@@ -1,0 +1,10 @@
+ {
+   "namespace": "com.nordea.cmit",
+   "type": "record",
+   "name": "technology",
+   "fields": [
+      {"name": "name", "type": "string"},
+      {"name": "category",  "type": ["string", "null"]},
+      {"name": "status", "type": ["string", "null"]}
+   ] 
+ }
