@@ -1,6 +1,8 @@
 VERSION=latest
 IMAGE=kumori/development:${VERSION}
 
+.PHONY: build test console
+
 build:
 	docker build -t ${IMAGE} .
 
