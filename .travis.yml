@@ -1,2 +1,23 @@
 language: java
-script: ./gradlew
+
+dist: trusty
+
+sudo: required
+
+os:
+  - linux
+
+jdk:
+  - oraclejdk8
+
+before_install:
+  - pip install --user codecov
+
+before_script:
+  - make build test
+
+script:
+  - ./gradlew
+
+after_success:
+- codecov
