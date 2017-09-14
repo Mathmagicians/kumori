@@ -38,11 +38,10 @@ dependencies {
 	compile 'org.slf4j:slf4j-api:1.7.21'
 	compile 'org.apache.avro:avro:1.8.2'
 
-	compile 'org.springframework.boot:spring-boot-starter-jetty'
+	compile 'org.springframework.boot:spring-boot-starter'
 	compile 'org.springframework.boot:spring-boot-starter-actuator'
-	compile( 'org.springframework.boot:spring-boot-starter-web' ) {
-		exclude module: "spring-boot-starter-tomcat"
-	}
+	compile("org.springframework:spring-web")
+	compile("com.fasterxml.jackson.core:jackson-databind")
 
 	testCompile 'junit:junit'
 }
