@@ -2,6 +2,7 @@ package dk.mathmagicians.kumori;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,6 +16,8 @@ import dk.mathmagicians.kumori.domain.ConfluencePage;
 public class KumoriApplication {
 
 	private static final Logger log = LoggerFactory.getLogger(KumoriApplication.class);
+	
+	@Value("${confluence.url}") private String confluenceUrl;
 
 	
 	public static void main(String[] args) {
@@ -30,7 +33,7 @@ public class KumoriApplication {
 	@Bean
 	public CommandLineRunner run(RestTemplate restTemplate) throws Exception {
 		return args -> {
-			ConfluencePage page = restTemplate.getForObject("https://jsonplaceholder.typicode.com/posts/2",
+			ConfluencePage page = restTemplate.getForObject( confluenceUrl,
 					ConfluencePage.class);
 			log.info(page.toString());
 		};
