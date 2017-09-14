@@ -44,7 +44,7 @@ dependencies {
 		exclude module: "spring-boot-starter-tomcat"
 	}
 
-	testCompile 'junit:junit:4.12'
+	testCompile 'junit:junit'
 }
 
 
