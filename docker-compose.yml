@@ -1,8 +1,8 @@
 version: '2'
 services:
-  server:
-    build:
-      context: ./
-      dockerfile: Dockerfile
+  confluence:
+    image: atlassian/confluence-server
     ports:
-     - "8000:8000"
+     - "8090:8090"
+    volumes:
+      - "/tmp/atlassian/confluence:/var/atlassian/application-data/confluence"
