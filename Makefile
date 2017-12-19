@@ -19,7 +19,7 @@ confluence_test:
 
 test:
 	@echo Java installed test:
-	@test $(shell docker run -it ${IMAGE} | grep version | awk '{ print $$3 }' | sed 's/"//g') = 1.8.0_144 && echo Passed || echo Failed
+	@test $(shell docker run -it ${IMAGE} | grep version | awk '{ print $$3 }' | sed 's/"//g') = 9.0.1 && echo Passed || echo Failed
 
 console:
 	docker run -it ${IMAGE} /bin/sh
