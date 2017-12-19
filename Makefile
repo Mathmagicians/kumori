@@ -13,6 +13,10 @@ build:
 confluence_setup:
 	curl -s -u admin:admin -X POST -H 'Content-Type: application/json' -d '{"key":"KUMO","name":"Kumori","type":"global","description":{"plain":{"value":"kumori","representation":"plain"}}}' http://localhost:8090/rest/api/space
 	curl -s -u admin:admin -X POST -H 'Content-Type: application/json' -d '{"type":"page","title":"Kumori","space":{"key":"KUMO"},"body":{"storage":{"value":"<h1>Kumori</h1>","representation":"storage"}}}' http://localhost:8090/rest/api/content/
+
+confluence_test:
+	curl -u admin:admin -X PUT -H 'Content-Type: application/json' -d'{"id":"720904","type":"page","title":"Kumori","space":{"key":"KUMO"},"body":{"storage":{"value":"<i class=\"test\">test</i>","representation":"storage"}},"version":{"number":3}}' http://localhost:8090/rest/api/content/720904
+
 test:
 	@echo Java installed test:
 	@test $(shell docker run -it ${IMAGE} | grep version | awk '{ print $$3 }' | sed 's/"//g') = 1.8.0_144 && echo Passed || echo Failed
