@@ -1,9 +1,9 @@
 FROM centos:7
 
 ENV SERVER_ROOT kumori
-ENV JDK_DOWNLOAD_PATH http://download.oracle.com/otn-pub/java/jdk/8u144-b01/090f390dda5b47b9b721c7dfaa008135/
-ENV JDK_DOWNLOAD_FILE jdk-8u144-linux-x64.rpm
-ENV JAVA_HOME /usr/java/jdk1.8.0_144/jre
+ENV JDK_DOWNLOAD_PATH http://download.oracle.com/otn-pub/java/jdk/9.0.1+11/
+ENV JDK_DOWNLOAD_FILE jdk-9.0.1_linux-x64_bin.rpm
+ENV JAVA_HOME /usr/java/default
 
 RUN mkdir /${SERVER_ROOT} \
     && cd /${SERVER_ROOT} \
