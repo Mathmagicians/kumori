@@ -1,8 +1,94 @@
-version: '2'
+version: '3'
 services:
+  grafana:
+    container_name: grafana
+    image: grafana/grafana
+    ports:
+    - "3000:3000"
+    networks:
+    - frontend
+    - backend
+    depends_on:
+    - postgres
+    links:
+    - postgres
+    environment:
+      GF_INSTALL_PLUGINS: digrich-bubblechart-panel,savantly-heatmap-panel
+    volumes:
+    - ./grafana-data:/var/lib/grafana
+  postgres:
+    container_name: postgres
+    image: postgres:alpine
+    networks:
+      - backend
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+    volumes:
+    - ./postgres-data:/var/lib/postgresql/data
+  pgadmin:
+    container_name: pgadmin
+    image: chorss/docker-pgadmin4:latest
+    ports:
+    - "5050:5050"
+    networks:
+      - frontend
+      - backend
+    volumes:
+    - ./pgadmin-data:/data
+  tensorflow:
+    container_name: tensorflow
+    image: tensorflow/tensorflow:latest
+    ports:
+    - "8888:8888"
+    networks:
+    - frontend
+    - backend
+  neo4j:
+    container_name: neo4j
+    image: neo4j:latest
+    ports:
+    - "7474:7474"
+    - "7687:7687"
+    networks:
+    - frontend
+    - backend
+    environment:
+      NEO4J_AUTH: none
+    volumes:
+    - ./neo4j-data:/data
+  sonarqube:
+    container_name: sonarqube
+    image: sonarqube:latest
+    ports:
+    - "9000:9000"
+    - "9092:9092"
+    networks:
+    - frontend
+    - backend
+    volumes:
+      - ./sonarqube-data/sonarqube_conf:/opt/sonarqube/conf
+      - ./sonarqube-data/sonarqube_data:/opt/sonarqube/data
+      - ./sonarqube-data/sonarqube_extensions:/opt/sonarqube/extensions
+      - ./sonarqube-data/sonarqube_bundled-plugins:/opt/sonarqube/lib/bundled-plugins
+    depends_on:
+    - postgres
+    environment:
+      SONARQUBE_JDBC_USERNAME: sonarqube
+      SONARQUBE_JDBC_PASSWORD: sonarqube
+      SONARQUBE_JDBC_URL: jdbc:postgresql://postgres/sonarqube
   confluence:
     image: atlassian/confluence-server
     ports:
      - "8090:8090"
+    networks:
+    - frontend
     volumes:
-      - "/tmp/atlassian/confluence:/var/atlassian/application-data/confluence"
+      - "./confluence-data:/var/atlassian/application-data/confluence"
+    depends_on:
+    - postgres
+networks:
+  frontend:
+    driver: bridge
+  backend:
+    driver: bridge
