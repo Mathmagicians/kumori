@@ -20,3 +20,7 @@ hs_err_pid*
 /.gradle/
 .classpath
 build
+/grafana-data
+/postgres-data
+/pgadmin-data
+/neo4j-data
