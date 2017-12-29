@@ -36,7 +36,7 @@ autofix:
 clean-all:
 	rm -rf ${G_DATA} ${P_DATA} ${A_DATA}
 
-build: build-parser-image build-php-app
+build: build-parser-image setup-php-app
 
 build-parser-image:
 	@cd parser && make -f Makefile build
