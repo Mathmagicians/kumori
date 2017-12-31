@@ -13,8 +13,9 @@ setup:
 	mkdir -p /tmp/atlassian/confluence
 	chmod -R 777 /tmp/atlassian/confluence
 
-build:
+build: build-parser-image setup-php-app
 	docker build -t ${IMAGE} .
+
 
 confluence_setup:
 	curl -s -u admin:admin -X POST -H 'Content-Type: application/json' -d '{"key":"KUMO","name":"Kumori","type":"global","description":{"plain":{"value":"kumori","representation":"plain"}}}' http://localhost:8090/rest/api/space
@@ -35,8 +36,6 @@ autofix:
 
 clean-all:
 	rm -rf ${G_DATA} ${P_DATA} ${A_DATA}
-
-build: build-parser-image setup-php-app
 
 build-parser-image:
 	@cd parser && make -f Makefile build
