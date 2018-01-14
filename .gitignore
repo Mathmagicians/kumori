@@ -24,3 +24,5 @@ build
 /postgres-data
 /pgadmin-data
 /neo4j-data
+/sonarqube-data
+/confluence-data

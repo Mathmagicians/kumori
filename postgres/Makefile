@@ -2,7 +2,7 @@ setup: create_databases access_databases create_schema_calculated create_schema_
 
 create_databases:
 	@docker run -it \
-	 --network=bodhi_backend \
+	 --network=kumori_backend \
 	 --rm \
 	 -e "PGPASSWORD=postgres" \
 	 -v $(shell pwd):/tmp \
@@ -11,7 +11,7 @@ create_databases:
 
 access_databases:
 	@docker run -it \
-	 --network=bodhi_backend \
+	 --network=kumori_backend \
 	 --rm \
 	 -e "PGPASSWORD=postgres" \
 	 -v $(shell pwd):/tmp \
@@ -20,7 +20,7 @@ access_databases:
 
 create_schema_calculated:
 	@docker run -it \
-	 --network=bodhi_backend \
+	 --network=kumori_backend \
 	 --rm \
 	 -e "PGPASSWORD=postgres" \
 	 -v $(shell pwd):/tmp \
@@ -29,7 +29,7 @@ create_schema_calculated:
 
 create_schema_raw:
 	@docker run -it \
-	 --network=bodhi_backend \
+	 --network=kumori_backend \
 	 --rm \
 	 -e "PGPASSWORD=postgres" \
 	 -v $(shell pwd):/tmp \
