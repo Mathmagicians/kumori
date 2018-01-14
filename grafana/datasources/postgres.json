@@ -1,0 +1,14 @@
+{
+  "name": "postgres",
+  "type": "postgres",
+  "access": "proxy",
+  "url": "postgres",
+  "basicAuth":false,
+  "password": "grafana",
+  "user": "grafana",
+  "database": "calculated",
+  "isDefault": true,
+  "jsonData": {
+    "sslmode": "disable"
+  }
+}
