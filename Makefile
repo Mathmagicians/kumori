@@ -56,7 +56,7 @@ bootstrap-sonarqube:
 
 populate:
 	@docker run -it \
-	 --network=bodhi_backend \
+	 --network=kumori_backend \
 	 --rm \
 	 --name populate \
 	 -v $(shell pwd):/usr/src/myapp \
@@ -65,7 +65,7 @@ populate:
 
 sonar-scan:
 	@docker run \
-	 --network=bodhi_backend \
+	 --network=kumori_backend \
 	 --rm \
 	 --user $(shell id -u):$(shell id -g) \
 	 -e "SONAR_HOST=http://sonarqube:9000" \
