@@ -1,7 +1,7 @@
 version: '3'
 services:
   grafana:
-    container_name: grafana
+    container_name: kumori-grafana
     image: grafana/grafana
     ports:
     - "3000:3000"
@@ -15,9 +15,9 @@ services:
     environment:
       GF_INSTALL_PLUGINS: digrich-bubblechart-panel,savantly-heatmap-panel
     volumes:
-    - ./grafana-data:/var/lib/grafana
+    - grafana:/var/lib/grafana
   postgres:
-    container_name: postgres
+    container_name: kumori-postgres
     image: postgres:alpine
     networks:
       - backend
@@ -25,9 +25,9 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_USER: postgres
     volumes:
-    - ./postgres-data:/var/lib/postgresql/data
+    - postgres:/var/lib/postgresql/data
   pgadmin:
-    container_name: pgadmin
+    container_name: kumori-pgadmin
     image: chorss/docker-pgadmin4:latest
     ports:
     - "5050:5050"
@@ -35,9 +35,9 @@ services:
       - frontend
       - backend
     volumes:
-    - ./pgadmin-data:/data
+    - pgadmin:/data
   tensorflow:
-    container_name: tensorflow
+    container_name: kumori-tensorflow
     image: tensorflow/tensorflow:latest
     ports:
     - "8888:8888"
@@ -45,7 +45,7 @@ services:
     - frontend
     - backend
   neo4j:
-    container_name: neo4j
+    container_name: kumori-neo4j
     image: neo4j:latest
     ports:
     - "7474:7474"
@@ -56,9 +56,9 @@ services:
     environment:
       NEO4J_AUTH: none
     volumes:
-    - ./neo4j-data:/data
+    - neo4j:/data
   sonarqube:
-    container_name: sonarqube
+    container_name: kumori-sonarqube
     image: sonarqube:latest
     ports:
     - "9000:9000"
@@ -67,10 +67,7 @@ services:
     - frontend
     - backend
     volumes:
-      - ./sonarqube-data/sonarqube_conf:/opt/sonarqube/conf
-      - ./sonarqube-data/sonarqube_data:/opt/sonarqube/data
-      - ./sonarqube-data/sonarqube_extensions:/opt/sonarqube/extensions
-      - ./sonarqube-data/sonarqube_bundled-plugins:/opt/sonarqube/lib/bundled-plugins
+    - sonarqube:/opt/sonarqube
     depends_on:
     - postgres
     environment:
@@ -78,13 +75,14 @@ services:
       SONARQUBE_JDBC_PASSWORD: sonarqube
       SONARQUBE_JDBC_URL: jdbc:postgresql://postgres/sonarqube
   confluence:
+    container_name: kumori-confluence
     image: atlassian/confluence-server
     ports:
      - "8090:8090"
     networks:
     - frontend
     volumes:
-      - "./confluence-data:/var/atlassian/application-data/confluence"
+    - confluence:/var/atlassian/application-data/confluence
     depends_on:
     - postgres
 networks:
@@ -92,3 +90,11 @@ networks:
     driver: bridge
   backend:
     driver: bridge
+
+volumes:
+  postgres:
+  sonarqube:
+  confluence:
+  neo4j:
+  pgadmin:
+  grafana:
