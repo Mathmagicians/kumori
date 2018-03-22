@@ -1,5 +1,5 @@
 {
-  "name": "mathmagicians/bodhi",
+  "name": "mathmagicians/kumori",
   "description": "A git log parser",
   "type": "application",
   "authors": [
@@ -13,17 +13,18 @@
   "keywords": [
     "git"
   ],
-  "homepage": "https://github.com/Mathmagicians/bodhi",
+  "homepage": "https://github.com/Mathmagicians/kumori",
   "license": "BSD-3-Clause-Clear",
   "require": {
-    "symfony/console": "4.0.1",
-    "symfony/stopwatch": "4.0.2"
+    "symfony/console": "4.0.6",
+    "symfony/stopwatch": "4.0.6",
+    "symfony/process": "4.0.6"
   },
   "minimum-stability": "stable",
   "support": {
-    "source": "https://github.com/Mathmagicians/bodhi",
-    "issues": "https://github.com/Mathmagicians/bodhi/issues",
-    "wiki": "https://github.com/Mathmagicians/bodhi/wiki"
+    "source": "https://github.com/Mathmagicians/kumori",
+    "issues": "https://github.com/Mathmagicians/kumori/issues",
+    "wiki": "https://github.com/Mathmagicians/kumori/wiki"
   },
   "config": {
     "bin-dir": "bin/",
