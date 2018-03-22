@@ -17,7 +17,7 @@ before_script:
   - cd ./backend && make build test
 
 script:
-  - cd ./backend && ./gradlew
+  - ./gradlew
 
 after_success:
 - codecov
