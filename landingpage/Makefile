@@ -1,5 +1,8 @@
+VERSION=latest
+IMAGE=dk.mathmagicians/kumori/landing:${VERSION}
+
 build:
-	docker build -t dk.mathmagicians/kumori/landing:latest .
+	docker build -t ${IMAGE} .
 
 start:
 	@docker run \
@@ -12,3 +15,6 @@ stop:
 	@docker stop landing
 
 restart: stop start
+
+console:
+	docker run --rm -it --entrypoint=/bin/sh ${IMAGE}
