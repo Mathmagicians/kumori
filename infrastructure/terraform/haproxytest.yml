@@ -1,0 +1,31 @@
+version: '3'
+services:
+  haproxy:
+    container_name: haproxy
+    image: haproxy:alpine
+    ports:
+    - "80:80"
+    depends_on:
+    - nginx1
+    - nginx2
+    links:
+    - nginx1
+    - nginx2
+    volumes:
+    - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
+  nginx1:
+    container_name: nginx1
+    image: nginx:stable-alpine
+    ports:
+    - "8080:80"
+    volumes:
+    - ./index1.html:/usr/share/nginx/html/index.html
+  nginx2:
+    container_name: nginx2
+    image: nginx:stable-alpine
+    ports:
+    - "8090:80"
+    volumes:
+    - ./index2.html:/usr/share/nginx/html/index.html
+
+      127.0.0.1 test1.me.com test2.me.com

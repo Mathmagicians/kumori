@@ -1,0 +1,7 @@
+/terraform
+/terraform.*
+/.terraform
+/tls/*.pem
+/tls/*.cnf
+/tls/*.csr
+/tls/*.srl
