@@ -14,10 +14,10 @@ before_install:
   - pip install --user codecov
 
 before_script:
-  - make build test
+  - cd backend && make build test
 
 script:
-  - ./gradlew
+  - cd backend && ./gradlew
 
 after_success:
 - codecov
