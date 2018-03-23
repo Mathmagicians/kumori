@@ -27,5 +27,3 @@ services:
     - "8090:80"
     volumes:
     - ./index2.html:/usr/share/nginx/html/index.html
-
-      127.0.0.1 test1.me.com test2.me.com
