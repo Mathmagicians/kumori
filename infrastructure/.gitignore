@@ -5,3 +5,5 @@
 /tls/*.cnf
 /tls/*.csr
 /tls/*.srl
+/compose.sh
+/docker.sh

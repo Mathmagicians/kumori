@@ -40,3 +40,23 @@ openssl x509 -req -days 365 -sha512 \
   -CAcreateserial \
   -out ${TLS_PATH}/client.pem \
   -extfile ${TLS_PATH}/client.cnf
+
+cat <<EOF > ./compose.sh
+#!/usr/bin/env bash
+docker-compose \
+--tlsverify \
+--tlscacert=$(pwd)/tls/myca.pem \
+--tlscert=$(pwd)/tls/client.pem \
+--tlskey=$(pwd)/tls/client-key.pem -H=docker.yggoo.dk:2376 \${@}
+EOF
+chmod 755 ./compose.sh
+
+cat <<EOF > ./docker.sh
+#!/usr/bin/env bash
+docker \
+--tlsverify \
+--tlscacert=$(pwd)/tls/myca.pem \
+--tlscert=$(pwd)/tls/client.pem \
+--tlskey=$(pwd)/tls/client-key.pem -H=docker.yggoo.dk:2376 \${@}
+EOF
+chmod 755 ./docker.sh

@@ -17,7 +17,7 @@ bootstrap-sonarqube:
 	cd ./sonarqube && ./bootstrap-sonarqube.sh
 
 t_init:
-	@./terraform init \
+	@/opt/terraform/terraform init \
   -var "do_token=${DO_PAT}" \
   -var "cloudflare_email=${CF_EMAIL}" \
   -var "cloudflare_token=${CF_TOKEN}" \
@@ -27,7 +27,7 @@ t_init:
   -var "ssh_fingerprint=${SSH_FINGER}"
 
 t_plan:
-	@./terraform plan \
+	@/opt/terraform/terraform plan \
   -var "do_token=${DO_PAT}" \
   -var "cloudflare_email=${CF_EMAIL}" \
   -var "cloudflare_token=${CF_TOKEN}" \
@@ -37,7 +37,7 @@ t_plan:
   -var "ssh_fingerprint=${SSH_FINGER}"
 
 t_apply:
-	@./terraform apply \
+	@/opt/terraform/terraform apply \
   -var "do_token=${DO_PAT}" \
   -var "cloudflare_email=${CF_EMAIL}" \
   -var "cloudflare_token=${CF_TOKEN}" \
@@ -47,7 +47,7 @@ t_apply:
   -var "ssh_fingerprint=${SSH_FINGER}"
 
 t_destroy:
-	@./terraform destroy \
+	@/opt/terraform/terraform destroy \
   -var "do_token=${DO_PAT}" \
   -var "cloudflare_email=${CF_EMAIL}" \
   -var "cloudflare_token=${CF_TOKEN}" \
