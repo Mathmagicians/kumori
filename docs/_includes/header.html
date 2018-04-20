@@ -20,7 +20,21 @@
                 {%- endif -%}
               {% endfor -%}
         {%- endif -%}
+        {%- if site.backend -%}
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Services</a>
+          <div class="dropdown-menu" aria-labelledby="dropdown01">
+            <a class="dropdown-item" href="#">Sonarqube</a>
+            <a class="dropdown-item" href="#">Grafana</a>
+            <a class="dropdown-item" href="#">Pgadmin</a>
+            <a class="dropdown-item" href="#">Tensorflow</a>
+            <a class="dropdown-item" href="#">Neo4j</a>
+            <a class="dropdown-item" href="#">Confluence</a>
+          </div>
+        </li>
+        {%- endif -%}
       </ul>
     </div>
+
   </nav>
 </header>
