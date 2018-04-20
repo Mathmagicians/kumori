@@ -1,5 +1,5 @@
 source: .
-destination: ._site
+destination: ./_site
 safe: true
 timezone: Europe/Copenhagen
 encoding: utf-8
@@ -8,3 +8,4 @@ baseurl: ""
 url: "http://www.kumori.dk"
 markdown: kramdown
 theme: minima
+backend: false

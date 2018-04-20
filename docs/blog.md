@@ -4,8 +4,6 @@ title: Blog
 permalink: /blog/
 ---
 
-# Blog
-
 <div>
   {%- if site.posts.size > 0 -%}
     <ul>
