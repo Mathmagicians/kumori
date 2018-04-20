@@ -2,7 +2,9 @@ version: '3'
 services:
   haproxy:
     container_name: haproxy
-    image: haproxy:alpine
+    build:
+      context: .
+      dockerfile: Dockerfile-haproxy
     ports:
     - "80:80"
     depends_on:
@@ -11,19 +13,17 @@ services:
     links:
     - nginx1
     - nginx2
-    volumes:
-    - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
   nginx1:
     container_name: nginx1
-    image: nginx:stable-alpine
+    build:
+      context: .
+      dockerfile: Dockerfile-nginx1
     ports:
     - "8080:80"
-    volumes:
-    - ./index1.html:/usr/share/nginx/html/index.html
   nginx2:
     container_name: nginx2
-    image: nginx:stable-alpine
+    build:
+      context: .
+      dockerfile: Dockerfile-nginx2
     ports:
     - "8090:80"
-    volumes:
-    - ./index2.html:/usr/share/nginx/html/index.html

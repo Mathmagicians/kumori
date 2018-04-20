@@ -13,6 +13,8 @@ openssl genrsa -aes256 -out ${TLS_PATH}/private-key.pem 4096
 
 openssl req -new -x509 -sha512 -days 365 \
   -subj "/C=DK/ST=DK/L=Copenhagen/O=Main/CN=${CN}" \
+  -reqexts SAN \
+  -config <(cat /etc/ssl/openssl.cnf <(printf "\n[SAN]\nsubjectAltName=DNS:${CN}")) \
   -key ${TLS_PATH}/private-key.pem -out ${TLS_PATH}/myca.pem
 
 openssl genrsa -out ${TLS_PATH}/docker-1-key.pem 4096
