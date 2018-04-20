@@ -1,0 +1,29 @@
+version: '3'
+services:
+  haproxy:
+    container_name: haproxy
+    build:
+      context: .
+      dockerfile: Dockerfile-haproxy
+    ports:
+    - "80:80"
+    depends_on:
+    - nginx1
+    - nginx2
+    links:
+    - nginx1
+    - nginx2
+  nginx1:
+    container_name: nginx1
+    build:
+      context: .
+      dockerfile: Dockerfile-nginx1
+    ports:
+    - "8080:80"
+  nginx2:
+    container_name: nginx2
+    build:
+      context: .
+      dockerfile: Dockerfile-nginx2
+    ports:
+    - "8090:80"

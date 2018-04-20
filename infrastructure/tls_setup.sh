@@ -13,6 +13,8 @@ openssl genrsa -aes256 -out ${TLS_PATH}/private-key.pem 4096
 
 openssl req -new -x509 -sha512 -days 365 \
   -subj "/C=DK/ST=DK/L=Copenhagen/O=Main/CN=${CN}" \
+  -reqexts SAN \
+  -config <(cat /etc/ssl/openssl.cnf <(printf "\n[SAN]\nsubjectAltName=DNS:${CN}")) \
   -key ${TLS_PATH}/private-key.pem -out ${TLS_PATH}/myca.pem
 
 openssl genrsa -out ${TLS_PATH}/docker-1-key.pem 4096
@@ -40,3 +42,23 @@ openssl x509 -req -days 365 -sha512 \
   -CAcreateserial \
   -out ${TLS_PATH}/client.pem \
   -extfile ${TLS_PATH}/client.cnf
+
+cat <<EOF > ./compose.sh
+#!/usr/bin/env bash
+docker-compose \
+--tlsverify \
+--tlscacert=$(pwd)/tls/myca.pem \
+--tlscert=$(pwd)/tls/client.pem \
+--tlskey=$(pwd)/tls/client-key.pem -H=docker.yggoo.dk:2376 \${@}
+EOF
+chmod 755 ./compose.sh
+
+cat <<EOF > ./docker.sh
+#!/usr/bin/env bash
+docker \
+--tlsverify \
+--tlscacert=$(pwd)/tls/myca.pem \
+--tlscert=$(pwd)/tls/client.pem \
+--tlskey=$(pwd)/tls/client-key.pem -H=docker.yggoo.dk:2376 \${@}
+EOF
+chmod 755 ./docker.sh

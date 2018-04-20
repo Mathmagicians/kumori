@@ -2,7 +2,7 @@ resource "digitalocean_droplet" "kumori" {
   image              = "coreos-stable"
   name               = "coreos"
   region             = "fra1"
-  size               = "4gb"
+  size               = "1gb"
   private_networking = true
 
   ssh_keys = [
