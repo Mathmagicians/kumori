@@ -1,25 +1,9 @@
-G_DATA=grafana-data
-P_DATA=postgres-data
-A_DATA=pgadmin-data
-S_DATA=sonarqube-data
-N_DATA=neo4j-data
-REPO=$(shell pwd)
+SSH_FINGER = $(shell ssh-keygen -E md5 -lf $$HOME/.ssh/id_rsa.pub | awk '{print $$2}' | sed "s/MD5://")
 
-.PHONY: setup build test console confluence_setup
+.PHONY: t_init t_plan t_apply t_destroy
 
-setup:
-	mkdir -p /tmp/atlassian/confluence
-	chmod -R 777 /tmp/atlassian/confluence
-
-confluence_setup:
-	curl -s -u admin:admin -X POST -H 'Content-Type: application/json' -d '{"key":"KUMO","name":"Kumori","type":"global","description":{"plain":{"value":"kumori","representation":"plain"}}}' http://localhost:8090/rest/api/space
-	curl -s -u admin:admin -X POST -H 'Content-Type: application/json' -d '{"type":"page","title":"Kumori","space":{"key":"KUMO"},"body":{"storage":{"value":"<h1>Kumori</h1>","representation":"storage"}}}' http://localhost:8090/rest/api/content/
-
-confluence_test:
-	curl -u admin:admin -X PUT -H 'Content-Type: application/json' -d'{"id":"720904","type":"page","title":"Kumori","space":{"key":"KUMO"},"body":{"storage":{"value":"<i class=\"test\">test</i>","representation":"storage"}},"version":{"number":3}}' http://localhost:8090/rest/api/content/720904
-
-clean-all:
-	rm -rf ${G_DATA} ${P_DATA} ${A_DATA}
+tls_setup:
+	@./tls_setup.sh
 
 bootstrap: bootstrap-postgres bootstrap-grafana
 
@@ -32,20 +16,42 @@ bootstrap-postgres:
 bootstrap-sonarqube:
 	cd ./sonarqube && ./bootstrap-sonarqube.sh
 
-populate:
-	@docker run -it \
-	 --network=kumori_backend \
-	 --rm \
-	 --name populate \
-	 -v $(shell pwd):/usr/src/myapp \
-	 -v ${REPO}:/usr/src/repo \
-	 -w /usr/src/myapp php_parser_image:latest php parser/populate.php parse
+t_init:
+	@/opt/terraform/terraform init \
+  -var "do_token=${DO_PAT}" \
+  -var "cloudflare_email=${CF_EMAIL}" \
+  -var "cloudflare_token=${CF_TOKEN}" \
+  -var "cloudflare_domain=${CF_DOMAIN}" \
+  -var "pub_key=${HOME}/.ssh/id_rsa.pub" \
+  -var "pvt_key=${HOME}/.ssh/id_rsa" \
+  -var "ssh_fingerprint=${SSH_FINGER}"
 
-sonar-scan:
-	@docker run \
-	 --network=kumori_backend \
-	 --rm \
-	 --user $(shell id -u):$(shell id -g) \
-	 -e "SONAR_HOST=http://sonarqube:9000" \
-	 -v $(shell pwd):/data \
-	 -w /data localgod/docker-sonarqube-scanner:3.0.3.778
+t_plan:
+	@/opt/terraform/terraform plan \
+  -var "do_token=${DO_PAT}" \
+  -var "cloudflare_email=${CF_EMAIL}" \
+  -var "cloudflare_token=${CF_TOKEN}" \
+  -var "cloudflare_domain=${CF_DOMAIN}" \
+  -var "pub_key=${HOME}/.ssh/id_rsa.pub" \
+  -var "pvt_key=${HOME}/.ssh/id_rsa" \
+  -var "ssh_fingerprint=${SSH_FINGER}"
+
+t_apply:
+	@/opt/terraform/terraform apply \
+  -var "do_token=${DO_PAT}" \
+  -var "cloudflare_email=${CF_EMAIL}" \
+  -var "cloudflare_token=${CF_TOKEN}" \
+  -var "cloudflare_domain=${CF_DOMAIN}" \
+  -var "pub_key=${HOME}/.ssh/id_rsa.pub" \
+  -var "pvt_key=${HOME}/.ssh/id_rsa" \
+  -var "ssh_fingerprint=${SSH_FINGER}"
+
+t_destroy:
+	@/opt/terraform/terraform destroy \
+  -var "do_token=${DO_PAT}" \
+  -var "cloudflare_email=${CF_EMAIL}" \
+  -var "cloudflare_token=${CF_TOKEN}" \
+  -var "cloudflare_domain=${CF_DOMAIN}" \
+  -var "pub_key=${HOME}/.ssh/id_rsa.pub" \
+  -var "pvt_key=${HOME}/.ssh/id_rsa" \
+  -var "ssh_fingerprint=${SSH_FINGER}"

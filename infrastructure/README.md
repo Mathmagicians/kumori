@@ -18,17 +18,13 @@ starting provisioning.
 
 ## What you get
 
-A server `coreos` server deployed at `kumori.yggoo.dk` with tls configured docker service.
+A server `coreos` server deployed at `docker.yggoo.dk` with tls configured docker service.
 
 ## Next step
 
 Deploy some docker containers with `docker-compose` like:
 
-    docker-compose \
-    --tlsverify \
-    --tlscacert=./tls/myca.pem \
-    --tlscert=./tls/client.pem \
-    --tlskey=./tls/client-key.pem -H=kumori.yggoo.dk:2376 up
+    ./compose.sh -f ./haproxy/haproxytest.yml up
 
 ## TODO
 
