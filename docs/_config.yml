@@ -1,0 +1,10 @@
+source: .
+destination: ._site
+safe: true
+timezone: Europe/Copenhagen
+encoding: utf-8
+title: Kumori
+baseurl: ""
+url: "http://www.kumori.dk"
+markdown: kramdown
+theme: minima
