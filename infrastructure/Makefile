@@ -16,6 +16,16 @@ bootstrap-postgres:
 bootstrap-sonarqube:
 	cd ./sonarqube && ./bootstrap-sonarqube.sh
 
+
+build_haproxy:
+	./compose.sh -f ./haproxy/docker-compose.yml build
+
+start_haproxy:
+	./compose.sh -f ./haproxy/docker-compose.yml up -d
+
+stop_haproxy:
+	./compose.sh -f ./haproxy/docker-compose.yml down
+
 t_init:
 	@/opt/terraform/terraform init \
   -var "do_token=${DO_PAT}" \
