@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 TLS_PATH="$(pwd)/tls"
-CN='docker.yggoo.dk'
+CN='docker.kumori.dk'
 
 # Cleanup
 files=( client-key.pem client.cnf client.pem docker-1-key.pem docker.csr \
@@ -49,7 +49,7 @@ docker-compose \
 --tlsverify \
 --tlscacert=$(pwd)/tls/myca.pem \
 --tlscert=$(pwd)/tls/client.pem \
---tlskey=$(pwd)/tls/client-key.pem -H=docker.yggoo.dk:2376 \${@}
+--tlskey=$(pwd)/tls/client-key.pem -H=docker.kumori.dk:2376 \${@}
 EOF
 chmod 755 ./compose.sh
 
@@ -59,6 +59,6 @@ docker \
 --tlsverify \
 --tlscacert=$(pwd)/tls/myca.pem \
 --tlscert=$(pwd)/tls/client.pem \
---tlskey=$(pwd)/tls/client-key.pem -H=docker.yggoo.dk:2376 \${@}
+--tlskey=$(pwd)/tls/client-key.pem -H=docker.kumori.dk:2376 \${@}
 EOF
 chmod 755 ./docker.sh

@@ -1,4 +1,4 @@
-resource "digitalocean_droplet" "kumori" {
+resource "digitalocean_droplet" "dockerhost" {
   image              = "coreos-stable"
   name               = "coreos"
   region             = "fra1"
