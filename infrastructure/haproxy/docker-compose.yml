@@ -1,6 +1,6 @@
 version: '3'
 services:
-  haproxy:
+  proxy:
     container_name: haproxy
     build:
       context: .
@@ -18,12 +18,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile-nginx1
-    ports:
-    - "8080:80"
   nginx2:
     container_name: nginx2
     build:
       context: .
       dockerfile: Dockerfile-nginx2
-    ports:
-    - "8090:80"

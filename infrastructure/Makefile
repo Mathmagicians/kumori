@@ -16,12 +16,11 @@ bootstrap-postgres:
 bootstrap-sonarqube:
 	cd ./sonarqube && ./bootstrap-sonarqube.sh
 
-
 build_haproxy:
 	./compose.sh -f ./haproxy/docker-compose.yml build
 
 start_haproxy:
-	./compose.sh -f ./haproxy/docker-compose.yml up -d
+	./compose.sh -f ./haproxy/docker-compose.yml up
 
 stop_haproxy:
 	./compose.sh -f ./haproxy/docker-compose.yml down
