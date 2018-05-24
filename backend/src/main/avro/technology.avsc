@@ -1,5 +1,5 @@
  {
-   "namespace": "com.nordea.cmit",
+   "namespace": "com.example",
    "type": "record",
    "name": "technology",
    "fields": [
