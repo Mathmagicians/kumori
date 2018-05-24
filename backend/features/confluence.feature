@@ -14,7 +14,9 @@ Feature: Publish to Confluence
     And the page id is /[0-9]{8}/
     And the space key is /[A-Z]{8}/
     And the version is /[0-9]{8}/
-    And the body is /.*/
+    And the body is """
+    {"type":"page","title":"Page Title","space":{"key":"EXAMPLE"},"body":{"storage":{"value":"content","representation":"storage"}},"version":{"number":1}}
+    """
     Then a response is recived with http status 200
     And the http header "Content-Type" contains "application/json"
     
