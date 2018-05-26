@@ -1,0 +1,68 @@
+
+
+apply plugin: "java"
+apply plugin: "scala"
+//apply plugin: "play"
+apply plugin: "eclipse"
+
+
+jar {
+	baseName = 'kumori-watchman'
+	version =  '0.1.0'
+	
+	 manifest {
+        attributes "Main-Class": "dk.mathmagicians.watchman.Main"
+    }
+    
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+
+repositories {
+	jcenter()
+	 maven {
+        name "lightbend-maven-release"
+        url "https://repo.lightbend.com/lightbend/maven-releases"
+    }
+    ivy {
+        name "lightbend-ivy-release"
+        url "https://repo.lightbend.com/lightbend/ivy-releases"
+        layout "ivy"
+    }
+}
+
+//JVM settings
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+configurations {
+    cucumberRuntime {
+        extendsFrom testRuntime
+    }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '4.7'
+}
+
+//kudos to https://blog.knoldus.com/2017/08/20/scalagradlecucumber-a-holy-alliance/
+task cucumber(type: JavaExec) {
+    main = "cucumber.api.cli.Main"
+    classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+    args = ['--plugin', 'pretty', '--glue', 'dk.mathmagicians', 'src/test/resources']
+}
+
+
+
+dependencies {
+    compile 'org.scala-lang:scala-library:2.12.4'
+    compile 'io.cucumber:cucumber-scala_2.12:2.0.1'
+    testCompile 'io.cucumber:cucumber-core:2.0.1'
+    testCompile 'io.cucumber:cucumber-junit:2.0.1'
+   
+    testCompile 'junit:junit:4.12'
+  //  testCompile 'info.cukes:cucumber-junit:1.2.5'
+  //  testCompile 'org.scalatest:scalatest_2.12:3.0.5'
+}
