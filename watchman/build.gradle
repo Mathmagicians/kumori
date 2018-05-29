@@ -43,6 +43,7 @@ configurations {
     }
 }
 
+// eclipse fucks up :( - comment out wrapper task on import
 task wrapper(type: Wrapper) {
     gradleVersion = '4.7'
 }
@@ -56,7 +57,8 @@ task cucumber(type: JavaExec) {
 }
 
 task integrationTest(type: Test) {
-	description "Executes the integration test features"
+	group 'verification'
+	description "Executes the integration test features using CucumberJVM for Scala"
 	dependsOn cucumber
 	outputs.upToDateWhen { false }
 }
