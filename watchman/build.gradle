@@ -49,11 +49,29 @@ task wrapper(type: Wrapper) {
 
 //kudos to https://blog.knoldus.com/2017/08/20/scalagradlecucumber-a-holy-alliance/
 task cucumber(type: JavaExec) {
+	description "Executes the cucumber tests"
     main = "cucumber.api.cli.Main"
     classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
     args = ['--plugin', 'pretty', '--glue', 'dk.mathmagicians', 'src/test/resources']
 }
 
+task integrationTest(type: Test) {
+	description "Executes the integration test features"
+	dependsOn cucumber
+	outputs.upToDateWhen { false }
+}
+
+// Ensure that our integration tests are run before the check task and that the check task fails the build if there are failing integration tests.
+// Ensure that our unit tests are run before our integration tests. This guarantees that our unit tests are run even if our integration tests fails.
+check.dependsOn integrationTest
+integrationTest.mustRunAfter test
+
+// kudos to: https://stackoverflow.com/questions/28387045/how-to-run-the-cucumber-test-using-gradle
+// Ensure that the HTML reports of unit and integration tests are created to different report
+// build/reports/integrationTest directory contains the HTML report that contains the test results of our integration tests.
+tasks.withType(Test) {
+    reports.html.destination = file("${reporting.baseDir}/${name}")
+}
 
 
 dependencies {
