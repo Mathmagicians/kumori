@@ -1,4 +1,4 @@
-package dk.mathmagicians
+package dk.mathmagicians.watchman
 
 import cucumber.api.CucumberOptions
 import cucumber.api.junit.Cucumber
