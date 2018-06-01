@@ -7,6 +7,7 @@ import org.scalatest._
 
 class ConfluenceSteps extends ScalaDsl with EN with Matchers{
   
+  @throws(classOf[java.io.IOException])
   def get(url: String) = scala.io.Source.fromURL(url).mkString
   
   Given("""^I have a Confluence endpoint$"""){ () =>
