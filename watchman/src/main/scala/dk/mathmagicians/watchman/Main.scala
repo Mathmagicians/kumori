@@ -6,6 +6,6 @@ object Main {
     
     //read application configuration file
     val appConfig =  new ConfigComponent
-    println( s"Loaded url from config file ${appConfig.url}" )
+    println( s"Loaded url from config file ${appConfig.confluence.endpoint}, user ${appConfig.confluence.user}, pwd = ${appConfig.confluence.password}" )
   }
 }
