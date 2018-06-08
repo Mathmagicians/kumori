@@ -7,7 +7,7 @@ import com.typesafe.config.ConfigFactory
     private val config = ConfigFactory.load()
     val confluence = Confluence(  user = config.getString( "confluence.user.mail"), 
           password = config.getString("confluence.user.password"),
-          endpoint = config.getString("confluence.url"))
+          endpoint = config.getString("confluence.page.rest"))
     
     case class Confluence( user:String, password: String, endpoint: String)
     

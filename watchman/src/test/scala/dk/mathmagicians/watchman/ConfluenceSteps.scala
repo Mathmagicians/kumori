@@ -14,12 +14,11 @@ class ConfluenceSteps extends ScalaDsl with EN with Matchers{
   
   val confluenceEndpoint:String = (new ConfigComponent).confluence.endpoint
   confluenceEndpoint should not be (null)
-  confluenceEndpoint should include ("integration")
+  confluenceEndpoint should include ("rest")
   
   val restGET =   get( confluenceEndpoint)
   restGET should not be (null)
-  
-  
+  //rest answer should be 200
 }
   
   
