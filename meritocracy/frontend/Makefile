@@ -1,4 +1,4 @@
-.PHONY: setup build console shell
+.PHONY: setup build unit e2e test serve-start serve-logs serve-stop shell
 
 setup:
 	@docker run --rm -dt --name setup -v ${PWD}:/tmp -w /tmp node
