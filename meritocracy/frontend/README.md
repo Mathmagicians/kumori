@@ -12,7 +12,7 @@ Install all npm dependencies.
 
 Build the project for distribution.
 
-    $ make setup
+    $ make build
 
 ## Test
 
