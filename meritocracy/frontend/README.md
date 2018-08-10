@@ -4,7 +4,7 @@ This is the frontend for Kumori Meritocracy.
 
 ## Setup
 
-Install all npm dependencies.
+Install all npm dependencies locally.
 
     $ make setup
 
@@ -24,7 +24,7 @@ Run the unit tests
 
     $ make unit
 
-Run the e2e tests
+Run the e2e tests (Not working at this time)
 
     $ make e2e
 
