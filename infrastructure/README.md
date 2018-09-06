@@ -1,5 +1,7 @@
 # Infrastructure for Kumori
 
+Spins up the infrastructure needed for Kumori.
+
 Currently managed by [Terraform](https://www.terraform.io/) with
 [Digitalocean](https://www.digitalocean.com/) and
 [Cloudflare](https://www.cloudflare.com/) as providers.
