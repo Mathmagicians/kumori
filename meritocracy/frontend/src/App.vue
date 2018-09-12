@@ -1,6 +1,6 @@
 <template>
 	<div id="app">
-		<b-nav-bar type="light" variant="faded" fixed="top">
+		<b-navbar type="light" variant="faded">
 			<b-navbar-brand to="/">
 				<img src="./assets/techmenu.svg">
 			</b-navbar-brand>
@@ -11,7 +11,7 @@
 				<b-nav-item><router-link to="/exterminator">Exterminator</router-link></b-nav-item>
 				<b-nav-item><router-link to="/about">About</router-link></b-nav-item>
 			</b-navbar-nav>
-		</b-nav-bar>
+		</b-navbar>
 		<router-view/>
 	</div>
 </template>
