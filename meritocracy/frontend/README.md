@@ -4,6 +4,8 @@ This is the frontend for Kumori Meritocracy.
 
 ## Setup
 
+Checkout project, and in a shell navigate to the kumori/meritocracy/frontend folder
+
 Install all npm dependencies locally.
 
     $ make setup
