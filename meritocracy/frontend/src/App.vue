@@ -1,9 +1,9 @@
 <template>
 	<div id="app">
-		<b-navbar type="dark" variant="dark" class="navbar navbar-expand-md fixed-top">
+		<b-navbar type="dark" variant="dark" class="navbar navbar-expand-md">
 			<b-navbar-brand to="/" class="d-inline-block align-top" alt="techmenu logo">
-				<b-img  src="./assets/techmenu.svg" width="64" height="65" class="m-1"/>
-				<p><small>POWERED BY Meritocracy</small></p>
+				<b-img  src="./assets/techmenu.svg" width="64" height="64" class="m-1"/>
+				#techmenu
 			</b-navbar-brand>
 
 			<b-navbar-nav>
@@ -30,6 +30,10 @@
 			</b-navbar-nav>
 		</b-navbar>
 		<router-view/>
+		<footer>
+			Copyright 2018 by Mathmagicians. Powered by Kumori.
+		</footer>
+
 	</div>
 </template>
 
@@ -44,6 +48,9 @@
   width: 48px;
   height: 48px;
   background-color: #ffffff;
+  border-style: solid;
+  border-width: medium;
+  border-color: #aaaaaa; 
   opacity: 1;
 }
 </style>

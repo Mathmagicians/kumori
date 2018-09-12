@@ -16,6 +16,8 @@ export default new Router({
     {path: '/about', component: About},
     {path: '/components', component: Components},
     {path: '/exterminator', component: Exterminator},
-    {path: '/services', component: Services}
+    {path: '/services', component: Services},
+    //dynamic routes
+     { path: '/components/:name', component: Components }
   ]
 })

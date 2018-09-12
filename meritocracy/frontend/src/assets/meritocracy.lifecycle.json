@@ -1,0 +1,13 @@
+ { 	title: "Tech Menu Status", 
+ 	items: [
+		{name: "Undecided", type: "maybe"},
+		{name: "WIP", type: "maybe"},
+		{name: "Experimental", type: "buy"},
+		{name: "Testing", type: "buy"},
+		{name: "POC", type: "maybe"},
+		{name: "Default", type: "hold"},
+		{name: "Limited", type: "hold"},
+		{name: "Deprecated", type: "sell"},
+		{name: "Don't use", type: "sell"}
+	]
+ }
