@@ -5,11 +5,11 @@
 				<img src="./assets/techmenu.svg">
 			</b-navbar-brand>
 			<b-navbar-nav>
-				<b-nav-item><router-link to="/">Meritocracy</router-link></b-nav-item>
-				<b-nav-item><router-link to="/components">Components</router-link></b-nav-item>
-				<b-nav-item><router-link to="/services">Services</router-link></b-nav-item>
-				<b-nav-item><router-link to="/exterminator">Exterminator</router-link></b-nav-item>
-				<b-nav-item><router-link to="/about">About</router-link></b-nav-item>
+				<b-nav-item to="/">Meritocracy</b-nav-item>
+				<b-nav-item to="/components">Components</b-nav-item>
+				<b-nav-item to="/services">Services</b-nav-item>
+				<b-nav-item to="/exterminator">Exterminator</b-nav-item>
+				<b-nav-item to="/about">About</b-nav-item>
 			</b-navbar-nav>
 		</b-navbar>
 		<router-view/>
