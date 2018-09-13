@@ -7,7 +7,7 @@
     </b-navbar-brand>
 
     <b-navbar-nav>
-      <b-nav-item to="/">
+      <b-nav-item to="/" exact>
         <b-img rounded="circle" src="./assets/techmenu.svg" class="image-overlay" />
         Meritocracy
       </b-nav-item>
@@ -29,7 +29,11 @@
       </b-nav-item>
     </b-navbar-nav>
   </b-navbar>
-  <router-view />
+  
+  <transition name="fade" mode="out-in">
+    <router-view class="m-1"/></router-view>
+  </transition>
+  
   <footer>
     Copyright 2018 by Mathmagicians. Powered by Kumori.
   </footer>
@@ -44,13 +48,5 @@ export default {
 </script>
 
 <style>
-.image-overlay {
-  width: 48px;
-  height: 48px;
-  background-color: #ffffff;
-  border-style: solid;
-  border-width: medium;
-  border-color: #aaaaaa;
-  opacity: 1;
-}
+
 </style>

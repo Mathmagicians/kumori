@@ -1,0 +1,9 @@
+.image-overlay {
+  width: 48px;
+  height: 48px;
+  background-color: #ffffff;
+  border-style: solid;
+  border-width: medium;
+  border-color: #aaaaaa;
+  opacity: 1;
+}

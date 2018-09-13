@@ -1,11 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import About from '../components/About.vue'
-import Components from '../components/Components.vue'
-import Errors from '../components/Errors.vue'
-import Exterminator from '../components/Exterminator.vue'
-import Home from '../components/Home.vue'
-import Services from '../components/Services.vue'
+import About from '../views/About.vue'
+import Components from '../views/components.vue'
+import Errors from '../views/Errors.vue'
+import Exterminator from '../views/Exterminator.vue'
+import Home from '../views/Home.vue'
+import Services from '../views/Services.vue'
 
 Vue.use(Router)
 
@@ -33,7 +33,7 @@ export default new Router({
     },
     // Dynamic routes
     {
-      path: '/components/:name',
+      path: '/views/:name',
       component: Components
     }
   ]

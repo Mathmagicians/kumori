@@ -1,6 +1,6 @@
 <template>
 <div id="about">
-  <b-alert show>Here, you can read more about #techmenu, the process, the life cycle, the status.</b-alert>
+  <b-alert show variant="secondary">Here, you can read more about #techmenu, the process, the life cycle, the status.</b-alert>
   <div id="lifecycle">
   	<b-card-group deck>
   	<b-card title="Buy"
@@ -13,7 +13,11 @@
     	<p class="card-text">
       		Some quick example text to build on the card title and make up the bulk of the card's content.
     	</p>
-    	<b-button href="#" variant="primary">Go somewhere</b-button>
+    	
+      <b-card-group deck>
+        <b-card v-for="item in items">{{item.name}}</b-card>
+      </b-card-group>
+
   	</b-card>
   	<b-card title="Hold"
           img-src="../assets/service.svg"
@@ -48,5 +52,13 @@
 </template>
 
 <script>
-	
+  
+  export default {
+    name: 'about',
+    computed: {
+        items(type) {
+          return this.$store.state.lifeCycle.items
+        }
+      }
+  }
 </script>
