@@ -16,7 +16,7 @@
         Components
       </b-nav-item>
       <b-nav-item to="/services">
-        <b-img rounded="circle" blank blank-color="white" src="./assets/techmenu.svg" class="image-overlay" />
+        <b-img rounded="circle" src="./assets/service.svg" class="image-overlay" />
         Services
       </b-nav-item>
       <b-nav-item to="/exterminator">

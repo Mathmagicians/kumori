@@ -1,8 +1,9 @@
 # In progress
-### route for each component - Agata
-### search window with life cycle tab
-### search window with category tag
-### test data set
+### FE: route for each component - Agata
+### FE: search comp with life cycle collapsible toggle
+### FE: search comp with category 
+### FE: test data set - read into store
+### FE: test data read from file / webservice
 
 #TODO
 
