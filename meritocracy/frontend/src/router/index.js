@@ -11,13 +11,30 @@ Vue.use(Router)
 
 export default new Router({
   mode: 'history',
-  routes: [
-    {path: '/', component: Home},
-    {path: '/about', component: About},
-    {path: '/components', component: Components},
-    {path: '/exterminator', component: Exterminator},
-    {path: '/services', component: Services},
-    //dynamic routes
-     { path: '/components/:name', component: Components }
+  routes: [{
+      path: '/',
+      component: Home
+    },
+    {
+      path: '/about',
+      component: About
+    },
+    {
+      path: '/components',
+      component: Components
+    },
+    {
+      path: '/exterminator',
+      component: Exterminator
+    },
+    {
+      path: '/services',
+      component: Services
+    },
+    // Dynamic routes
+    {
+      path: '/components/:name',
+      component: Components
+    }
   ]
 })

@@ -10,6 +10,6 @@ Vue.use(BootstrapVue)
 Vue.config.productionTip = false
 
 const app = new Vue({
-	...App,
+  ...App,
   router
 }).$mount('#app')
