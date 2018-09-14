@@ -6,7 +6,7 @@
         "filename": "[name].[chunkhash:8].js"
     },
     "module": {
-        "rules": [
+       "rules": [
             {
                 "test": /\.vue$/,
                 "exclude": /node_modules/,
