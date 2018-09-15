@@ -28,3 +28,6 @@ skuffe
           :img-src="img['buy']">
       </b-card>
   <!-- debug -->
+
+  <p>Let me tell you more about <strong>{{ $route.params.name }}</strong></p>
+          

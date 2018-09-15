@@ -30,7 +30,7 @@
     {
       "uid": "a4d2-3df1-e82b-bb44-6d6b-a548-466d-4a50",
       "name": ".Net",
-      "description": ".NET Framework (pronounced dot net) is a software framework developed by Microsoft that runs primarily on Microsoft Windows. It includes a large class library named Framework Class Library (FCL) and provides language interoperability (each language can use code written in other languages) across several programming languages.",
+      "description": ".NET Framework is a software framework developed by Microsoft that runs primarily on Microsoft Windows. It includes a large class library named Framework Class Library (FCL) and provides language interoperability (each language can use code written in other languages) across several programming languages.",
       "comments": "",
       "tags": [
         "Delivery Services",
@@ -75,7 +75,7 @@
       ],
       "links": [],
       "usecases": [
-        "Any"
+        "7-Zip fits a nice niche in between the built-in Windows capabilities and the features of the paid products, and it is able to handle a large variety of file formats in the process."
       ],
       "scopes": [
         {
@@ -95,7 +95,7 @@
     {
       "uid": "76ce-cbf5-c438-1a90-fe35-08ff-a0c5-9d23",
       "name": "AD",
-      "description": "",
+      "description": "Active Directory Domain Services is Microsoft’s Directory Server. It provides authentication and authorization mechanisms as well as a framework within which other related services can be deployed (AD Certificate Services, AD Federated Services, etc). It is an LDAP compliant database that contains objects.",
       "comments": "Active Directory",
       "tags": [],
       "licenses": [
@@ -123,7 +123,7 @@
     {
       "uid": "3f7d-9a94-a8d0-c01a-278e-b6ba-11dd-fda2",
       "name": "ActivePivot",
-      "description": "In-memory analytical platform.",
+      "description": "The ActivePivot aggregates massive amounts of fast moving data from multiple sources, storing it in its in-memory database to enable optimal decisions in a timely fashion. Combining incremental transactional and analytical processing, the ActivePivot computes sophisticated metrics on data that is updated on the fly without the need for any pre-aggregation. It lets you explore metrics across hundreds of dimensions, analyze live data at its most granular level and perform what-if simulations at unparalleled speed.",
       "comments": "Requires license.",
       "tags": [
         "Delivery Services",
@@ -136,7 +136,7 @@
       ],
       "links": [],
       "usecases": [
-        "Any"
+        "In memory computing and analytics of large datasets."
       ],
       "scopes": [
         {

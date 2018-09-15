@@ -2,7 +2,6 @@
 ### FE: route for each component - Agata
 ### FE: search comp with life cycle collapsible toggle
 ### FE: search comp with category 
-### FE: test data set - read into store
 ### FE: test data read from file / webservice
 
 #TODO
@@ -34,3 +33,4 @@
 
 # Hall of fame
     -- FE:About view --
+    -- FE: test data set - read into store --
