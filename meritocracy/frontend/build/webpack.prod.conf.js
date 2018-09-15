@@ -16,6 +16,13 @@ const env = process.env.NODE_ENV === 'testing'
   : require('../config/prod.env')
 
 const webpackConfig = merge(baseWebpackConfig, {
+  resolve: {
+    alias: {
+      'api-client': config.build.apiClient === 'mock'
+        ? path.join(__dirname, '..', 'src/api/mock/index.js')
+        : path.join(__dirname, '..', 'src/api/server/index.js')
+    }
+  },
   module: {
     rules: utils.styleLoaders({
       sourceMap: config.build.productionSourceMap,

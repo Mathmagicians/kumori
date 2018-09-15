@@ -1,4 +1,4 @@
-import posts from './data/components'
+import techComponents from './data/techComponents'
 
 const fetch = (mockData, time = 0) => {
   return new Promise((resolve) => {
@@ -10,6 +10,6 @@ const fetch = (mockData, time = 0) => {
 
 export default {
   fetchTechComponents () {
-    return fetch(components, 1000) // wait 1s before returning posts
+    return fetch(techComponents, 1000) // wait 1s before returning posts
   }
 }

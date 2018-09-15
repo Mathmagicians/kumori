@@ -1,5 +1,4 @@
-{
-  "components": 
+[
     {
       "uid": "2e3b-2e7a-b285-4b99-e0ec-5377-4b02-6ec3",
       "name": "#Slack",
@@ -615,102 +614,6 @@
         {
           "org": "Typical Taoists Inc",
           "status": "Default"
-        },
-        {
-          "org": "Gigantic Teleporters Inc",
-          "status": "To be decided"
-        },
-        {
-          "org": "Brave Traders Inc",
-          "status": "To be decided"
-        }
-      ]
-    },
-    {
-      "uid": "f56b-ad02-936b-90e5-477f-86b2-64cc-31d3",
-      "name": "Apache Samza",
-      "description": "Apache Samza is a distributed stream processing framework. It uses Apache Kafka for messaging, and Apache Hadoop YARN to provide fault tolerance, processor isolation, security, and resource management.",
-      "comments": "",
-      "tags": [
-        "Delivery Services",
-        "Development",
-        "Design and Development",
-        "Frameworks"
-      ],
-      "licenses": [
-        "Any"
-      ],
-      "links": [],
-      "usecases": [
-        "Any"
-      ],
-      "scopes": [
-        {
-          "org": "Typical Taoists Inc",
-          "status": "Testing"
-        },
-        {
-          "org": "Gigantic Teleporters Inc",
-          "status": "To be decided"
-        },
-        {
-          "org": "Brave Traders Inc",
-          "status": "To be decided"
-        }
-      ]
-    },
-    {
-      "uid": "8642-a78c-75b5-5a57-859c-f0e5-7eeb-65a5",
-      "name": "Apache Spark",
-      "description": "",
-      "comments": "May be used for ETL (Extract Transform Load)  inside an application, including use for operational BI. ETL is needed whenever we need to move data around, that be it because an IT system needs massive amounts of data or when building a datamart for BI purposes. DataStage should still be used as default for ETL processing against TDW.",
-      "tags": [
-        "Delivery Services",
-        "Development",
-        "Design and Development",
-        "Frameworks"
-      ],
-      "licenses": [
-        "Any"
-      ],
-      "links": [],
-      "usecases": [
-        "Any"
-      ],
-      "scopes": [
-        {
-          "org": "Typical Taoists Inc",
-          "status": "Default"
-        },
-        {
-          "org": "Gigantic Teleporters Inc",
-          "status": "To be decided"
-        },
-        {
-          "org": "Brave Traders Inc",
-          "status": "To be decided"
-        }
-      ]
-    },
-    {
-      "uid": "6fa4-09b2-f821-ce86-60cf-fe43-c65f-2e7b",
-      "name": "Apache Struts",
-      "description": "Apache Struts is a free, open-source, MVC framework for creating elegant, modern Java web applications. It favors convention over configuration, is extensible using a plugin architecture, and ships with plugins to support REST, AJAX and JSON.",
-      "comments": "",
-      "tags": [
-        "Design and Development"
-      ],
-      "licenses": [
-        "Any"
-      ],
-      "links": [],
-      "usecases": [
-        "Any"
-      ],
-      "scopes": [
-        {
-          "org": "Typical Taoists Inc",
-          "status": "To be decided"
         },
         {
           "org": "Gigantic Teleporters Inc",
@@ -1609,4 +1512,4 @@
     }
     
   ]
-}
+

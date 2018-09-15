@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import client from 'api-client'
 
 Vue.use(Vuex)
 
@@ -34,13 +35,14 @@ export function createStore ()
     		}
 		},
 		actions: {
-    		fetchPosts ({ commit }) 
+    		fetchTechComponents ({ commit })
     		{
       			return client
-        		.fetchTechComponents()
-        		.then(techComponents => commit('setTechComponentss', techComponents))
+      				.fetchTechComponents()
+        			.then(techComponents => commit('setTechComponents', techComponents))
     		}
   		}
 	})
 }
+
 

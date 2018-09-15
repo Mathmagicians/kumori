@@ -15,23 +15,22 @@
 ### password protect (simple secret challenge)
 ## Routes
 ### route for each component
-## 
 
 # Backend
-## Spring boot backend
-## Read components from file
-## Expose components trough service
-## Cross origin
+### Spring boot backend
+### Read components from file
+### Expose components trough service
+### Cross origin
 
 # Database
-## Neo4j poc
-## postgress backend
+### Neo4j poc
+### postgress backend
 
 # Infrastructure
-## gradle multiproject build
-## make -> ansible?
-## docker compose (backend + frontend)
+### gradle multiproject build
+### make -> ansible?
+### docker compose (backend + frontend)
 
 
 # Hall of fame
-### --FE:About view--
+    -- FE:About view --
