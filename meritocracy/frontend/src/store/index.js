@@ -3,9 +3,12 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-export function createStore () {
-	return new Vuex.Store({
-		state: {
+export function createStore () 
+{
+	return new Vuex.Store
+	({
+		state: 
+		{
 			lifeCycle: 
 			{ 
 				title: "Tech Menu Life Cycle", 
@@ -20,8 +23,24 @@ export function createStore () {
 					{name: "undecided", type: "maybe"},
 					{name: "wip", type: "maybe"}
 				]
-			}
-		}
+			},
+			techComponents: []
+		},
+		mutations: 
+		{
+			setTechComponents (state, techComponents) 
+			{
+      			state.techComponents = techComponents
+    		}
+		},
+		actions: {
+    		fetchPosts ({ commit }) 
+    		{
+      			return client
+        		.fetchTechComponents()
+        		.then(techComponents => commit('setTechComponentss', techComponents))
+    		}
+  		}
 	})
 }
 
