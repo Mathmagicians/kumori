@@ -7,10 +7,6 @@
     </b-navbar-brand>
 
     <b-navbar-nav>
-      <b-nav-item to="/" exact>
-        <b-img rounded="circle" src="./assets/techmenu.svg" class="image-overlay" />
-        Meritocracy
-      </b-nav-item>
       <b-nav-item to="/components">
         <b-img rounded="circle" blank blank-color="white" src="./assets/techmenu.svg" class="image-overlay" />
         Components
@@ -23,8 +19,12 @@
         <b-img rounded="circle" src="./assets/exterminator.svg" class="image-overlay" />
         Exterminator
       </b-nav-item>
+      <b-nav-item to="/meritocracy">
+        <b-img rounded="circle" blank blank-color="white" class="image-overlay" />
+        Meritocracy
+      </b-nav-item>
       <b-nav-item to="/about">
-        <b-img rounded="circle" blank blank-color="white" src="./assets/techmenu.svg" class="image-overlay" />
+        <b-img rounded="circle" blank blank-color="white"  class="image-overlay" />
         About
       </b-nav-item>
     </b-navbar-nav>

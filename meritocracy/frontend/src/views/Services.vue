@@ -1,5 +1,9 @@
 <template>
-<div>
-  <h1>Content on the way ...</h1>
-</div>
+	<div>
+  		<b-alert show variant="secondary">
+  			Services are technologies implemented. 
+  			Overview of what we have, what is good, what should be improved.
+  			Content on the way ...
+  		</b-alert>
+	</div>
 </template>
