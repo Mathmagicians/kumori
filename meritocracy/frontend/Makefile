@@ -17,7 +17,7 @@ e2e:
 test: unit e2e
 
 serve-start:
-	@docker run --rm -dt --name serve -v ${PWD}:/tmp -w /tmp -p 8080:8080 node npm run dev
+	@docker run --network frontend --rm -dt --name serve -v ${PWD}:/tmp -w /tmp -p 8080:8080 node npm run dev
 
 serve-logs:
 	@docker logs serve -f

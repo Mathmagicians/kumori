@@ -1,0 +1,55 @@
+version: '3.5'
+services:
+  postgrest:
+    container_name: postgrest
+    image: postgrest/postgrest
+    ports:
+      - "3000:3000"
+    links:
+      - postgres:postgres
+    environment:
+      PGRST_DB_URI: postgres://app_user:password@postgres:5432/meritocracy
+      PGRST_DB_SCHEMA: public
+      PGRST_DB_ANON_ROLE: app_user #In production this role should not be the same as the one used for the connection
+    depends_on:
+      - postgres
+    networks:
+      - frontend
+      - backend
+  postgres:
+    container_name: postgres
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: meritocracy
+      POSTGRES_USER: app_user
+      POSTGRES_PASSWORD: password
+    volumes:
+      - "data-postgres:/var/lib/postgresql/data"
+    networks:
+      - frontend
+      - backend
+
+  swagger:
+    container_name: swagger
+    image: swaggerapi/swagger-ui
+    ports:
+      - "8000:8000"
+    expose:
+      - "8080"
+    environment:
+      API_URL: http://localhost:3000/
+    depends_on:
+      - postgrest
+    networks:
+      - frontend
+
+volumes:
+  data-postgres:
+
+networks:
+  frontend:
+    name: frontend
+  backend:
+    name: backend
