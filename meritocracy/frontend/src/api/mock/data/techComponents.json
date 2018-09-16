@@ -1,1416 +1,1418 @@
 [
-    {
-      "uid": "2e3b-2e7a-b285-4b99-e0ec-5377-4b02-6ec3",
-      "name": "#Slack",
-      "status": "testing",
-      "description": "Slack is a cloud-based set of proprietary team collaboration tools and services.",
-      "comments": "",
-      "tags": [],
-      "licenses": [
-        "Any"
-      ],
-      "links": [],
-      "usecases": [
-        "Any"
-      ],
-      "scopes": [
-        {
-          "org": "Typical Taoists Inc",
-          "status": "To be decided"
-        },
-        {
-          "org": "Gigantic Teleporters Inc",
-          "status": "To be decided"
-        },
-        {
-          "org": "Brave Traders Inc",
-          "status": "To be decided"
-        }
-      ],
-      "log": [
-        { "date": "2018-01-01", 
-          "description": "Status changed",
-          "status": "testing"},
-          { "date": "2018-01-01", 
-          "description": "Added to #techmenu",
-          "status": "experimental"}
-      ]
-    },
-    {
-      "uid": "a4d2-3df1-e82b-bb44-6d6b-a548-466d-4a50",
-      "name": ".Net",
-      "status": "limited",
-      "description": ".NET Framework is a software framework developed by Microsoft that runs primarily on Microsoft Windows. It includes a large class library named Framework Class Library (FCL) and provides language interoperability (each language can use code written in other languages) across several programming languages.",
-      "comments": "",
-      "tags": [
-        "Delivery Services",
-        "Development",
-        "Design and Development",
-        "Languages and Libraries"
-      ],
-      "licenses": [
-        "Any"
-      ],
-      "links": [],
-      "usecases": [
-        "May be used for development targeted the Windows platform."
-      ],
-      "scopes": [
-        {
-          "org": "Typical Taoists Inc",
-          "status": "Limited"
-        },
-        {
-          "org": "Gigantic Teleporters Inc",
-          "status": "Default"
-        },
-        {
-          "org": "Brave Traders Inc",
-          "status": "Default"
-        }
-      ]
-    },
-    {
-      "uid": "a56a-da73-8d10-8bc8-4b1a-a1ff-59c6-76f5",
-      "name": "7-zip",
-      "description": "7-Zip is a free and open-source file archiver, a utility used to place groups of files within compressed containers known as archives.",
-      "comments": "",
-      "tags": [
-        "Delivery Services",
-        "Development",
-        "Design and Development"
-      ],
-      "licenses": [
-        "Any"
-      ],
-      "links": [],
-      "usecases": [
-        "7-Zip fits a nice niche in between the built-in Windows capabilities and the features of the paid products, and it is able to handle a large variety of file formats in the process."
-      ],
-      "scopes": [
-        {
-          "org": "Typical Taoists Inc",
-          "status": "To be decided"
-        },
-        {
-          "org": "Gigantic Teleporters Inc",
-          "status": "To be decided"
-        },
-        {
-          "org": "Brave Traders Inc",
-          "status": "To be decided"
-        }
-      ]
-    },
-    {
-      "uid": "76ce-cbf5-c438-1a90-fe35-08ff-a0c5-9d23",
-      "name": "AD",
-      "status": "undecided",
-      "description": "Active Directory Domain Services is Microsoft’s Directory Server. It provides authentication and authorization mechanisms as well as a framework within which other related services can be deployed (AD Certificate Services, AD Federated Services, etc). It is an LDAP compliant database that contains objects.",
-      "comments": "Active Directory",
-      "tags": [],
-      "licenses": [
-        "Any"
-      ],
-      "links": [],
-      "usecases": [
-        "Any"
-      ]
-    },
-    {
-      "uid": "3f7d-9a94-a8d0-c01a-278e-b6ba-11dd-fda2",
-      "name": "ActivePivot",
-      "description": "The ActivePivot aggregates massive amounts of fast moving data from multiple sources, storing it in its in-memory database to enable optimal decisions in a timely fashion. Combining incremental transactional and analytical processing, the ActivePivot computes sophisticated metrics on data that is updated on the fly without the need for any pre-aggregation. It lets you explore metrics across hundreds of dimensions, analyze live data at its most granular level and perform what-if simulations at unparalleled speed.",
-      "comments": "Requires license.",
-      "tags": [
-        "Delivery Services",
-        "Development",
-        "Design and Development",
-        "Frameworks"
-      ],
-      "licenses": [
-        "Any"
-      ],
-      "links": [],
-      "usecases": [
-        "In memory computing and analytics of large datasets."
-      ],
-      "scopes": [
-        {
-          "org": "Typical Taoists Inc",
-          "status": "Default"
-        },
-        {
-          "org": "Gigantic Teleporters Inc",
-          "status": "To be decided"
-        },
-        {
-          "org": "Brave Traders Inc",
-          "status": "To be decided"
-        }
-      ]
-    },
-    {
-      "uid": "170a-ff1a-8aff-b4e3-438a-3b70-eb2e-6ff1",
-      "name": "Ansible AWX",
-      "description": "Ansible AWX is a way to automate apps and IT infrastructure. Application Deployment plus Configuration Management and Continuous Delivery.",
-      "comments": "",
-      "tags": [
-        "Delivery Services",
-        "Operations",
-        "Deployment and Administration"
-      ],
-      "licenses": [
-        "Any"
-      ],
-      "links": [
-        "https://github.com/ansible/awx"
-      ],
-      "usecases": [
-        "Should be used for deployment."
-      ],
-      "scopes": [
-        {
-          "org": "Typical Taoists Inc",
-          "status": "Testing"
-        },
-        {
-          "org": "Gigantic Teleporters Inc",
-          "status": "To be decided"
-        },
-        {
-          "org": "Brave Traders Inc",
-          "status": "To be decided"
-        }
-      ]
-    },
-    {
-      "uid": "0b67-baa5-619e-0755-22e0-74f0-67bd-9135",
-      "name": "Ansible Tower",
-      "description": "Ansible Tower is a way to automate apps and IT infrastructure. Application Deployment plus Configuration Management and Continuous Delivery.",
-      "comments": "",
-      "tags": [
-        "Delivery Services",
-        "Operations",
-        "Deployment and Administration"
-      ],
-      "licenses": [
-        "Any"
-      ],
-      "links": [
-        "https://www.ansible.com/products/tower"
-      ],
-      "usecases": [
-        "May be used for deployment."
-      ],
-      "scopes": [
-        {
-          "org": "Typical Taoists Inc",
-          "status": "Testing"
-        },
-        {
-          "org": "Gigantic Teleporters Inc",
-          "status": "To be decided"
-        },
-        {
-          "org": "Brave Traders Inc",
-          "status": "To be decided"
-        }
-      ]
-    },
-    {
-      "uid": "42ba-140f-e6eb-489f-2bb2-0e90-59a8-9d23",
-      "name": "Ant",
-      "description": "Apache Ant is a Java-based build tool. In theory, it is kind of like Make, but without Make's wrinkles.",
-      "comments": "",
-      "tags": [
-        "Delivery Services",
-        "Development",
-        "Design and Development"
-      ],
-      "licenses": [
-        "Any"
-      ],
-      "links": [
-        "https://ant.apache.org/"
-      ],
-      "usecases": [
-        "Must move to Gradle asap"
-      ],
-      "scopes": [
-        {
-          "org": "Typical Taoists Inc",
-          "status": "Do not use"
-        },
-        {
-          "org": "Gigantic Teleporters Inc",
-          "status": "To be decided"
-        },
-        {
-          "org": "Brave Traders Inc",
-          "status": "To be decided"
-        }
-      ]
-    },
-    {
-      "uid": "c2ef-35b4-c8c3-deb9-df3f-09d3-07be-4773",
-      "name": "Apache ActiveMQ",
-      "description": "Apache ActiveMQ is an open source message broker written in Java together with a full Java Message Service client. It provides Enterprise Features which in this case means fostering the communication from more than one client or server.",
-      "comments": "",
-      "tags": [],
-      "licenses": [
-        "Any"
-      ],
-      "links": [],
-      "usecases": [
-        "Any"
-      ],
-      "scopes": [
-        {
-          "org": "Typical Taoists Inc",
-          "status": "Limited"
-        },
-        {
-          "org": "Gigantic Teleporters Inc",
-          "status": "Limited"
-        },
-        {
-          "org": "Brave Traders Inc",
-          "status": "Limited"
-        }
-      ]
-    },
-    {
-      "uid": "0c22-a344-0b16-24f9-8139-04d5-7ff2-2401",
-      "name": "Apache Cassandra",
-      "description": "Apache Cassandra is a free and open-source distributed wide column store NoSQL database management system designed to handle large amounts of data across many commodity servers, providing high availability with no single point of failure.",
-      "comments": "Get approval from EA for experimental usage.",
-      "tags": [
-        "Platform Services",
-        "Data",
-        "Database"
-      ],
-      "licenses": [
-        "Any"
-      ],
-      "links": [
-        "http://cassandra.apache.org/"
-      ],
-      "usecases": [
-        "Any"
-      ],
-      "scopes": [
-        {
-          "org": "Typical Taoists Inc",
-          "status": "Testing"
-        },
-        {
-          "org": "Gigantic Teleporters Inc",
-          "status": "Limited"
-        },
-        {
-          "org": "Brave Traders Inc",
-          "status": "Limited"
-        }
-      ]
-    },
-    {
-      "uid": "6dea-f5d6-3dd7-47ec-0f53-5e23-8db0-b282",
-      "name": "Apache CouchDB",
-      "description": "Apache CouchDB is open source database software that focuses on ease of use and having a scalable architecture.",
-      "comments": "",
-      "tags": [
-        "Platform Services",
-        "Applications",
-        "Application Hosting"
-      ],
-      "licenses": [
-        "Any"
-      ],
-      "links": [
-        "http://couchdb.apache.org/"
-      ],
-      "usecases": [
-        "Any"
-      ],
-      "scopes": [
-        {
-          "org": "Typical Taoists Inc",
-          "status": "Experiment"
-        },
-        {
-          "org": "Gigantic Teleporters Inc",
-          "status": "Experiment"
-        },
-        {
-          "org": "Brave Traders Inc",
-          "status": "Experiment"
-        }
-      ]
-    },
-    {
-      "uid": "2578-81de-a86a-2c14-b7dc-4af8-b357-8d15",
-      "name": "Apache HBase Master",
-      "description": "HBase is an open-source, non-relational, distributed database modeled after Google's Bigtable and written in Java.",
-      "comments": "",
-      "tags": [],
-      "licenses": [
-        "Any"
-      ],
-      "links": [],
-      "usecases": [
-        "Any"
-      ],
-      "scopes": [
-        {
-          "org": "Typical Taoists Inc",
-          "status": "Limited"
-        },
-        {
-          "org": "Gigantic Teleporters Inc",
-          "status": "Limited"
-        },
-        {
-          "org": "Brave Traders Inc",
-          "status": "Limited"
-        }
-      ]
-    },
-    {
-      "uid": "9b72-5e39-6d07-8b69-15b4-059a-e4bb-72de",
-      "name": "Apache HBase Region Server",
-      "description": "HBase is an open-source, non-relational, distributed database modeled after Google's Bigtable and written in Java. ",
-      "comments": "",
-      "tags": [],
-      "licenses": [
-        "Any"
-      ],
-      "links": [],
-      "usecases": [
-        "Any"
-      ],
-      "scopes": [
-        {
-          "org": "Typical Taoists Inc",
-          "status": "Limited"
-        },
-        {
-          "org": "Gigantic Teleporters Inc",
-          "status": "Limited"
-        },
-        {
-          "org": "Brave Traders Inc",
-          "status": "Limited"
-        }
-      ]
-    },
-    {
-      "uid": "a864-4116-4d20-dd46-e506-ead5-e1cf-6c2f",
-      "name": "Apache HTTPD-based Webserver",
-      "description": "The Apache HTTP Server, colloquially called Apache, is a free and open-source cross-platform web server.",
-      "comments": "",
-      "tags": [],
-      "licenses": [
-        "Any"
-      ],
-      "links": [
-        "https://httpd.apache.org/"
-      ],
-      "usecases": [
-        "Any"
-      ],
-      "scopes": [
-        {
-          "org": "Typical Taoists Inc",
-          "status": "Limited"
-        },
-        {
-          "org": "Gigantic Teleporters Inc",
-          "status": "Limited"
-        },
-        {
-          "org": "Brave Traders Inc",
-          "status": "Limited"
-        }
-      ]
-    },
-    {
-      "uid": "4982-0afb-ce40-eb44-5962-3f9a-2121-c884",
-      "name": "Apache Hadoop DataNode",
-      "description": "",
-      "comments": "",
-      "tags": [],
-      "licenses": [
-        "Any"
-      ],
-      "links": [],
-      "usecases": [
-        "Any"
-      ],
-      "scopes": [
-        {
-          "org": "Typical Taoists Inc",
-          "status": "Limited"
-        },
-        {
-          "org": "Gigantic Teleporters Inc",
-          "status": "Limited"
-        },
-        {
-          "org": "Brave Traders Inc",
-          "status": "Limited"
-        }
-      ]
-    },
-    {
-      "uid": "d6aa-80cd-d3a2-59f3-caf9-2677-f98d-e2ce",
-      "name": "Apache Hive",
-      "description": "Apache Hive is a data warehouse software project built on top of Apache Hadoop for providing data query and analysis. Hive gives an SQL-like interface to query data stored in various databases and file systems that integrate with Hadoop.",
-      "comments": "",
-      "tags": [
-        "Platform Services",
-        "Data",
-        "Database"
-      ],
-      "licenses": [
-        "Any"
-      ],
-      "links": [],
-      "usecases": [
-        "Any"
-      ],
-      "scopes": [
-        {
-          "org": "Typical Taoists Inc",
-          "status": "Testing"
-        },
-        {
-          "org": "Gigantic Teleporters Inc",
-          "status": "To be decided"
-        },
-        {
-          "org": "Brave Traders Inc",
-          "status": "To be decided"
-        }
-      ]
-    },
-    {
-      "uid": "b40f-3504-204f-e55f-c852-834e-546e-48bf",
-      "name": "Apache Kafka",
-      "description": "",
-      "comments": "Should be used for data transfer and message passing between applications.",
-      "tags": [
-        "Platform Services",
-        "Applications",
-        "Message Bus and Integration"
-      ],
-      "licenses": [
-        "Any"
-      ],
-      "links": [],
-      "usecases": [
-        "Any"
-      ],
-      "scopes": [
-        {
-          "org": "Typical Taoists Inc",
-          "status": "Default"
-        },
-        {
-          "org": "Gigantic Teleporters Inc",
-          "status": "To be decided"
-        },
-        {
-          "org": "Brave Traders Inc",
-          "status": "To be decided"
-        }
-      ]
-    },
-    {
-      "uid": "63a0-7033-e62f-e6cf-9861-7a9a-d5d0-7f0b",
-      "name": "Apache Thrift",
-      "description": "The Apache Thrift software framework, for scalable cross-language services development, combines a software stack with a code generation engine to build services that work efficiently and seamlessly between C++, Java, Python, PHP, Ruby, Erlang, Perl, Haskell, C#, Cocoa, JavaScript, Node.js, Smalltalk, OCaml and Delphi and other languages.",
-      "comments": "May be used in the following recommended use cases: Exposing and consuming service endpoints in RPC style (as an alternative to REST), This is an interim solution, while Communication Layer has not delivered the request-response integration patterns, see Recommended Integration Patterns. Thrift must not be used as a Canonical Message Format. Usage in new projects requires permission from Enterprise Architecture.",
-      "tags": [
-        "Delivery Services",
-        "Development",
-        "Design and Development",
-        "Frameworks"
-      ],
-      "licenses": [
-        "Any"
-      ],
-      "links": [],
-      "usecases": [
-        "Any"
-      ],
-      "scopes": [
-        {
-          "org": "Typical Taoists Inc",
-          "status": "Limited"
-        },
-        {
-          "org": "Gigantic Teleporters Inc",
-          "status": "To be decided"
-        },
-        {
-          "org": "Brave Traders Inc",
-          "status": "To be decided"
-        }
-      ]
-    },
-    {
-      "uid": "915b-c6a8-d1dd-dd09-686d-d65c-40ce-c0fe",
-      "name": "Apache Tomcat",
-      "description": "",
-      "comments": "Should be used as a container for all webenabled Java applications.",
-      "tags": [
-        "Delivery Services",
-        "Development",
-        "Design and Development"
-      ],
-      "licenses": [
-        "Any"
-      ],
-      "links": [],
-      "usecases": [
-        "Any"
-      ],
-      "scopes": [
-        {
-          "org": "Typical Taoists Inc",
-          "status": "Default"
-        },
-        {
-          "org": "Gigantic Teleporters Inc",
-          "status": "Limited"
-        },
-        {
-          "org": "Brave Traders Inc",
-          "status": "Limited"
-        }
-      ]
-    },
-    {
-      "uid": "c531-4402-1124-e545-9f75-24f1-2f54-324a",
-      "name": "Apache Zookeeper Server",
-      "description": "",
-      "comments": "",
-      "tags": [],
-      "licenses": [
-        "Any"
-      ],
-      "links": [],
-      "usecases": [
-        "Any"
-      ],
-      "scopes": [
-        {
-          "org": "Typical Taoists Inc",
-          "status": "Limited"
-        },
-        {
-          "org": "Gigantic Teleporters Inc",
-          "status": "Limited"
-        },
-        {
-          "org": "Brave Traders Inc",
-          "status": "Limited"
-        }
-      ]
-    },
-    {
-      "uid": "fd4f-9337-f379-52c4-1f4c-b5f5-0564-3b46",
-      "name": "AppDynamics",
-      "description": "",
-      "comments": "",
-      "tags": [],
-      "licenses": [
-        "Any"
-      ],
-      "links": [],
-      "usecases": [
-        "Should be used for metrics gathering on application level. "
-      ],
-      "scopes": [
-        {
-          "org": "Typical Taoists Inc",
-          "status": "Default"
-        },
-        {
-          "org": "Gigantic Teleporters Inc",
-          "status": "Default"
-        },
-        {
-          "org": "Brave Traders Inc",
-          "status": "Default"
-        }
-      ]
-    },
-    {
-      "uid": "7b78-b24e-85ea-4c3c-7af0-7dd6-d61b-efeb",
-      "name": "Atlassain Bamboo",
-      "description": "Build service.",
-      "comments": "Should be used for aytomated building. Provided by SRE",
-      "tags": [
-        "Delivery Services",
-        "Development",
-        "Design and Development"
-      ],
-      "licenses": [
-        "Any"
-      ],
-      "links": [],
-      "usecases": [
-        "Any"
-      ],
-      "scopes": [
-        {
-          "org": "Typical Taoists Inc",
-          "status": "Default"
-        },
-        {
-          "org": "Gigantic Teleporters Inc",
-          "status": "Default"
-        },
-        {
-          "org": "Brave Traders Inc",
-          "status": "Default"
-        }
-      ]
-    },
-    {
-      "uid": "c4bb-e476-d38b-d2a9-f74f-9081-1743-a478",
-      "name": "Atlassian Bitbucket",
-      "description": "Source code repository (Git)",
-      "comments": "Should be used for sorce code management. Provided by SRE",
-      "tags": [
-        "Delivery Services",
-        "Development",
-        "Design and Development"
-      ],
-      "licenses": [
-        "Any"
-      ],
-      "links": [],
-      "usecases": [
-        "Any"
-      ],
-      "scopes": [
-        {
-          "org": "Typical Taoists Inc",
-          "status": "Default"
-        },
-        {
-          "org": "Gigantic Teleporters Inc",
-          "status": "Default"
-        },
-        {
-          "org": "Brave Traders Inc",
-          "status": "Default"
-        }
-      ]
-    },
-    {
-      "uid": "5ad1-4fef-ea35-a738-51be-f176-4654-be79",
-      "name": "Atlassian Confluence",
-      "description": "Project and team documentation",
-      "comments": "Should be used for team collaboration. Provided by SRE",
-      "tags": [
-        "Delivery Services",
-        "Strategy and Planning",
-        "Program and Project Managment"
-      ],
-      "licenses": [
-        "Any"
-      ],
-      "links": [],
-      "usecases": [
-        "Any"
-      ],
-      "scopes": [
-        {
-          "org": "Typical Taoists Inc",
-          "status": "Default"
-        },
-        {
-          "org": "Gigantic Teleporters Inc",
-          "status": "Default"
-        },
-        {
-          "org": "Brave Traders Inc",
-          "status": "Default"
-        }
-      ]
-    },
-    {
-      "uid": "735f-09dc-a493-f8e2-065f-45c5-119f-be47",
-      "name": "Atlassian Jira",
-      "description": "Issue tracking and Workflow management",
-      "comments": "Should be used for issue tracking. Provided by SRE",
-      "tags": [
-        "Delivery Services",
-        "Strategy and Planning",
-        "Program and Project Managment"
-      ],
-      "licenses": [
-        "Any"
-      ],
-      "links": [],
-      "usecases": [
-        "Any"
-      ],
-      "scopes": [
-        {
-          "org": "Typical Taoists Inc",
-          "status": "Default"
-        },
-        {
-          "org": "Gigantic Teleporters Inc",
-          "status": "Default"
-        },
-        {
-          "org": "Brave Traders Inc",
-          "status": "Default"
-        }
-      ]
-    },
-    {
-      "uid": "d68a-c093-8c35-6c88-26eb-95b1-7916-58ee",
-      "name": "Atlassian Sourcetree",
-      "description": "Sourcetree simplifies how you interact with your Git repositories so you can focus on coding. Visualize and manage your repositories through Sourcetree's simple Git GUI.",
-      "comments": "",
-      "tags": [
-        "Delivery Services",
-        "Development",
-        "Design and Development"
-      ],
-      "licenses": [
-        "Any"
-      ],
-      "links": [],
-      "usecases": [
-        "Any"
-      ],
-      "scopes": [
-        {
-          "org": "Typical Taoists Inc",
-          "status": "Default"
-        },
-        {
-          "org": "Gigantic Teleporters Inc",
-          "status": "Default"
-        },
-        {
-          "org": "Brave Traders Inc",
-          "status": "Default"
-        }
-      ]
-    },
-    {
-      "uid": "2f05-e526-8c67-c801-a0e5-250c-c901-65e8",
-      "name": "Atom",
-      "description": "Atom is a free and open-source text and source code editor for macOS, Linux, and Microsoft Windows with support for plug-ins written in Node.js, and embedded Git Control, developed by GitHub. Atom is a desktop application built using web technologies. ",
-      "comments": "",
-      "tags": [
-        "Delivery Services",
-        "Development",
-        "Design and Development",
-        "IDE and plug-in’s"
-      ],
-      "licenses": [
-        "Any"
-      ],
-      "links": [
-        "https://atom.io/"
-      ],
-      "usecases": [
-        "Any"
-      ],
-      "scopes": [
-        {
-          "org": "Typical Taoists Inc",
-          "status": "To be decided"
-        },
-        {
-          "org": "Gigantic Teleporters Inc",
-          "status": "To be decided"
-        },
-        {
-          "org": "Brave Traders Inc",
-          "status": "To be decided"
-        }
-      ]
-    },
-    {
-      "uid": "fcf9-64ef-a4b0-ebe0-467b-c509-ddc6-fae9",
-      "name": "BOB and Roley",
-      "description": "",
-      "comments": "",
-      "tags": [],
-      "licenses": [
-        "Any"
-      ],
-      "links": [],
-      "usecases": [
-        "Any"
-      ],
-      "scopes": [
-        {
-          "org": "Typical Taoists Inc",
-          "status": "To be decided"
-        },
-        {
-          "org": "Gigantic Teleporters Inc",
-          "status": "To be decided"
-        },
-        {
-          "org": "Brave Traders Inc",
-          "status": "To be decided"
-        }
-      ]
-    },
-    {
-      "uid": "e407-89e8-ddec-984a-c4b3-496d-959d-b050",
-      "name": "C#",
-      "description": "C# is a multi-paradigm programming language encompassing strong typing, imperative, declarative, functional, generic, object-oriented (class-based), and component-oriented programming disciplines.",
-      "comments": "Should not be used unless a vendor application requires C# for integration.",
-      "tags": [
-        "Delivery Services",
-        "Development",
-        "Design and Development"
-      ],
-      "licenses": [
-        "Any"
-      ],
-      "links": [],
-      "usecases": [
-        "Any"
-      ],
-      "scopes": [
-        {
-          "org": "Typical Taoists Inc",
-          "status": "Limited"
-        },
-        {
-          "org": "Gigantic Teleporters Inc",
-          "status": "To be decided"
-        },
-        {
-          "org": "Brave Traders Inc",
-          "status": "To be decided"
-        }
-      ]
-    },
-    {
-      "uid": "0c98-f6ee-5434-04f0-7a5b-47d4-1867-e5f4",
-      "name": "Git",
-      "description": "Git is a free and open source distributed version control system.",
-      "comments": "Should be used for all new projects.",
-      "tags": [
-        "Delivery Services",
-        "Development",
-        "Design and Development"
-      ],
-      "licenses": [
-        "Any"
-      ],
-      "links": [],
-      "usecases": [
-        "Any"
-      ],
-      "scopes": [
-        {
-          "org": "Typical Taoists Inc",
-          "status": "Default"
-        },
-        {
-          "org": "Gigantic Teleporters Inc",
-          "status": "Default"
-        },
-        {
-          "org": "Brave Traders Inc",
-          "status": "Default"
-        }
-      ]
-    },
-    {
-      "uid": "acc0-b086-a83e-0286-24e1-7102-a466-1ad1",
-      "name": "Git Bash",
-      "description": "",
-      "comments": "",
-      "tags": [],
-      "licenses": [
-        "Any"
-      ],
-      "links": [],
-      "usecases": [
-        "Any"
-      ],
-      "scopes": [
-        {
-          "org": "Typical Taoists Inc",
-          "status": "Default"
-        },
-        {
-          "org": "Gigantic Teleporters Inc",
-          "status": "Default"
-        },
-        {
-          "org": "Brave Traders Inc",
-          "status": "Default"
-        }
-      ]
-    },
-    {
-      "uid": "d7aa-7932-82b8-cbff-b17c-47db-8337-f37e",
-      "name": "Hadoop distributed file system (HDFS)",
-      "description": "The HDFS is a distributed, scalable, and portable file system written in Java for the Hadoop framework.",
-      "comments": "May be used if no interoperability issues exist between producer and consumers.",
-      "tags": [
-        "Platform Services",
-        "Data",
-        "Data Management"
-      ],
-      "licenses": [
-        "Any"
-      ],
-      "links": [],
-      "usecases": [
-        "Any"
-      ],
-      "scopes": [
-        {
-          "org": "Typical Taoists Inc",
-          "status": "Testing"
-        },
-        {
-          "org": "Gigantic Teleporters Inc",
-          "status": "To be decided"
-        },
-        {
-          "org": "Brave Traders Inc",
-          "status": "To be decided"
-        }
-      ]
-    },
-    {
-      "uid": "426a-1faa-ad1a-cec5-128b-9f89-1746-01dd",
-      "name": "Hamcrest",
-      "description": "",
-      "comments": "May be used for all Java developement.",
-      "tags": [
-        "Delivery Services",
-        "Development",
-        "Testing"
-      ],
-      "licenses": [
-        "Any"
-      ],
-      "links": [],
-      "usecases": [
-        "Any"
-      ],
-      "scopes": [
-        {
-          "org": "Typical Taoists Inc",
-          "status": "Default"
-        },
-        {
-          "org": "Gigantic Teleporters Inc",
-          "status": "To be decided"
-        },
-        {
-          "org": "Brave Traders Inc",
-          "status": "To be decided"
-        }
-      ]
-    },
-    {
-      "uid": "140f-ae48-607f-e5f5-900b-a4c4-5d8e-5f54",
-      "name": "Hashicorp Vagrant",
-      "description": "Virtual machine automation tool",
-      "comments": "",
-      "tags": [
-        "Delivery Services",
-        "Development",
-        "Design and Development"
-      ],
-      "licenses": [
-        "Any"
-      ],
-      "links": [],
-      "usecases": [
-        "May only be used for testing and local development."
-      ],
-      "scopes": [
-        {
-          "org": "Typical Taoists Inc",
-          "status": "Default"
-        },
-        {
-          "org": "Gigantic Teleporters Inc",
-          "status": "To be decided"
-        },
-        {
-          "org": "Brave Traders Inc",
-          "status": "To be decided"
-        }
-      ]
-    },
-    {
-      "uid": "acae-cd76-8f4f-6666-8c85-3157-3690-8686",
-      "name": "Hashicorp Vault",
-      "description": "",
-      "comments": "",
-      "tags": [
-        "Delivery Services",
-        "Development",
-        "Design and Development"
-      ],
-      "licenses": [
-        "Any"
-      ],
-      "links": [],
-      "usecases": [
-        "Any"
-      ],
-      "scopes": [
-        {
-          "org": "Typical Taoists Inc",
-          "status": "POC"
-        },
-        {
-          "org": "Gigantic Teleporters Inc",
-          "status": "To be decided"
-        },
-        {
-          "org": "Brave Traders Inc",
-          "status": "To be decided"
-        }
-      ]
-    },
-    {
-      "uid": "be4d-199e-684a-4c77-48f2-7399-5a99-605f",
-      "name": "Haskell",
-      "description": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing",
-      "comments": "Should not be used unless a vendor application requires it for integration.",
-      "tags": [
-        "Delivery Services",
-        "Development",
-        "Design and Development"
-      ],
-      "licenses": [
-        "Any"
-      ],
-      "links": [],
-      "usecases": [
-        "Any"
-      ],
-      "scopes": [
-        {
-          "org": "Typical Taoists Inc",
-          "status": "Limited"
-        },
-        {
-          "org": "Gigantic Teleporters Inc",
-          "status": "To be decided"
-        },
-        {
-          "org": "Brave Traders Inc",
-          "status": "To be decided"
-        }
-      ]
-    },
-    {
-      "uid": "f92b-b52b-bb94-be0c-fb07-121a-7246-0c92",
-      "name": "IBM Db2",
-      "description": "IBM Db2 contains database-server products developed by IBM. These products all support the relational model, but in recent years, some products have been extended to support object-relational features and non-relational structures like JSON and XML.",
-      "comments": "Should not be used unless where needed by legacy applications. Development of new functionality on these platforms is strongly discouraged.",
-      "tags": [
-        "Platform Services",
-        "Data",
-        "Database"
-      ],
-      "licenses": [
-        "Any"
-      ],
-      "links": [],
-      "usecases": [
-        "Any"
-      ],
-      "scopes": [
-        {
-          "org": "Typical Taoists Inc",
-          "status": "Deprecated"
-        },
-        {
-          "org": "Gigantic Teleporters Inc",
-          "status": "To be decided"
-        },
-        {
-          "org": "Brave Traders Inc",
-          "status": "To be decided"
-        }
-      ]
-    },
-    {
-      "uid": "08a5-c0c6-5470-61b6-6b02-c620-5e1d-1023",
-      "name": "Java",
-      "description": "Java is a general-purpose computer programming language that is concurrent, class-based, object-oriented, and specifically designed to have as few implementation dependencies as possible.",
-      "comments": "",
-      "tags": [
-        "Delivery Services",
-        "Development",
-        "Design and Development",
-        "Language and Libraries"
-      ],
-      "licenses": [
-        "Any"
-      ],
-      "links": [
-        "https://docs.oracle.com/javase/7/docs/technotes/guides/language/index.html"
-      ],
-      "usecases": [
-        "No suppport. No infrastructure exists until requested by business",
-        "Should be used for all new development projects except mainframe."
-      ],
-      "scopes": [
-        {
-          "org": "Typical Taoists Inc",
-          "status": "Default"
-        },
-        {
-          "org": "Gigantic Teleporters Inc",
-          "status": "Default"
-        },
-        {
-          "org": "Brave Traders Inc",
-          "status": "Default"
-        }
-      ]
-    },
-    {
-      "uid": "b5b8-8e9c-8b2b-974c-29ce-64cc-e3b1-824e",
-      "name": "Javascript",
-      "description": "JavaScript often abbreviated as JS, is a high-level, dynamic, weakly typed, prototype-based, multi-paradigm, and interpreted programming language.",
-      "comments": "Should be used for frontend development in web projects.",
-      "tags": [
-        "Delivery Services",
-        "Development",
-        "Design and Development",
-        "Languages and Libraries"
-      ],
-      "licenses": [
-        "Any"
-      ],
-      "links": [],
-      "usecases": [
-        "Any"
-      ],
-      "scopes": [
-        {
-          "org": "Typical Taoists Inc",
-          "status": "Default"
-        },
-        {
-          "org": "Gigantic Teleporters Inc",
-          "status": "To be decided"
-        },
-        {
-          "org": "Brave Traders Inc",
-          "status": "To be decided"
-        }
-      ]
-    },
-    {
-      "uid": "57c3-69e9-c2c6-12db-2bd9-fc03-fcb8-8ddb",
-      "name": "Jfrog Artifactory",
-      "description": "Build artifacts and library repository",
-      "comments": "Should be used for artifact and library management.",
-      "tags": [
-        "Platform Services",
-        "Applications",
-        "Content Management"
-      ],
-      "licenses": [
-        "Any"
-      ],
-      "links": [],
-      "usecases": [
-        "Any"
-      ],
-      "scopes": [
-        {
-          "org": "Typical Taoists Inc",
-          "status": "Default"
-        },
-        {
-          "org": "Gigantic Teleporters Inc",
-          "status": "To be decided"
-        },
-        {
-          "org": "Brave Traders Inc",
-          "status": "Default"
-        }
-      ]
-    },
-    {
-      "uid": "921a-4532-5afb-598a-0364-a021-b078-e3da",
-      "name": "Jmeter",
-      "description": "",
-      "comments": "",
-      "tags": [],
-      "licenses": [
-        "Any"
-      ],
-      "links": [],
-      "usecases": [
-        "Any"
-      ],
-      "scopes": [
-        {
-          "org": "Typical Taoists Inc",
-          "status": "To be decided"
-        },
-        {
-          "org": "Gigantic Teleporters Inc",
-          "status": "To be decided"
-        },
-        {
-          "org": "Brave Traders Inc",
-          "status": "Default"
-        }
-      ]
-    },
-    {
-      "uid": "5f19-bdb3-9e2c-3251-8ed0-7f4d-877e-541a",
-      "name": "Mercurial",
-      "description": "Mercurial is a distributed revision-control tool for software developers. ",
-      "comments": "",
-      "tags": [
-        "Delivery Services",
-        "Development",
-        "Design and Development"
-      ],
-      "licenses": [
-        "Any"
-      ],
-      "links": [],
-      "usecases": [
-        "Any"
-      ],
-      "scopes": [
-        {
-          "org": "Typical Taoists Inc",
-          "status": "To be decided"
-        },
-        {
-          "org": "Gigantic Teleporters Inc",
-          "status": "To be decided"
-        },
-        {
-          "org": "Brave Traders Inc",
-          "status": "To be decided"
-        }
-      ]
-    },
-    {
-      "uid": "a30d-3ed6-d68e-54b5-5495-7d03-924f-0009",
-      "name": "Nginx Webserver",
-      "description": "",
-      "comments": "",
-      "tags": [
-        "Platform Services",
-        "Applications",
-        "Application Hosting"
-      ],
-      "licenses": [
-        "Any"
-      ],
-      "links": [],
-      "usecases": [
-        "Any"
-      ],
-      "scopes": [
-        {
-          "org": "Typical Taoists Inc",
-          "status": "Limited"
-        },
-        {
-          "org": "Gigantic Teleporters Inc",
-          "status": "Limited"
-        },
-        {
-          "org": "Brave Traders Inc",
-          "status": "Limited"
-        }
-      ]
-    },
-    {
-      "uid": "7f66-0e5d-79d4-6c84-16a3-9d5e-a125-464d",
-      "name": "Nodejs",
-      "description": "Node.js is an open-source, cross-platform JavaScript run-time environment for executing JavaScript code server-side.",
-      "comments": "May be used in frontend web development",
-      "tags": [
-        "Delivery Services",
-        "Development",
-        "Design and Development"
-      ],
-      "licenses": [
-        "Any"
-      ],
-      "links": [],
-      "usecases": [
-        "Any"
-      ],
-      "scopes": [
-        {
-          "org": "Typical Taoists Inc",
-          "status": "Default"
-        },
-        {
-          "org": "Gigantic Teleporters Inc",
-          "status": "To be decided"
-        },
-        {
-          "org": "Brave Traders Inc",
-          "status": "To be decided"
-        }
-      ]
-    },
-    {
-      "uid": "2490-ab66-e794-3282-2cba-ee03-1b45-3fb6",
-      "name": "Xray for Jira",
-      "description": "Manual and Automated Test Management tool for JIRA",
-      "comments": "May be used for test management. Provided by SRE",
-      "tags": [
-        "Delivery Services",
-        "Development",
-        "Testing"
-      ],
-      "licenses": [
-        "Any"
-      ],
-      "links": [],
-      "usecases": [
-        "Any"
-      ],
-      "scopes": [
-        {
-          "org": "Typical Taoists Inc",
-          "status": "Default"
-        },
-        {
-          "org": "Gigantic Teleporters Inc",
-          "status": "To be decided"
-        },
-        {
-          "org": "Brave Traders Inc",
-          "status": "To be decided"
-        }
-      ]
-    }
-    
-  ]
-
+  {
+    "uid": "2e3b-2e7a-b285-4b99-e0ec-5377-4b02-6ec3",
+    "name": "#Slack",
+    "status": "testing",
+    "description": "Slack is a cloud-based set of proprietary team collaboration tools and services.",
+    "comments": "",
+    "tags": [],
+    "licenses": [
+      "Any"
+    ],
+    "links": [],
+    "usecases": [
+      "Any"
+    ],
+    "scopes": [
+      {
+        "org": "Typical Taoists Inc",
+        "status": "To be decided"
+      },
+      {
+        "org": "Gigantic Teleporters Inc",
+        "status": "To be decided"
+      },
+      {
+        "org": "Brave Traders Inc",
+        "status": "To be decided"
+      }
+    ],
+    "log": [
+      {
+        "date": "2018-01-01",
+        "description": "Status changed",
+        "status": "testing"
+      },
+      {
+        "date": "2018-01-01",
+        "description": "Added to #techmenu",
+        "status": "experimental"
+      }
+    ]
+  },
+  {
+    "uid": "a4d2-3df1-e82b-bb44-6d6b-a548-466d-4a50",
+    "name": ".Net",
+    "status": "limited",
+    "description": ".NET Framework is a software framework developed by Microsoft that runs primarily on Microsoft Windows. It includes a large class library named Framework Class Library (FCL) and provides language interoperability (each language can use code written in other languages) across several programming languages.",
+    "comments": "",
+    "tags": [
+      "Delivery Services",
+      "Development",
+      "Design and Development",
+      "Languages and Libraries"
+    ],
+    "licenses": [
+      "Any"
+    ],
+    "links": [],
+    "usecases": [
+      "May be used for development targeted the Windows platform."
+    ],
+    "scopes": [
+      {
+        "org": "Typical Taoists Inc",
+        "status": "Limited"
+      },
+      {
+        "org": "Gigantic Teleporters Inc",
+        "status": "Default"
+      },
+      {
+        "org": "Brave Traders Inc",
+        "status": "Default"
+      }
+    ]
+  },
+  {
+    "uid": "a56a-da73-8d10-8bc8-4b1a-a1ff-59c6-76f5",
+    "name": "7-zip",
+    "description": "7-Zip is a free and open-source file archiver, a utility used to place groups of files within compressed containers known as archives.",
+    "comments": "",
+    "tags": [
+      "Delivery Services",
+      "Development",
+      "Design and Development"
+    ],
+    "licenses": [
+      "Any"
+    ],
+    "links": [],
+    "usecases": [
+      "7-Zip fits a nice niche in between the built-in Windows capabilities and the features of the paid products, and it is able to handle a large variety of file formats in the process."
+    ],
+    "scopes": [
+      {
+        "org": "Typical Taoists Inc",
+        "status": "To be decided"
+      },
+      {
+        "org": "Gigantic Teleporters Inc",
+        "status": "To be decided"
+      },
+      {
+        "org": "Brave Traders Inc",
+        "status": "To be decided"
+      }
+    ]
+  },
+  {
+    "uid": "76ce-cbf5-c438-1a90-fe35-08ff-a0c5-9d23",
+    "name": "AD",
+    "status": "undecided",
+    "description": "Active Directory Domain Services is Microsoft’s Directory Server. It provides authentication and authorization mechanisms as well as a framework within which other related services can be deployed (AD Certificate Services, AD Federated Services, etc). It is an LDAP compliant database that contains objects.",
+    "comments": "Active Directory",
+    "tags": [],
+    "licenses": [
+      "Any"
+    ],
+    "links": [],
+    "usecases": [
+      "Any"
+    ]
+  },
+  {
+    "uid": "3f7d-9a94-a8d0-c01a-278e-b6ba-11dd-fda2",
+    "name": "ActivePivot",
+    "description": "The ActivePivot aggregates massive amounts of fast moving data from multiple sources, storing it in its in-memory database to enable optimal decisions in a timely fashion. Combining incremental transactional and analytical processing, the ActivePivot computes sophisticated metrics on data that is updated on the fly without the need for any pre-aggregation. It lets you explore metrics across hundreds of dimensions, analyze live data at its most granular level and perform what-if simulations at unparalleled speed.",
+    "comments": "Requires license.",
+    "tags": [
+      "Delivery Services",
+      "Development",
+      "Design and Development",
+      "Frameworks"
+    ],
+    "licenses": [
+      "Any"
+    ],
+    "links": [],
+    "usecases": [
+      "In memory computing and analytics of large datasets."
+    ],
+    "scopes": [
+      {
+        "org": "Typical Taoists Inc",
+        "status": "Default"
+      },
+      {
+        "org": "Gigantic Teleporters Inc",
+        "status": "To be decided"
+      },
+      {
+        "org": "Brave Traders Inc",
+        "status": "To be decided"
+      }
+    ]
+  },
+  {
+    "uid": "170a-ff1a-8aff-b4e3-438a-3b70-eb2e-6ff1",
+    "name": "Ansible AWX",
+    "description": "Ansible AWX is a way to automate apps and IT infrastructure. Application Deployment plus Configuration Management and Continuous Delivery.",
+    "comments": "",
+    "tags": [
+      "Delivery Services",
+      "Operations",
+      "Deployment and Administration"
+    ],
+    "licenses": [
+      "Any"
+    ],
+    "links": [
+      "https://github.com/ansible/awx"
+    ],
+    "usecases": [
+      "Should be used for deployment."
+    ],
+    "scopes": [
+      {
+        "org": "Typical Taoists Inc",
+        "status": "Testing"
+      },
+      {
+        "org": "Gigantic Teleporters Inc",
+        "status": "To be decided"
+      },
+      {
+        "org": "Brave Traders Inc",
+        "status": "To be decided"
+      }
+    ]
+  },
+  {
+    "uid": "0b67-baa5-619e-0755-22e0-74f0-67bd-9135",
+    "name": "Ansible Tower",
+    "description": "Ansible Tower is a way to automate apps and IT infrastructure. Application Deployment plus Configuration Management and Continuous Delivery.",
+    "comments": "",
+    "tags": [
+      "Delivery Services",
+      "Operations",
+      "Deployment and Administration"
+    ],
+    "licenses": [
+      "Any"
+    ],
+    "links": [
+      "https://www.ansible.com/products/tower"
+    ],
+    "usecases": [
+      "May be used for deployment."
+    ],
+    "scopes": [
+      {
+        "org": "Typical Taoists Inc",
+        "status": "Testing"
+      },
+      {
+        "org": "Gigantic Teleporters Inc",
+        "status": "To be decided"
+      },
+      {
+        "org": "Brave Traders Inc",
+        "status": "To be decided"
+      }
+    ]
+  },
+  {
+    "uid": "42ba-140f-e6eb-489f-2bb2-0e90-59a8-9d23",
+    "name": "Ant",
+    "description": "Apache Ant is a Java-based build tool. In theory, it is kind of like Make, but without Make's wrinkles.",
+    "comments": "",
+    "tags": [
+      "Delivery Services",
+      "Development",
+      "Design and Development"
+    ],
+    "licenses": [
+      "Any"
+    ],
+    "links": [
+      "https://ant.apache.org/"
+    ],
+    "usecases": [
+      "Must move to Gradle asap"
+    ],
+    "scopes": [
+      {
+        "org": "Typical Taoists Inc",
+        "status": "Do not use"
+      },
+      {
+        "org": "Gigantic Teleporters Inc",
+        "status": "To be decided"
+      },
+      {
+        "org": "Brave Traders Inc",
+        "status": "To be decided"
+      }
+    ]
+  },
+  {
+    "uid": "c2ef-35b4-c8c3-deb9-df3f-09d3-07be-4773",
+    "name": "Apache ActiveMQ",
+    "description": "Apache ActiveMQ is an open source message broker written in Java together with a full Java Message Service client. It provides Enterprise Features which in this case means fostering the communication from more than one client or server.",
+    "comments": "",
+    "tags": [],
+    "licenses": [
+      "Any"
+    ],
+    "links": [],
+    "usecases": [
+      "Any"
+    ],
+    "scopes": [
+      {
+        "org": "Typical Taoists Inc",
+        "status": "Limited"
+      },
+      {
+        "org": "Gigantic Teleporters Inc",
+        "status": "Limited"
+      },
+      {
+        "org": "Brave Traders Inc",
+        "status": "Limited"
+      }
+    ]
+  },
+  {
+    "uid": "0c22-a344-0b16-24f9-8139-04d5-7ff2-2401",
+    "name": "Apache Cassandra",
+    "description": "Apache Cassandra is a free and open-source distributed wide column store NoSQL database management system designed to handle large amounts of data across many commodity servers, providing high availability with no single point of failure.",
+    "comments": "Get approval from EA for experimental usage.",
+    "tags": [
+      "Platform Services",
+      "Data",
+      "Database"
+    ],
+    "licenses": [
+      "Any"
+    ],
+    "links": [
+      "http://cassandra.apache.org/"
+    ],
+    "usecases": [
+      "Any"
+    ],
+    "scopes": [
+      {
+        "org": "Typical Taoists Inc",
+        "status": "Testing"
+      },
+      {
+        "org": "Gigantic Teleporters Inc",
+        "status": "Limited"
+      },
+      {
+        "org": "Brave Traders Inc",
+        "status": "Limited"
+      }
+    ]
+  },
+  {
+    "uid": "6dea-f5d6-3dd7-47ec-0f53-5e23-8db0-b282",
+    "name": "Apache CouchDB",
+    "description": "Apache CouchDB is open source database software that focuses on ease of use and having a scalable architecture.",
+    "comments": "",
+    "tags": [
+      "Platform Services",
+      "Applications",
+      "Application Hosting"
+    ],
+    "licenses": [
+      "Any"
+    ],
+    "links": [
+      "http://couchdb.apache.org/"
+    ],
+    "usecases": [
+      "Any"
+    ],
+    "scopes": [
+      {
+        "org": "Typical Taoists Inc",
+        "status": "Experiment"
+      },
+      {
+        "org": "Gigantic Teleporters Inc",
+        "status": "Experiment"
+      },
+      {
+        "org": "Brave Traders Inc",
+        "status": "Experiment"
+      }
+    ]
+  },
+  {
+    "uid": "2578-81de-a86a-2c14-b7dc-4af8-b357-8d15",
+    "name": "Apache HBase Master",
+    "description": "HBase is an open-source, non-relational, distributed database modeled after Google's Bigtable and written in Java.",
+    "comments": "",
+    "tags": [],
+    "licenses": [
+      "Any"
+    ],
+    "links": [],
+    "usecases": [
+      "Any"
+    ],
+    "scopes": [
+      {
+        "org": "Typical Taoists Inc",
+        "status": "Limited"
+      },
+      {
+        "org": "Gigantic Teleporters Inc",
+        "status": "Limited"
+      },
+      {
+        "org": "Brave Traders Inc",
+        "status": "Limited"
+      }
+    ]
+  },
+  {
+    "uid": "9b72-5e39-6d07-8b69-15b4-059a-e4bb-72de",
+    "name": "Apache HBase Region Server",
+    "description": "HBase is an open-source, non-relational, distributed database modeled after Google's Bigtable and written in Java. ",
+    "comments": "",
+    "tags": [],
+    "licenses": [
+      "Any"
+    ],
+    "links": [],
+    "usecases": [
+      "Any"
+    ],
+    "scopes": [
+      {
+        "org": "Typical Taoists Inc",
+        "status": "Limited"
+      },
+      {
+        "org": "Gigantic Teleporters Inc",
+        "status": "Limited"
+      },
+      {
+        "org": "Brave Traders Inc",
+        "status": "Limited"
+      }
+    ]
+  },
+  {
+    "uid": "a864-4116-4d20-dd46-e506-ead5-e1cf-6c2f",
+    "name": "Apache HTTPD-based Webserver",
+    "description": "The Apache HTTP Server, colloquially called Apache, is a free and open-source cross-platform web server.",
+    "comments": "",
+    "tags": [],
+    "licenses": [
+      "Any"
+    ],
+    "links": [
+      "https://httpd.apache.org/"
+    ],
+    "usecases": [
+      "Any"
+    ],
+    "scopes": [
+      {
+        "org": "Typical Taoists Inc",
+        "status": "Limited"
+      },
+      {
+        "org": "Gigantic Teleporters Inc",
+        "status": "Limited"
+      },
+      {
+        "org": "Brave Traders Inc",
+        "status": "Limited"
+      }
+    ]
+  },
+  {
+    "uid": "4982-0afb-ce40-eb44-5962-3f9a-2121-c884",
+    "name": "Apache Hadoop DataNode",
+    "description": "",
+    "comments": "",
+    "tags": [],
+    "licenses": [
+      "Any"
+    ],
+    "links": [],
+    "usecases": [
+      "Any"
+    ],
+    "scopes": [
+      {
+        "org": "Typical Taoists Inc",
+        "status": "Limited"
+      },
+      {
+        "org": "Gigantic Teleporters Inc",
+        "status": "Limited"
+      },
+      {
+        "org": "Brave Traders Inc",
+        "status": "Limited"
+      }
+    ]
+  },
+  {
+    "uid": "d6aa-80cd-d3a2-59f3-caf9-2677-f98d-e2ce",
+    "name": "Apache Hive",
+    "description": "Apache Hive is a data warehouse software project built on top of Apache Hadoop for providing data query and analysis. Hive gives an SQL-like interface to query data stored in various databases and file systems that integrate with Hadoop.",
+    "comments": "",
+    "tags": [
+      "Platform Services",
+      "Data",
+      "Database"
+    ],
+    "licenses": [
+      "Any"
+    ],
+    "links": [],
+    "usecases": [
+      "Any"
+    ],
+    "scopes": [
+      {
+        "org": "Typical Taoists Inc",
+        "status": "Testing"
+      },
+      {
+        "org": "Gigantic Teleporters Inc",
+        "status": "To be decided"
+      },
+      {
+        "org": "Brave Traders Inc",
+        "status": "To be decided"
+      }
+    ]
+  },
+  {
+    "uid": "b40f-3504-204f-e55f-c852-834e-546e-48bf",
+    "name": "Apache Kafka",
+    "description": "",
+    "comments": "Should be used for data transfer and message passing between applications.",
+    "tags": [
+      "Platform Services",
+      "Applications",
+      "Message Bus and Integration"
+    ],
+    "licenses": [
+      "Any"
+    ],
+    "links": [],
+    "usecases": [
+      "Any"
+    ],
+    "scopes": [
+      {
+        "org": "Typical Taoists Inc",
+        "status": "Default"
+      },
+      {
+        "org": "Gigantic Teleporters Inc",
+        "status": "To be decided"
+      },
+      {
+        "org": "Brave Traders Inc",
+        "status": "To be decided"
+      }
+    ]
+  },
+  {
+    "uid": "63a0-7033-e62f-e6cf-9861-7a9a-d5d0-7f0b",
+    "name": "Apache Thrift",
+    "description": "The Apache Thrift software framework, for scalable cross-language services development, combines a software stack with a code generation engine to build services that work efficiently and seamlessly between C++, Java, Python, PHP, Ruby, Erlang, Perl, Haskell, C#, Cocoa, JavaScript, Node.js, Smalltalk, OCaml and Delphi and other languages.",
+    "comments": "May be used in the following recommended use cases: Exposing and consuming service endpoints in RPC style (as an alternative to REST), This is an interim solution, while Communication Layer has not delivered the request-response integration patterns, see Recommended Integration Patterns. Thrift must not be used as a Canonical Message Format. Usage in new projects requires permission from Enterprise Architecture.",
+    "tags": [
+      "Delivery Services",
+      "Development",
+      "Design and Development",
+      "Frameworks"
+    ],
+    "licenses": [
+      "Any"
+    ],
+    "links": [],
+    "usecases": [
+      "Any"
+    ],
+    "scopes": [
+      {
+        "org": "Typical Taoists Inc",
+        "status": "Limited"
+      },
+      {
+        "org": "Gigantic Teleporters Inc",
+        "status": "To be decided"
+      },
+      {
+        "org": "Brave Traders Inc",
+        "status": "To be decided"
+      }
+    ]
+  },
+  {
+    "uid": "915b-c6a8-d1dd-dd09-686d-d65c-40ce-c0fe",
+    "name": "Apache Tomcat",
+    "description": "",
+    "comments": "Should be used as a container for all webenabled Java applications.",
+    "tags": [
+      "Delivery Services",
+      "Development",
+      "Design and Development"
+    ],
+    "licenses": [
+      "Any"
+    ],
+    "links": [],
+    "usecases": [
+      "Any"
+    ],
+    "scopes": [
+      {
+        "org": "Typical Taoists Inc",
+        "status": "Default"
+      },
+      {
+        "org": "Gigantic Teleporters Inc",
+        "status": "Limited"
+      },
+      {
+        "org": "Brave Traders Inc",
+        "status": "Limited"
+      }
+    ]
+  },
+  {
+    "uid": "c531-4402-1124-e545-9f75-24f1-2f54-324a",
+    "name": "Apache Zookeeper Server",
+    "description": "",
+    "comments": "",
+    "tags": [],
+    "licenses": [
+      "Any"
+    ],
+    "links": [],
+    "usecases": [
+      "Any"
+    ],
+    "scopes": [
+      {
+        "org": "Typical Taoists Inc",
+        "status": "Limited"
+      },
+      {
+        "org": "Gigantic Teleporters Inc",
+        "status": "Limited"
+      },
+      {
+        "org": "Brave Traders Inc",
+        "status": "Limited"
+      }
+    ]
+  },
+  {
+    "uid": "fd4f-9337-f379-52c4-1f4c-b5f5-0564-3b46",
+    "name": "AppDynamics",
+    "description": "",
+    "comments": "",
+    "tags": [],
+    "licenses": [
+      "Any"
+    ],
+    "links": [],
+    "usecases": [
+      "Should be used for metrics gathering on application level. "
+    ],
+    "scopes": [
+      {
+        "org": "Typical Taoists Inc",
+        "status": "Default"
+      },
+      {
+        "org": "Gigantic Teleporters Inc",
+        "status": "Default"
+      },
+      {
+        "org": "Brave Traders Inc",
+        "status": "Default"
+      }
+    ]
+  },
+  {
+    "uid": "7b78-b24e-85ea-4c3c-7af0-7dd6-d61b-efeb",
+    "name": "Atlassain Bamboo",
+    "description": "Build service.",
+    "comments": "Should be used for aytomated building. Provided by SRE",
+    "tags": [
+      "Delivery Services",
+      "Development",
+      "Design and Development"
+    ],
+    "licenses": [
+      "Any"
+    ],
+    "links": [],
+    "usecases": [
+      "Any"
+    ],
+    "scopes": [
+      {
+        "org": "Typical Taoists Inc",
+        "status": "Default"
+      },
+      {
+        "org": "Gigantic Teleporters Inc",
+        "status": "Default"
+      },
+      {
+        "org": "Brave Traders Inc",
+        "status": "Default"
+      }
+    ]
+  },
+  {
+    "uid": "c4bb-e476-d38b-d2a9-f74f-9081-1743-a478",
+    "name": "Atlassian Bitbucket",
+    "description": "Source code repository (Git)",
+    "comments": "Should be used for sorce code management. Provided by SRE",
+    "tags": [
+      "Delivery Services",
+      "Development",
+      "Design and Development"
+    ],
+    "licenses": [
+      "Any"
+    ],
+    "links": [],
+    "usecases": [
+      "Any"
+    ],
+    "scopes": [
+      {
+        "org": "Typical Taoists Inc",
+        "status": "Default"
+      },
+      {
+        "org": "Gigantic Teleporters Inc",
+        "status": "Default"
+      },
+      {
+        "org": "Brave Traders Inc",
+        "status": "Default"
+      }
+    ]
+  },
+  {
+    "uid": "5ad1-4fef-ea35-a738-51be-f176-4654-be79",
+    "name": "Atlassian Confluence",
+    "description": "Project and team documentation",
+    "comments": "Should be used for team collaboration. Provided by SRE",
+    "tags": [
+      "Delivery Services",
+      "Strategy and Planning",
+      "Program and Project Managment"
+    ],
+    "licenses": [
+      "Any"
+    ],
+    "links": [],
+    "usecases": [
+      "Any"
+    ],
+    "scopes": [
+      {
+        "org": "Typical Taoists Inc",
+        "status": "Default"
+      },
+      {
+        "org": "Gigantic Teleporters Inc",
+        "status": "Default"
+      },
+      {
+        "org": "Brave Traders Inc",
+        "status": "Default"
+      }
+    ]
+  },
+  {
+    "uid": "735f-09dc-a493-f8e2-065f-45c5-119f-be47",
+    "name": "Atlassian Jira",
+    "description": "Issue tracking and Workflow management",
+    "comments": "Should be used for issue tracking. Provided by SRE",
+    "tags": [
+      "Delivery Services",
+      "Strategy and Planning",
+      "Program and Project Managment"
+    ],
+    "licenses": [
+      "Any"
+    ],
+    "links": [],
+    "usecases": [
+      "Any"
+    ],
+    "scopes": [
+      {
+        "org": "Typical Taoists Inc",
+        "status": "Default"
+      },
+      {
+        "org": "Gigantic Teleporters Inc",
+        "status": "Default"
+      },
+      {
+        "org": "Brave Traders Inc",
+        "status": "Default"
+      }
+    ]
+  },
+  {
+    "uid": "d68a-c093-8c35-6c88-26eb-95b1-7916-58ee",
+    "name": "Atlassian Sourcetree",
+    "description": "Sourcetree simplifies how you interact with your Git repositories so you can focus on coding. Visualize and manage your repositories through Sourcetree's simple Git GUI.",
+    "comments": "",
+    "tags": [
+      "Delivery Services",
+      "Development",
+      "Design and Development"
+    ],
+    "licenses": [
+      "Any"
+    ],
+    "links": [],
+    "usecases": [
+      "Any"
+    ],
+    "scopes": [
+      {
+        "org": "Typical Taoists Inc",
+        "status": "Default"
+      },
+      {
+        "org": "Gigantic Teleporters Inc",
+        "status": "Default"
+      },
+      {
+        "org": "Brave Traders Inc",
+        "status": "Default"
+      }
+    ]
+  },
+  {
+    "uid": "2f05-e526-8c67-c801-a0e5-250c-c901-65e8",
+    "name": "Atom",
+    "description": "Atom is a free and open-source text and source code editor for macOS, Linux, and Microsoft Windows with support for plug-ins written in Node.js, and embedded Git Control, developed by GitHub. Atom is a desktop application built using web technologies. ",
+    "comments": "",
+    "tags": [
+      "Delivery Services",
+      "Development",
+      "Design and Development",
+      "IDE and plug-in’s"
+    ],
+    "licenses": [
+      "Any"
+    ],
+    "links": [
+      "https://atom.io/"
+    ],
+    "usecases": [
+      "Any"
+    ],
+    "scopes": [
+      {
+        "org": "Typical Taoists Inc",
+        "status": "To be decided"
+      },
+      {
+        "org": "Gigantic Teleporters Inc",
+        "status": "To be decided"
+      },
+      {
+        "org": "Brave Traders Inc",
+        "status": "To be decided"
+      }
+    ]
+  },
+  {
+    "uid": "fcf9-64ef-a4b0-ebe0-467b-c509-ddc6-fae9",
+    "name": "BOB and Roley",
+    "description": "",
+    "comments": "",
+    "tags": [],
+    "licenses": [
+      "Any"
+    ],
+    "links": [],
+    "usecases": [
+      "Any"
+    ],
+    "scopes": [
+      {
+        "org": "Typical Taoists Inc",
+        "status": "To be decided"
+      },
+      {
+        "org": "Gigantic Teleporters Inc",
+        "status": "To be decided"
+      },
+      {
+        "org": "Brave Traders Inc",
+        "status": "To be decided"
+      }
+    ]
+  },
+  {
+    "uid": "e407-89e8-ddec-984a-c4b3-496d-959d-b050",
+    "name": "C#",
+    "description": "C# is a multi-paradigm programming language encompassing strong typing, imperative, declarative, functional, generic, object-oriented (class-based), and component-oriented programming disciplines.",
+    "comments": "Should not be used unless a vendor application requires C# for integration.",
+    "tags": [
+      "Delivery Services",
+      "Development",
+      "Design and Development"
+    ],
+    "licenses": [
+      "Any"
+    ],
+    "links": [],
+    "usecases": [
+      "Any"
+    ],
+    "scopes": [
+      {
+        "org": "Typical Taoists Inc",
+        "status": "Limited"
+      },
+      {
+        "org": "Gigantic Teleporters Inc",
+        "status": "To be decided"
+      },
+      {
+        "org": "Brave Traders Inc",
+        "status": "To be decided"
+      }
+    ]
+  },
+  {
+    "uid": "0c98-f6ee-5434-04f0-7a5b-47d4-1867-e5f4",
+    "name": "Git",
+    "description": "Git is a free and open source distributed version control system.",
+    "comments": "Should be used for all new projects.",
+    "tags": [
+      "Delivery Services",
+      "Development",
+      "Design and Development"
+    ],
+    "licenses": [
+      "Any"
+    ],
+    "links": [],
+    "usecases": [
+      "Any"
+    ],
+    "scopes": [
+      {
+        "org": "Typical Taoists Inc",
+        "status": "Default"
+      },
+      {
+        "org": "Gigantic Teleporters Inc",
+        "status": "Default"
+      },
+      {
+        "org": "Brave Traders Inc",
+        "status": "Default"
+      }
+    ]
+  },
+  {
+    "uid": "acc0-b086-a83e-0286-24e1-7102-a466-1ad1",
+    "name": "Git Bash",
+    "description": "",
+    "comments": "",
+    "tags": [],
+    "licenses": [
+      "Any"
+    ],
+    "links": [],
+    "usecases": [
+      "Any"
+    ],
+    "scopes": [
+      {
+        "org": "Typical Taoists Inc",
+        "status": "Default"
+      },
+      {
+        "org": "Gigantic Teleporters Inc",
+        "status": "Default"
+      },
+      {
+        "org": "Brave Traders Inc",
+        "status": "Default"
+      }
+    ]
+  },
+  {
+    "uid": "d7aa-7932-82b8-cbff-b17c-47db-8337-f37e",
+    "name": "Hadoop distributed file system (HDFS)",
+    "description": "The HDFS is a distributed, scalable, and portable file system written in Java for the Hadoop framework.",
+    "comments": "May be used if no interoperability issues exist between producer and consumers.",
+    "tags": [
+      "Platform Services",
+      "Data",
+      "Data Management"
+    ],
+    "licenses": [
+      "Any"
+    ],
+    "links": [],
+    "usecases": [
+      "Any"
+    ],
+    "scopes": [
+      {
+        "org": "Typical Taoists Inc",
+        "status": "Testing"
+      },
+      {
+        "org": "Gigantic Teleporters Inc",
+        "status": "To be decided"
+      },
+      {
+        "org": "Brave Traders Inc",
+        "status": "To be decided"
+      }
+    ]
+  },
+  {
+    "uid": "426a-1faa-ad1a-cec5-128b-9f89-1746-01dd",
+    "name": "Hamcrest",
+    "description": "",
+    "comments": "May be used for all Java developement.",
+    "tags": [
+      "Delivery Services",
+      "Development",
+      "Testing"
+    ],
+    "licenses": [
+      "Any"
+    ],
+    "links": [],
+    "usecases": [
+      "Any"
+    ],
+    "scopes": [
+      {
+        "org": "Typical Taoists Inc",
+        "status": "Default"
+      },
+      {
+        "org": "Gigantic Teleporters Inc",
+        "status": "To be decided"
+      },
+      {
+        "org": "Brave Traders Inc",
+        "status": "To be decided"
+      }
+    ]
+  },
+  {
+    "uid": "140f-ae48-607f-e5f5-900b-a4c4-5d8e-5f54",
+    "name": "Hashicorp Vagrant",
+    "description": "Virtual machine automation tool",
+    "comments": "",
+    "tags": [
+      "Delivery Services",
+      "Development",
+      "Design and Development"
+    ],
+    "licenses": [
+      "Any"
+    ],
+    "links": [],
+    "usecases": [
+      "May only be used for testing and local development."
+    ],
+    "scopes": [
+      {
+        "org": "Typical Taoists Inc",
+        "status": "Default"
+      },
+      {
+        "org": "Gigantic Teleporters Inc",
+        "status": "To be decided"
+      },
+      {
+        "org": "Brave Traders Inc",
+        "status": "To be decided"
+      }
+    ]
+  },
+  {
+    "uid": "acae-cd76-8f4f-6666-8c85-3157-3690-8686",
+    "name": "Hashicorp Vault",
+    "description": "",
+    "comments": "",
+    "tags": [
+      "Delivery Services",
+      "Development",
+      "Design and Development"
+    ],
+    "licenses": [
+      "Any"
+    ],
+    "links": [],
+    "usecases": [
+      "Any"
+    ],
+    "scopes": [
+      {
+        "org": "Typical Taoists Inc",
+        "status": "POC"
+      },
+      {
+        "org": "Gigantic Teleporters Inc",
+        "status": "To be decided"
+      },
+      {
+        "org": "Brave Traders Inc",
+        "status": "To be decided"
+      }
+    ]
+  },
+  {
+    "uid": "be4d-199e-684a-4c77-48f2-7399-5a99-605f",
+    "name": "Haskell",
+    "description": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing",
+    "comments": "Should not be used unless a vendor application requires it for integration.",
+    "tags": [
+      "Delivery Services",
+      "Development",
+      "Design and Development"
+    ],
+    "licenses": [
+      "Any"
+    ],
+    "links": [],
+    "usecases": [
+      "Any"
+    ],
+    "scopes": [
+      {
+        "org": "Typical Taoists Inc",
+        "status": "Limited"
+      },
+      {
+        "org": "Gigantic Teleporters Inc",
+        "status": "To be decided"
+      },
+      {
+        "org": "Brave Traders Inc",
+        "status": "To be decided"
+      }
+    ]
+  },
+  {
+    "uid": "f92b-b52b-bb94-be0c-fb07-121a-7246-0c92",
+    "name": "IBM Db2",
+    "description": "IBM Db2 contains database-server products developed by IBM. These products all support the relational model, but in recent years, some products have been extended to support object-relational features and non-relational structures like JSON and XML.",
+    "comments": "Should not be used unless where needed by legacy applications. Development of new functionality on these platforms is strongly discouraged.",
+    "tags": [
+      "Platform Services",
+      "Data",
+      "Database"
+    ],
+    "licenses": [
+      "Any"
+    ],
+    "links": [],
+    "usecases": [
+      "Any"
+    ],
+    "scopes": [
+      {
+        "org": "Typical Taoists Inc",
+        "status": "Deprecated"
+      },
+      {
+        "org": "Gigantic Teleporters Inc",
+        "status": "To be decided"
+      },
+      {
+        "org": "Brave Traders Inc",
+        "status": "To be decided"
+      }
+    ]
+  },
+  {
+    "uid": "08a5-c0c6-5470-61b6-6b02-c620-5e1d-1023",
+    "name": "Java",
+    "description": "Java is a general-purpose computer programming language that is concurrent, class-based, object-oriented, and specifically designed to have as few implementation dependencies as possible.",
+    "comments": "",
+    "tags": [
+      "Delivery Services",
+      "Development",
+      "Design and Development",
+      "Language and Libraries"
+    ],
+    "licenses": [
+      "Any"
+    ],
+    "links": [
+      "https://docs.oracle.com/javase/7/docs/technotes/guides/language/index.html"
+    ],
+    "usecases": [
+      "No suppport. No infrastructure exists until requested by business",
+      "Should be used for all new development projects except mainframe."
+    ],
+    "scopes": [
+      {
+        "org": "Typical Taoists Inc",
+        "status": "Default"
+      },
+      {
+        "org": "Gigantic Teleporters Inc",
+        "status": "Default"
+      },
+      {
+        "org": "Brave Traders Inc",
+        "status": "Default"
+      }
+    ]
+  },
+  {
+    "uid": "b5b8-8e9c-8b2b-974c-29ce-64cc-e3b1-824e",
+    "name": "Javascript",
+    "description": "JavaScript often abbreviated as JS, is a high-level, dynamic, weakly typed, prototype-based, multi-paradigm, and interpreted programming language.",
+    "comments": "Should be used for frontend development in web projects.",
+    "tags": [
+      "Delivery Services",
+      "Development",
+      "Design and Development",
+      "Languages and Libraries"
+    ],
+    "licenses": [
+      "Any"
+    ],
+    "links": [],
+    "usecases": [
+      "Any"
+    ],
+    "scopes": [
+      {
+        "org": "Typical Taoists Inc",
+        "status": "Default"
+      },
+      {
+        "org": "Gigantic Teleporters Inc",
+        "status": "To be decided"
+      },
+      {
+        "org": "Brave Traders Inc",
+        "status": "To be decided"
+      }
+    ]
+  },
+  {
+    "uid": "57c3-69e9-c2c6-12db-2bd9-fc03-fcb8-8ddb",
+    "name": "Jfrog Artifactory",
+    "description": "Build artifacts and library repository",
+    "comments": "Should be used for artifact and library management.",
+    "tags": [
+      "Platform Services",
+      "Applications",
+      "Content Management"
+    ],
+    "licenses": [
+      "Any"
+    ],
+    "links": [],
+    "usecases": [
+      "Any"
+    ],
+    "scopes": [
+      {
+        "org": "Typical Taoists Inc",
+        "status": "Default"
+      },
+      {
+        "org": "Gigantic Teleporters Inc",
+        "status": "To be decided"
+      },
+      {
+        "org": "Brave Traders Inc",
+        "status": "Default"
+      }
+    ]
+  },
+  {
+    "uid": "921a-4532-5afb-598a-0364-a021-b078-e3da",
+    "name": "Jmeter",
+    "description": "",
+    "comments": "",
+    "tags": [],
+    "licenses": [
+      "Any"
+    ],
+    "links": [],
+    "usecases": [
+      "Any"
+    ],
+    "scopes": [
+      {
+        "org": "Typical Taoists Inc",
+        "status": "To be decided"
+      },
+      {
+        "org": "Gigantic Teleporters Inc",
+        "status": "To be decided"
+      },
+      {
+        "org": "Brave Traders Inc",
+        "status": "Default"
+      }
+    ]
+  },
+  {
+    "uid": "5f19-bdb3-9e2c-3251-8ed0-7f4d-877e-541a",
+    "name": "Mercurial",
+    "description": "Mercurial is a distributed revision-control tool for software developers. ",
+    "comments": "",
+    "tags": [
+      "Delivery Services",
+      "Development",
+      "Design and Development"
+    ],
+    "licenses": [
+      "Any"
+    ],
+    "links": [],
+    "usecases": [
+      "Any"
+    ],
+    "scopes": [
+      {
+        "org": "Typical Taoists Inc",
+        "status": "To be decided"
+      },
+      {
+        "org": "Gigantic Teleporters Inc",
+        "status": "To be decided"
+      },
+      {
+        "org": "Brave Traders Inc",
+        "status": "To be decided"
+      }
+    ]
+  },
+  {
+    "uid": "a30d-3ed6-d68e-54b5-5495-7d03-924f-0009",
+    "name": "Nginx Webserver",
+    "description": "",
+    "comments": "",
+    "tags": [
+      "Platform Services",
+      "Applications",
+      "Application Hosting"
+    ],
+    "licenses": [
+      "Any"
+    ],
+    "links": [],
+    "usecases": [
+      "Any"
+    ],
+    "scopes": [
+      {
+        "org": "Typical Taoists Inc",
+        "status": "Limited"
+      },
+      {
+        "org": "Gigantic Teleporters Inc",
+        "status": "Limited"
+      },
+      {
+        "org": "Brave Traders Inc",
+        "status": "Limited"
+      }
+    ]
+  },
+  {
+    "uid": "7f66-0e5d-79d4-6c84-16a3-9d5e-a125-464d",
+    "name": "Nodejs",
+    "description": "Node.js is an open-source, cross-platform JavaScript run-time environment for executing JavaScript code server-side.",
+    "comments": "May be used in frontend web development",
+    "tags": [
+      "Delivery Services",
+      "Development",
+      "Design and Development"
+    ],
+    "licenses": [
+      "Any"
+    ],
+    "links": [],
+    "usecases": [
+      "Any"
+    ],
+    "scopes": [
+      {
+        "org": "Typical Taoists Inc",
+        "status": "Default"
+      },
+      {
+        "org": "Gigantic Teleporters Inc",
+        "status": "To be decided"
+      },
+      {
+        "org": "Brave Traders Inc",
+        "status": "To be decided"
+      }
+    ]
+  },
+  {
+    "uid": "2490-ab66-e794-3282-2cba-ee03-1b45-3fb6",
+    "name": "Xray for Jira",
+    "description": "Manual and Automated Test Management tool for JIRA",
+    "comments": "May be used for test management. Provided by SRE",
+    "tags": [
+      "Delivery Services",
+      "Development",
+      "Testing"
+    ],
+    "licenses": [
+      "Any"
+    ],
+    "links": [],
+    "usecases": [
+      "Any"
+    ],
+    "scopes": [
+      {
+        "org": "Typical Taoists Inc",
+        "status": "Default"
+      },
+      {
+        "org": "Gigantic Teleporters Inc",
+        "status": "To be decided"
+      },
+      {
+        "org": "Brave Traders Inc",
+        "status": "To be decided"
+      }
+    ]
+  }
+]
