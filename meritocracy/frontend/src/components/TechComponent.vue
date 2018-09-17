@@ -2,7 +2,7 @@
 	<div :id="id">
 		<b-card>
 			<p slot="header" v-b-toggle="accordionId">
-				<b-button v-on:click="changeRoute" variant="secondary">{{tech.name}}</b-button>
+				<b-button v-on:click="changeRoute" variant="link lg">{{tech.name}}</b-button>
 				<life-cycle :status="tech.status"></life-cycle>
 			</p>
 			<b-collapse :id="accordionId" accordion="tech" v-on:show="changeRoute" v-on:click="changeRoute" :visible="active?active:false">
@@ -11,7 +11,7 @@
 						{{tech}} 
 					</p>
 					<div slot="footer" class="card-footer">
-						<b-button variant="outline-secondary sm" class="btn-round" v-on:click="changeRoute">
+						<b-button variant="outline-secondary sm" class="btn-round">
 		            		<v-icon name="heart" scale="1"/></v-icon>
 		        		</b-button>
 		        		<b-button variant="outline-secondary sm" class="btn-round">

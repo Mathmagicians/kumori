@@ -1,19 +1,15 @@
 # In progress
-### FE: route for each component - Agata
 ### FE: search comp with life cycle collapsible toggle
 ### FE: search comp with category 
-### FE: test data read from file / webservice
+### FE: test data read from webservice
 
 #TODO
 
 # Frontend
 ## Config 
-### Lifecycle phases + colors
 ### Read from config file
 ### edit
 ### password protect (simple secret challenge)
-## Routes
-### route for each component
 
 # Backend
 ### Spring boot backend
@@ -33,4 +29,9 @@
 
 # Hall of fame
     -- FE:About view --
-    -- FE: test data set - read into store --
+    -- FE: test data set - read into store -- , Agata
+    -- FE: route for each component -- , Agata
+    -- FE: test data read from file --, Agata
+    -- FE: Lifecycle phases + colors --, Agata
+    -- FE: Routes -- , Agata
+	-- FE: route for each component --, Agata

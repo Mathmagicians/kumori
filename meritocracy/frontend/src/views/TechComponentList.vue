@@ -53,7 +53,6 @@
       }
     },
     beforeRouteUpdate (to, from, next) {
-      console.log("route changes to"+ to);
       this.activeId = to.params.uid;
       next();
     }

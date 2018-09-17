@@ -48,8 +48,8 @@ services:
 volumes:
   data-postgres:
 
-networks:
-  frontend:
-    name: frontend
-  backend:
-    name: backend
+#networks:
+#  frontend:
+#    name: frontend
+#  backend:
+#    name: backend

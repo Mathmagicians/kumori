@@ -225,6 +225,7 @@
   {
     "uid": "42ba-140f-e6eb-489f-2bb2-0e90-59a8-9d23",
     "name": "Ant",
+    "status": "deprecated",
     "description": "Apache Ant is a Java-based build tool. In theory, it is kind of like Make, but without Make's wrinkles.",
     "comments": "",
     "tags": [
