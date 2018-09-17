@@ -501,6 +501,7 @@
   {
     "uid": "b40f-3504-204f-e55f-c852-834e-546e-48bf",
     "name": "Apache Kafka",
+    "status": "default",
     "description": "",
     "comments": "Should be used for data transfer and message passing between applications.",
     "tags": [
@@ -533,6 +534,7 @@
   {
     "uid": "63a0-7033-e62f-e6cf-9861-7a9a-d5d0-7f0b",
     "name": "Apache Thrift",
+    "status": "testing",
     "description": "The Apache Thrift software framework, for scalable cross-language services development, combines a software stack with a code generation engine to build services that work efficiently and seamlessly between C++, Java, Python, PHP, Ruby, Erlang, Perl, Haskell, C#, Cocoa, JavaScript, Node.js, Smalltalk, OCaml and Delphi and other languages.",
     "comments": "May be used in the following recommended use cases: Exposing and consuming service endpoints in RPC style (as an alternative to REST), This is an interim solution, while Communication Layer has not delivered the request-response integration patterns, see Recommended Integration Patterns. Thrift must not be used as a Canonical Message Format. Usage in new projects requires permission from Enterprise Architecture.",
     "tags": [
@@ -1290,6 +1292,7 @@
   {
     "uid": "5f19-bdb3-9e2c-3251-8ed0-7f4d-877e-541a",
     "name": "Mercurial",
+    "status":"dontuse",
     "description": "Mercurial is a distributed revision-control tool for software developers. ",
     "comments": "",
     "tags": [
