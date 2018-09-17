@@ -8,14 +8,14 @@
       		v-else
       		class="components">
       		<b-alert show variant="secondary">
-      			#techmenu is happily governing <b>{{techComponents.length}}</b> components.
+      			#techmenu is happily governing <b>{{techComponents.length}}</b> components. Route {{ $route.params.uid }}
       		</b-alert>
        		
   			<b-list-group-item
         		v-for="component in techComponents"
         		:key="component.name"
         		class="tech-component">
-          		<tech-component :tech="component"></tech-component>
+          		<tech-component v-bind:id="component | techId" :tech="component" :active="component.uid === activeId"></tech-component>
       		</b-list-group-item>
     	</b-list-group>
   </div>
@@ -23,27 +23,39 @@
 
 <script>
 
-	import TechComponent from '../components/TechComponent.vue'
+  import TechComponent from '../components/TechComponent.vue'
 
-	export default {
-		name: "techComponentsList",
-		data () {
+  export default {
+  	name: "techComponentsList",
+  	data () {
     		return {
-      			loading: false
+      			loading: false,
+            activeId: ''
     		}
+		},
+		components: {
+			TechComponent
+		},
+		computed: {
+  		techComponents () {
+    			return this.$store.state.techComponents
   		},
-  		components: {
-  			TechComponent
-  		},
-  		computed: {
-    		techComponents () {
-      			return this.$store.state.techComponents
-    		}
-  		},
-  		created () {
-    		this.loading = true
-    		this.$store.dispatch('fetchTechComponents')
-      			.then(techComponents => { this.loading = false})
-  		}
-	}
+		},
+		created () {
+      this.activeId = this.$route.params.uid;
+  		this.loading = true;
+  		this.$store.dispatch('fetchTechComponents')
+    			.then(techComponents => { this.loading = false});
+		},
+    filters: {
+      techId (tech) {
+        return 'tc-'+tech.uid;
+      }
+    },
+    beforeRouteUpdate (to, from, next) {
+      console.log("route changes to"+ to);
+      this.activeId = to.params.uid;
+      next();
+    }
+  }
 </script>

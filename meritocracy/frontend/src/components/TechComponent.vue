@@ -1,25 +1,26 @@
 <template>
-	<div>
+	<div :id="id">
 		<b-card>
 			<p slot="header" v-b-toggle="accordionId">
-				{{tech.name}} 
+				<b-button v-on:click="changeRoute" variant="secondary">{{tech.name}}</b-button>
 				<life-cycle :status="tech.status"></life-cycle>
 			</p>
-			<b-collapse :id="accordionId" accordion="tech">
-				<p class="card-text">
-					{{tech}} 
-				</p>
-			
-				<div slot="footer">
-					<b-button variant="outline-secondary sm" class="btn-round">
-	            		<v-icon name="heart" scale="1"/></v-icon>
-	        		</b-button>
-	        		<b-button variant="outline-secondary sm" class="btn-round">
-	            		<v-icon name="fire" scale="1"/></v-icon>
-	        		</b-button>
-	        		<b-button  variant="outline-secondary sm" class="btn-round">
-	            		<v-icon name="comment" scale="1"/></v-icon>
-	        		</b-button>
+			<b-collapse :id="accordionId" accordion="tech" v-on:show="changeRoute" v-on:click="changeRoute" :visible="active?active:false">
+				<div>
+					<p class="card-text">
+						{{tech}} 
+					</p>
+					<div slot="footer" class="card-footer">
+						<b-button variant="outline-secondary sm" class="btn-round" v-on:click="changeRoute">
+		            		<v-icon name="heart" scale="1"/></v-icon>
+		        		</b-button>
+		        		<b-button variant="outline-secondary sm" class="btn-round">
+		            		<v-icon name="fire" scale="1"/></v-icon>
+		        		</b-button>
+		        		<b-button  variant="outline-secondary sm" class="btn-round">
+		            		<v-icon name="comment" scale="1"/></v-icon>
+		        		</b-button>
+		        	</div>
 	        	</div>
         	</b-collapse>
         </b-card>
@@ -35,10 +36,19 @@
   		components: {
   			LifeCycle
   		},
-  		props: ['tech'],
+  		props: {
+  			id: { type: String, required: true},
+  			tech: { type: Object, required: true}, 
+  			active: {type: Boolean, default: false}
+  		},
   		computed: {
   			accordionId: function(){
   				return 'accordion-' + this.tech.uid; 
+  			}
+  		}, 
+  		methods: {
+  			changeRoute: function() {
+  				this.$router.push('/components/'+ this.tech.uid);
   			}
   		}
   	}

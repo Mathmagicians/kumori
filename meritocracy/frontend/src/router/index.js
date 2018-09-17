@@ -38,7 +38,7 @@ export default new Router({
     },
     // Dynamic routes
     {
-      path: '/components/:name',
+      path: '/components/:uid',
       component: Components
     }
   ]
