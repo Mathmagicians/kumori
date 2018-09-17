@@ -1,11 +1,11 @@
 <template>
-  <div>
+  <span>
     <span v-if="lc"
       class="align-middle"  :title="'Lifecycle phase '+status"  >
       <b-button class="md-4 px-2 align-middle btn-lifecycle" :variant="btnVariant" 
         to="about" 
-        :v-b-popover.hover="this.$options.lcText[lc.type]" 
-        :title="'Life cycle phase '+lc.name">
+        v-b-popover.hover="popup" 
+        :title="lc.name | toUpperCase | title">
         {{status | toUpperCase }}
       </b-button>
     </span>
@@ -15,7 +15,7 @@
         <v-icon name="times"  scale="2"></v-icon>
       </b-button>
     </span>
-  </div>
+  </span>
 </template>
 
 <script>	
@@ -52,12 +52,17 @@
     },
     computed: {
        lc: function(){
-        //let statusClean = this.status? this.status: '';
         return this.$store.state.lifeCycle.items.filter( item => item.name === this.status).pop();
       },
-      btnVariant: function(status) {
-        return this.$options.variant[this.lc? this.lc.type: 'maybe']; 
+
+      btnVariant: function() {
+       return this.$options.variant[this.lc? this.lc.type: 'maybe']; 
+      },
+
+      popup: function(){
+        return this.$options.lcText[this.lc.name];
       }
+
     },
     filters: {
       capitalize: function( lower){
@@ -65,7 +70,11 @@
       },
       toUpperCase: function(upper){
         return upper.toUpperCase();
+      },
+      title: function( title){
+        return 'Life cycle phase '+title; 
       }
+
     }
 	}
 	

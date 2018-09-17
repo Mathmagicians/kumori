@@ -20,7 +20,7 @@
         Exterminator
       </b-nav-item>
       <b-nav-item to="/meritocracy">
-        <b-img rounded="circle" blank blank-color="white" class="image-overlay" />
+        <b-img rounded="circle" src="./assets/community.svg" class="image-overlay" />
         Meritocracy
       </b-nav-item>
       <b-nav-item to="/about">
