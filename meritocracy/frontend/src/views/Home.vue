@@ -1,17 +1,11 @@
 <template>
 	<div>
-  		
 
+  1. exp <life-cycle status="experimental"></life-cycle>
+        2. dont  <life-cycle status="dontuse"></life-cycle>
+        3.  empty <life-cycle status=""></life-cycle>
+        4. wrong <life-cycle status="wrong"></life-cycle>
   		
-        <p>array syntax {{img['buy']}}</p>
-  		<p> dot syntax {{img.buy}}</p>
-    	<b-card :title="img['buy']"
-          img-src="../assets/buy.svg">
-      	</b-card>
-     
-      	<b-card :title="img['buy']"
-          :img-src="img['buy']">
-      	</b-card>
 
        	<b-card :title="img['buy']"
           :img-src="img.buy">
@@ -20,16 +14,22 @@
 </template>
 
 <script>
+
+import LifeCycle from '../components/LifeCycle.vue'
+
 	export default {
 		name: 'home',
+    components: {
+        LifeCycle
+      },
 		data() {
       		return {
         		el: "#about",
         		img: {
-					'buy': '../assets/buy.svg',
-					'hold': '../assets/service.svg', 
-					'sell': '../assets/exterminator.svg', 
-					'maybe': '../assets/community.svg'
+					'buy': require('../assets/buy.svg'),
+					'hold': require('../assets/service.svg'), 
+					'sell': require('../assets/exterminator.svg'), 
+					'maybe': require('../assets/exterminator.svg')
 				}
 			}
         }

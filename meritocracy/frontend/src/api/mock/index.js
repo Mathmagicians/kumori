@@ -1,4 +1,6 @@
 import techComponents from './data/techComponents'
+import meritocracy from './data/meritocracy'
+import services from './data/services'
 
 const fetch = (mockData, time = 0) => {
   return new Promise((resolve) => {
@@ -11,5 +13,13 @@ const fetch = (mockData, time = 0) => {
 export default {
   fetchTechComponents () {
     return fetch(techComponents, 1000) // wait 1s before returning posts
+  },
+
+  fetchMeritocracy () {
+  	return fetch( meritocracy, 2000)
+  },
+
+  fetchServices () {
+  	return fetch( services, 4000) 
   }
 }

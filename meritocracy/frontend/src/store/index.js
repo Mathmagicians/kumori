@@ -25,21 +25,37 @@ export function createStore ()
 					{name: "wip", type: "maybe"}
 				]
 			},
-			techComponents: []
+			techComponents: [],
+			meritocracy: [],
+			services:[],
 		},
 		mutations: 
 		{
-			setTechComponents (state, techComponents) 
-			{
+			setTechComponents (state, techComponents) {
       			state.techComponents = techComponents
+    		},
+    		setMeritocracy( state, meritocracy){
+    			state.meritocracy = meritocracy
+    		},
+    		setServices (state, services){
+    			state.services = services
     		}
 		},
 		actions: {
-    		fetchTechComponents ({ commit })
-    		{
+    		fetchTechComponents ({ commit }){
       			return client
       				.fetchTechComponents()
         			.then(techComponents => commit('setTechComponents', techComponents))
+    		},
+    		fetchMeritocracy ({ commit }){
+    			return client
+    				.fetchMeritocracy()
+    				.then(meritocracy => commit('setMeritocracy', meritocracy))
+    		},
+    		fetchServices ({commit}){
+    				return client
+    					.fetchServices()
+    					.then(services => commit('setServices', services))
     		}
   		}
 	})

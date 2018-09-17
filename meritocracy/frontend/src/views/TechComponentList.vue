@@ -26,6 +26,7 @@
 	import TechComponent from '../components/TechComponent.vue'
 
 	export default {
+		name: "techComponentsList",
 		data () {
     		return {
       			loading: false
