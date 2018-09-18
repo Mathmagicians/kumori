@@ -1,11 +1,11 @@
 PGPASSWORD="meritocracy"
 PG_SCHEMA="meritocracy"
 NETWORK="backend"
-IMAGE="postgres:9.4"
+IMAGE="postgres"
 
-setup: create_databases access_databases create_schema
+setup: create_db create_access create_schema
 
-create_databases:
+create_db:
 	@docker run -it \
 	 --network=${NETWORK} \
 	 --rm \
@@ -14,7 +14,7 @@ create_databases:
 	 -w /tmp ${IMAGE} psql -h postgres -U ${PGPASSWORD} \
 	 -f databases.sql
 
-access_databases:
+create_access:
 	@docker run -it \
 	 --network=${NETWORK} \
 	 --rm \

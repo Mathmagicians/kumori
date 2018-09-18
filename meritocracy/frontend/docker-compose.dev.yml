@@ -1,5 +1,18 @@
 version: '3.5'
 services:
+  devserver:
+    container_name: dev-server
+    image: node
+    command: ["npm", "run", "dev"]
+    working_dir: /tmp
+    ports:
+      - "8080:8080"
+    volumes:
+      - "./:/tmp"
+    networks:
+      - frontend
+      - backend
+
   postgrest:
     container_name: postgrest
     image: postgrest/postgrest
@@ -8,14 +21,15 @@ services:
     links:
       - postgres:postgres
     environment:
-      PGRST_DB_URI: postgres://app_user:password@postgres:5432/meritocracy
+      PGRST_DB_URI: postgres://meritocracy:meritocracy@postgres:5432/meritocracy
       PGRST_DB_SCHEMA: public
-      PGRST_DB_ANON_ROLE: app_user #In production this role should not be the same as the one used for the connection
+      PGRST_DB_ANON_ROLE: web_anon #In production this role should not be the same as the one used for the connection
     depends_on:
       - postgres
     networks:
       - frontend
       - backend
+
   postgres:
     container_name: postgres
     image: postgres
@@ -23,8 +37,8 @@ services:
       - "5432:5432"
     environment:
       POSTGRES_DB: meritocracy
-      POSTGRES_USER: app_user
-      POSTGRES_PASSWORD: password
+      POSTGRES_USER: meritocracy
+      POSTGRES_PASSWORD: meritocracy
     volumes:
       - "data-postgres:/var/lib/postgresql/data"
     networks:
@@ -35,9 +49,7 @@ services:
     container_name: swagger
     image: swaggerapi/swagger-ui
     ports:
-      - "8000:8000"
-    expose:
-      - "8080"
+      - "8070:8080"
     environment:
       API_URL: http://localhost:3000/
     depends_on:
@@ -47,9 +59,12 @@ services:
 
 volumes:
   data-postgres:
+    name: meritocracy
 
-#networks:
-#  frontend:
-#    name: frontend
-#  backend:
-#    name: backend
+networks:
+  frontend:
+    driver: bridge
+    name: frontend
+  backend:
+    driver: bridge
+    name: backend
