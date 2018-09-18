@@ -24,7 +24,7 @@
         Meritocracy
       </b-nav-item>
       <b-nav-item to="/about">
-        <b-img rounded="circle" blank blank-color="white"  class="image-overlay" />
+        <b-img rounded="circle" blank blank-color="white" class="image-overlay" />
         About
       </b-nav-item>
     </b-navbar-nav>
@@ -32,7 +32,7 @@
   
   <b-container fluid>
     <transition name="fade" mode="out-in">
-      <router-view class="m-1"/></router-view>
+       <router-view class="m-1" />
     </transition>
   </b-container>
   
