@@ -76,7 +76,6 @@
     },
     methods: {
       search( queryString ){
-        console.log( "Received event from search comp: "+ queryString );
         this.queryString = queryString;
       }
     }

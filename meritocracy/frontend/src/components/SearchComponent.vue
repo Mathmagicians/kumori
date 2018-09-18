@@ -6,7 +6,7 @@
 					type="text"
 					v-model.sync="searchInput"
 					required
-					v-on:
+					v-on:change="sendSearchQueryEvent"
 					:placeholder="'Search in '+ amounts.components +' technology components ...'  ">
 				</b-form-input>
 				<b-input-group-append>
@@ -132,7 +132,6 @@
 	        return this.$options.phaseText[type];
 	      },
 	      sendSearchQueryEvent(query) {
-	      	console.log("sending event to parent with query: "+ this.searchInput);
 	      	return this.$emit('query', this.searchInput);
 	      }
 	    }
