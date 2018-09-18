@@ -16,10 +16,10 @@ export default {
   },
 
   fetchMeritocracy () {
-  	return fetch( meritocracy, 2000)
+    return fetch(meritocracy, 2000)
   },
 
   fetchServices () {
-  	return fetch( services, 4000) 
+    return fetch(services, 4000)
   }
 }

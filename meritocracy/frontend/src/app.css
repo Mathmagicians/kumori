@@ -9,15 +9,15 @@
 }
 
 .btn-round {
-	border-radius: 50px;
+  border-radius: 50px;
 }
 
 .btn-lifecycle {
-	min-width: 10em;
-    max-width: 10em;
+  min-width: 10em;
+  max-width: 10em;
 }
 
 .card-lifecycle {
-	max-width: 90%; 
-	height: auto;
+  max-width: 90%;
+  height: auto;
 }

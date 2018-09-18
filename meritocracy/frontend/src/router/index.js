@@ -12,32 +12,26 @@ Vue.use(Router)
 
 export default new Router({
   mode: 'history',
-  routes: [{
+  routes: [
+    {
       path: '/',
       component: Home
-    },
-    {
+    }, {
       path: '/about',
       component: About
-    },
-    {
+    }, {
       path: '/components',
       component: Components
-    },
-    {
+    }, {
       path: '/exterminator',
       component: Exterminator
-    },
-    {
+    }, {
       path: '/services',
       component: Services
-    },
-    {
+    }, {
       path: '/meritocracy',
       component: Meritocracy
-    },
-    // Dynamic routes
-    {
+    }, {
       path: '/components/:uid',
       component: Components
     }
