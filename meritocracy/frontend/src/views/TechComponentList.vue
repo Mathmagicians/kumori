@@ -1,11 +1,11 @@
 <template>
 	<div >
     <b-alert show variant="secondary">
-            #techmenu is happily governing <b>{{techComponents.length}}</b> components. Route {{ $route.params.uid }}
+            #techmenu is happily governing <b>{{techComponents.length}}</b> components. 
           </b-alert>
     <b-row>
       <b-col cols="4">
-        <search-component :amounts="{components: 42}" v-on:query="search"></search-component>
+        <search-component :amounts="amounts" v-on:query="search"></search-component>
       </b-col>
       <b-col>
     	<b-alert show variant="warning"
@@ -16,7 +16,7 @@
       		v-else
       		class="components">
   			<b-list-group-item
-        		v-for="component in techComponents"
+        		v-for="component in filteredTechComponents"
         		:key="component.name"
         		class="tech-component">
           		<tech-component v-bind:id="component | techId" :tech="component" :active="component.uid === activeId"></tech-component>
@@ -41,7 +41,8 @@
   	data () {
     		return {
       			loading: false,
-            activeId: ''
+            activeId: '', 
+            queryString: ''
     		}
 		},
 		components: {
@@ -52,6 +53,15 @@
   		techComponents () {
     			return this.$store.state.techComponents
   		},
+      amounts () {
+        let am =  {components: this.techComponents.length};
+        return am;
+      },
+      filteredTechComponents() {
+        return this.techComponents.filter(
+            tech => {  return tech.name.toLowerCase().includes(this.queryString.toLowerCase()) }
+          );
+      }
 		},
 		created () {
       this.activeId = this.$route.params.uid;
@@ -66,7 +76,8 @@
     },
     methods: {
       search( queryString ){
-        console.log( "Received event from search comp: "+ event );
+        console.log( "Received event from search comp: "+ queryString );
+        this.queryString = queryString;
       }
     }
   }

@@ -2,7 +2,7 @@
   <span>
     <span v-if="lc"
       class="align-middle"  :title="'Lifecycle phase '+status"  >
-      <b-button class="md-4 px-2 align-middle btn-lifecycle" :variant="btnVariant" 
+      <b-button class="md-4 px-2 align-middle btn-lifecycle" :variant="btn" 
         :to="to" 
         v-b-popover.hover="popup" 
         :title="lc.name | toUpperCase | title">
@@ -19,6 +19,9 @@
 </template>
 
 <script>	
+
+  import lifeCycleMixin from '../mixins/lifeCycle.js'
+
 	export default {
 		name: 'lifeCycle',
 		props: {
@@ -26,12 +29,9 @@
       to: {type:String, required:false},
       ispopup: {type: Boolean, required: false, default: false}
     },
-    variant : {
-      maybe: "outline-secondary",
-      buy: "outline-primary", 
-      hold: "outline-success",
-      sell: "outline-danger"
-    },
+    mixins: [
+      lifeCycleMixin
+    ],
     lcText: {
       'experimental': `A brand new, (possibly) bleeding edge technology that we want to investigate.`,
       'testing': `
@@ -59,8 +59,8 @@
         return this.$store.state.lifeCycle.items.filter( item => item.name === this.status).pop();
       },
 
-      btnVariant: function() {
-       return this.$options.variant[this.lc? this.lc.type: 'maybe']; 
+      btn: function() {
+       return this.btnVariant(this.lc? this.lc.type: 'maybe'); 
       },
 
       popup: function(){

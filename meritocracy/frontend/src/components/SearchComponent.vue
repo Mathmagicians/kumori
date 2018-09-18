@@ -4,7 +4,7 @@
 			<b-input-group>
 				<b-form-input id="searchInput"
 					type="text"
-					v-model="searchInput"
+					v-model.sync="searchInput"
 					required
 					v-on:
 					:placeholder="'Search in '+ amounts.components +' technology components ...'  ">
@@ -24,14 +24,14 @@
 
 	    <b-card no-body>
 	    	<p slot="header">
-	    		 	<b-button variant="secondary lg" :pressed.sync="filterOn" > {{filterOn?'Set Filter Off':'Set Filter On'}}
+	    		 	<b-button variant="secondary lg" :pressed.sync="filterOn" > {{filterOn?'Clear Filters':'Set Filters'}}
 			    		<v-icon v-if="filterOn" 
 			    			label="reset filters">
 			    			<v-icon name="filter" scale="2"></v-icon>
-			    			<v-icon name="ban" scale="2" color="red" ></v-icon>
+			    			<v-icon name="ban" scale="2" color="orange"></v-icon>
 			    		</v-icon>
 			    		<v-icon v-else
-			    			name="filter" scale="3" >
+			    			name="filter" scale="2" >
 			    		</v-icon>
 					</b-button @click:"doSearch">
 			</p>
@@ -42,7 +42,7 @@
 						tag="article"
 						class="mb-1 card-lifecycle" v-b-toggle="'search_'+type">
 						<div slot="header" >
-							<b-button variant="danger lg">
+							<b-button :variant="btnVariant(type)">
 								<b-img rounded :src="images(type)" class="image-menu" />
 								{{type | capitalize}}
 								<b-badge>12</b-badge>
@@ -86,6 +86,7 @@
 <script type="text/javascript">
 
 	import LifeCycle from '../components/LifeCycle.vue'
+	import lifeCycleMixin from '../mixins/lifeCycle.js'
 
 	
 	export default {
@@ -93,19 +94,16 @@
 		props: {
 			amounts:{ required: false}
 		},
-		img: {
-	      'buy': require('../assets/buy.svg'),
-	      'hold': require('../assets/service.svg'), 
-	      'sell': require('../assets/exterminator.svg'), 
-	      'maybe': require('../assets/community.svg')
-	    },
 		components: { 
 			LifeCycle 
 		}, 
+		mixins: [
+			lifeCycleMixin
+		],
 		data () {
 			return {
 				searchInput: '',
-				filterOn: false
+				filterOn: true
 			}
 		},
 	    computed: {
