@@ -25,6 +25,12 @@ export function createStore ()
 					{name: "wip", type: "maybe"}
 				]
 			},
+			phaseImages: {
+		      'buy': require('../assets/buy.svg'),
+		      'hold': require('../assets/service.svg'), 
+		      'sell': require('../assets/exterminator.svg'), 
+		      'maybe': require('../assets/community.svg')
+		    },
 			techComponents: [],
 			meritocracy: [],
 			services:[],

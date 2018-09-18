@@ -10,6 +10,8 @@ import Meritocracy from '../views/Meritocracy.vue'
 
 Vue.use(Router)
 
+
+
 export default new Router({
   mode: 'history',
   routes: [{
@@ -40,6 +42,14 @@ export default new Router({
     {
       path: '/components/:uid',
       component: Components
+    }, 
+    {
+      path: '/404', 
+      name: 'not-found', 
+      component: Errors    
+    },
+    { path: '*',
+      redirect:  '/404'
     }
   ]
 })

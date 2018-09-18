@@ -8,6 +8,16 @@
   opacity: 1;
 }
 
+.image-menu {
+    width: 96px;
+    height: 96px;
+    background-color: #ffffff;
+    border-style: solid;
+    border-width: medium;
+    border-color: #aaaaaa;
+    opacity: 1;
+}
+
 .btn-round {
 	border-radius: 50px;
 }

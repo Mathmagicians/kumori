@@ -31,16 +31,11 @@
   export default {
 
     name: 'about',
-    img: {
-      'buy': require('../assets/buy.svg'),
-      'hold': require('../assets/service.svg'), 
-      'sell': require('../assets/exterminator.svg'), 
-      'maybe': require('../assets/community.svg')
-    },
+    
     phaseText: 
     { 
       'maybe': `
-      <h6>About the Buy Phase</h6>
+      <h6>About the Maybe Phase</h6>
       The status of this item has not been decided yet. Either it has not been investigated, or <strong>#techmenu</strong>'s community of experts, is currently investigating this item. `,
       'buy': `
       <h6>About the Buy Phase</h6>
@@ -90,7 +85,7 @@
     },
     methods: {
       images: function(type) {
-        return this.$options.img[type];
+        return this.$store.state.phaseImages[type];
       },
       texts: function(type) {
         return this.$options.phaseText[type];

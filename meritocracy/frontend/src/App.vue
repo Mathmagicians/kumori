@@ -30,9 +30,11 @@
     </b-navbar-nav>
   </b-navbar>
   
-  <transition name="fade" mode="out-in">
-    <router-view class="m-1"/></router-view>
-  </transition>
+  <b-container fluid>
+    <transition name="fade" mode="out-in">
+      <router-view class="m-1"/></router-view>
+    </transition>
+  </b-container>
   
   <footer>
     Copyright 2018 by Mathmagicians. Powered by Kumori.

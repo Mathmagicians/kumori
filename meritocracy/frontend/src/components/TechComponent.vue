@@ -3,7 +3,7 @@
 		<b-card>
 			<p slot="header" v-b-toggle="accordionId">
 				<b-button v-on:click="changeRoute" variant="link lg">{{tech.name}}</b-button>
-				<life-cycle :status="tech.status"></life-cycle>
+				<life-cycle :status="tech.status" to="about"></life-cycle>
 			</p>
 			<b-collapse :id="accordionId" accordion="tech" v-on:show="changeRoute" v-on:click="changeRoute" :visible="active?active:false">
 				<div>

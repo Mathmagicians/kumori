@@ -3,7 +3,7 @@
     <span v-if="lc"
       class="align-middle"  :title="'Lifecycle phase '+status"  >
       <b-button class="md-4 px-2 align-middle btn-lifecycle" :variant="btnVariant" 
-        to="about" 
+        :to="to" 
         v-b-popover.hover="popup" 
         :title="lc.name | toUpperCase | title">
         {{status | toUpperCase }}
@@ -21,7 +21,11 @@
 <script>	
 	export default {
 		name: 'lifeCycle',
-		props: ['status'],
+		props: {
+      status: {required: true},
+      to: {type:String, required:false},
+      ispopup: {type: Boolean, required: false, default: false}
+    },
     variant : {
       maybe: "outline-secondary",
       buy: "outline-primary", 
@@ -60,7 +64,7 @@
       },
 
       popup: function(){
-        return this.$options.lcText[this.lc.name];
+        return this.ispopup?this.$options.lcText[this.lc.name]:'';
       }
 
     },

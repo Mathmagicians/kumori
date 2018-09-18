@@ -1,20 +1,23 @@
 <template>
 	<div>
     <b-alert show variant="warning">
-      <v-icon name="keyboard" scale="2" pulse/></v-icon>
+      <v-icon name="keyboard" scale="2"/></v-icon>
       Work in progress - awesome content on the way ...
     </b-alert>
+
+    <search-component></search-component>
+
   </div>
 </template>
 
 <script>
 
-import LifeCycle from '../components/LifeCycle.vue'
+import SearchComponent from '../components/SearchComponent.vue'
 
 	export default {
 		name: 'home',
     components: {
-        LifeCycle
+        SearchComponent
       },
 		data() {
       		return {
