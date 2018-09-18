@@ -5,7 +5,7 @@
           </b-alert>
     <b-row>
       <b-col cols="4">
-        <search-component></search-component>
+        <search-component :amounts="{components: 42}" v-on:query="search"></search-component>
       </b-col>
       <b-col>
     	<b-alert show variant="warning"
@@ -34,6 +34,10 @@
 
   export default {
   	name: "techComponentsList",
+    beforeRouteUpdate (to, from, next) {
+      this.activeId = to.params.uid;
+      next();
+    },
   	data () {
     		return {
       			loading: false,
@@ -60,9 +64,10 @@
         return 'tc-'+tech.uid;
       }
     },
-    beforeRouteUpdate (to, from, next) {
-      this.activeId = to.params.uid;
-      next();
+    methods: {
+      search( queryString ){
+        console.log( "Received event from search comp: "+ event );
+      }
     }
   }
 </script>

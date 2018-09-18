@@ -5,7 +5,7 @@
       Work in progress - awesome content on the way ...
     </b-alert>
 
-    <search-component></search-component>
+    <search-component :amounts="{components: 42}"></search-component>
 
   </div>
 </template>

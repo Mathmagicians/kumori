@@ -7,12 +7,14 @@
 					v-model="searchInput"
 					required
 					v-on:
-					placeholder="What are you looking for?">
+					:placeholder="'Search in '+ amounts.components +' technology components ...'  ">
 				</b-form-input>
 				<b-input-group-append>
-					<b-button variant="secondary">Search
+					<b-button v-on:click="sendSearchQueryEvent"
+						variant="secondary">
+						Search
 					<v-icon name="search" ></v-icon>
-					</b-button @click:"doSearch">
+					</b-button>
 				</b-input-group-append>
 			</b-input-group>
 			<b-form-text id="inputLiveHelp">
@@ -22,9 +24,16 @@
 
 	    <b-card no-body>
 	    	<p slot="header">
-		    	<b-button variant="secondary">Filter
-					<v-icon name="filter" ></v-icon>
-				</b-button @click:"doSearch">
+	    		 	<b-button variant="secondary lg" :pressed.sync="filterOn" > {{filterOn?'Set Filter Off':'Set Filter On'}}
+			    		<v-icon v-if="filterOn" 
+			    			label="reset filters">
+			    			<v-icon name="filter" scale="2"></v-icon>
+			    			<v-icon name="ban" scale="2" color="red" ></v-icon>
+			    		</v-icon>
+			    		<v-icon v-else
+			    			name="filter" scale="3" >
+			    		</v-icon>
+					</b-button @click:"doSearch">
 			</p>
 			<b-tabs card >
 				<b-tab title="Tech Menu Life Cycle" active>
@@ -33,10 +42,12 @@
 						tag="article"
 						class="mb-1 card-lifecycle" v-b-toggle="'search_'+type">
 						<div slot="header" >
-							<b-button variant="outline-danger lg">
+							<b-button variant="danger lg">
+								<b-img rounded :src="images(type)" class="image-menu" />
 								{{type | capitalize}}
+								<b-badge>12</b-badge>
 							</b-button>
-							<b-img :src="images(type)" class="image-menu" />
+							
 						</div>
 
 						<b-collapse :id="'search_'+type" >
@@ -50,13 +61,22 @@
 
 				</b-tab>
 				<b-tab title="Taxonomy">
-					Tab Contents 2
+					 <b-alert show variant="warning">
+						<v-icon name="keyboard" scale="2"/></v-icon>
+						Work in progress - awesome content on the way ...
+				    </b-alert>
 				</b-tab>
 				<b-tab title="Cost">
-					Tab Contents 3
+					 <b-alert show variant="warning">
+						<v-icon name="keyboard" scale="2"/></v-icon>
+						Work in progress - awesome content on the way ...
+				    </b-alert>
 				</b-tab>
 				<b-tab title="Changes">
-					Tab Contents 3
+					<b-alert show variant="warning">
+						<v-icon name="keyboard" scale="2"/></v-icon>
+						Work in progress - awesome content on the way ...
+				    </b-alert>
 				</b-tab>
 			</b-tabs>
 	    </b-card>
@@ -71,7 +91,7 @@
 	export default {
 		name:"searchComponent",
 		props: {
-			componentNumber:{ required: false}
+			amounts:{ required: false}
 		},
 		img: {
 	      'buy': require('../assets/buy.svg'),
@@ -84,7 +104,8 @@
 		}, 
 		data () {
 			return {
-				searchInput: ''
+				searchInput: '',
+				filterOn: false
 			}
 		},
 	    computed: {
@@ -111,6 +132,10 @@
 	      },
 	      texts: function(type) {
 	        return this.$options.phaseText[type];
+	      },
+	      sendSearchQueryEvent(query) {
+	      	console.log("sending event to parent with query: "+ this.searchInput);
+	      	return this.$emit('query', this.searchInput);
 	      }
 	    }
 	}

@@ -2,6 +2,9 @@
 ### FE: search comp with life cycle collapsible toggle
 ### FE: search comp with category 
 ### FE: test data read from webservice
+### FE: center componentlist page on the expanded component
+### FE: if component uuid does not exist, redirect to error page
+### FE: alternative url with name of component
 
 #TODO
 
