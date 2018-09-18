@@ -30,6 +30,14 @@ Run the e2e tests (Not working at this time)
 
     $ make e2e
 
+## Dev environment
+
+The dev environment includes the postgrest/postgres backend. You start it wth docker-compose.
+
+    $ docker-compose up
+    
+Your dev environment needs to run before you start your dev server. Othervice you need to remove the --network flag in the serve-start task in the Makefile.
+
 ## Dev server
 
 Start the dev server with live reload. The server will be available at http://127.0.0.1:8080
