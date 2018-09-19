@@ -56,7 +56,8 @@ export function createStore () {
 	  },
       techComponents: [],
       meritocracy: [],
-      services: []
+      services: [],
+      taxonomy: []
     },
     mutations: {
       setTechComponents (state, techComponents) {
@@ -67,29 +68,31 @@ export function createStore () {
       },
       setServices (state, services) {
         state.services = services
+      },
+      setTaxonomy (state, taxonomy) {
+        state.taxonomy = taxonomy
       }
     },
     actions: {
-      fetchTechComponents ({
-        commit
-      }) {
-        return client
-          .fetchTechComponents()
-          .then(techComponents => commit('setTechComponents', techComponents))
+      fetchTechComponents ({ commit}) {
+          return client
+            .fetchTechComponents()
+            .then(techComponents => commit('setTechComponents', techComponents))
       },
-      fetchMeritocracy ({
-        commit
-      }) {
-        return client
-          .fetchMeritocracy()
-          .then(meritocracy => commit('setMeritocracy', meritocracy))
+      fetchMeritocracy ({ commit }) {
+          return client
+            .fetchMeritocracy()
+            .then(meritocracy => commit('setMeritocracy', meritocracy))
       },
-      fetchServices ({
-        commit
-      }) {
+      fetchServices ({ commit }) {
         return client
           .fetchServices()
           .then(services => commit('setServices', services))
+      },
+      fetchTaxonomy ({ commit }) {
+        return client
+          .fetchTaxonomy()
+          .then(taxonomy => commit('setTaxonomy', taxonomy))
       }
     }
   })

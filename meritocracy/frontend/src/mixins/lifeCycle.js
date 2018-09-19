@@ -26,6 +26,23 @@ export default {
     methods: {
     	btnVariant(type){
     		return type?this.$options.variant[type]:'';
-	      }
+      },
+      // returns a list of root elements, that are trees built from parent-child relations in the flatList. Assumes name, parent and no loops.
+      buildTree( flatList ) {
+        console.log("flat list is: ");
+        console.log( flatList);
+        const exists = ( e ) => { return (e=== 'null') || (e=== undefined) || (e === '') }
+        const findChildren = ( parent, list) => {
+          return list.filter( e => {return e.parent === parent.name });
+        };
+
+        const findRoots = ( list ) => {
+          return list.filter( e=> { return !exists(e.parent) }); 
+        };
+        let tree = findRoots( flatList );
+        console.log( "roots" + tree );
+        return tree;
+      }
+
     }
 }

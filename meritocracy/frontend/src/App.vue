@@ -28,6 +28,27 @@
         About
       </b-nav-item>
     </b-navbar-nav>
+    <b-navbar-nav class="ml-auto">
+      <b-nav-item-dropdown right>
+         <template slot="button-content">
+          <b-button class="btn-round">
+            <v-icon name="lock" color="orange"></v-icon>
+          </b-button>
+          Edit
+        </template>
+        <b-dropdown-item href="#">Enable editing</b-dropdown-item>
+      </b-nav-item-dropdown>
+      <b-nav-item-dropdown right>
+        <template slot="button-content">
+          <b-button class="btn-round" >
+            <v-icon name="user" color="orange" ></v-icon>
+          </b-button>
+          User
+        </template>
+        <b-dropdown-item href="#">Profile</b-dropdown-item>
+        <b-dropdown-item href="#">Sign In</b-dropdown-item>
+      </b-nav-item-dropdown>
+    </b-navbar-nav>
   </b-navbar>
   
   <b-container fluid>

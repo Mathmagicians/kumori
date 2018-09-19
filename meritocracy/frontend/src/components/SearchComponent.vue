@@ -1,5 +1,6 @@
 <template>
 	<div>
+		Taxonomy: {{taxonomyTree}}
 		<b-card no-body>
 			<b-input-group>
 				<b-form-input id="searchInput"
@@ -45,7 +46,7 @@
 							<b-button :variant="btnVariant(type)">
 								<b-img rounded :src="images(type)" class="image-menu" />
 								{{type | capitalize}}
-								<b-badge>12</b-badge>
+								<b-badge pill>12</b-badge>
 							</b-button>
 							
 						</div>
@@ -60,11 +61,15 @@
 					</b-card>
 
 				</b-tab>
-				<b-tab title="Taxonomy">
-					 <b-alert show variant="warning">
-						<v-icon name="keyboard" scale="2"/></v-icon>
-						Work in progress - awesome content on the way ...
-				    </b-alert>
+				<b-tab title="Service Taxonomy">
+					{{ taxonomyTree }}
+					<b-list-group>
+						 <b-list-group-item v-for="level in taxonomyLevels"
+						 	class="d-flex justify-content-between align-items-center">
+					    	{{level.name}}
+					    <b-badge variant="secondary" pill>24</b-badge>
+					  </b-list-group-item>
+					</b-list-group>
 				</b-tab>
 				<b-tab title="Cost">
 					 <b-alert show variant="warning">
@@ -106,6 +111,9 @@
 				filterOn: true
 			}
 		},
+		created() {
+			this.$store.dispatch('fetchTaxonomy');
+		},
 	    computed: {
 	      types: function() {
 	        let temp = this.$store.state.lifeCycle.items.map( item => item.type).filter((v, i, a) => a.indexOf(v) === i);
@@ -117,6 +125,19 @@
 	        const myMap = new Map();
 	        this.types.forEach( type =>  myMap[type] = namesForType(type));
 	        return myMap;
+	      },
+	      taxonomyLevels: function() {
+	      	return this.$store.state.taxonomy.levels;
+	      },
+	      taxonomyTags: function() {
+	      	return this.$store.state.taxonomy.tags;
+	      },
+	      taxonomyTree() {
+	      	console.log("building tree, taxonomy below");
+	      	console.log( this.taxonomyTags );
+	      	let temp = this.taxonomyTags ? this.buildTree( [{"name":"A", parent:"null"},{"name":"B", parent:"A"}] ):'';
+	      	console.log(" build returned "+ temp);
+	      	return temp;
 	      }
 	    },
 	    filters: {
