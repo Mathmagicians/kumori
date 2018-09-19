@@ -36,21 +36,12 @@ The dev environment includes the postgrest/postgres/swagger backend. You start i
 
     $ docker-compose -f docker-compose.dev.yml up
 
-For now, you need to bootstrap the database manually by running `cd postgres && make create_schema && make create_schema`
+The site will be available at: http://127.0.0.1:8080
+The postgrest service will be available at:http://127.0.0.1:3000
+The swagger ui will be available at:http://127.0.0.1:8070
+The postgres ui will be avaialble at http://127.0.0.1:5050
 
-## Dev server only
-
-Start the dev server with live reload. The server will be available at http://127.0.0.1:8080
-
-    $ make serve-start
-
-Show the logs from the dev server
-
-    $ make serve-logs
-
-Stop the dev server
-
-    $ make serve-stop
+For now, you need to bootstrap the database manually by running `make schema`, `make fixture` and `make load`
 
 Get a shell with node
 
