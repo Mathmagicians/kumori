@@ -1,6 +1,5 @@
 <template>
 	<div>
-		Taxonomy: {{taxonomyTree}}
 		<b-card no-body>
 			<b-input-group>
 				<b-form-input id="searchInput"
@@ -62,12 +61,15 @@
 
 				</b-tab>
 				<b-tab title="Service Taxonomy">
-					{{ taxonomyTree }}
+
+					<sunburst-wrap data="taxonomyTree"></sunburst-wrap>
+
 					<b-list-group>
 						 <b-list-group-item v-for="level in taxonomyLevels"
 						 	class="d-flex justify-content-between align-items-center">
 					    	{{level.name}}
 					    <b-badge variant="secondary" pill>24</b-badge>
+
 					  </b-list-group-item>
 					</b-list-group>
 				</b-tab>
@@ -92,6 +94,7 @@
 
 	import LifeCycle from '../components/LifeCycle.vue'
 	import lifeCycleMixin from '../mixins/lifeCycle.js'
+  	import SunburstWrap from '../components/SunburstWrap.vue'
 
 	
 	export default {
@@ -100,7 +103,8 @@
 			amounts:{ required: false}
 		},
 		components: { 
-			LifeCycle 
+			LifeCycle,
+        	SunburstWrap
 		}, 
 		mixins: [
 			lifeCycleMixin
@@ -133,11 +137,7 @@
 	      	return this.$store.state.taxonomy.tags;
 	      },
 	      taxonomyTree() {
-	      	console.log("building tree, taxonomy below");
-	      	console.log( this.taxonomyTags );
-	      	let temp = this.taxonomyTags ? this.buildTree( [{"name":"A", parent:"null"},{"name":"B", parent:"A"}] ):'';
-	      	console.log(" build returned "+ temp);
-	      	return temp;
+	      	return this.buildTree( this.taxonomyTags );
 	      }
 	    },
 	    filters: {

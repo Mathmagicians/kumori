@@ -27,20 +27,38 @@ export default {
     	btnVariant(type){
     		return type?this.$options.variant[type]:'';
       },
+      // todo - unit test!
       // returns a list of root elements, that are trees built from parent-child relations in the flatList. Assumes name, parent and no loops.
+      // test data: [{"name":"A", parent:"null"},{"name":"B", parent:"A"}, {"name":"C", parent:"A"}, {"name":"D", parent:""}]
+      // assert  [ { "name": "A", "parent": "null", "children": [ { "name": "B", "parent": "A", "children": [] }, { "name": "C", "parent": "A", "children": [] } ] }, { "name": "D", "parent": "", "children": [] } ]
       buildTree( flatList ) {
-        console.log("flat list is: ");
-        console.log( flatList);
-        const exists = ( e ) => { return (e=== 'null') || (e=== undefined) || (e === '') }
-        const findChildren = ( parent, list) => {
-          return list.filter( e => {return e.parent === parent.name });
-        };
+        const nonExists = ( e ) => { return (e=== 'null') || (e=== null) || (e=== undefined) || (e === '') || (e ===[])}
+        let tree = [];
+        let lookUp = {};
 
-        const findRoots = ( list ) => {
-          return list.filter( e=> { return !exists(e.parent) }); 
-        };
-        let tree = findRoots( flatList );
-        console.log( "roots" + tree );
+        if( nonExists(flatList) ){
+          console.log("Recieved empty flatlist !")
+          return tree;
+        }
+
+        //we work on a copy to treeify  
+        let myCopy = [...flatList];
+        
+        myCopy.forEach( el => { 
+          lookUp[ el.name] = el; 
+          el.children = [];
+          console.log( "found " + el.name);
+        });
+
+        myCopy.forEach( el => {
+          if(  nonExists(el.parent) ){
+            //it is a root
+            tree.push(el);
+          } else {
+            lookUp[el.parent].children.push(el);
+          }
+        });
+
         return tree;
       }
 
