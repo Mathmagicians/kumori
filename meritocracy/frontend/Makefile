@@ -27,3 +27,18 @@ serve-stop:
 
 shell:
 	@docker run --rm -it -v ${PWD}:/tmp -w /tmp -p 8080:8080 node bash
+
+####### BACKEND ######
+
+PGPASSWORD="postgres"
+NETWORK="backend"
+IMAGE="postgres"
+
+create:
+	@docker run -it \
+	 --network=${NETWORK} \
+	 --rm \
+	 -e "PGPASSWORD=${PGPASSWORD}" \
+	 -v $(shell pwd):/tmp \
+	 -w /tmp ${IMAGE} psql -h postgres -U ${PGPASSWORD} \
+	 -f postgres/schema.sql

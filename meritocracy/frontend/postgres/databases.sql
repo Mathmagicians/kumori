@@ -1,2 +1,0 @@
-DROP DATABASE IF EXISTS meritocracy;
-CREATE DATABASE meritocracy;
