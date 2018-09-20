@@ -21,7 +21,11 @@ import {
   heart,
   comment,
   exclamation,
-  times
+  times,
+  pen,
+  lock,
+  unlock,
+  user
 } from 'vue-awesome/icons'
 import Icon from 'vue-awesome/components/Icon'
 import 'bootstrap/dist/css/bootstrap.min.css'

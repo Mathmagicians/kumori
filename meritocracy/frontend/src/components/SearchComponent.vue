@@ -1,0 +1,161 @@
+<template>
+	<div>
+		Taxonomy: {{taxonomyTree}}
+		<b-card no-body>
+			<b-input-group>
+				<b-form-input id="searchInput"
+					type="text"
+					v-model.sync="searchInput"
+					required
+					v-on:change="sendSearchQueryEvent"
+					:placeholder="'Search in '+ amounts.components +' technology components ...'  ">
+				</b-form-input>
+				<b-input-group-append>
+					<b-button v-on:click="sendSearchQueryEvent"
+						variant="secondary">
+						Search
+					<v-icon name="search" ></v-icon>
+					</b-button>
+				</b-input-group-append>
+			</b-input-group>
+			<b-form-text id="inputLiveHelp">
+			Type what you want to search for -technology name, use case, anything ...
+			</b-form-text>
+		</b-card>
+
+	    <b-card no-body>
+	    	<p slot="header">
+	    		 	<b-button variant="secondary lg" :pressed.sync="filterOn" > {{filterOn?'Clear Filters':'Set Filters'}}
+			    		<v-icon v-if="filterOn" 
+			    			label="reset filters">
+			    			<v-icon name="filter" scale="2"></v-icon>
+			    			<v-icon name="ban" scale="2" color="orange"></v-icon>
+			    		</v-icon>
+			    		<v-icon v-else
+			    			name="filter" scale="2" >
+			    		</v-icon>
+					</b-button @click:"doSearch">
+			</p>
+			<b-tabs card >
+				<b-tab title="Tech Menu Life Cycle" active>
+
+					<b-card v-for="type in types"
+						tag="article"
+						class="mb-1 card-lifecycle" v-b-toggle="'search_'+type">
+						<div slot="header" >
+							<b-button :variant="btnVariant(type)">
+								<b-img rounded :src="images(type)" class="image-menu" />
+								{{type | capitalize}}
+								<b-badge pill>12</b-badge>
+							</b-button>
+							
+						</div>
+
+						<b-collapse :id="'search_'+type" >
+							<div class="card-text">
+								<b-button-group >
+									<life-cycle v-for="item in itemsForType[type]" :status="item"></life-cycle>
+								</b-button-group>
+							</div>
+						</b-collapse>
+					</b-card>
+
+				</b-tab>
+				<b-tab title="Service Taxonomy">
+					{{ taxonomyTree }}
+					<b-list-group>
+						 <b-list-group-item v-for="level in taxonomyLevels"
+						 	class="d-flex justify-content-between align-items-center">
+					    	{{level.name}}
+					    <b-badge variant="secondary" pill>24</b-badge>
+					  </b-list-group-item>
+					</b-list-group>
+				</b-tab>
+				<b-tab title="Cost">
+					 <b-alert show variant="warning">
+						<v-icon name="keyboard" scale="2"/></v-icon>
+						Work in progress - awesome content on the way ...
+				    </b-alert>
+				</b-tab>
+				<b-tab title="Changes">
+					<b-alert show variant="warning">
+						<v-icon name="keyboard" scale="2"/></v-icon>
+						Work in progress - awesome content on the way ...
+				    </b-alert>
+				</b-tab>
+			</b-tabs>
+	    </b-card>
+	</div>
+</template>
+
+<script type="text/javascript">
+
+	import LifeCycle from '../components/LifeCycle.vue'
+	import lifeCycleMixin from '../mixins/lifeCycle.js'
+
+	
+	export default {
+		name:"searchComponent",
+		props: {
+			amounts:{ required: false}
+		},
+		components: { 
+			LifeCycle 
+		}, 
+		mixins: [
+			lifeCycleMixin
+		],
+		data () {
+			return {
+				searchInput: '',
+				filterOn: true
+			}
+		},
+		created() {
+			this.$store.dispatch('fetchTaxonomy');
+		},
+	    computed: {
+	      types: function() {
+	        let temp = this.$store.state.lifeCycle.items.map( item => item.type).filter((v, i, a) => a.indexOf(v) === i);
+	        return temp;
+
+	      },
+	      itemsForType: function() {
+	        const namesForType = type =>  this.$store.state.lifeCycle.items.filter( item => item.type === type).map( item => item.name);
+	        const myMap = new Map();
+	        this.types.forEach( type =>  myMap[type] = namesForType(type));
+	        return myMap;
+	      },
+	      taxonomyLevels: function() {
+	      	return this.$store.state.taxonomy.levels;
+	      },
+	      taxonomyTags: function() {
+	      	return this.$store.state.taxonomy.tags;
+	      },
+	      taxonomyTree() {
+	      	console.log("building tree, taxonomy below");
+	      	console.log( this.taxonomyTags );
+	      	let temp = this.taxonomyTags ? this.buildTree( [{"name":"A", parent:"null"},{"name":"B", parent:"A"}] ):'';
+	      	console.log(" build returned "+ temp);
+	      	return temp;
+	      }
+	    },
+	    filters: {
+	      capitalize: function( lower) {
+	        return lower.charAt(0).toUpperCase() + lower.substr(1);
+	      }
+	    },
+	    methods: {
+	      images: function(type) {
+	        return this.$store.state.phaseImages[type];
+	      },
+	      texts: function(type) {
+	        return this.$options.phaseText[type];
+	      },
+	      sendSearchQueryEvent(query) {
+	      	return this.$emit('query', this.searchInput);
+	      }
+	    }
+	}
+
+</script>

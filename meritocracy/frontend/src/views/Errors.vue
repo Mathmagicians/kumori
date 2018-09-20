@@ -1,5 +1,7 @@
 <template>
-<div>
-  <h1>Something bad happened ..  this is not the page you are looking for</h1>
-</div>
+	<b-alert varinat="danger">
+		<v-icon name="times" scale="2">
+		</v-icon>
+		Maybe something bad happened ... but, ..., this is not the page you are looking for ...
+	</b-alert>
 </template>

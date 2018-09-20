@@ -8,13 +8,23 @@
   opacity: 1;
 }
 
+.image-menu {
+    width: 64px;
+    height: 64px;
+    background-color: #ffffff;
+    border-style: solid;
+    border-width: thin;
+    border-color: #aaaaaa;
+    opacity: 1;
+}
+
 .btn-round {
   border-radius: 50px;
 }
 
 .btn-lifecycle {
-  min-width: 10em;
-  max-width: 10em;
+	min-width: 8em;
+  max-width: 8em;
 }
 
 .card-lifecycle {
