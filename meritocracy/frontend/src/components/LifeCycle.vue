@@ -1,7 +1,7 @@
 <template>
 <span>
     <span v-if="lc"
-      class="align-middle"  :title="'Lifecycle phase '+status"  >
+      class="align-middle"  :title="'Lifecycle phase '+status">
       <b-button class="md-4 px-2 align-middle btn-lifecycle" :variant="btnVariant"
         to="about"
         v-b-popover.hover="popup"
