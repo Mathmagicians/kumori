@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import VueResource from 'vue-resource'
 import App from './App.vue'
 import {
   sync
@@ -32,6 +33,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import './app.css'
 
 Vue.use(BootstrapVue)
+Vue.use(VueResource)
 
 Vue.component('v-icon', Icon)
 

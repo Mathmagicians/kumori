@@ -32,25 +32,16 @@ Run the e2e tests (Not working at this time)
 
 ## Dev environment
 
-The dev environment includes the postgrest/postgres backend. You start it wth docker-compose.
+The dev environment includes the postgrest/postgres/swagger backend. You start it with docker-compose.
 
-    $ docker-compose up
-    
-Your dev environment needs to run before you start your dev server. Othervice you need to remove the --network flag in the serve-start task in the Makefile.
+    $ docker-compose -f docker-compose.dev.yml up
 
-## Dev server
+The site will be available at: http://127.0.0.1:8080
+The postgrest service will be available at:http://127.0.0.1:3000
+The swagger ui will be available at:http://127.0.0.1:8070
+The postgres ui will be avaialble at http://127.0.0.1:5050
 
-Start the dev server with live reload. The server will be available at http://127.0.0.1:8080
-
-    $ make serve-start
-
-Show the logs from the dev server
-
-    $ make serve-logs
-
-Stop the dev server
-
-    $ make serve-stop
+For now, you need to bootstrap the database manually by running `make schema`, `make fixture` and `make load`
 
 Get a shell with node
 

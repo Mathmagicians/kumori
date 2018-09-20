@@ -1,0 +1,74 @@
+version: '3.5'
+services:
+  devserver:
+    container_name: dev-server
+    image: node
+    command: ["npm", "run", "dev"]
+    working_dir: /tmp
+    ports:
+      - "8080:8080"
+    volumes:
+      - "./:/tmp"
+    networks:
+      - frontend
+      - backend
+
+  postgrest:
+    container_name: postgrest
+    image: postgrest/postgrest:latest
+    ports:
+      - "3000:3000"
+    environment:
+      PGRST_DB_URI: postgres://${POSTGREST_CONNECTION_USER}:${POSTGREST_CONNECTION_PASSWORD}@postgres:5432/${POSTGREST_CONNECTION_DB}
+      PGRST_DB_SCHEMA: ${POSTGREST_CONNECTION_SCHEMA}
+      PGRST_DB_ANON_ROLE: ${POSTGREST_ANON_ROLE}
+    depends_on:
+      - postgres
+    networks:
+      - frontend
+      - backend
+
+  postgres:
+    container_name: postgres
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    networks:
+      - backend
+
+  pgadmin:
+    container_name: pgadmin
+    image: chorss/docker-pgadmin4:latest
+    ports:
+    - "5050:5050"
+    networks:
+      - frontend
+      - backend
+    volumes:
+    - data-pgadmin:/data
+
+  swagger:
+    container_name: swagger
+    image: swaggerapi/swagger-ui
+    ports:
+      - "8070:8080"
+    environment:
+      API_URL: http://localhost:3000/
+    depends_on:
+      - postgrest
+    networks:
+      - frontend
+
+volumes:
+  data-pgadmin:
+    name: pgadmin
+
+networks:
+  frontend:
+    driver: bridge
+    name: frontend
+  backend:
+    driver: bridge
+    name: backend

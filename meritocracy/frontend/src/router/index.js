@@ -7,6 +7,7 @@ import Exterminator from '../views/Exterminator.vue'
 import Home from '../views/Home.vue'
 import Services from '../views/Services.vue'
 import Meritocracy from '../views/Meritocracy.vue'
+import Database from '../views/Database.vue'
 
 Vue.use(Router)
 
@@ -36,13 +37,15 @@ export default new Router({
     }, {
       path: '/components/:uid',
       component: Components
-    }, 
-    {
+    }, {
+      path: '/db',
+      component: Database
+    }, {
       path: '/404', 
       name: 'not-found', 
       component: Errors    
-    },
-    { path: '*',
+    }, {
+      path: '*',
       redirect:  '/404'
     }
   ]
