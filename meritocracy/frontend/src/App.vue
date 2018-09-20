@@ -1,5 +1,5 @@
 <template>
-<div id="app">
+<div id="app" >
   <b-navbar type="dark" variant="dark" class="navbar navbar-expand-md">
     <b-navbar-brand to="/" class="d-inline-block align-top" alt="techmenu logo">
       <b-img src="./assets/techmenu.svg" width="64" height="64" class="m-1" />
@@ -31,8 +31,8 @@
     <b-navbar-nav class="ml-auto">
       <b-nav-item-dropdown right>
          <template slot="button-content">
-          <b-button class="btn-round">
-            <v-icon name="lock" color="orange"></v-icon>
+          <b-button class="btn-round" variant="light">
+            <v-icon name="lock" color="green "></v-icon>
           </b-button>
           Edit
         </template>
@@ -41,7 +41,7 @@
       <b-nav-item-dropdown right>
         <template slot="button-content">
           <b-button class="btn-round" >
-            <v-icon name="user" color="orange" ></v-icon>
+            <v-icon name="user" color="green" variant="light"></v-icon>
           </b-button>
           User
         </template>
@@ -53,7 +53,7 @@
   
   <b-container fluid>
     <transition name="fade" mode="out-in">
-       <router-view class="m-1" />
+       <router-view />
     </transition>
   </b-container>
   

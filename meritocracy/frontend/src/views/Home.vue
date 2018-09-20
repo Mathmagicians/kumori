@@ -12,24 +12,18 @@
 
 <script>
 
-import SearchComponent from '../components/SearchComponent.vue'
+  import SearchComponent from '../components/SearchComponent.vue'
+  import SunburstWrap from '../components/SunburstWrap.vue'
 
-	export default {
-		name: 'home',
+
+  export default {
+  	name: 'home',
     components: {
-        SearchComponent
+        SearchComponent,
+        SunburstWrap
       },
-		data() {
-      		return {
-        		el: "#about",
-        		img: {
-					'buy': require('../assets/buy.svg'),
-					'hold': require('../assets/service.svg'), 
-					'sell': require('../assets/exterminator.svg'), 
-					'maybe': require('../assets/exterminator.svg')
-				}
-			}
-        }
-	}
+  	
+  }
+
 </script>
 

@@ -1,6 +1,6 @@
 <template>
 	<div :id="id">
-		<b-card>
+		<b-card no-body>
 			<p slot="header" v-b-toggle="accordionId">
 				<b-button v-on:click="changeRoute" variant="link lg">{{tech.name}}</b-button>
 				<life-cycle :status="tech.status" to="about"></life-cycle>

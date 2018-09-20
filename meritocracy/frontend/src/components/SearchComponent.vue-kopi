@@ -1,5 +1,5 @@
 <template>
-	<div >
+	<div class="container-fluid">
 		<b-card no-body>
 			<b-input-group>
 				<b-form-input id="searchInput"
@@ -22,38 +22,70 @@
 			</b-form-text>
 		</b-card>
 
-		<b-card-group>
-		<b-card v-for="type in types"
-			tag="article"
-			class="card-lifecycle">
-			<div slot="header" >
-				<b-button :variant="'outline-'+btnVariant(type)">
-					<b-img rounded :src="images(type)" class="image-menu" top/>
-					{{type | capitalize}}
-				</b-button>
-				<b-badge pill>12</b-badge>
-				
+	    <b-card no-body>
+	    	<p slot="header">
+	    		 	<b-button variant="secondary lg" :pressed.sync="filterOn" > {{filterOn?'Clear Filters':'Set Filters'}}
+			    		<v-icon v-if="filterOn" 
+			    			label="reset filters">
+			    			<v-icon name="filter" scale="2"></v-icon>
+			    			<v-icon name="ban" scale="2" color="orange"></v-icon>
+			    		</v-icon>
+			    		<v-icon v-else
+			    			name="filter" scale="2" >
+			    		</v-icon>
+					</b-button @click:"doSearch">
+			</p>
+			<b-tabs card >
+				<b-tab title="Tech Menu Life Cycle" active>
 
-				
-			</div>
+					<b-card v-for="type in types"
+						tag="article"
+						class="mb-1 card-lifecycle" v-b-toggle="'search_'+type">
+						<div slot="header" >
+							<b-button :variant="btnVariant(type)">
+								<b-img rounded :src="images(type)" class="image-menu" />
+								{{type | capitalize}}
+								<b-badge pill>12</b-badge>
+							</b-button>
+							
+						</div>
 
-			<div class="card-text">
-					<b-button-group vertical>
-						<life-cycle v-for="item in itemsForType[type]" :status="item"></life-cycle>
-					</b-button-group>
-				</div>
-		</b-card>
-	</b-card-group>
+						<b-collapse :id="'search_'+type" >
+							<div class="card-text">
+								<b-button-group >
+									<life-cycle v-for="item in itemsForType[type]" :status="item"></life-cycle>
+								</b-button-group>
+							</div>
+						</b-collapse>
+					</b-card>
 
-		<b-card style="card control-left " no-body>
-			<div class="card-header">Usecases</div>
-			<div style="card-body father"> 
-				<sunburst-wrap :tree="sunburstTree" class="sunburst"></sunburst-wrap>
-			</div>
-		</b-card>		
-	
-</div>
+				</b-tab>
+				<b-tab title="Service Taxonomy">
+					<b-card style="card">
+						<div style="card-body father"> 
+							<sunburst-wrap :tree="sunburstTree"></sunburst-wrap>
+						</div>
+					</b-card>
+					
 
+					
+					
+				</b-tab>
+				<b-tab title="Cost">
+					 <b-alert show variant="warning">
+						<v-icon name="keyboard" scale="2"/></v-icon>
+						Work in progress - awesome content on the way ...
+				    </b-alert>
+				</b-tab>
+				<b-tab title="Changes">
+					<b-alert show variant="warning">
+						<v-icon name="keyboard" scale="2"/></v-icon>
+						Work in progress - awesome content on the way ...
+				    </b-alert>
+				</b-tab>
+			</b-tabs>
+	    </b-card>
+	</div>
 </template>
 
 <script type="text/javascript">
