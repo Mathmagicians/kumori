@@ -15,13 +15,13 @@ services:
 
   postgrest:
     container_name: postgrest
-    image: postgrest/postgrest
+    image: postgrest/postgrest:latest
     ports:
       - "3000:3000"
     environment:
-      PGRST_DB_URI: postgres://meritocracy:meritocracy@postgres:5432/meritocracy
-      PGRST_DB_SCHEMA: api
-      PGRST_DB_ANON_ROLE: web_anon
+      PGRST_DB_URI: postgres://${POSTGREST_CONNECTION_USER}:${POSTGREST_CONNECTION_PASSWORD}@postgres:5432/${POSTGREST_CONNECTION_DB}
+      PGRST_DB_SCHEMA: ${POSTGREST_CONNECTION_SCHEMA}
+      PGRST_DB_ANON_ROLE: ${POSTGREST_ANON_ROLE}
     depends_on:
       - postgres
     networks:
@@ -30,15 +30,12 @@ services:
 
   postgres:
     container_name: postgres
-    image: postgres
+    image: postgres:latest
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_PASSWORD: postgres
-    volumes:
-      - "data-postgres:/var/lib/postgresql/data"
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     networks:
-      - frontend
       - backend
 
   pgadmin:
@@ -65,8 +62,6 @@ services:
       - frontend
 
 volumes:
-  data-postgres:
-    name: meritocracy
   data-pgadmin:
     name: pgadmin
 
