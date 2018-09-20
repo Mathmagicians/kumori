@@ -1,28 +1,28 @@
 <template>
-	<div >
+	<div class="mb1">
     <b-alert show variant="secondary">
             #techmenu is happily governing <b>{{techComponents.length}}</b> components. 
           </b-alert>
     <b-row>
-      <b-col cols="4">
+      <b-col cols="5">
         <search-component :amounts="amounts" v-on:query="search"></search-component>
       </b-col>
-      <b-col>
-    	<b-alert show variant="warning"
-    		v-if="loading">Loading #techmenu components … 
-    		<v-icon name="spinner" scale="2" spin/></v-icon>
-    	</b-alert>
-    	<b-list-group
-      		v-else
-      		class="components">
-  			<b-list-group-item
-        		v-for="component in filteredTechComponents"
-        		:key="component.name"
-        		class="tech-component">
-          		<tech-component v-bind:id="component | techId" :tech="component" :active="component.uid === activeId"></tech-component>
-      		</b-list-group-item>
-    	</b-list-group>
-    </b-col>
+      <b-col cols="7">
+      	<b-alert show variant="warning"
+      		v-if="loading">Loading #techmenu components … 
+      		<v-icon name="spinner" scale="2" spin/></v-icon>
+      	</b-alert>
+      	<b-list-group
+        		v-else
+        		class="components">
+    			<b-list-group-item
+          		v-for="component in filteredTechComponents"
+          		:key="component.name"
+          		class="tech-component">
+            		<tech-component v-bind:id="component | techId" :tech="component" :active="component.uid === activeId"></tech-component>
+        		</b-list-group-item>
+      	</b-list-group>
+      </b-col>
     </b-row>
   </div>
 </template>

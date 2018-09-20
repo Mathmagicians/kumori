@@ -30,4 +30,14 @@ skuffe
   <!-- debug -->
 
   <p>Let me tell you more about <strong>{{ $route.params.name }}</strong></p>
+
+  From search component: 
+  <b-list-group>
+             <b-list-group-item v-for="level in taxonomyLevels"
+              class="d-flex justify-content-between align-items-center">
+                {{level.name}}
+              <b-badge variant="secondary" pill>24</b-badge>
+
+            </b-list-group-item>
+          </b-list-group>
           

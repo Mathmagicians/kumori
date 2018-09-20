@@ -47,7 +47,7 @@ export default {
         myCopy.forEach( el => { 
           lookUp[ el.name] = el; 
           el.children = [];
-          console.log( "found " + el.name);
+          el.size ="100";
         });
 
         myCopy.forEach( el => {
@@ -60,6 +60,18 @@ export default {
         });
 
         return tree;
+      },
+
+      buildTreeForSunburst( tree ){
+        let treeObj = {name: "#techmenu taxonomy"};
+          treeObj.children = tree;
+          return treeObj;
+      },
+
+      saveFile: function( treeObj ) {
+        const data = JSON.stringify(treeObj);
+        window.localStorage.setItem('treeObj', data);
+        console.log( "saved to local storage as "+ 'treeObj');
       }
 
     }

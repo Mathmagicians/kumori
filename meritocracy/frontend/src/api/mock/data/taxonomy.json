@@ -3,19 +3,23 @@
     "levels": [
       {
         "level": 1,
-        "name": "Service Type"
+        "name": "Type"
       },
       {
         "level": 2,
-        "name": "Service Category"
+        "name": "Category"
       },
       {
         "level": 3,
-        "name": "Service Name"
+        "name": "Name"
       },
       {
         "level": 4,
-        "name": "Service Purpose"
+        "name": "Capability"
+      },
+      {
+        "level": 5,
+        "name": "use-case"
       }
     ],
     "tags": [
@@ -181,6 +185,15 @@
         "parent": "Design and Development"
       },
       {
+        "level": 5,
+        "name": "Ad hoc scripting",
+        "parent": "Languages and Libraries"
+      },
+      { "level": 5,
+        "name": "Application Development",
+        "parent": "Languages and Libraries"
+      },
+      {
         "level": 4,
         "name": "Frameworks",
         "parent": "Design and Development"
@@ -284,6 +297,16 @@
         "level": 3,
         "name": "Monitoring",
         "parent": "Operations"
+      },
+      {
+        "level": 4,
+        "name": "Event Gathering",
+        "parent": "Monitoring"
+      },
+      {
+        "level": 5,
+        "name": "Application Level Event Gathering",
+        "parent": "Event Gathering"
       },
       {
         "level": 3,
