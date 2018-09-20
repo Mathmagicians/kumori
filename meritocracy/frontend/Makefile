@@ -35,7 +35,7 @@ schema:
 	 -f postgres/schema.sql
 
 fixture:
-	@docker run --rm -it -v ${PWD}:/tmp -w /tmp -p 8050:8080 node ./json2sql.sh
+	@docker run --rm -it -v ${PWD}:/tmp -w /tmp -p 8050:8080 node ./postgres/json2sql.sh
 
 load:
 	@docker run -it \

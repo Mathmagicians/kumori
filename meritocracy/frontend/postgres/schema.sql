@@ -8,8 +8,7 @@ BEGIN
             WHERE
                 usename = 'meritocracy') THEN
             CREATE ROLE meritocracy LOGIN PASSWORD 'meritocracy';
-            COMMENT ON ROLE meritocracy IS 'This is the default CRUD user.';
-
+        COMMENT ON ROLE meritocracy IS 'This is the default CRUD user.';
     END IF;
 END $body$;
 
@@ -22,80 +21,87 @@ BEGIN
             WHERE
                 usename = 'web_anon') THEN
             CREATE ROLE web_anon NOLOGIN;
-            COMMENT ON ROLE web_anon IS 'This is the default anonymous user for read only access.';
+        COMMENT ON ROLE web_anon IS 'This is the default anonymous user for read only access.';
     END IF;
 END $body$;
 
-grant web_anon to meritocracy;
-
+GRANT web_anon TO meritocracy;
 
 -- Create Database
 DROP DATABASE IF EXISTS meritocracy;
+
 CREATE DATABASE meritocracy;
+
 GRANT CONNECT ON DATABASE meritocracy TO meritocracy;
 
 -- Connect Database
 \connect meritocracy;
 
 -- Create Schema
-DROP SCHEMA IF EXISTS api;
+DROP
+SCHEMA IF EXISTS api;
+
 CREATE SCHEMA api;
 
 -- Create Table
 DROP TABLE IF EXISTS api.components;
 
 CREATE TABLE api.components (
-    id serial primary key,
+    id serial PRIMARY KEY,
     data jsonb,
-    modified timestamp NOT NULL
+    modified TIMESTAMP NOT NULL
 );
 
 -- Create Functions
-DROP FUNCTION IF EXISTS data_changed();
+DROP FUNCTION IF EXISTS data_changed ();
 
-CREATE FUNCTION data_changed() RETURNS TRIGGER
+CREATE FUNCTION data_changed ()
+    RETURNS TRIGGER
     LANGUAGE plpgsql
-    AS $$
+AS $$
 BEGIN
-  IF NEW.data != OLD.data THEN
-    NEW.modified := localtimestamp;
-    RAISE NOTICE 'modified updated for components ''%'' on %', OLD.id, NEW.modified;
-  END IF;
-  RETURN NEW;
+    IF NEW.data != OLD.data THEN
+        NEW.modified := LOCALTIMESTAMP;
+        RAISE NOTICE 'modified updated for components ''%'' on %', OLD.id, NEW.modified;
+    END IF;
+    RETURN NEW;
 END;
 $$;
 
-DROP FUNCTION IF EXISTS data_inserted();
+DROP FUNCTION IF EXISTS data_inserted ();
 
-CREATE FUNCTION data_inserted() RETURNS TRIGGER
+CREATE FUNCTION data_inserted ()
+    RETURNS TRIGGER
     LANGUAGE plpgsql
-    AS $$
+AS $$
 BEGIN
-  NEW.modified := localtimestamp;
-  RAISE NOTICE 'modified created for components ''%'' on %', new.id, NEW.modified;
-  RETURN NEW;
+    NEW.modified := LOCALTIMESTAMP;
+    RAISE NOTICE 'modified created for components ''%'' on %', new.id, NEW.modified;
+    RETURN NEW;
 END;
 $$;
 
 -- Create Trigger
 DROP TRIGGER IF EXISTS trigger_data_changed ON api.components;
 
-CREATE TRIGGER trigger_data_changed
-  BEFORE UPDATE ON api.components
-  FOR EACH ROW
-  EXECUTE PROCEDURE data_changed();
+CREATE TRIGGER trigger_data_changed BEFORE
+UPDATE
+    ON api.components FOR EACH ROW EXECUTE PROCEDURE data_changed ();
 
-CREATE TRIGGER trigger_data_inserted
-  BEFORE INSERT ON api.components
-  FOR EACH ROW
-  EXECUTE PROCEDURE data_inserted();
+CREATE TRIGGER trigger_data_inserted BEFORE INSERT ON api.components FOR EACH ROW EXECUTE PROCEDURE data_inserted ();
 
 -- Create priviliges
 GRANT USAGE ON SCHEMA api TO meritocracy;
+
 GRANT USAGE ON SCHEMA api TO web_anon;
+
 ALTER DEFAULT PRIVILEGES IN SCHEMA api GRANT ALL ON TABLES TO meritocracy;
-GRANT UPDATE(data) ON api.components TO web_anon;
-GRANT SELECT(id,data,modified) ON api.components TO web_anon;
+
+GRANT UPDATE (data)
+ON api.components TO web_anon;
+
+GRANT SELECT (id, data, modified)
+ON api.components TO web_anon;
 
 -- Disconnect Database
 \q
