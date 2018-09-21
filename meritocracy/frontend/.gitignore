@@ -17,3 +17,5 @@ postgres/fixture.sql
 *.ntvs*
 *.njsproj
 *.sln
+.project
+.metadata
