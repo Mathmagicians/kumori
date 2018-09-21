@@ -1,24 +1,28 @@
 <template>
   <span>
-    <span v-if="lc"
-      class="align-middle"  :title="'Lifecycle phase '+status"  >
-      <b-button class="md-4 px-2 align-middle btn-lifecycle" :variant="btn" 
-        :to="to" 
-        v-b-popover.hover="popup" 
-        :title="lc.name | toUpperCase | title">
-        {{status | toUpperCase }}
+    <span v-if="lc">
+      <b-button
+        size="sm"
+        class="md-4 px-2 align-middle btn-lifecycle"
+        v-b-popover.hover="popup"
+        :variant="btn"
+        :to="to"
+        :title="lc.name | title">
+        {{status | capitalize}}
       </b-button>
     </span>
      <span v-else >
-        <b-button class="md-4 px-2 align-middle btn-lifecycle" variant="outline-danger sm">
-        MISSING
-        <v-icon name="times"  scale="2"></v-icon>
+        <b-button
+          size="sm"
+          class="md-4 px-2 align-middle btn-lifecycle"
+          variant="outline-danger">
+          Missing
       </b-button>
     </span>
   </span>
 </template>
 
-<script>	
+<script>
 
   import lifeCycleMixin from '../mixins/lifeCycle.js'
 
@@ -60,7 +64,7 @@
       },
 
       btn: function() {
-       return this.btnVariant(this.lc? this.lc.type: 'maybe'); 
+       return this.btnVariant(this.lc? this.lc.type: 'maybe');
       },
 
       popup: function(){
@@ -76,10 +80,10 @@
         return upper.toUpperCase();
       },
       title: function( title){
-        return 'Life cycle phase '+title; 
+        return 'Life cycle phase '+title;
       }
 
     }
 	}
-	
+
 </script>
