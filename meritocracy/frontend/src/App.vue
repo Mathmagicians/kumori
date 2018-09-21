@@ -50,13 +50,13 @@
       </b-nav-item-dropdown>
     </b-navbar-nav>
   </b-navbar>
-  
+
   <b-container fluid>
     <transition name="fade" mode="out-in">
        <router-view />
     </transition>
   </b-container>
-  
+
   <footer>
     Copyright 2018 by Mathmagicians. Powered by Kumori.
   </footer>
@@ -71,5 +71,23 @@ export default {
 </script>
 
 <style>
+.image-overlay {
+  width: 48px;
+  height: 48px;
+  background-color: #ffffff;
+  border-style: solid;
+  border-width: medium;
+  border-color: #aaaaaa;
+  opacity: 1;
+}
 
+.btn-round {
+  border-radius: 50px;
+}
+
+#app {
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 </style>
