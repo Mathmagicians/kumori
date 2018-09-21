@@ -121,8 +121,6 @@
 	        return this.$options.phaseText[type];
 	      },
 	      sendSearchQueryEvent(queryString) {
-	      	//return this.$emit('query', this.searchInput);
-	      	console.log(" query changed to ..." + queryString);
 	      	return this.query.string = queryString;
 	      },
 	      setUseCaseQuery( useCaseId){
@@ -155,6 +153,7 @@
 	      	//todo dont push empty query parameters!
 	      	this.$router.push({path: '/components/search', query: this.query });
 	      }
+
 	    }
 	}
 

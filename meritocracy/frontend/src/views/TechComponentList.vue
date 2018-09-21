@@ -3,6 +3,9 @@
     <b-alert show variant="secondary">
             #techmenu is happily governing <b>{{techComponents.length}}</b> components. 
             {{query}}
+            <b-button @click="fuzzySearch(query.string)"> try fuzzy search
+            </b-button>
+            {{fuzzySearchResults}}
           </b-alert>
     <b-row>
       <b-col cols="5">
@@ -47,7 +50,8 @@
               string: '',
               lc: [],
               tx: []
-            }
+            },
+            fuzzySearchResults: []
     		}
 		},
 		components: {
@@ -82,12 +86,30 @@
       }
     },
     methods: {
-      search( query ){
-        this.query.string = query;
-      },
       selectLifeCycle( list){
         this.query.lc = list; 
-      }
+      },
+      fuzzySearch( query ){
+          console.log("trying fuzzy search");
+          const options = {
+            id: "name",
+            shouldSort: true,
+            includeScore: true,
+            includeMatches: true,
+            threshold: 0.6,
+            location: 0,
+            distance: 50,
+            maxPatternLength: 32,
+            minMatchCharLength: 2,
+            keys: [
+              "name",
+              "description"
+            ]
+          };
+          this.$search(this.query.string, this.techComponents, options).then(results => {
+            this.fuzzySearchResults = results
+          })
+        }
     }
   }
 </script>
