@@ -3,7 +3,7 @@
     <span v-if="lc"
       class="align-middle"  :title="'Lifecycle phase '+status"  >
       <b-button class="md-4 px-2 align-middle btn-lifecycle" :variant="btn" 
-        :to="to" 
+        :to="to" @click="clicked" :pressed="isPressed"
         v-b-popover.hover="popup" 
         :title="lc.name | toUpperCase | title">
         {{status | toUpperCase }}
@@ -27,7 +27,8 @@
 		props: {
       status: {required: true},
       to: {type:String, required:false},
-      ispopup: {type: Boolean, required: false, default: false}
+      ispopup: {type: Boolean, required: false, default: false},
+      isPressed:  {type: Boolean, required: false, default: false}
     },
     mixins: [
       lifeCycleMixin
@@ -54,6 +55,11 @@
       'wip': `#techmenu is currently working on updating the life cycle state of this technology`,
       'undecided': `#techmenu has no opinion about this technology. Do we need it? Let us get this into #techmenu.`
     },
+    data() {
+      return {
+
+      }
+    },
     computed: {
        lc: function(){
         return this.$store.state.lifeCycle.items.filter( item => item.name === this.status).pop();
@@ -79,6 +85,14 @@
         return 'Life cycle phase '+title; 
       }
 
+    }, 
+    methods: {
+      clicked(){
+        //this.isPressed
+        console.log( "Clicked, is pressed " + this.isPressed );
+        return this.$emit('selected', this.status);
+          
+      }
     }
 	}
 	

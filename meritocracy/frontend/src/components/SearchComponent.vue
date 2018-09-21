@@ -6,7 +6,7 @@
 					type="text"
 					v-model.sync="searchInput"
 					required
-					v-on:change="sendSearchQueryEvent"
+					v-on:input="sendSearchQueryEvent"
 					:placeholder="'Search in '+ amounts.components +' technology components ...'  ">
 				</b-form-input>
 				<b-input-group-append>
@@ -21,7 +21,6 @@
 			Type what you want to search for -technology name, use case, anything ...
 			</b-form-text>
 		</b-card>
-
 		<b-card-group>
 		<b-card v-for="type in types"
 			tag="article"
@@ -31,15 +30,15 @@
 					<b-img rounded :src="images(type)" class="image-menu" top/>
 					{{type | capitalize}}
 				</b-button>
-				<b-badge pill>12</b-badge>
-				
-
-				
+				<b-badge pill>12</b-badge>			
 			</div>
 
 			<div class="card-text">
 					<b-button-group vertical>
-						<life-cycle v-for="item in itemsForType[type]" :status="item"></life-cycle>
+						<life-cycle :id="item+'selector'" v-for="item in itemsForType[type]" :key="item" :status="item" 
+						v-on:selected="setLcQuery(item)"
+						:isPressed.sync="lcModel[item]">	
+						</life-cycle>
 					</b-button-group>
 				</div>
 		</b-card>
@@ -66,7 +65,9 @@
 	export default {
 		name:"searchComponent",
 		props: {
-			amounts:{ required: false}
+			amounts:{ required: false},
+			query: {required: true},
+			lc: {required: false}
 		},
 		components: { 
 			LifeCycle,
@@ -78,7 +79,8 @@
 		data () {
 			return {
 				searchInput: '',
-				filterOn: true
+				filterOn: true,
+				lcModel: this.$store.state.lifeCycle.items.reduce( (acc, i) => ({...acc, [i.name]: false}), {})
 			}
 		},
 		created() {
@@ -121,8 +123,20 @@
 	      texts: function(type) {
 	        return this.$options.phaseText[type];
 	      },
-	      sendSearchQueryEvent(query) {
-	      	return this.$emit('query', this.searchInput);
+	      sendSearchQueryEvent(queryString) {
+	      	//return this.$emit('query', this.searchInput);
+	      	console.log(" query changed to ..." + queryString);
+	      	return this.query.string = queryString;
+	      },
+	      setUseCaseQuery( useCaseId){
+	      	console.log(" setting query for "+ useCaseId);
+	      },
+	      setLcQuery( item ){
+	      	console.log( "changing model for "+ item + " -- from "+ this.lcModel[item] );
+	      	this.lcModel[item] = !this.lcModel[item]
+	      	let lcSet = Object.keys(this.lcModel).filter( item =>  this.lcModel[item]);
+	      	//console.log(lcSet);
+	      	return this.query.lc = lcSet;
 	      },
 	      save(){
 	      	let sunburstTree = this.buildTreeForSunburst();

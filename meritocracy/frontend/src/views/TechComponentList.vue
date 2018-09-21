@@ -5,12 +5,12 @@
           </b-alert>
     <b-row>
       <b-col cols="5">
-        <search-component :amounts="amounts" v-on:query="search"></search-component>
+        <search-component :amounts="amounts" v-bind:query="query"></search-component>
       </b-col>
       <b-col cols="7">
       	<b-alert show variant="warning"
       		v-if="loading">Loading #techmenu components … 
-      		<v-icon name="spinner" scale="2" spin/></v-icon>
+      		<v-icon name="spinner" scale="3" spin/></v-icon>
       	</b-alert>
       	<b-list-group
         		v-else
@@ -42,7 +42,11 @@
     		return {
       			loading: false,
             activeId: '', 
-            queryString: ''
+            query: {
+              string: '',
+              lc: [],
+              tx: []
+            }
     		}
 		},
 		components: {
@@ -58,9 +62,12 @@
         return am;
       },
       filteredTechComponents() {
-        return this.techComponents.filter(
-            tech => {  return tech.name.toLowerCase().includes(this.queryString.toLowerCase()) }
-          );
+        const isQueryStringIncluded = (tech) => tech.name.toLowerCase().includes(this.query.string.toLowerCase());
+        const isLifeCycleIncluded = (tech) => this.query.lc.includes(tech.status);
+        const filters = [isQueryStringIncluded, isLifeCycleIncluded];
+       //apply all the filters to the list
+       console.log( "Filtering components" );
+        return this.techComponents.filter( e => filters.every( f =>  f.call( null, e)));           
       }
 		},
 		created () {
@@ -75,8 +82,11 @@
       }
     },
     methods: {
-      search( queryString ){
-        this.queryString = queryString;
+      search( query ){
+        this.query.string = query;
+      },
+      selectLifeCycle( list){
+        this.query.lc = list; 
       }
     }
   }

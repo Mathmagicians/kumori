@@ -8,7 +8,7 @@
 		</template>
 
 		<!-- Add information to be displayed on top the graph -->
-		<nodeInfoDisplayer slot="legend" id="info" slot-scope="{ nodes }" :current="nodes.mouseOver" :root="nodes.root" />
+		<nodeInfoDisplayer slot="legend" id="info" slot-scope="{ nodes }" :current="nodes.mouseOver" :root="nodes.root" description="of usecases"/>
 
 		<!-- Add bottom legend -->
 		<breadcrumbTrail id="breadcrumbs" slot="top"  slot-scope="{ nodes, colorGetter, width }" :current="nodes.mouseOver" :root="nodes.root" :colorGetter="colorGetter" :from="nodes.clicked" />
