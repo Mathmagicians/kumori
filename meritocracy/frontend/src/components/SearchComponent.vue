@@ -26,7 +26,9 @@
 			tag="article"
 			class="card-lifecycle">
 			<div slot="header" >
-				<b-button :variant="'outline-'+btnVariant(type)">
+				<b-button :variant="'outline-'+btnVariant(type)" 
+					@click="setPhase(type)"
+					:pressed="phaseModel[type]" >
 					<b-img rounded :src="images(type)" class="image-menu" top/>
 					{{type | capitalize}}
 				</b-button>
@@ -79,27 +81,21 @@
 			return {
 				searchInput: '',
 				filterOn: true,
-				lcModel: this.$store.state.lifeCycle.items.reduce( (acc, i) => ({...acc, [i.name]: true}), {})
+				lcModel: this.$store.state.lifeCycle.items.reduce( (acc, i) => ({...acc, [i.name]: true}), {}),
+				//phase model represent the state of buttons that group lifecycles -it does not send its own events, but selects - deselects its group
+				phaseModel: {}
 			}
 		},
 		created() {
 			this.$store.dispatch('fetchTaxonomy');
+			
+			this.phaseModel = this.types.reduce( (acc, i) => ({...acc, [i]:true }), {});
 			//initialize array state for life cycle buttons
 			this.query.lc.forEach( item => this.setLcQuery(item) );
+			
 		},
 	    computed: {
-	      types: function() {
-	        let temp = this.$store.state.lifeCycle.items.map( item => item.type).filter((v, i, a) => a.indexOf(v) === i);
-	        return temp;
-
-	      },
-	      itemsForType: function() {
-	        const namesForType = type =>  this.$store.state.lifeCycle.items.filter( item => item.type === type).map( item => item.name);
-	        const myMap = new Map();
-	        this.types.forEach( type =>  myMap[type] = namesForType(type));
-	        return myMap;
-	      },
-	      taxonomyLevels: function() {
+	       taxonomyLevels: function() {
 	      	return this.$store.state.taxonomy.levels;
 	      },
 	      taxonomyTags: function() {
@@ -132,14 +128,32 @@
 	      setUseCaseQuery( useCaseId){
 	      	console.log(" setting query for "+ useCaseId);
 	      },
-	      setLcQuery( item ){
-	      	this.lcModel[item] = !this.lcModel[item]
+	      setLcQuery(item ){
+	      	//have to update state here, since lcbutton is a child compponent that wraps a button
+	      	this.lcModel[item] = !this.lcModel[item];
+	      	this.updateLcQuery( item );
+	      	this.updateRoute();
+	      },
+	      updateLcQuery(item){
 	      	this.query.lc = Object.keys(this.lcModel).filter( item =>  this.lcModel[item]);
+	      },
+	      // the phase button flips its group of lc buttons on/off
+	      setPhase(type){
+	      	this.phaseModel[type] = ! this.phaseModel[type];
+	      	this.itemsForType[type].forEach( item => {
+	      		this.lcModel[item] = this.phaseModel[type]; 
+	      		this.updateLcQuery(item);	
+	      	} );
+	      	this.updateRoute();
 	      },
 	      save(){
 	      	let sunburstTree = this.buildTreeForSunburst();
 	      	console.log("Trying to save file");
 	      	this.saveFile( sunburstTree );
+	      }, 
+	      updateRoute() {
+	      	//todo dont push empty query parameters!
+	      	this.$router.push({path: '/components/search', query: this.query });
 	      }
 	    }
 	}

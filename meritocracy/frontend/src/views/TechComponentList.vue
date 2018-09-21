@@ -64,10 +64,9 @@
       },
       filteredTechComponents() {
         const isQueryStringIncluded = (tech) => tech.name.toLowerCase().includes(this.query.string.toLowerCase());
-        const isLifeCycleIncluded = (tech) => !this.query.lc.includes(tech.status);
-        const filters = [isQueryStringIncluded, isLifeCycleIncluded];
+        const isLifeCycleExcluded = (tech) => !this.query.lc.includes(tech.status);
+        const filters = [isQueryStringIncluded, isLifeCycleExcluded];
        //apply all the filters to the list
-       console.log( "Filtering components" );
         return this.techComponents.filter( e => filters.every( f =>  f.call( null, e)));           
       }
 		},
