@@ -67,7 +67,6 @@
 		props: {
 			amounts:{ required: false},
 			query: {required: true},
-			lc: {required: false}
 		},
 		components: { 
 			LifeCycle,
@@ -80,11 +79,13 @@
 			return {
 				searchInput: '',
 				filterOn: true,
-				lcModel: this.$store.state.lifeCycle.items.reduce( (acc, i) => ({...acc, [i.name]: false}), {})
+				lcModel: this.$store.state.lifeCycle.items.reduce( (acc, i) => ({...acc, [i.name]: true}), {})
 			}
 		},
 		created() {
 			this.$store.dispatch('fetchTaxonomy');
+			//initialize array state for life cycle buttons
+			this.query.lc.forEach( item => this.setLcQuery(item) );
 		},
 	    computed: {
 	      types: function() {
@@ -132,11 +133,8 @@
 	      	console.log(" setting query for "+ useCaseId);
 	      },
 	      setLcQuery( item ){
-	      	console.log( "changing model for "+ item + " -- from "+ this.lcModel[item] );
 	      	this.lcModel[item] = !this.lcModel[item]
-	      	let lcSet = Object.keys(this.lcModel).filter( item =>  this.lcModel[item]);
-	      	//console.log(lcSet);
-	      	return this.query.lc = lcSet;
+	      	this.query.lc = Object.keys(this.lcModel).filter( item =>  this.lcModel[item]);
 	      },
 	      save(){
 	      	let sunburstTree = this.buildTreeForSunburst();

@@ -2,10 +2,11 @@
 	<div class="mb1">
     <b-alert show variant="secondary">
             #techmenu is happily governing <b>{{techComponents.length}}</b> components. 
+            {{query}}
           </b-alert>
     <b-row>
       <b-col cols="5">
-        <search-component :amounts="amounts" v-bind:query="query"></search-component>
+        <search-component :amounts="amounts" v-bind:query="query" ></search-component>
       </b-col>
       <b-col cols="7">
       	<b-alert show variant="warning"
@@ -63,7 +64,7 @@
       },
       filteredTechComponents() {
         const isQueryStringIncluded = (tech) => tech.name.toLowerCase().includes(this.query.string.toLowerCase());
-        const isLifeCycleIncluded = (tech) => this.query.lc.includes(tech.status);
+        const isLifeCycleIncluded = (tech) => !this.query.lc.includes(tech.status);
         const filters = [isQueryStringIncluded, isLifeCycleIncluded];
        //apply all the filters to the list
        console.log( "Filtering components" );

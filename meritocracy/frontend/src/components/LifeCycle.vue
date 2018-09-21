@@ -88,9 +88,7 @@
     }, 
     methods: {
       clicked(){
-        //this.isPressed
-        console.log( "Clicked, is pressed " + this.isPressed );
-        return this.$emit('selected', this.status);
+       return this.$emit('selected', this.status);
           
       }
     }
