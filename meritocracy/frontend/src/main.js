@@ -31,10 +31,11 @@ import Icon from 'vue-awesome/components/Icon'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import './app.css'
-
+import VueFuse from 'vue-fuse'
+ 
 Vue.use(BootstrapVue)
 Vue.use(VueResource)
-
+Vue.use(VueFuse)
 Vue.component('v-icon', Icon)
 
 Vue.config.productionTip = false

@@ -34,6 +34,7 @@ Run the e2e tests (Not working at this time)
 
 The dev environment includes the postgrest/postgres/swagger backend. You start it with docker-compose.
 
+    $ cp .env.sample .env
     $ docker-compose -f docker-compose.dev.yml up
 
 The site will be available at: http://127.0.0.1:8080
