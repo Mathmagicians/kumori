@@ -23,7 +23,6 @@
 		        		</b-button>
                 </span>
 		        	</div>
-	        	
     </b-collapse>
   </b-card>
 </div>

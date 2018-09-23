@@ -48,11 +48,11 @@
 
 		<b-card style="card control-left " no-body>
 			<div class="card-header">Usecases</div>
-			<div style="card-body father"> 
+			<div style="card-body father">
 				<sunburst-wrap :tree="sunburstTree" class="sunburst"></sunburst-wrap>
 			</div>
-		</b-card>		
-	
+		</b-card>
+
 </div>
 
 </template>
@@ -63,17 +63,17 @@
 	import lifeCycleMixin from '../mixins/lifeCycle.js'
   	import SunburstWrap from '../components/SunburstWrap.vue'
 
-	
+
 	export default {
 		name:"searchComponent",
 		props: {
 			amounts:{ required: false},
 			query: {required: true},
 		},
-		components: { 
+		components: {
 			LifeCycle,
         	SunburstWrap
-		}, 
+		},
 		mixins: [
 			lifeCycleMixin
 		],
@@ -158,3 +158,39 @@
 	}
 
 </script>
+
+<style scoped>
+.card-lifecycle {
+  max-width: 95%;
+  height: auto;
+}
+
+.image-menu {
+    width: 64px;
+    height: 64px;
+    background-color: #ffffff;
+    border-style: solid;
+    border-width: thin;
+    border-color: #aaaaaa;
+    opacity: 1;
+}
+
+.sunburst {
+    width: 400px;
+    height: 400px;
+    margin-top: 10px;
+    position: relative;
+  }
+
+	.father {
+	    position: relative;
+	    width: 100%;
+	    height: 100%;
+	    display: flex;
+	    justify-content: center;
+	  }
+
+		.control-left {
+		 height: 100%;
+	 }
+</style>

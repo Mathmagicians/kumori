@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
   <span>
     <span v-if="lc"
       class="align-middle"  :title="'Lifecycle phase '+status"  >
@@ -7,18 +8,33 @@
         v-b-popover.hover="popup" 
         :title="lc.name | toUpperCase | title">
         {{status | toUpperCase }}
+=======
+<span>
+    <span v-if="lc">
+      <b-button
+        size="sm"
+        class="md-4 px-2 align-middle lifecycle"
+        v-b-popover.hover="popup"
+        :variant="btn"
+        :to="to"
+        :title="lc.name | title">
+        {{status | capitalize}}
+>>>>>>> master
       </b-button>
     </span>
-     <span v-else >
-        <b-button class="md-4 px-2 align-middle btn-lifecycle" variant="outline-danger sm">
-        MISSING
-        <v-icon name="times"  scale="2"></v-icon>
+    <span v-else >
+        <b-button
+          size="sm"
+          class="md-4 px-2 align-middle lifecycle"
+          variant="outline-danger">
+          Missing
       </b-button>
     </span>
-  </span>
+</span>
 </template>
 
-<script>	
+<script>
+import lifeCycleMixin from '../mixins/lifeCycle.js'
 
   import lifeCycleMixin from '../mixins/lifeCycle.js'
 
@@ -30,30 +46,40 @@
       ispopup: {type: Boolean, required: false, default: false},
       isPressed:  {type: Boolean, required: false, default: false}
     },
-    mixins: [
-      lifeCycleMixin
-    ],
-    lcText: {
-      'experimental': `A brand new, (possibly) bleeding edge technology that we want to investigate.`,
-      'testing': `
+    ispopup: {
+      type: Boolean,
+      required: false,
+      default: false
+    }
+  },
+  mixins: [
+    lifeCycleMixin
+  ],
+  lcText: {
+    'experimental': `A brand new, (possibly) bleeding edge technology that we want to investigate.`,
+    'testing': `
       <p>This is the part of the lifecycle, where we try out things.</p>
       <p>The technology seems to have <strong> significant advantages</strong> for some use cases, that are superior over the currently approved technologies. We want to explore this to learn more.</p>
       `,
-      'poc': `
+    'poc': `
       <p>A technology, with well known characteristics, but either the technology or the operational capabilities / knowledge are not yet mature enough for full-scale production or critical applications.
       </p>
       <p>In order to gain a better understanding, we should do a Proof Of Concept - launch the technology in production, for a suitably chosen application.
       </p>
       `,
-      'default': `A mature technology, with well known characteristics, for which Nordea has a mature operational capability.
+    'default': `A mature technology, with well known characteristics, for which Nordea has a mature operational capability.
       No further questions asked, you can go ahead and use this technology to build your applications, for all the defined use cases.
       `,
-      'limited': `A mature technology, with well known characteristics, for which there is amature operational capability, but which for various reasons <em>(cost, licensing, strategic direction, etc, </em> it is desirable to limit the exceptional situations and use cases in which it is used.`,
-      'deprecated': `A technology that we are actively phasing out (e.g. due to lack of support, security, stability, cost issues, impossible to staff, very inefficient in use or to be replaced with another technology, etc.)
+    'limited': `A mature technology, with well known characteristics, for which there is amature operational capability, but which for various reasons <em>(cost, licensing, strategic direction, etc, </em> it is desirable to limit the exceptional situations and use cases in which it is used.`,
+    'deprecated': `A technology that we are actively phasing out (e.g. due to lack of support, security, stability, cost issues, impossible to staff, very inefficient in use or to be replaced with another technology, etc.)
       `,
-      'dontuse': `Must not be used, either for maintenance, or for new development. This is typically due to legal, policy or architecture reasons.`,
-      'wip': `#techmenu is currently working on updating the life cycle state of this technology`,
-      'undecided': `#techmenu has no opinion about this technology. Do we need it? Let us get this into #techmenu.`
+    'dontuse': `Must not be used, either for maintenance, or for new development. This is typically due to legal, policy or architecture reasons.`,
+    'wip': `#techmenu is currently working on updating the life cycle state of this technology`,
+    'undecided': `#techmenu has no opinion about this technology. Do we need it? Let us get this into #techmenu.`
+  },
+  computed: {
+    lc: function() {
+      return this.$store.state.lifeCycle.items.filter(item => item.name === this.status).pop();
     },
     data() {
       return {
@@ -65,14 +91,19 @@
         return this.$store.state.lifeCycle.items.filter( item => item.name === this.status).pop();
       },
 
-      btn: function() {
-       return this.btnVariant(this.lc? this.lc.type: 'maybe'); 
-      },
 
-      popup: function(){
-        return this.ispopup?this.$options.lcText[this.lc.name]:'';
-      }
+    btn: function() {
+      return this.btnVariant(this.lc ? this.lc.type : 'maybe');
+    },
 
+    popup: function() {
+      return this.ispopup ? this.$options.lcText[this.lc.name] : '';
+    }
+
+  },
+  filters: {
+    capitalize: function(lower) {
+      return lower.charAt(0).toUpperCase() + lower.substr(1);
     },
     filters: {
       capitalize: function( lower){
@@ -91,7 +122,16 @@
        return this.$emit('selected', this.status);
           
       }
+
     }
-	}
-	
+
+  }
+}
 </script>
+
+<style scoped>
+.lifecycle {
+	min-width: 8em;
+  max-width: 8em;
+}
+</style>

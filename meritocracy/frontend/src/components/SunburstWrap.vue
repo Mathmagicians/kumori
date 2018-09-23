@@ -25,9 +25,9 @@
 	  sunburst,
 	  zoomOnClick
 	} from 'vue-d3-sunburst'
-	
+
 	export default {
-		name: "SunburstWrap",		
+		name: "SunburstWrap",
 		components: {
 			breadcrumbTrail,
 		    highlightOnHover,
@@ -42,3 +42,25 @@
 
 
 </script>
+
+<style scoped>
+/** has to be fixed */
+  #breadcrumbs {
+    margin-top: -10px;
+    position:absolute;
+    bottom:-100px;
+    left: 30%;
+    font-size: 60%;
+  }
+
+	/**
+	#info {
+	    width: 100%;
+	    height: 50px;
+	    position: absolute;
+	    left: 10px;
+	    bottom: 0px;
+	   // -ms-transform: translate(-50%, -50%);
+	   // transform: translate(-50%, -50%);
+	  }
+</style>
