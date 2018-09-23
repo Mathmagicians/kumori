@@ -43,16 +43,3 @@
 
 </script>
 
-<style scoped>
-/** has to be fixed */
-  #breadcrumbs {
-    margin-top: -10px;
-    position:absolute;
-    bottom:-100px;
-    left: 30%;
-    font-size: 60%;
-  }
-
-
-
-</style>

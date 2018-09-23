@@ -16,16 +16,21 @@
       		v-if="loading">Loading #techmenu components … 
       		<v-icon name="spinner" scale="3" spin/></v-icon>
       	</b-alert>
-      	<b-list-group
-        		v-else
-        		class="components">
-    			<b-list-group-item
-          		v-for="component in filteredTechComponents"
-          		:key="component.name"
-          		class="tech-component">
-            		<tech-component v-bind:id="component | techId" :tech="component" :active="component.uid === activeId"></tech-component>
-        		</b-list-group-item>
-      	</b-list-group>
+         <b-card 
+          v-else
+          no-body 
+          header="<b>#techmenu components</b>">
+        	<b-list-group
+            flush
+          	class="components">
+      			<b-list-group-item
+            		v-for="component in filteredTechComponents"
+            		:key="component.name"
+            		class="tech-component">
+              		<tech-component v-bind:id="component | techId" :tech="component" :active="component.uid === activeId"></tech-component>
+          		</b-list-group-item>
+        	</b-list-group>
+      </b-card>
       </b-col>
     </b-row>
   </div>
@@ -67,11 +72,7 @@
         return am;
       },
       filteredTechComponents() {
-        const isQueryStringIncluded = (tech) => tech.name.toLowerCase().includes(this.query.string.toLowerCase());
-        const isLifeCycleExcluded = (tech) => !this.query.lc.includes(tech.status);
-        const filters = [isQueryStringIncluded, isLifeCycleExcluded];
-       //apply all the filters to the list
-        return this.techComponents.filter( e => filters.every( f =>  f.call( null, e)));           
+        return this.filterList( this.techComponents, this.query );           
       }
 		},
 		created () {
@@ -109,6 +110,13 @@
           this.$search(this.query.string, this.techComponents, options).then(results => {
             this.fuzzySearchResults = results
           })
+        },
+        filterList( techList, query ){
+          const isQueryStringIncluded = (tech,query) => query.string === '' || tech.name.toLowerCase().includes(query.string.toLowerCase());
+          const isLifeCycleIncluded = (tech, query) => query.lc.length === 0 || query.lc.includes(tech.status);
+          const filters = [isQueryStringIncluded, isLifeCycleIncluded];
+          //apply all the filters to the list
+          return techList.filter( e => filters.every( f =>  f.call( null, e, query)));   
         }
     }
   }
