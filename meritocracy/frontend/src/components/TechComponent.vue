@@ -21,8 +21,8 @@
 		        		<b-button  variant="outline-secondary sm" class="btn-round">
 		            		<v-icon name="comment" scale="1"/></v-icon>
 		        		</b-button>
+                </span>
 		        	</div>
-	        	</span>
     </b-collapse>
   </b-card>
 </div>

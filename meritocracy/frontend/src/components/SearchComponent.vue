@@ -6,7 +6,7 @@
 					type="text"
 					v-model.sync="searchInput"
 					required
-					v-on:change="sendSearchQueryEvent"
+					v-on:input="sendSearchQueryEvent"
 					:placeholder="'Search in '+ amounts.components +' technology components ...'  ">
 				</b-form-input>
 				<b-input-group-append>
@@ -21,25 +21,26 @@
 			Type what you want to search for -technology name, use case, anything ...
 			</b-form-text>
 		</b-card>
-
 		<b-card-group>
 		<b-card v-for="type in types"
 			tag="article"
 			class="card-lifecycle">
 			<div slot="header" >
-				<b-button :variant="'outline-'+btnVariant(type)">
+				<b-button :variant="'outline-'+btnVariant(type)" 
+					@click="setPhase(type)"
+					:pressed="phaseModel[type]" >
 					<b-img rounded :src="images(type)" class="image-menu" top/>
 					{{type | capitalize}}
 				</b-button>
-				<b-badge pill>12</b-badge>
-
-
-
+				<b-badge pill>12</b-badge>			
 			</div>
 
 			<div class="card-text">
 					<b-button-group vertical>
-						<life-cycle v-for="item in itemsForType[type]" :status="item"></life-cycle>
+						<life-cycle :id="item+'selector'" v-for="item in itemsForType[type]" :key="item" :status="item" 
+						v-on:selected="setLcQuery(item)"
+						:isPressed.sync="lcModel[item]">	
+						</life-cycle>
 					</b-button-group>
 				</div>
 		</b-card>
@@ -66,7 +67,8 @@
 	export default {
 		name:"searchComponent",
 		props: {
-			amounts:{ required: false}
+			amounts:{ required: false},
+			query: {required: true},
 		},
 		components: {
 			LifeCycle,
@@ -78,25 +80,22 @@
 		data () {
 			return {
 				searchInput: '',
-				filterOn: true
+				filterOn: true,
+				lcModel: this.$store.state.lifeCycle.items.reduce( (acc, i) => ({...acc, [i.name]: true}), {}),
+				//phase model represent the state of buttons that group lifecycles -it does not send its own events, but selects - deselects its group
+				phaseModel: {}
 			}
 		},
 		created() {
 			this.$store.dispatch('fetchTaxonomy');
+			
+			this.phaseModel = this.types.reduce( (acc, i) => ({...acc, [i]:true }), {});
+			//initialize array state for life cycle buttons
+			this.query.lc.forEach( item => this.setLcQuery(item) );
+			
 		},
 	    computed: {
-	      types: function() {
-	        let temp = this.$store.state.lifeCycle.items.map( item => item.type).filter((v, i, a) => a.indexOf(v) === i);
-	        return temp;
-
-	      },
-	      itemsForType: function() {
-	        const namesForType = type =>  this.$store.state.lifeCycle.items.filter( item => item.type === type).map( item => item.name);
-	        const myMap = new Map();
-	        this.types.forEach( type =>  myMap[type] = namesForType(type));
-	        return myMap;
-	      },
-	      taxonomyLevels: function() {
+	       taxonomyLevels: function() {
 	      	return this.$store.state.taxonomy.levels;
 	      },
 	      taxonomyTags: function() {
@@ -121,14 +120,40 @@
 	      texts: function(type) {
 	        return this.$options.phaseText[type];
 	      },
-	      sendSearchQueryEvent(query) {
-	      	return this.$emit('query', this.searchInput);
+	      sendSearchQueryEvent(queryString) {
+	      	return this.query.string = queryString;
+	      },
+	      setUseCaseQuery( useCaseId){
+	      	console.log(" setting query for "+ useCaseId);
+	      },
+	      setLcQuery(item ){
+	      	//have to update state here, since lcbutton is a child compponent that wraps a button
+	      	this.lcModel[item] = !this.lcModel[item];
+	      	this.updateLcQuery( item );
+	      	this.updateRoute();
+	      },
+	      updateLcQuery(item){
+	      	this.query.lc = Object.keys(this.lcModel).filter( item =>  this.lcModel[item]);
+	      },
+	      // the phase button flips its group of lc buttons on/off
+	      setPhase(type){
+	      	this.phaseModel[type] = ! this.phaseModel[type];
+	      	this.itemsForType[type].forEach( item => {
+	      		this.lcModel[item] = this.phaseModel[type]; 
+	      		this.updateLcQuery(item);	
+	      	} );
+	      	this.updateRoute();
 	      },
 	      save(){
 	      	let sunburstTree = this.buildTreeForSunburst();
 	      	console.log("Trying to save file");
 	      	this.saveFile( sunburstTree );
+	      }, 
+	      updateRoute() {
+	      	//todo dont push empty query parameters!
+	      	this.$router.push({path: '/components/search', query: this.query });
 	      }
+
 	    }
 	}
 

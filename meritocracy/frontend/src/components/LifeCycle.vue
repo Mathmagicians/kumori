@@ -1,14 +1,17 @@
 <template>
-<span>
-    <span v-if="lc">
-      <b-button
+  <span>
+    <span v-if="lc"
+      class="align-middle"  :title="'Lifecycle phase '+status"  >
+      <b-button 
         size="sm"
         class="md-4 px-2 align-middle lifecycle"
-        v-b-popover.hover="popup"
-        :variant="btn"
-        :to="to"
-        :title="lc.name | title">
-        {{status | capitalize}}
+        :variant="btn" 
+        :to="to" 
+        @click="clicked" 
+        :pressed="isPressed"
+        v-b-popover.hover="popup" 
+        :title="lc.name | toUpperCase | title">
+        {{status | toUpperCase }}
       </b-button>
     </span>
     <span v-else >
@@ -23,23 +26,20 @@
 </template>
 
 <script>
-import lifeCycleMixin from '../mixins/lifeCycle.js'
+  import lifeCycleMixin from '../mixins/lifeCycle.js'
 
-export default {
-  name: 'lifeCycle',
-  props: {
-    status: {
-      required: true
-    },
-    to: {
-      type: String,
-      required: false
-    },
-    ispopup: {
-      type: Boolean,
-      required: false,
-      default: false
-    }
+	export default {
+		name: 'lifeCycle',
+		props: {
+      status: {required: true},
+      to: {type:String, required:false},
+      ispopup: {type: Boolean, required: false, default: false},
+      isPressed:  {type: Boolean, required: false, default: false},
+      ispopup: {
+        type: Boolean,
+        required: false,
+        default: false
+      }
   },
   mixins: [
     lifeCycleMixin
@@ -66,10 +66,11 @@ export default {
     'wip': `#techmenu is currently working on updating the life cycle state of this technology`,
     'undecided': `#techmenu has no opinion about this technology. Do we need it? Let us get this into #techmenu.`
   },
-  computed: {
-    lc: function() {
-      return this.$store.state.lifeCycle.items.filter(item => item.name === this.status).pop();
-    },
+    computed: {
+       lc: function(){
+        return this.$store.state.lifeCycle.items.filter( item => item.name === this.status).pop();
+      },
+
 
     btn: function() {
       return this.btnVariant(this.lc ? this.lc.type : 'maybe');
@@ -80,19 +81,26 @@ export default {
     }
 
   },
-  filters: {
-    capitalize: function(lower) {
-      return lower.charAt(0).toUpperCase() + lower.substr(1);
-    },
-    toUpperCase: function(upper) {
-      return upper.toUpperCase();
-    },
-    title: function(title) {
-      return 'Life cycle phase ' + title;
+    filters: {
+      capitalize: function( lower){
+        return lower.charAt(0).toUpperCase() + lower.substr(1);
+      },
+      toUpperCase: function(upper){
+        return upper.toUpperCase();
+      },
+      title: function( title){
+        return 'Life cycle phase '+title; 
+      }
+    }, 
+    methods: {
+      clicked(){
+       return this.$emit('selected', this.status);   
+      }
+
     }
 
   }
-}
+
 </script>
 
 <style scoped>

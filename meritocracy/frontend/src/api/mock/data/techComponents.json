@@ -73,6 +73,7 @@
   {
     "uid": "a56a-da73-8d10-8bc8-4b1a-a1ff-59c6-76f5",
     "name": "7-zip",
+    "status": "default",
     "description": "7-Zip is a free and open-source file archiver, a utility used to place groups of files within compressed containers known as archives.",
     "comments": "",
     "tags": [
@@ -119,6 +120,7 @@
   {
     "uid": "3f7d-9a94-a8d0-c01a-278e-b6ba-11dd-fda2",
     "name": "ActivePivot",
+    "status": "default",
     "description": "The ActivePivot aggregates massive amounts of fast moving data from multiple sources, storing it in its in-memory database to enable optimal decisions in a timely fashion. Combining incremental transactional and analytical processing, the ActivePivot computes sophisticated metrics on data that is updated on the fly without the need for any pre-aggregation. It lets you explore metrics across hundreds of dimensions, analyze live data at its most granular level and perform what-if simulations at unparalleled speed.",
     "comments": "Requires license.",
     "tags": [
@@ -151,6 +153,7 @@
   {
     "uid": "170a-ff1a-8aff-b4e3-438a-3b70-eb2e-6ff1",
     "name": "Ansible AWX",
+    "status": "testing",
     "description": "Ansible AWX is a way to automate apps and IT infrastructure. Application Deployment plus Configuration Management and Continuous Delivery.",
     "comments": "",
     "tags": [
@@ -251,6 +254,7 @@
   {
     "uid": "c2ef-35b4-c8c3-deb9-df3f-09d3-07be-4773",
     "name": "Apache ActiveMQ",
+    "status": "dontuse",
     "description": "Apache ActiveMQ is an open source message broker written in Java together with a full Java Message Service client. It provides Enterprise Features which in this case means fostering the communication from more than one client or server.",
     "comments": "",
     "tags": [],
@@ -278,6 +282,7 @@
   {
     "uid": "0c22-a344-0b16-24f9-8139-04d5-7ff2-2401",
     "name": "Apache Cassandra",
+    "status": "testing",
     "description": "Apache Cassandra is a free and open-source distributed wide column store NoSQL database management system designed to handle large amounts of data across many commodity servers, providing high availability with no single point of failure.",
     "comments": "Get approval from EA for experimental usage.",
     "tags": [
@@ -344,6 +349,7 @@
   {
     "uid": "2578-81de-a86a-2c14-b7dc-4af8-b357-8d15",
     "name": "Apache HBase Master",
+    "status": "default",
     "description": "HBase is an open-source, non-relational, distributed database modeled after Google's Bigtable and written in Java.",
     "comments": "",
     "tags": [],
@@ -352,7 +358,7 @@
     ],
     "links": [],
     "usecases": [
-      "Any"
+      "Big data platform - use if you need to process large data sets."
     ],
     "scopes": [{
         "org": "Typical Taoists Inc",

@@ -34,7 +34,12 @@ export default new Router({
     }, {
       path: '/meritocracy',
       component: Meritocracy
-    }, {
+    }, 
+    {
+      path:'/components/search',
+      component: Components
+    },
+    {
       path: '/components/:uid',
       component: Components
     }, {
