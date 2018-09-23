@@ -3,8 +3,6 @@
     <b-alert show variant="secondary">
             #techmenu is happily governing <b>{{techComponents.length}}</b> components. 
             {{query}}
-            <b-button @click="fuzzySearch(query.string)"> try fuzzy search
-            </b-button>
             {{fuzzySearchResults}}
           </b-alert>
     <b-row>
@@ -12,25 +10,23 @@
         <search-component :amounts="amounts" v-bind:query="query" ></search-component>
       </b-col>
       <b-col cols="7">
-      	<b-alert show variant="warning"
-      		v-if="loading">Loading #techmenu components … 
+      	<b-alert 
+          v-if="loading"
+          show 
+          variant="warning">
+          Loading #techmenu components … 
       		<v-icon name="spinner" scale="3" spin/></v-icon>
       	</b-alert>
-         <b-card 
-          v-else
-          no-body 
-          header="<b>#techmenu components</b>">
-        	<b-list-group
-            flush
-          	class="components">
-      			<b-list-group-item
-            		v-for="component in filteredTechComponents"
-            		:key="component.name"
-            		class="tech-component">
-              		<tech-component v-bind:id="component | techId" :tech="component" :active="component.uid === activeId"></tech-component>
-          		</b-list-group-item>
-        	</b-list-group>
-      </b-card>
+        <b-card-deck 
+          v-else>
+      		<tech-component 
+            v-for="component in filteredTechComponents"
+            :key="component.name"
+            v-bind:id="component | techId" 
+            :tech="component" 
+            :active="component.uid === activeId">    
+          </tech-component>
+        </b-card-deck>
       </b-col>
     </b-row>
   </div>
@@ -55,8 +51,7 @@
               string: '',
               lc: [],
               tx: []
-            },
-            fuzzySearchResults: []
+            }
     		}
 		},
 		components: {
@@ -73,6 +68,12 @@
       },
       filteredTechComponents() {
         return this.filterList( this.techComponents, this.query );           
+      }, 
+      fuzzySearchResults () {
+        let res =  this.fuzzySearch( this.query.string);
+        console.log("fuzzy");
+        console.log( res);
+        return res;
       }
 		},
 		created () {
@@ -90,7 +91,7 @@
       selectLifeCycle( list){
         this.query.lc = list; 
       },
-      fuzzySearch( query ){
+      fuzzySearch( query, techComponentsList ){
           console.log("trying fuzzy search");
           const options = {
             id: "name",
@@ -107,9 +108,8 @@
               "description"
             ]
           };
-          this.$search(this.query.string, this.techComponents, options).then(results => {
-            this.fuzzySearchResults = results
-          })
+          this.$search(query, this.techComponents, options)
+            .then(results => this.fuzzySearchResults = results)
         },
         filterList( techList, query ){
           const isQueryStringIncluded = (tech,query) => query.string === '' || tech.name.toLowerCase().includes(query.string.toLowerCase());
