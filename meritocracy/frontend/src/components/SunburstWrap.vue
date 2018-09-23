@@ -53,14 +53,6 @@
     font-size: 60%;
   }
 
-	/**
-	#info {
-	    width: 100%;
-	    height: 50px;
-	    position: absolute;
-	    left: 10px;
-	    bottom: 0px;
-	   // -ms-transform: translate(-50%, -50%);
-	   // transform: translate(-50%, -50%);
-	  }
+
+
 </style>

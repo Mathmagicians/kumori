@@ -1,25 +1,17 @@
 <template>
-<<<<<<< HEAD
   <span>
     <span v-if="lc"
       class="align-middle"  :title="'Lifecycle phase '+status"  >
-      <b-button class="md-4 px-2 align-middle btn-lifecycle" :variant="btn" 
-        :to="to" @click="clicked" :pressed="isPressed"
+      <b-button 
+        size="sm"
+        class="md-4 px-2 align-middle lifecycle"
+        :variant="btn" 
+        :to="to" 
+        @click="clicked" 
+        :pressed="isPressed"
         v-b-popover.hover="popup" 
         :title="lc.name | toUpperCase | title">
         {{status | toUpperCase }}
-=======
-<span>
-    <span v-if="lc">
-      <b-button
-        size="sm"
-        class="md-4 px-2 align-middle lifecycle"
-        v-b-popover.hover="popup"
-        :variant="btn"
-        :to="to"
-        :title="lc.name | title">
-        {{status | capitalize}}
->>>>>>> master
       </b-button>
     </span>
     <span v-else >
@@ -34,8 +26,6 @@
 </template>
 
 <script>
-import lifeCycleMixin from '../mixins/lifeCycle.js'
-
   import lifeCycleMixin from '../mixins/lifeCycle.js'
 
 	export default {
@@ -44,13 +34,12 @@ import lifeCycleMixin from '../mixins/lifeCycle.js'
       status: {required: true},
       to: {type:String, required:false},
       ispopup: {type: Boolean, required: false, default: false},
-      isPressed:  {type: Boolean, required: false, default: false}
-    },
-    ispopup: {
-      type: Boolean,
-      required: false,
-      default: false
-    }
+      isPressed:  {type: Boolean, required: false, default: false},
+      ispopup: {
+        type: Boolean,
+        required: false,
+        default: false
+      }
   },
   mixins: [
     lifeCycleMixin
@@ -77,15 +66,6 @@ import lifeCycleMixin from '../mixins/lifeCycle.js'
     'wip': `#techmenu is currently working on updating the life cycle state of this technology`,
     'undecided': `#techmenu has no opinion about this technology. Do we need it? Let us get this into #techmenu.`
   },
-  computed: {
-    lc: function() {
-      return this.$store.state.lifeCycle.items.filter(item => item.name === this.status).pop();
-    },
-    data() {
-      return {
-
-      }
-    },
     computed: {
        lc: function(){
         return this.$store.state.lifeCycle.items.filter( item => item.name === this.status).pop();
@@ -101,10 +81,6 @@ import lifeCycleMixin from '../mixins/lifeCycle.js'
     }
 
   },
-  filters: {
-    capitalize: function(lower) {
-      return lower.charAt(0).toUpperCase() + lower.substr(1);
-    },
     filters: {
       capitalize: function( lower){
         return lower.charAt(0).toUpperCase() + lower.substr(1);
@@ -115,18 +91,16 @@ import lifeCycleMixin from '../mixins/lifeCycle.js'
       title: function( title){
         return 'Life cycle phase '+title; 
       }
-
     }, 
     methods: {
       clicked(){
-       return this.$emit('selected', this.status);
-          
+       return this.$emit('selected', this.status);   
       }
 
     }
 
   }
-}
+
 </script>
 
 <style scoped>
