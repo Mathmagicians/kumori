@@ -1131,13 +1131,15 @@
   {
     "uid": "08a5-c0c6-5470-61b6-6b02-c620-5e1d-1023",
     "name": "Java",
+    "status": "default",
     "description": "Java is a general-purpose computer programming language that is concurrent, class-based, object-oriented, and specifically designed to have as few implementation dependencies as possible.",
     "comments": "",
     "tags": [
       "Delivery Services",
       "Development",
       "Design and Development",
-      "Language and Libraries"
+      "Languages and Libraries",
+      "Application Development"
     ],
     "licenses": [
       "Any"

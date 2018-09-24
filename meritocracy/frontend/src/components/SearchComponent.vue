@@ -123,7 +123,7 @@
 	      	return this.buildTreeForSunburst( this.taxonomyTree );
 	      },
 	      filterOn(){
-	      	return this.searchInput !== ''|| Object.values(this.lcModel).some( lcValue => lcValue );
+	      	return this.searchInput !== ''|| Object.values(this.lcModel).some( lcValue => lcValue ) || this.query.tx.length !== 0;
 	      }
 	    },
 	    filters: {
