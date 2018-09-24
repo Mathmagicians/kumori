@@ -1,28 +1,27 @@
-[{
-    "uid": "2e3b-2e7a-b285-4b99-e0ec-5377-4b02-6ec3",
+[
+  {
+     "uid": "2e3b-2e7a-b285-4b99-e0ec-5377-4b02-6ec3",
     "name": "#Slack",
     "status": "testing",
     "description": "Slack is a cloud-based set of proprietary team collaboration tools and services.",
     "comments": "",
-    "tags": [],
+    "tags": [ 
+      "Delivery Services",
+      "Development",
+      "Design and Development",
+      "Developer communication",
+      "Development team instant messaging"
+    ],
     "licenses": [
-      "Any"
+      "See license plans at Slack.com"
     ],
     "links": [],
     "usecases": [
-      "Any"
-    ],
-    "scopes": [{
-        "org": "Typical Taoists Inc",
-        "status": "To be decided"
-      },
       {
-        "org": "Gigantic Teleporters Inc",
-        "status": "To be decided"
-      },
-      {
-        "org": "Brave Traders Inc",
-        "status": "To be decided"
+        "name": "Development team instant messaging",
+        "description": "Developer commuication channel, for instant messaging, designed to improve a teams fusion with its Continuos Delivery pipeline.",
+        "status": "testing",
+        "scope": "Typical Taoists Inc"
       }
     ],
     "log": [{

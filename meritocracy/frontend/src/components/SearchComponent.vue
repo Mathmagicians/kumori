@@ -118,9 +118,7 @@
 	      	return this.buildTreeForSunburst( this.taxonomyTree );
 	      },
 	      filterOn(){
-	      	let filterIsOn = this.searchInput !== ''|| Object.values(this.lcModel).some( lcValue => lcValue );
-	      	console.log("Filter computed "+ filterIsOn);
-	      	return filterIsOn;
+	      	return this.searchInput !== ''|| Object.values(this.lcModel).some( lcValue => lcValue );
 	      }
 	    },
 	    filters: {
@@ -136,10 +134,11 @@
 	        return this.$options.phaseText[type];
 	      },
 	      sendSearchQueryEvent(queryString) {
+	      	this.$emit('queryString', this.searchInput);
 	      	return this.query.string = queryString;
 	      },
 	      setUseCaseQuery( useCaseId){
-	      	console.log(" setting query for "+ useCaseId);
+	      	console.log("todo... setting query for "+ useCaseId);
 	      },
 	      setLcQuery(item, newValue = !this.lcModel[item] ){
 	      	//have to update state here, since lcbutton is a child compponent that wraps a button
@@ -167,10 +166,8 @@
 	      	//reset the query object
 	      	this.sendSearchQueryEvent( this.searchInput);
 	      	this.types.forEach( type => this.setPhase(type, false));
-	      	//todo update lc
-	      	//todo update phase
 	      	//todo update taxonomy
-	      	console.log("clearing filters "+ this.filterOn);
+	      	console.log("todo ... for taxonomy ... clearing filters "+ this.filterOn);
 	      }
 
 	    }

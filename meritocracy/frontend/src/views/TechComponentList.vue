@@ -7,7 +7,12 @@
           </b-alert>
     <b-row>
       <b-col cols="5">
-        <search-component :amounts="amounts" v-bind:query="query" ></search-component>
+        <search-component 
+          :amounts="amounts" 
+          v-bind:query="query" 
+          v-on:queryString="fuzzySearch($event)"
+        >
+        </search-component>
       </b-col>
       <b-col cols="7">
       	<b-alert 
@@ -17,7 +22,7 @@
           Loading #techmenu components … 
       		<v-icon name="spinner" scale="3" spin/></v-icon>
       	</b-alert>
-        <b-card-deck 
+        <div
           v-else>
       		<tech-component 
             v-for="component in filteredTechComponents"
@@ -26,7 +31,7 @@
             :tech="component" 
             :active="component.uid === activeId">    
           </tech-component>
-        </b-card-deck>
+        </div>
       </b-col>
     </b-row>
   </div>
@@ -51,7 +56,8 @@
               string: '',
               lc: [],
               tx: []
-            }
+            },
+            fuzzySearchResults: []
     		}
 		},
 		components: {
@@ -60,7 +66,7 @@
 		},
 		computed: {
   		techComponents () {
-    			return this.$store.state.techComponents
+    		return this.$store.state.techComponents
   		},
       amounts () {
         let am =  {components: this.techComponents.length};
@@ -68,12 +74,6 @@
       },
       filteredTechComponents() {
         return this.filterList( this.techComponents, this.query );           
-      }, 
-      fuzzySearchResults () {
-        let res =  this.fuzzySearch( this.query.string);
-        console.log("fuzzy");
-        console.log( res);
-        return res;
       }
 		},
 		created () {
@@ -92,7 +92,6 @@
         this.query.lc = list; 
       },
       fuzzySearch( query, techComponentsList ){
-          console.log("trying fuzzy search");
           const options = {
             id: "name",
             shouldSort: true,
@@ -108,13 +107,16 @@
               "description"
             ]
           };
-          this.$search(query, this.techComponents, options)
-            .then(results => this.fuzzySearchResults = results)
+          if( this.query.string) {
+             this.$search(query, this.techComponents, options)
+            .then(results => this.fuzzySearchResults = results);
+          }
         },
         filterList( techList, query ){
-          const isQueryStringIncluded = (tech,query) => query.string === '' || tech.name.toLowerCase().includes(query.string.toLowerCase());
+          //const isQueryStringIncluded = (tech,query) => query.string === '' || tech.name.toLowerCase().includes(query.string.toLowerCase());
+          const isQueryStringInFuzzySearch = (tech, query) => query.string === '' || this.fuzzySearchResults.find( fuzzy => fuzzy.item === tech.name );
           const isLifeCycleIncluded = (tech, query) => query.lc.length === 0 || query.lc.includes(tech.status);
-          const filters = [isQueryStringIncluded, isLifeCycleIncluded];
+          const filters = [isQueryStringInFuzzySearch, isLifeCycleIncluded];
           //apply all the filters to the list
           return techList.filter( e => filters.every( f =>  f.call( null, e, query)));   
         }

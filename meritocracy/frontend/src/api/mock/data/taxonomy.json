@@ -224,6 +224,16 @@
         "parent": "Design and Development"
       },
       {
+        "level": 4,
+        "name": "Developer communication",
+        "parent": "Design and Development"
+      },
+      {
+        "level":"",
+        "name": "Development team instant messaging",
+        "parent": "Developer communication"
+      },
+      {
         "level": 3,
         "name": "System integration",
         "parent": "Development"
