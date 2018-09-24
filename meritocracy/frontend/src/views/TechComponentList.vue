@@ -2,8 +2,6 @@
 	<div class="mb1">
     <b-alert show variant="secondary">
             #techmenu is happily governing <b>{{techComponents.length}}</b> components. 
-            {{query}}
-            {{fuzzySearchResults}}
           </b-alert>
     <b-row>
       <b-col cols="5">
@@ -104,7 +102,8 @@
             minMatchCharLength: 2,
             keys: [
               "name",
-              "description"
+              "description",
+              "usecases"
             ]
           };
           if( this.query.string) {
