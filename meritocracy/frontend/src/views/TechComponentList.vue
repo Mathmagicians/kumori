@@ -2,6 +2,7 @@
 	<div class="mb1">
     <b-alert show variant="secondary">
             #techmenu is happily governing <b>{{techComponents.length}}</b> components. 
+            {{query.tx}}
           </b-alert>
     <b-row>
       <b-col cols="5">
@@ -115,7 +116,8 @@
           //const isQueryStringIncluded = (tech,query) => query.string === '' || tech.name.toLowerCase().includes(query.string.toLowerCase());
           const isQueryStringInFuzzySearch = (tech, query) => query.string === '' || this.fuzzySearchResults.find( fuzzy => fuzzy.item === tech.name );
           const isLifeCycleIncluded = (tech, query) => query.lc.length === 0 || query.lc.includes(tech.status);
-          const filters = [isQueryStringInFuzzySearch, isLifeCycleIncluded];
+          const isUseCaseIncluded = (tech, query) => query.tx.length === 0 || query.tx.every( tx => tech.tags? tech.tags.includes( tx ):false);
+          const filters = [isQueryStringInFuzzySearch, isLifeCycleIncluded, isUseCaseIncluded];
           //apply all the filters to the list
           return techList.filter( e => filters.every( f =>  f.call( null, e, query)));   
         }

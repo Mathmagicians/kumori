@@ -1,6 +1,6 @@
 <template>
 <div class="test">
-  <sunburst :data="tree">
+  <sunburst :data="tree" v-on:clickNode="nodeClicked">
 
     <!-- Add behaviors -->
     <template slot-scope="{ nodes, actions }">
@@ -42,7 +42,21 @@
 		},
 		props: [
 			'tree'
-		]
+		],
+		methods: {
+			nodeClicked(obj) {
+				this.$emit('nodeClicked', { clicked: obj.node.data.name, trail: this.findTrail( obj.node)});
+			}, 
+			findTrail( node ){
+				let trail = [];
+				let myNode = node;
+				while( myNode.parent ){
+					trail.unshift( myNode.data.name );
+					myNode = myNode.parent;
+				}
+				return trail;
+			}
+		}
     }
 
 

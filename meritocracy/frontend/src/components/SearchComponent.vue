@@ -58,9 +58,14 @@
 	</b-card-group>
 
 		<b-card style="card control-left " no-body>
-			<div class="card-header">Usecases</div>
+			<div class="card-header">Search in Usecases <strong v-if="query">{{ query.tx | stringify }}</strong></div>
 			<div style="card-body father">
-				<sunburst-wrap :tree="sunburstTree" class="sunburst"></sunburst-wrap>
+				<sunburst-wrap 
+					:tree="sunburstTree" 
+					class="sunburst"
+					v-on:nodeClicked="setUseCaseQuery"
+				>
+				</sunburst-wrap>
 			</div>
 		</b-card>
 
@@ -124,6 +129,9 @@
 	    filters: {
 	      capitalize: function( lower) {
 	        return lower.charAt(0).toUpperCase() + lower.substr(1);
+	      }, 
+	      stringify: function( list ){
+	      	return list ? list.join('>'): list;
 	      }
 	    },
 	    methods: {
@@ -135,10 +143,11 @@
 	      },
 	      sendSearchQueryEvent(queryString) {
 	      	this.$emit('queryString', this.searchInput);
-	      	return this.query.string = queryString;
+	      	this.query.string = queryString;
 	      },
-	      setUseCaseQuery( useCaseId){
-	      	console.log("todo... setting query for "+ useCaseId);
+	      setUseCaseQuery( useCase ){
+	      	this.query.tx = useCase.trail;
+	      	//this.$emit(useCase, this.useCaseModel.trail);
 	      },
 	      setLcQuery(item, newValue = !this.lcModel[item] ){
 	      	//have to update state here, since lcbutton is a child compponent that wraps a button
@@ -148,7 +157,6 @@
 	      },
 	      // the phase button flips its group of lc buttons on/off
 	      setPhase(type, newValue = ! this.phaseModel[type]){
-	      	console.log("setting phase "+ type +" to "+ newValue);
 	      	this.phaseModel[type] = newValue;
 	      	this.itemsForType[type].forEach( item => this.setLcQuery(item, newValue));
 	      },
@@ -166,8 +174,8 @@
 	      	//reset the query object
 	      	this.sendSearchQueryEvent( this.searchInput);
 	      	this.types.forEach( type => this.setPhase(type, false));
-	      	//todo update taxonomy
-	      	console.log("todo ... for taxonomy ... clearing filters "+ this.filterOn);
+	      	this.query.tx=[];
+	      	//reset sunburst to root
 	      }
 
 	    }
