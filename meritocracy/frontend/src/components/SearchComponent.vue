@@ -118,7 +118,7 @@
 	      	return this.buildTreeForSunburst( this.taxonomyTree );
 	      },
 	      filterOn(){
-	      	let filterIsOn = this.searchInput !== '';
+	      	let filterIsOn = this.searchInput !== ''|| Object.values(this.lcModel).some( lcValue => lcValue );
 	      	console.log("Filter computed "+ filterIsOn);
 	      	return filterIsOn;
 	      }
