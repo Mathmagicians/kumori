@@ -1,19 +1,23 @@
 <template>
-	<sunburst :data="tree">
+<div class="test">
+  <sunburst :data="tree">
 
-		<!-- Add behaviors -->
-		<template slot-scope="{ nodes, actions }">
+    <!-- Add behaviors -->
+    <template slot-scope="{ nodes, actions }">
 		<highlightOnHover :nodes="nodes" :actions="actions" />
 		<zoomOnClick :nodes="nodes" :actions="actions" />
 		</template>
 
-		<!-- Add information to be displayed on top the graph -->
-		<nodeInfoDisplayer slot="legend" id="info" slot-scope="{ nodes }" :current="nodes.mouseOver" :root="nodes.root" description="of usecases"/>
+    <!-- Add information to be displayed on top the graph -->
 
-		<!-- Add bottom legend -->
-		<breadcrumbTrail id="breadcrumbs" slot="top"  slot-scope="{ nodes, colorGetter, width }" :current="nodes.mouseOver" :root="nodes.root" :colorGetter="colorGetter" :from="nodes.clicked" />
+    <nodeInfoDisplayer slot="legend" id="info" slot-scope="{ nodes }" :current="nodes.mouseOver" :root="nodes.root" description="of usecases" />
 
-	</sunburst>
+    <!-- Add bottom legend -->
+
+    <breadcrumbTrail id="breadcrumbs" :width="width" slot="top" slot-scope="{ nodes,colorGetter,width}" :current="nodes.mouseOver" :root="nodes.root" :colorGetter="colorGetter" :from="nodes.clicked" />
+
+  </sunburst>
+</div>
 </template>
 
 <script>
@@ -25,6 +29,7 @@
 	  sunburst,
 	  zoomOnClick
 	} from 'vue-d3-sunburst'
+	import "vue-d3-sunburst/dist/vue-d3-sunburst.css";
 
 	export default {
 		name: "SunburstWrap",
@@ -44,15 +49,7 @@
 </script>
 
 <style scoped>
-/** has to be fixed */
-  #breadcrumbs {
-    margin-top: -10px;
-    position:absolute;
-    bottom:-100px;
-    left: 30%;
-    font-size: 60%;
-  }
-
-
-
+.test {
+	margin-bottom: 30px;
+}
 </style>

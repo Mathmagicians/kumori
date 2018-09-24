@@ -2,30 +2,34 @@
 	<div class="mb1">
     <b-alert show variant="secondary">
             #techmenu is happily governing <b>{{techComponents.length}}</b> components. 
-            {{query}}
-            <b-button @click="fuzzySearch(query.string)"> try fuzzy search
-            </b-button>
-            {{fuzzySearchResults}}
           </b-alert>
     <b-row>
       <b-col cols="5">
-        <search-component :amounts="amounts" v-bind:query="query" ></search-component>
+        <search-component 
+          :amounts="amounts" 
+          v-bind:query="query" 
+          v-on:queryString="fuzzySearch($event)"
+        >
+        </search-component>
       </b-col>
       <b-col cols="7">
-      	<b-alert show variant="warning"
-      		v-if="loading">Loading #techmenu components … 
+      	<b-alert 
+          v-if="loading"
+          show 
+          variant="warning">
+          Loading #techmenu components … 
       		<v-icon name="spinner" scale="3" spin/></v-icon>
       	</b-alert>
-      	<b-list-group
-        		v-else
-        		class="components">
-    			<b-list-group-item
-          		v-for="component in filteredTechComponents"
-          		:key="component.name"
-          		class="tech-component">
-            		<tech-component v-bind:id="component | techId" :tech="component" :active="component.uid === activeId"></tech-component>
-        		</b-list-group-item>
-      	</b-list-group>
+        <div
+          v-else>
+      		<tech-component 
+            v-for="component in filteredTechComponents"
+            :key="component.name"
+            v-bind:id="component | techId" 
+            :tech="component" 
+            :active="component.uid === activeId">    
+          </tech-component>
+        </div>
       </b-col>
     </b-row>
   </div>
@@ -60,18 +64,14 @@
 		},
 		computed: {
   		techComponents () {
-    			return this.$store.state.techComponents
+    		return this.$store.state.techComponents
   		},
       amounts () {
         let am =  {components: this.techComponents.length};
         return am;
       },
       filteredTechComponents() {
-        const isQueryStringIncluded = (tech) => tech.name.toLowerCase().includes(this.query.string.toLowerCase());
-        const isLifeCycleExcluded = (tech) => !this.query.lc.includes(tech.status);
-        const filters = [isQueryStringIncluded, isLifeCycleExcluded];
-       //apply all the filters to the list
-        return this.techComponents.filter( e => filters.every( f =>  f.call( null, e)));           
+        return this.filterList( this.techComponents, this.query );           
       }
 		},
 		created () {
@@ -89,8 +89,7 @@
       selectLifeCycle( list){
         this.query.lc = list; 
       },
-      fuzzySearch( query ){
-          console.log("trying fuzzy search");
+      fuzzySearch( query, techComponentsList ){
           const options = {
             id: "name",
             shouldSort: true,
@@ -103,12 +102,22 @@
             minMatchCharLength: 2,
             keys: [
               "name",
-              "description"
+              "description",
+              "usecases"
             ]
           };
-          this.$search(this.query.string, this.techComponents, options).then(results => {
-            this.fuzzySearchResults = results
-          })
+          if( this.query.string) {
+             this.$search(query, this.techComponents, options)
+            .then(results => this.fuzzySearchResults = results);
+          }
+        },
+        filterList( techList, query ){
+          //const isQueryStringIncluded = (tech,query) => query.string === '' || tech.name.toLowerCase().includes(query.string.toLowerCase());
+          const isQueryStringInFuzzySearch = (tech, query) => query.string === '' || this.fuzzySearchResults.find( fuzzy => fuzzy.item === tech.name );
+          const isLifeCycleIncluded = (tech, query) => query.lc.length === 0 || query.lc.includes(tech.status);
+          const filters = [isQueryStringInFuzzySearch, isLifeCycleIncluded];
+          //apply all the filters to the list
+          return techList.filter( e => filters.every( f =>  f.call( null, e, query)));   
         }
     }
   }

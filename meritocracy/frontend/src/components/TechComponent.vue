@@ -1,35 +1,55 @@
 <template>
-<div :id="id">
-  <b-card no-body>
-    <span slot="header" v-b-toggle="accordionId">
-			<b-button size="sm" v-on:click="changeRoute" variant="link">{{tech.name}}</b-button>
-				<life-cycle :status="tech.status" to="about"></life-cycle>
+  <b-card no-body :id="id">
+    <span 
+      slot="header" 
+      :v-b-toggle="accordionId"
+      @click="changeRoute">
+			<b-button 
+        size="sm" 
+        v-on:click="changeRoute" 
+        variant="link"
+        class="mb-2"
+        >
+        {{tech.name}}
+      </b-button>
+			<life-cycle :status="tech.status" to="about"></life-cycle>
 		</span>
 
-    <b-collapse :id="accordionId" accordion="tech" v-on:show="changeRoute" v-on:click="changeRoute" :visible="active?active:false">
-      <div>
-        <p class="card-text">
-          {{tech}}
-        </p>
-        <span slot="footer" class="card-footer">
+    <b-collapse 
+      :id="accordionId" 
+      accordion="tech" 
+      v-on:show="changeRoute" 
+      :visible="active?active:false">
+        <div 
+          v-for="key in Object.keys(tech)"
+          class="card-text">
+           <div v-if="key!= 'name' && key !== 'status' && key !== 'uid'">
+              <h6>{{key | capitalize }}</h6>
+              <p>{{tech[key]}}</p>
+          </div >
+          
+        </div>
+        <div slot="footer" class="card-footer">
+        <span >
 						<b-button variant="outline-secondary sm" class="btn-round">
-		            		<v-icon name="heart" scale="1"/></v-icon>
-		        		</b-button>
-		        		<b-button variant="outline-secondary sm" class="btn-round">
-		            		<v-icon name="fire" scale="1"/></v-icon>
-		        		</b-button>
-		        		<b-button  variant="outline-secondary sm" class="btn-round">
-		            		<v-icon name="comment" scale="1"/></v-icon>
-		        		</b-button>
-                </span>
-		        	</div>
+              <v-icon name="heart" scale="1"/></v-icon>
+            </b-button>
+            <b-button variant="outline-secondary sm" class="btn-round">
+              <v-icon name="fire" scale="1"/></v-icon>
+            </b-button>
+            <b-button  variant="outline-secondary sm" class="btn-round">
+              <v-icon name="comment" scale="1"/></v-icon>
+            </b-button>
+        </span>
+      </div>
     </b-collapse>
   </b-card>
-</div>
 </template>
 
 <script>
 import LifeCycle from '../components/LifeCycle.vue'
+import filterMixin from '../mixins/filters.js'
+
 
 export default {
   name: 'techComponent',
@@ -50,6 +70,9 @@ export default {
       default: false
     }
   },
+  mixins: [
+    filterMixin
+  ],
   computed: {
     accordionId: function() {
       return 'accordion-' + this.tech.uid;

@@ -15,6 +15,17 @@
 						Search
 					<v-icon name="search" ></v-icon>
 					</b-button>
+					<b-button 
+						variant="secondary lg" 
+						:disabled="!filterOn"
+						@click="clearFilters"> 
+						Clear Filters
+			    		<v-icon 
+			    			label="reset filters">
+			    			<v-icon name="filter" scale="2"></v-icon>
+			    			<v-icon name="ban" scale="2" color="orange"></v-icon>
+			    		</v-icon>
+					</b-button >
 				</b-input-group-append>
 			</b-input-group>
 			<b-form-text id="inputLiveHelp">
@@ -80,8 +91,7 @@
 		data () {
 			return {
 				searchInput: '',
-				filterOn: true,
-				lcModel: this.$store.state.lifeCycle.items.reduce( (acc, i) => ({...acc, [i.name]: true}), {}),
+				lcModel: this.$store.state.lifeCycle.items.reduce( (acc, i) => ({...acc, [i.name]: false}), {}),
 				//phase model represent the state of buttons that group lifecycles -it does not send its own events, but selects - deselects its group
 				phaseModel: {}
 			}
@@ -89,7 +99,7 @@
 		created() {
 			this.$store.dispatch('fetchTaxonomy');
 			
-			this.phaseModel = this.types.reduce( (acc, i) => ({...acc, [i]:true }), {});
+			this.phaseModel = this.types.reduce( (acc, i) => ({...acc, [i]:false }), {});
 			//initialize array state for life cycle buttons
 			this.query.lc.forEach( item => this.setLcQuery(item) );
 			
@@ -106,6 +116,9 @@
 	      },
 	      sunburstTree(){
 	      	return this.buildTreeForSunburst( this.taxonomyTree );
+	      },
+	      filterOn(){
+	      	return this.searchInput !== ''|| Object.values(this.lcModel).some( lcValue => lcValue );
 	      }
 	    },
 	    filters: {
@@ -121,28 +134,23 @@
 	        return this.$options.phaseText[type];
 	      },
 	      sendSearchQueryEvent(queryString) {
+	      	this.$emit('queryString', this.searchInput);
 	      	return this.query.string = queryString;
 	      },
 	      setUseCaseQuery( useCaseId){
-	      	console.log(" setting query for "+ useCaseId);
+	      	console.log("todo... setting query for "+ useCaseId);
 	      },
-	      setLcQuery(item ){
+	      setLcQuery(item, newValue = !this.lcModel[item] ){
 	      	//have to update state here, since lcbutton is a child compponent that wraps a button
-	      	this.lcModel[item] = !this.lcModel[item];
-	      	this.updateLcQuery( item );
-	      	this.updateRoute();
-	      },
-	      updateLcQuery(item){
+	      	this.lcModel[item] = newValue;
 	      	this.query.lc = Object.keys(this.lcModel).filter( item =>  this.lcModel[item]);
+	      	this.updateRoute();
 	      },
 	      // the phase button flips its group of lc buttons on/off
-	      setPhase(type){
-	      	this.phaseModel[type] = ! this.phaseModel[type];
-	      	this.itemsForType[type].forEach( item => {
-	      		this.lcModel[item] = this.phaseModel[type]; 
-	      		this.updateLcQuery(item);	
-	      	} );
-	      	this.updateRoute();
+	      setPhase(type, newValue = ! this.phaseModel[type]){
+	      	console.log("setting phase "+ type +" to "+ newValue);
+	      	this.phaseModel[type] = newValue;
+	      	this.itemsForType[type].forEach( item => this.setLcQuery(item, newValue));
 	      },
 	      save(){
 	      	let sunburstTree = this.buildTreeForSunburst();
@@ -152,6 +160,14 @@
 	      updateRoute() {
 	      	//todo dont push empty query parameters!
 	      	this.$router.push({path: '/components/search', query: this.query });
+	      },
+	      clearFilters(){
+	      	this.searchInput = '';
+	      	//reset the query object
+	      	this.sendSearchQueryEvent( this.searchInput);
+	      	this.types.forEach( type => this.setPhase(type, false));
+	      	//todo update taxonomy
+	      	console.log("todo ... for taxonomy ... clearing filters "+ this.filterOn);
 	      }
 
 	    }
