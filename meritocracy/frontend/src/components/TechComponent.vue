@@ -7,7 +7,9 @@
 			<b-button 
         size="sm" 
         v-on:click="changeRoute" 
-        variant="link">
+        variant="link"
+        class="mb-2"
+        >
         {{tech.name}}
       </b-button>
 			<life-cycle :status="tech.status" to="about"></life-cycle>
@@ -18,7 +20,6 @@
       accordion="tech" 
       v-on:show="changeRoute" 
       :visible="active?active:false">
-      <div>
         <div 
           v-for="key in Object.keys(tech)"
           class="card-text">
@@ -41,7 +42,6 @@
             </b-button>
         </span>
       </div>
-    	</div>
     </b-collapse>
   </b-card>
 </template>
