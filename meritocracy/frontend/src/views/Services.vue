@@ -30,9 +30,9 @@
 </template>
 
 <script>
-	export default {
-		name: "services",
-		data () {
+export default {
+  name: 'services',
+  data () {
     		return {
       			loading: false
     		}
@@ -45,7 +45,7 @@
   		created () {
     		this.loading = true
     		this.$store.dispatch('fetchServices')
-      			.then(services => { this.loading = false})
+      			.then(services => { this.loading = false })
   		}
-	}
+}
 </script>

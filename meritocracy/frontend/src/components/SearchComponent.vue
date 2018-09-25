@@ -70,108 +70,107 @@
 
 <script type="text/javascript">
 
-	import LifeCycle from '../components/LifeCycle.vue'
-	import lifeCycleMixin from '../mixins/lifeCycle.js'
+import LifeCycle from '../components/LifeCycle.vue'
+import lifeCycleMixin from '../mixins/lifeCycle.js'
   	import SunburstWrap from '../components/SunburstWrap.vue'
 
-
-	export default {
-		name:"searchComponent",
-		props: {
-			amounts:{ required: false},
-			query: {required: true},
-		},
-		components: {
-			LifeCycle,
+export default {
+  name: 'searchComponent',
+  props: {
+    amounts: {required: false},
+    query: {required: true}
+  },
+  components: {
+    LifeCycle,
         	SunburstWrap
-		},
-		mixins: [
-			lifeCycleMixin
-		],
-		data () {
-			return {
-				searchInput: '',
-				lcModel: this.$store.state.lifeCycle.items.reduce( (acc, i) => ({...acc, [i.name]: false}), {}),
-				//phase model represent the state of buttons that group lifecycles -it does not send its own events, but selects - deselects its group
-				phaseModel: {}
-			}
-		},
-		created() {
-			this.$store.dispatch('fetchTaxonomy');
+  },
+  mixins: [
+    lifeCycleMixin
+  ],
+  data () {
+    return {
+      searchInput: '',
+      lcModel: this.$store.state.lifeCycle.items.reduce((acc, i) => ({...acc, [i.name]: false}), {}),
+      // phase model represent the state of buttons that group lifecycles -it does not send its own events, but selects - deselects its group
+      phaseModel: {}
+    }
+  },
+  created () {
+    this.$store.dispatch('fetchTaxonomy')
 
-			this.phaseModel = this.types.reduce( (acc, i) => ({...acc, [i]:false }), {});
-			//initialize array state for life cycle buttons
-			this.query.lc.forEach( item => this.setLcQuery(item) );
-
-		},
+    this.phaseModel = this.types.reduce((acc, i) => ({...acc, [i]: false }), {})
+    // initialize array state for life cycle buttons
+    this.query.lc.forEach(item => this.setLcQuery(item))
+  },
 	    computed: {
-	       taxonomyLevels: function() {
-	      	return this.$store.state.taxonomy.levels;
+	       taxonomyLevels: function () {
+	      	return this.$store.state.taxonomy.levels
 	      },
-	      taxonomyTags: function() {
-	      	return this.$store.state.taxonomy.tags;
+	      taxonomyTags: function () {
+	      	return this.$store.state.taxonomy.tags
 	      },
-	      taxonomyTree() {
-	      	return this.buildTree( this.taxonomyTags );
+	      taxonomyTree () {
+	      	return this.buildTree(this.taxonomyTags)
 	      },
-	      sunburstTree(){
-	      	return this.buildTreeForSunburst( this.taxonomyTree );
+	      sunburstTree () {
+	      	return this.buildTreeForSunburst(this.taxonomyTree)
 	      },
-	      filterOn(){
-	      	return this.searchInput !== ''|| Object.values(this.lcModel).some( lcValue => lcValue );
+	      filterOn () {
+	      	return this.searchInput !== '' || Object.values(this.lcModel).some(lcValue => lcValue)
 	      }
 	    },
 	    filters: {
-	      capitalize: function( lower) {
-	        return lower.charAt(0).toUpperCase() + lower.substr(1);
+	      capitalize: function (lower) {
+	        return lower.charAt(0).toUpperCase() + lower.substr(1)
 	      }
 	    },
 	    methods: {
-	      images: function(type) {
-	        return this.$store.state.phaseImages[type];
+	      images: function (type) {
+	        return this.$store.state.phaseImages[type]
 	      },
-	      texts: function(type) {
-	        return this.$options.phaseText[type];
+	      texts: function (type) {
+	        return this.$options.phaseText[type]
 	      },
-	      sendSearchQueryEvent(queryString) {
-	      	this.$emit('queryString', this.searchInput);
-	      	return this.query.string = queryString;
+	      sendSearchQueryEvent (queryString) {
+	      	this.$emit('queryString', this.searchInput)
+      this.query.string = queryString
+	      	return queryString
 	      },
-	      setUseCaseQuery( useCaseId){
-	      	console.log("todo... setting query for "+ useCaseId);
+	      setUseCaseQuery (useCaseId) {
+	      	console.log('todo... setting query for ' + useCaseId)
 	      },
-	      setLcQuery(item, newValue = !this.lcModel[item] ){
-	      	//have to update state here, since lcbutton is a child compponent that wraps a button
-	      	this.lcModel[item] = newValue;
-	      	this.query.lc = Object.keys(this.lcModel).filter( item =>  this.lcModel[item]);
-	      	this.updateRoute();
+	      setLcQuery (item, newValue = !this.lcModel[item]) {
+	      	// have to update state here, since lcbutton is a child compponent that wraps a button
+	      	this.lcModel[item] = newValue
+	      	this.query.lc = Object.keys(this.lcModel).filter(item => this.lcModel[item])
+	      	this.updateRoute()
 	      },
 	      // the phase button flips its group of lc buttons on/off
-	      setPhase(type, newValue = ! this.phaseModel[type]){
-	      	console.log("setting phase "+ type +" to "+ newValue);
-	      	this.phaseModel[type] = newValue;
-	      	this.itemsForType[type].forEach( item => this.setLcQuery(item, newValue));
+	      setPhase (type, newValue = !this.phaseModel[type]) {
+	      	console.log('setting phase ' + type + ' to ' + newValue)
+	      	this.phaseModel[type] = newValue
+	      	this.itemsForType[type].forEach(item => this.setLcQuery(item, newValue))
 	      },
-	      save(){
-	      	let sunburstTree = this.buildTreeForSunburst();
-	      	console.log("Trying to save file");
-	      	this.saveFile( sunburstTree );
+	      save () {
+	      	let sunburstTree = this.buildTreeForSunburst()
+	      	console.log('Trying to save file')
+	      	this.saveFile(sunburstTree)
 	      },
-	      updateRoute() {
-	      	//todo dont push empty query parameters!
-	      	this.$router.push({path: '/components/search', query: this.query });
+	      updateRoute () {
+	      	// todo dont push empty query parameters!
+	      	this.$router.push({ path: '/components/search', query: this.query })
 	      },
-	      clearFilters(){
-	      	this.searchInput = '';
-	      	//reset the query object
-	      	this.sendSearchQueryEvent( this.searchInput);
-	      	this.types.forEach( type => this.setPhase(type, false));
-	      	//todo update taxonomy
-	      	console.log("todo ... for taxonomy ... clearing filters "+ this.filterOn);
+	      clearFilters () {
+	      	this.searchInput = ''
+	      	// reset the query object
+	      	this.sendSearchQueryEvent(this.searchInput)
+	      	this.types.forEach(type => this.setPhase(type, false))
+	      	// todo update taxonomy
+	      	console.log('todo ... for taxonomy ... clearing filters ' + this.filterOn)
 	      }
 
 	    }
-	}
+}
 
 </script>
 

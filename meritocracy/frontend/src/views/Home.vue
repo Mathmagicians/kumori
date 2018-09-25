@@ -12,18 +12,16 @@
 
 <script>
 
-  import SearchComponent from '../components/SearchComponent.vue'
-  import SunburstWrap from '../components/SunburstWrap.vue'
+import SearchComponent from '../components/SearchComponent.vue'
+import SunburstWrap from '../components/SunburstWrap.vue'
 
-
-  export default {
+export default {
   	name: 'home',
-    components: {
-        SearchComponent,
-        SunburstWrap
-      },
-  	
+  components: {
+    SearchComponent,
+    SunburstWrap
   }
 
-</script>
+}
 
+</script>

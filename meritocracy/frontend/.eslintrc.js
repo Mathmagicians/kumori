@@ -13,7 +13,7 @@ module.exports = {
     // consider switching to `plugin:vue/strongly-recommended` or `plugin:vue/recommended` for stricter rules.
     'plugin:vue/essential',
     // https://github.com/standard/standard/blob/master/docs/RULES-en.md
-    //'standard'
+    'standard'
   ],
   // required to lint *.vue files
   plugins: [
@@ -25,7 +25,8 @@ module.exports = {
     //'generator-star-spacing': 'off',
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    //'no-tabs': 1,
-    //'no-mixed-spaces-and-tabs': 1
+    'no-tabs': 0,
+    'no-mixed-spaces-and-tabs': 0,
+    'no-unused-vars' : 0
   }
 }

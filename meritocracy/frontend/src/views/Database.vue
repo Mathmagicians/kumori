@@ -18,10 +18,10 @@ export default {
   methods: {
     getOne: function () {
       this.$http.get('http://127.0.0.1:3000/components?limit=1').then(response => {
-        this.data = response.body;
+        this.data = response.body
       }, response => {
-        this.data = "Found nothing";
-      });
+        this.data = 'Found nothing'
+      })
     }
   }
 }

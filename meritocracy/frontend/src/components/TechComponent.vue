@@ -24,7 +24,7 @@
           v-for="key in Object.keys(tech)" :key="key"
           class="card-text">
            <div v-if="key!= 'name' && key !== 'status' && key !== 'uid'">
-              <h6>{{key | capitalize }}</h6>
+              <h6>{{key | capitalize}}</h6>
               <p>{{tech[key]}}</p>
           </div >
 
@@ -50,7 +50,6 @@
 import LifeCycle from '../components/LifeCycle.vue'
 import filterMixin from '../mixins/filters.js'
 
-
 export default {
   name: 'techComponent',
   components: {
@@ -74,13 +73,13 @@ export default {
     filterMixin
   ],
   computed: {
-    accordionId: function() {
-      return 'accordion-' + this.tech.uid;
+    accordionId: function () {
+      return 'accordion-' + this.tech.uid
     }
   },
   methods: {
-    changeRoute: function() {
-      this.$router.push('/components/' + this.tech.uid);
+    changeRoute: function () {
+      this.$router.push('/components/' + this.tech.uid)
     }
   }
 }

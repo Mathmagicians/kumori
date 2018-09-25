@@ -11,7 +11,7 @@
 </template>
 
 <script>
-	export default {
-		name: "meritocracy"
-	}
+export default {
+  name: 'meritocracy'
+}
 </script>

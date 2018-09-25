@@ -11,8 +11,6 @@ import Database from '../views/Database.vue'
 
 Vue.use(Router)
 
-
-
 export default new Router({
   mode: 'history',
   routes: [
@@ -34,9 +32,9 @@ export default new Router({
     }, {
       path: '/meritocracy',
       component: Meritocracy
-    }, 
+    },
     {
-      path:'/components/search',
+      path: '/components/search',
       component: Components
     },
     {
@@ -46,12 +44,12 @@ export default new Router({
       path: '/db',
       component: Database
     }, {
-      path: '/404', 
-      name: 'not-found', 
-      component: Errors    
+      path: '/404',
+      name: 'not-found',
+      component: Errors
     }, {
       path: '*',
-      redirect:  '/404'
+      redirect: '/404'
     }
   ]
 })
