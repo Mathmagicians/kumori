@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<b-alert show variant="warning">
-			<v-icon name="keyboard" scale="2"/></v-icon>
+			<v-icon name="keyboard" scale="2"/>
 			Work in progress - awesome content on the way ...
 		</b-alert>
 		<b-alert show variant="secondary">
@@ -11,7 +11,7 @@
 </template>
 
 <script>
-	export default {
-		name: "meritocracy"
-	}
+export default {
+  name: 'meritocracy'
+}
 </script>
