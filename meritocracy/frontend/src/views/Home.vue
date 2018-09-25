@@ -1,12 +1,40 @@
 <template>
-	<div>
-    <b-alert show variant="warning">
-      <v-icon name="keyboard" scale="2"/></v-icon>
-      Work in progress - awesome content on the way ...
-    </b-alert>
+	 <div id="about">
+    <p>
+       Based on principles of idea meritocracy, we aim to make rational technology decisions.
+      </p>
+    <b-jumbotron>
+      <template slot="header">
+        Welcome to #techmenu
+      </template>
+      <template slot="lead">
+        #techmenu is a community, a process and a catalog of technologies.
+      </template>
+      <b-carousel id="carousel1"
+                style="text-shadow: 1px 1px 2px #333;"
+                controls
+                indicators
+                background="#ababab"
+                :interval="4000"
+                img-width="1024"
+                img-height="480"
+                v-model="slide"
+                 @sliding-start="onSlideStart"
+                @sliding-end="onSlideEnd">
 
-    <search-component :amounts="{components: 42}"></search-component>
+      <!-- Text slides with image -->
+      <b-carousel-slide 
+        caption="It is a community"
+        text="Based on principles of idea meritocracy, we aim to make rational technology decisions."
+        img-src="../assets/community.svg"
+      >
+       
+      </b-carousel-slide>
+      </b-carousel>
 
+      <b-btn variant="link" to="/components">Checkout the #techmenu...</b-btn>
+      <b-btn variant="link" to="/about">Explain more...</b-btn>
+    </b-jumbotron>  
   </div>
 </template>
 
