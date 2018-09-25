@@ -3,7 +3,7 @@
     <b-alert show variant="secondary">Here, you can read more about #techmenu, the process, the life cycle, the status.</b-alert>
 
     <b-card-group deck>
-      <b-card v-for="type in types"
+      <b-card v-for="type in types" :key="type"
           :title="type | capitalize"
           :img-src="images(type)"
           img-alt="Image"
@@ -14,7 +14,7 @@
       <div slot="footer" class="text-center">
         <h6>Lifecycle phases for {{type | capitalize}}</h6>
         <b-list-group flush>
-          <b-list-group-item v-for="item in itemsForType[type]">
+          <b-list-group-item v-for="item in itemsForType[type]" :key="item">
             <life-cycle :status="item"></life-cycle>
           </b-list-group-item>
         </b-list-group>

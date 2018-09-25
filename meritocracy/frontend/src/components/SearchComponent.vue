@@ -4,7 +4,7 @@
 			<b-input-group>
 				<b-form-input id="searchInput"
 					type="text"
-					v-model.sync="searchInput"
+					v-model="searchInput"
 					required
 					v-on:input="sendSearchQueryEvent"
 					:placeholder="'Search in '+ amounts.components +' technology components ...'  ">
@@ -15,12 +15,12 @@
 						Search
 					<v-icon name="search" ></v-icon>
 					</b-button>
-					<b-button 
-						variant="secondary lg" 
+					<b-button
+						variant="secondary lg"
 						:disabled="!filterOn"
-						@click="clearFilters"> 
+						@click="clearFilters">
 						Clear Filters
-			    		<v-icon 
+			    		<v-icon
 			    			label="reset filters">
 			    			<v-icon name="filter" scale="2"></v-icon>
 			    			<v-icon name="ban" scale="2" color="orange"></v-icon>
@@ -33,24 +33,24 @@
 			</b-form-text>
 		</b-card>
 		<b-card-group>
-		<b-card v-for="type in types"
+		<b-card v-for="type in types" :key="type"
 			tag="article"
 			class="card-lifecycle">
 			<div slot="header" >
-				<b-button :variant="'outline-'+btnVariant(type)" 
+				<b-button :variant="'outline-'+btnVariant(type)"
 					@click="setPhase(type)"
 					:pressed="phaseModel[type]" >
 					<b-img rounded :src="images(type)" class="image-menu" top/>
 					{{type | capitalize}}
 				</b-button>
-				<b-badge pill>12</b-badge>			
+				<b-badge pill>12</b-badge>
 			</div>
 
 			<div class="card-text">
 					<b-button-group vertical>
-						<life-cycle :id="item+'selector'" v-for="item in itemsForType[type]" :key="item" :status="item" 
+						<life-cycle :id="item+'selector'" v-for="item in itemsForType[type]" :key="item" :status="item"
 						v-on:selected="setLcQuery(item)"
-						:isPressed.sync="lcModel[item]">	
+						:isPressed.sync="lcModel[item]">
 						</life-cycle>
 					</b-button-group>
 				</div>
@@ -98,11 +98,11 @@
 		},
 		created() {
 			this.$store.dispatch('fetchTaxonomy');
-			
+
 			this.phaseModel = this.types.reduce( (acc, i) => ({...acc, [i]:false }), {});
 			//initialize array state for life cycle buttons
 			this.query.lc.forEach( item => this.setLcQuery(item) );
-			
+
 		},
 	    computed: {
 	       taxonomyLevels: function() {
@@ -156,7 +156,7 @@
 	      	let sunburstTree = this.buildTreeForSunburst();
 	      	console.log("Trying to save file");
 	      	this.saveFile( sunburstTree );
-	      }, 
+	      },
 	      updateRoute() {
 	      	//todo dont push empty query parameters!
 	      	this.$router.push({path: '/components/search', query: this.query });

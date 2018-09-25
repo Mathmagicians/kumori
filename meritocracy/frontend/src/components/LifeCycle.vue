@@ -33,7 +33,6 @@
 		props: {
       status: {required: true},
       to: {type:String, required:false},
-      ispopup: {type: Boolean, required: false, default: false},
       isPressed:  {type: Boolean, required: false, default: false},
       ispopup: {
         type: Boolean,

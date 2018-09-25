@@ -1,16 +1,16 @@
 <template>
 	<div>
 		<b-alert show variant="warning">
-			<v-icon name="keyboard" scale="2" pulse/></v-icon>
+			<v-icon name="keyboard" scale="2" pulse/>
 			Work in progress - awesome content on the way ...
 		</b-alert>
   		<b-alert show variant="secondary">
-  			Services are technologies implemented. 
+  			Services are technologies implemented.
   			Overview of what we have, what is good, what should be improved.
   		</b-alert>
   		<b-alert show variant="warning"
-    		v-if="loading">Loading #techmenu services … 
-    		<v-icon name="spinner" scale="2" spin/></v-icon>
+    		v-if="loading">Loading #techmenu services …
+    		<v-icon name="spinner" scale="2" spin/>
     	</b-alert>
     	<b-list-group
       		v-else
@@ -18,12 +18,12 @@
       		<b-alert show variant="secondary">
       			#techmenu is happily governing <b>{{services.length}}</b> services.
       		</b-alert>
-       		
+
   			<b-list-group-item
         		v-for="service in services"
         		:key="service.name"
         		class="tech-component">
-          		{{ service }} 
+          		{{ service }}
       		</b-list-group-item>
     	</b-list-group>
 	</div>
