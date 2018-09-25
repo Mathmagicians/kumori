@@ -49,7 +49,11 @@
           User
         </template>
         <b-dropdown-item href="#">Profile</b-dropdown-item>
-        <b-dropdown-item>Sign Out</b-dropdown-item>
+        <b-dropdown-item
+          @click="logout"
+          >
+          Sign Out
+        </b-dropdown-item>
       </b-nav-item-dropdown>
       <b-nav-item-dropdown 
         v-else

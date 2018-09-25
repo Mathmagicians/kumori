@@ -13,7 +13,8 @@ export function createStore () {
   return new Vuex.Store({
     state: {
       security: {
-        isLoggedIn: !!localStorage.getItem('token')
+        isLoggedIn: !!localStorage.getItem('token'),
+        pending: false
       },
       lifeCycle: {
         title: 'Tech Menu Life Cycle',
@@ -118,14 +119,14 @@ export function createStore () {
         state.taxonomy = taxonomy
       },
       [LOGIN] (state) {
-      state.pending = true;
+      state.security.pending = true;
       },
       [LOGIN_SUCCESS] (state) {
-        state.isLoggedIn = true;
-        state.pending = false;
+        state.security.isLoggedIn = true;
+        state.security.pending = false;
       },
       [LOGOUT](state) {
-        state.isLoggedIn = false;
+        state.security.isLoggedIn = false;
       }
     },
     actions: {
