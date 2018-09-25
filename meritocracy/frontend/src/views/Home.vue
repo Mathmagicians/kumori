@@ -14,7 +14,7 @@
                 style="text-shadow: 1px 1px 2px #333;"
                 controls
                 indicators
-                background="#ababab"
+                background="#aaaaaa"
                 :interval="4000"
                 img-width="1024"
                 img-height="480"
@@ -32,8 +32,8 @@
       </b-carousel-slide>
       </b-carousel>
 
-      <b-btn variant="link" to="/components">Checkout the #techmenu...</b-btn>
-      <b-btn variant="link" to="/about">Explain more...</b-btn>
+      <b-btn variant="link lg" to="/components">Checkout the #techmenu...</b-btn>
+      <b-btn variant="link lg" to="/about">Explain more...</b-btn>
     </b-jumbotron>  
   </div>
 </template>

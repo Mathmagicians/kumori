@@ -29,7 +29,9 @@
       </b-nav-item>
     </b-navbar-nav>
     <b-navbar-nav class="ml-auto">
-      <b-nav-item-dropdown right>
+      <b-nav-item-dropdown 
+        v-if="isLoggedIn"
+        right>
          <template slot="button-content">
           <b-button class="btn-round" variant="light">
             <v-icon name="lock" color="green "></v-icon>
@@ -38,15 +40,27 @@
         </template>
         <b-dropdown-item href="#">Enable editing</b-dropdown-item>
       </b-nav-item-dropdown>
-      <b-nav-item-dropdown right>
+      <b-nav-item-dropdown v-if="isLoggedIn"
+        right>
         <template slot="button-content">
-          <b-button class="btn-round" >
-            <v-icon name="user" color="green" variant="light"></v-icon>
+          <b-button class="btn-round" variant="light">
+            <v-icon name="user" color="green" ></v-icon>
           </b-button>
           User
         </template>
         <b-dropdown-item href="#">Profile</b-dropdown-item>
-        <b-dropdown-item href="#">Sign In</b-dropdown-item>
+        <b-dropdown-item>Sign Out</b-dropdown-item>
+      </b-nav-item-dropdown>
+      <b-nav-item-dropdown 
+        v-else
+        right>
+        <template slot="button-content">
+          <b-button class="btn-round" variant="light">
+            <v-icon name="user" color="green" ></v-icon>
+          </b-button>
+          Sign in!
+        </template>
+        <b-dropdown-item to="/login">Sign in</b-dropdown-item>
       </b-nav-item-dropdown>
     </b-navbar-nav>
   </b-navbar>
@@ -65,9 +79,21 @@
 </template>
 
 <script>
-export default {
-  name: 'App'
-}
+  
+  export default {
+    name: 'App',
+    computed: {
+      isLoggedIn() {
+        return this.$store.getters.isLoggedIn;
+      }
+    }, 
+    methods: {
+      logout() {
+        console.log("logging user out");
+        this.$store.dispatch('logout');
+      }
+    }
+  }
 </script>
 
 <style>

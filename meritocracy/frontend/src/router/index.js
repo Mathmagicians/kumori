@@ -8,6 +8,7 @@ import Home from '../views/Home.vue'
 import Services from '../views/Services.vue'
 import Meritocracy from '../views/Meritocracy.vue'
 import Database from '../views/Database.vue'
+import Login from '../components/Login.vue'
 
 Vue.use(Router)
 
@@ -45,11 +46,18 @@ export default new Router({
     }, {
       path: '/db',
       component: Database
-    }, {
-      path: '/404', 
-      name: 'not-found', 
-      component: Errors    
-    }, {
+    }, 
+    {
+      path: '/login',
+      component: Login,
+      name: 'login'
+    },
+    {
+      path: '/404',
+      name: 'not-found',
+      component: Errors
+    }, 
+    {
       path: '*',
       redirect:  '/404'
     }

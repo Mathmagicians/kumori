@@ -5,8 +5,16 @@ import client from 'api-client'
 Vue.use(Vuex)
 
 export function createStore () {
+
+  const LOGIN = "LOGIN";
+  const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+  const LOGOUT = "LOGOUT";
+
   return new Vuex.Store({
     state: {
+      security: {
+        isLoggedIn: !!localStorage.getItem('token')
+      },
       lifeCycle: {
         title: 'Tech Menu Life Cycle',
         items: [
@@ -108,6 +116,16 @@ export function createStore () {
       },
       setTaxonomy (state, taxonomy) {
         state.taxonomy = taxonomy
+      },
+      [LOGIN] (state) {
+      state.pending = true;
+      },
+      [LOGIN_SUCCESS] (state) {
+        state.isLoggedIn = true;
+        state.pending = false;
+      },
+      [LOGOUT](state) {
+        state.isLoggedIn = false;
       }
     },
     actions: {
@@ -130,7 +148,26 @@ export function createStore () {
         return client
           .fetchTaxonomy()
           .then(taxonomy => commit('setTaxonomy', taxonomy))
+      },
+      login({ commit }, creds) {
+        commit(LOGIN); // show spinner
+        return new Promise(resolve => {
+          setTimeout(() => {
+            localStorage.setItem("token", "JWT");
+            commit(LOGIN_SUCCESS);
+            resolve();
+          }, 1000);
+        });
+      },
+      logout({ commit }) {
+        localStorage.removeItem("token");
+        commit(LOGOUT);
       }
-    }
+    },
+    getters: {
+      isLoggedIn: state => {
+        return state.security.isLoggedIn;
+      }
+}
   })
 }
