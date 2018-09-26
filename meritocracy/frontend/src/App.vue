@@ -32,13 +32,32 @@
       <b-nav-item-dropdown 
         v-if="isLoggedIn"
         right>
-         <template slot="button-content">
+         <template 
+          v-if="isEditOn"
+          slot="button-content">
           <b-button class="btn-round" variant="light">
-            <v-icon name="lock" color="green "></v-icon>
+            <v-icon name="unlock" color="green"></v-icon>
+          </b-button>
+          Edit enabled
+        </template>
+         <template 
+          v-else
+          slot="button-content">
+          <b-button class="btn-round" variant="light">
+            <v-icon name="lock" color="orange"></v-icon>
           </b-button>
           Edit
         </template>
-        <b-dropdown-item href="#">Enable editing</b-dropdown-item>
+        <b-dropdown-item 
+          v-if="isEditOn"
+          @click="editOff"
+          href="#">Editing
+        </b-dropdown-item>
+        <b-dropdown-item 
+          v-else
+          @click="editOn"
+          href="#">Unlock Edit
+        </b-dropdown-item>
       </b-nav-item-dropdown>
       <b-nav-item-dropdown v-if="isLoggedIn"
         right>
@@ -89,12 +108,21 @@
     computed: {
       isLoggedIn() {
         return this.$store.getters.isLoggedIn;
+      },
+      isEditOn() {
+        return this.$store.getters.isEditOn;
       }
     }, 
     methods: {
       logout() {
         console.log("logging user out");
         this.$store.dispatch('logout');
+      },
+      editOn(){
+        this.$store.dispatch('editOn');
+      },
+      editOff(){
+        this.$store.dispatch('editOff');
       }
     }
   }
