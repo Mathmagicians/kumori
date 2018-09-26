@@ -2,8 +2,7 @@
   <b-card no-body :id="id">
     <span 
       slot="header" 
-      :v-b-toggle="accordionId"
-      @click="changeRoute">
+      :v-b-toggle="accordionId">
 			<b-button 
         size="sm" 
         v-on:click="changeRoute" 
@@ -18,30 +17,32 @@
     <b-collapse 
       :id="accordionId" 
       accordion="tech" 
-      v-on:show="changeRoute" 
-      :visible="active?active:false">
-        <div 
-          v-for="key in Object.keys(tech)"
-          class="card-text">
-           <div v-if="key!= 'name' && key !== 'status' && key !== 'uid'">
-              <h6>{{key | capitalize }}</h6>
-              <p>{{tech[key]}}</p>
-          </div >
-          
-        </div>
-        <div slot="footer" class="card-footer">
+       :visible="active?active:false">
+      <b-card-body
+        v-for="key in Object.keys(tech)"
+        v-if="key!= 'name' && key !== 'status' && key !== 'uid' && tech[key]">
+          <p><strong>{{key | capitalize }}</strong>: {{tech[key]}}</p>
+      </b-card-body>
+      <b-card-footer>
         <span >
-						<b-button variant="outline-secondary sm" class="btn-round">
-              <v-icon name="heart" scale="1"/></v-icon>
-            </b-button>
-            <b-button variant="outline-secondary sm" class="btn-round">
-              <v-icon name="fire" scale="1"/></v-icon>
-            </b-button>
-            <b-button  variant="outline-secondary sm" class="btn-round">
-              <v-icon name="comment" scale="1"/></v-icon>
-            </b-button>
+					<b-button variant="outline-secondary sm" class="btn-round">
+            <v-icon name="heart" scale="1"/></v-icon>
+          </b-button>
+          <b-button variant="outline-secondary sm" class="btn-round">
+            <v-icon name="fire" scale="1"/></v-icon>
+          </b-button>
+          <b-button  variant="outline-secondary sm" class="btn-round">
+            <v-icon name="comment" scale="1"/></v-icon>
+          </b-button>
+          <b-button  
+            v-if="isEditOn"
+            @click="edit"
+            variant="outline-secondary sm" 
+            class="btn-round">
+            <v-icon name="pen" color="green" scale="1"/></v-icon>
+          </b-button>
         </span>
-      </div>
+      </b-card-footer>
     </b-collapse>
   </b-card>
 </template>
@@ -76,11 +77,17 @@ export default {
   computed: {
     accordionId: function() {
       return 'accordion-' + this.tech.uid;
-    }
+    },
+    isEditOn() {
+        return this.$store.getters.isEditOn;
+      }
   },
   methods: {
     changeRoute: function() {
       this.$router.push('/components/' + this.tech.uid);
+    },
+    edit: function(){
+      this.$router.push({ name: 'edit', params: { uid: this.tech.uid } });
     }
   }
 }

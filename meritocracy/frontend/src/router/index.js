@@ -9,6 +9,7 @@ import Services from '../views/Services.vue'
 import Meritocracy from '../views/Meritocracy.vue'
 import Database from '../views/Database.vue'
 import Login from '../components/Login.vue'
+import TechComponentEditor from '../components/TechComponentEditor.vue'
 
 Vue.use(Router)
 
@@ -43,7 +44,13 @@ export default new Router({
     {
       path: '/components/:uid',
       component: Components
-    }, {
+    }, 
+     {
+      path: '/components/:uid/edit',
+      name: 'edit',
+      component: TechComponentEditor
+    },
+    {
       path: '/db',
       component: Database
     }, 
