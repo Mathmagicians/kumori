@@ -38,7 +38,7 @@
           <b-button class="btn-round" variant="light">
             <v-icon name="unlock" color="green"></v-icon>
           </b-button>
-          Edit enabled
+          Editing
         </template>
          <template 
           v-else
@@ -51,12 +51,12 @@
         <b-dropdown-item 
           v-if="isEditOn"
           @click="editOff"
-          href="#">Editing
+            >Edit enabled
         </b-dropdown-item>
         <b-dropdown-item 
           v-else
-          @click="editOn"
-          href="#">Unlock Edit
+          @click="editOn">
+          Unlock Edit
         </b-dropdown-item>
       </b-nav-item-dropdown>
       <b-nav-item-dropdown v-if="isLoggedIn"
