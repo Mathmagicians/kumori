@@ -52,6 +52,37 @@ CREATE TABLE api.components (
     modified TIMESTAMP NOT NULL
 );
 
+CREATE TABLE api.taxonomy
+(
+    name text COLLATE pg_catalog."default" NOT NULL,
+    level integer NOT NULL,
+    parent text COLLATE pg_catalog."default",
+    CONSTRAINT taxonomy_pkey PRIMARY KEY (name)
+);
+
+
+DROP TABLE IF EXISTS api.usecase;
+CREATE TABLE api.usecase
+(
+    taxonomy text COLLATE pg_catalog."default" NOT NULL,
+    description text COLLATE pg_catalog."default" NOT NULL,
+    scope text COLLATE pg_catalog."default" NOT NULL,
+    status text COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT taxonomy FOREIGN KEY (taxonomy)
+    REFERENCES api.taxonomy (name) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION
+);
+
+DROP TABLE IF EXISTS api.component;
+CREATE TABLE api.component
+(
+    id serial NOT NULL,
+    name text NOT NULL,
+    description text NOT NULL,
+    PRIMARY KEY (id)
+);
+
 -- Create Functions
 DROP FUNCTION IF EXISTS data_changed ();
 
