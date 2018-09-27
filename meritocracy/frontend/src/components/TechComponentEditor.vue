@@ -65,14 +65,17 @@
 					</b-form-group>
 					<b-form-row>
 						<b-form-group 
-							v-for="level in taxonomyLevels"
+							v-for="(level,index) in taxonomyLevels"
+							v-show="isLeftDefined(index) && treeGeneration(index).length > 0"
 							:id="'txLevel_'+level"
 							:label="level"
 							:label-for="'txSelect_'+level">
 							 <b-form-select 
-							 	:id="'txSelect_'+level" 
+							 	:id="'txSelect_'+level"
 							 	v-model="txModel[level]" 
-							 	:options="lc" 
+							 	:options="treeGeneration(index)"
+							 	text-field="name"
+							 	value-field="name"
 							 	class="mb-3" />
 						</b-form-group>
 					</b-form-row>
@@ -120,7 +123,7 @@
 					description: '',
 					status: ''
 				},
-				txModel: this.$store.state.taxonomy.levels.reduce( (acc, t) => ({...acc, [t.name]: false}), {}),
+				txModel: this.$store.state.taxonomy.levels.reduce( (acc, t) => ({...acc, [t.name]: ''}), {}),
 			}
 		},
 		computed: {
@@ -132,6 +135,9 @@
       		},
       		taxonomyLevels(){
       			return this.$store.state.taxonomy.levels.map( tx => tx.name);
+      		},
+      		txTree(){
+      			return this.buildTree(this.$store.state.taxonomy.tags)
       		}
 		},
 		methods: {
@@ -140,6 +146,33 @@
 			},
 			onReset(){
 				console.log("todo reset");
+			},
+			treeGeneration(n){
+				if( n=== 0) return this.txTree
+	
+				const lookup = this.taxonomyLevels[n-1]
+				const leftSelection = this.txModel[lookup]
+				const myNode = this.findNodeForName(this.txModel[lookup])
+				return myNode ? myNode.children: []
+					
+			},
+			isLeftDefined( index){
+				if( index === 0) return true
+				
+				const lookup = this.taxonomyLevels[index-1]
+				const leftSelection = this.txModel[lookup]
+				return leftSelection !== null && leftSelection !== ''
+				
+			},
+			findNodeForName( name ){
+				const stack = [... this.txTree]
+				while( stack.length ){
+					const node = stack.pop()
+					if( node.name === name) return node
+					stack.push( ...node.children)
+
+				}
+				return null;
 			}
 		}
 	}
