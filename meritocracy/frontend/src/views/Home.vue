@@ -1,7 +1,7 @@
 <template>
 	<div>
     <b-alert show variant="warning">
-      <v-icon name="keyboard" scale="2"/></v-icon>
+      <v-icon name="keyboard" scale="2"/>
       Work in progress - awesome content on the way ...
     </b-alert>
 
@@ -12,18 +12,16 @@
 
 <script>
 
-  import SearchComponent from '../components/SearchComponent.vue'
-  import SunburstWrap from '../components/SunburstWrap.vue'
+import SearchComponent from '../components/SearchComponent.vue'
+import SunburstWrap from '../components/SunburstWrap.vue'
 
-
-  export default {
+export default {
   	name: 'home',
-    components: {
-        SearchComponent,
-        SunburstWrap
-      },
-  	
+  components: {
+    SearchComponent,
+    SunburstWrap
   }
 
-</script>
+}
 
+</script>

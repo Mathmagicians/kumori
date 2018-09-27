@@ -2,14 +2,14 @@
   <span>
     <span v-if="lc"
       class="align-middle"  :title="'Lifecycle phase '+status"  >
-      <b-button 
+      <b-button
         size="sm"
         class="md-4 px-2 align-middle lifecycle"
-        :variant="btn" 
-        :to="to" 
-        @click="clicked" 
+        :variant="btn"
+        :to="to"
+        @click="clicked"
         :pressed="isPressed"
-        v-b-popover.hover="popup" 
+        v-b-popover.hover="popup"
         :title="lc.name | toUpperCase | title">
         {{status | toUpperCase }}
       </b-button>
@@ -26,20 +26,19 @@
 </template>
 
 <script>
-  import lifeCycleMixin from '../mixins/lifeCycle.js'
+import lifeCycleMixin from '../mixins/lifeCycle.js'
 
-	export default {
-		name: 'lifeCycle',
-		props: {
-      status: {required: true},
-      to: {type:String, required:false},
-      ispopup: {type: Boolean, required: false, default: false},
-      isPressed:  {type: Boolean, required: false, default: false},
-      ispopup: {
-        type: Boolean,
-        required: false,
-        default: false
-      }
+export default {
+  name: 'lifeCycle',
+  props: {
+    status: {required: true},
+    to: {type: String, required: false},
+    isPressed: {type: Boolean, required: false, default: false},
+    ispopup: {
+      type: Boolean,
+      required: false,
+      default: false
+    }
   },
   mixins: [
     lifeCycleMixin
@@ -66,40 +65,39 @@
     'wip': `#techmenu is currently working on updating the life cycle state of this technology`,
     'undecided': `#techmenu has no opinion about this technology. Do we need it? Let us get this into #techmenu.`
   },
-    computed: {
-       lc: function(){
-        return this.$store.state.lifeCycle.items.filter( item => item.name === this.status).pop();
-      },
-
-
-    btn: function() {
-      return this.btnVariant(this.lc ? this.lc.type : 'maybe');
+  computed: {
+    lc: function () {
+      return this.$store.state.lifeCycle.items.filter(item => item.name === this.status).pop()
     },
 
-    popup: function() {
-      return this.ispopup ? this.$options.lcText[this.lc.name] : '';
+    btn: function () {
+      return this.btnVariant(this.lc ? this.lc.type : 'maybe')
+    },
+
+    popup: function () {
+      return this.ispopup ? this.$options.lcText[this.lc.name] : ''
     }
 
   },
-    filters: {
-      capitalize: function( lower){
-        return lower.charAt(0).toUpperCase() + lower.substr(1);
-      },
-      toUpperCase: function(upper){
-        return upper.toUpperCase();
-      },
-      title: function( title){
-        return 'Life cycle phase '+title; 
-      }
-    }, 
-    methods: {
-      clicked(){
-       return this.$emit('selected', this.status);   
-      }
-
+  filters: {
+    capitalize: function (lower) {
+      return lower.charAt(0).toUpperCase() + lower.substr(1)
+    },
+    toUpperCase: function (upper) {
+      return upper.toUpperCase()
+    },
+    title: function (title) {
+      return 'Life cycle phase ' + title
+    }
+  },
+  methods: {
+    clicked () {
+      return this.$emit('selected', this.status)
     }
 
   }
+
+}
 
 </script>
 

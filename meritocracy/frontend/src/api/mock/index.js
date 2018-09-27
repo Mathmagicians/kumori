@@ -13,18 +13,18 @@ const fetch = (mockData, time = 0) => {
 
 export default {
   fetchTechComponents () {
-    return fetch(techComponents, 1000); // wait 1s before returning posts
+    return fetch(techComponents, 1000) // wait 1s before returning posts
   },
 
   fetchMeritocracy () {
-    return fetch(meritocracy, 2000);
+    return fetch(meritocracy, 2000)
   },
 
   fetchServices () {
-    return fetch(services, 4000);
+    return fetch(services, 4000)
   },
 
   fetchTaxonomy () {
-    return fetch(taxonomy,0);
+    return fetch(taxonomy, 0)
   }
 }
