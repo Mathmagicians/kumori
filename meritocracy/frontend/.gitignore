@@ -19,3 +19,5 @@ postgres/fixture.sql
 *.sln
 .project
 .metadata
+.nyc_output/
+coverage/
