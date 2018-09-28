@@ -1,11 +1,9 @@
-import Vue from 'vue'
+import { shallowMount } from '@vue/test-utils'
 import Home from '@/components/Home'
 
-describe('Home.vue', () => {
-  it('should render correct contents', () => {
-    const Constructor = Vue.extend(Home);
-    const vm = new Constructor().$mount();
-    expect(vm.$el.querySelector('title').textContent)
-      .to.equal('#techmenu');
+describe('Home', () => {
+  it('should render the home component', () => {
+  	const wrapper = shallowMount( Home, {})
+  	expect.wrapper.find('#techmenu').exists().toBeTruthy()
   })
 })
