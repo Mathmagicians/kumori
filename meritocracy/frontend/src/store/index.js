@@ -149,6 +149,12 @@ export function createStore () {
       },
       isEditOn: state => {
         return state.security.isEditOn;
+      },
+      lifeCycle: state => {
+        return state.lifeCycle;
+      },
+      taxonomy: state => {
+        return state.taxonomy;
       }
 }
   })

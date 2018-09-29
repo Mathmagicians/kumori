@@ -33,7 +33,9 @@
 			</b-form-text>
 		</b-card>
 		<b-card-group>
-		<b-card v-for="type in types"
+		<b-card 
+			v-for="type in types"
+			key="type.name"
 			tag="article"
 			class="card-lifecycle">
 			<div slot="header" >

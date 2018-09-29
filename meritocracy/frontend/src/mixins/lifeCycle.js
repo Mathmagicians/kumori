@@ -12,10 +12,10 @@ export default {
 	},
 	computed: {
       types: function() {
-        return this.$store.state.lifeCycle.items.map( item => item.type).filter((v, i, a) => a.indexOf(v) === i);
+        return this.$store.getters.lifeCycle.items.map( item => item.type).filter((v, i, a) => a.indexOf(v) === i);
       },
       itemsForType: function() {
-        const namesForType = type =>  this.$store.state.lifeCycle.items.filter( item => item.type === type).map( item => item.name);
+        const namesForType = type =>  this.$store.geters.lifeCycle.items.filter( item => item.type === type).map( item => item.name);
         const myMap = new Map();
         this.types.forEach( type =>  myMap[type] = namesForType(type));
         return myMap;

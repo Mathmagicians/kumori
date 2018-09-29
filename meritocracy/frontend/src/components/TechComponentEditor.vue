@@ -66,6 +66,7 @@
 					<b-form-row>
 						<b-form-group 
 							v-for="(level,index) in taxonomyLevels"
+							key="level.name"
 							v-show="isLeftDefined(index) && treeGeneration(index).length > 0"
 							:id="'txLevel_'+level"
 							:label="level"
@@ -88,93 +89,89 @@
 </template>
 
 <script>
-	import LifeCycle from '../components/LifeCycle.vue'
-	import lifeCycleMixin from '../mixins/lifeCycle.js'
-  	
+import LifeCycle from "../components/LifeCycle.vue";
+import lifeCycleMixin from "../mixins/lifeCycle.js";
 
-	export default {
-		name: "techComponentEditor",
-		components: {LifeCycle},
-		mixins: [
-			lifeCycleMixin
-		],
-		data(){
-			return {
-				techModel: {
-					uid: '',
-					name: '',
-					status: '',
-					description: '',
-					comments: [],
-					tax: [],
-					licenses: [],
-					links: [],
-					usecases: [],
-					log: []
-				},
-				usecaseModel: {
-					name: '',
-					description: '',
-					status: '',
-					scope: ''
-				},
-				logModel: {
-					date: '',
-					description: '',
-					status: ''
-				},
-				txModel: this.$store.state.taxonomy.levels.reduce( (acc, t) => ({...acc, [t.name]: ''}), {}),
-			}
+export default {
+	name: "techComponentEditor",
+	components: { LifeCycle },
+	mixins: [lifeCycleMixin],
+	data() {
+		return {
+			techModel: {
+				uid: "",
+				name: "",
+				status: "",
+				description: "",
+				comments: [],
+				tax: [],
+				licenses: [],
+				links: [],
+				usecases: [],
+				log: []
+			},
+			usecaseModel: {
+				name: "",
+				description: "",
+				status: "",
+				scope: ""
+			},
+			logModel: {
+				date: "",
+				description: "",
+				status: ""
+			},
+			txModel: this.$store.getters.taxonomy.levels.reduce(
+				(acc, t) => ({ ...acc, [t.name]: "" }),
+				{}
+			)
+		};
+	},
+	computed: {
+		isEditOn() {
+			return this.$store.getters.isEditOn;
 		},
-		computed: {
-			isEditOn() {
-        		return this.$store.getters.isEditOn;
-      		},
-      		lc() {
-      			return this.$store.state.lifeCycle.items.map( it => it.name);
-      		},
-      		taxonomyLevels(){
-      			return this.$store.state.taxonomy.levels.map( tx => tx.name);
-      		},
-      		txTree(){
-      			return this.buildTree(this.$store.state.taxonomy.tags)
-      		}
+		lc() {
+			return this.$store.getters.lifeCycle.items.map(it => it.name);
 		},
-		methods: {
-			onSubmit(){
-				console.log("todo submit");
-			},
-			onReset(){
-				console.log("todo reset");
-			},
-			treeGeneration(n){
-				if( n=== 0) return this.txTree
-	
-				const lookup = this.taxonomyLevels[n-1]
-				const leftSelection = this.txModel[lookup]
-				const myNode = this.findNodeForName(this.txModel[lookup])
-				return myNode ? myNode.children: []
-					
-			},
-			isLeftDefined( index){
-				if( index === 0) return true
-				
-				const lookup = this.taxonomyLevels[index-1]
-				const leftSelection = this.txModel[lookup]
-				return leftSelection !== null && leftSelection !== ''
-				
-			},
-			findNodeForName( name ){
-				const stack = [... this.txTree]
-				while( stack.length ){
-					const node = stack.pop()
-					if( node.name === name) return node
-					stack.push( ...node.children)
+		taxonomyLevels() {
+			return this.$store.getters.taxonomy.levels.map(tx => tx.name);
+		},
+		txTree() {
+			return this.buildTree(this.$store.getters.taxonomy.tags);
+		}
+	},
+	methods: {
+		onSubmit() {
+			console.log("todo submit");
+		},
+		onReset() {
+			console.log("todo reset");
+		},
+		treeGeneration(n) {
+			if (n === 0) return this.txTree;
 
-				}
-				return null;
+			const lookup = this.taxonomyLevels[n - 1];
+			const leftSelection = this.txModel[lookup];
+			const myNode = this.findNodeForName(this.txModel[lookup]);
+			return myNode ? myNode.children : [];
+		},
+		isLeftDefined(index) {
+			if (index === 0) return true;
+
+			const lookup = this.taxonomyLevels[index - 1];
+			const leftSelection = this.txModel[lookup];
+			return leftSelection !== null && leftSelection !== "";
+		},
+		findNodeForName(name) {
+			const stack = [...this.txTree];
+			while (stack.length) {
+				const node = stack.pop();
+				if (node.name === name) return node;
+				stack.push(...node.children);
 			}
+			return null;
 		}
 	}
-
+};
 </script>

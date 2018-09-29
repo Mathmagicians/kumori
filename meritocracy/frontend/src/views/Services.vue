@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<b-alert show variant="warning">
-			<v-icon name="keyboard" scale="2" pulse/></v-icon>
+			<v-icon name="keyboard" scale="2" pulse/>
 			Work in progress - awesome content on the way ...
 		</b-alert>
   		<b-alert show variant="secondary">
@@ -10,7 +10,7 @@
   		</b-alert>
   		<b-alert show variant="warning"
     		v-if="loading">Loading #techmenu services … 
-    		<v-icon name="spinner" scale="2" spin/></v-icon>
+    		<v-icon name="spinner" scale="2" spin/>
     	</b-alert>
     	<b-list-group
       		v-else

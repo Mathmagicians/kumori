@@ -4,6 +4,7 @@
 
     <b-card-group deck>
       <b-card v-for="type in types"
+          :key="type.name"
           :title="type | capitalize"
           :img-src="images(type)"
           img-alt="Image"
