@@ -1,7 +1,8 @@
 <template>
-	 <div id="about">
-    <p>
-       Based on principles of idea meritocracy, we aim to make rational technology decisions.
+	 <div id="home">
+    <p id="techmenu-welcome">
+       Based on principles of idea meritocracy, we aim to make rational technology decisions. 
+       The decisions are recorded in a catalog of technologies -- the #techmenu.
       </p>
     <b-jumbotron>
       <template slot="header">
@@ -27,7 +28,8 @@
         </b-carousel-slide>
       </b-carousel>
 
-      <b-btn variant="link lg" to="/components">Checkout the #techmenu...</b-btn>
+      <b-btn 
+        variant="link lg" to="/components">Checkout the #techmenu...</b-btn>
       <b-btn variant="link lg" to="/about">Explain more...</b-btn>
     </b-jumbotron>  
   </div>

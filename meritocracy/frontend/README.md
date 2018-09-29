@@ -47,3 +47,14 @@ For now, you need to bootstrap the database manually by running `make schema`, `
 Get a shell with node
 
     $ make shell
+
+ --- 
+ Unit tests - work in local environment - didnt update the make file:
+ npm test
+
+ Start dev server:
+ npm run dev
+
+ CAVEAT: there is a bug in mocha, currently you need to :
+ comment out line 32893 of prettier/index.js.
+ See: https://stackoverflow.com/questions/52202399/typeerror-super-expression-must-either-be-null-or-a-function/52204427

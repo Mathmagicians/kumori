@@ -21,3 +21,4 @@ postgres/fixture.sql
 .metadata
 .nyc_output/
 coverage/
+.gradlew

@@ -11,8 +11,8 @@ module.exports = {
     browser
       .url(devServer)
       .waitForElementVisible('#app', 5000)
-      .assert.elementPresent('.hello')
-      .assert.containsText('h1', 'Meritocracy')
+      .assert.elementPresent('.home')
+      .assert.containsText('techmenu')
       .end()
   }
 }
