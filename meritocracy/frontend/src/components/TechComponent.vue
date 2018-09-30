@@ -20,7 +20,6 @@
        :visible="active?active:false">
       <b-card-body
         v-for="key in Object.keys(tech)"
-        key="key"
         v-if="key!= 'name' && key !== 'status' && key !== 'uid' && tech[key]">
           <p><strong>{{key | capitalize }}</strong>: {{tech[key]}}</p>
       </b-card-body>

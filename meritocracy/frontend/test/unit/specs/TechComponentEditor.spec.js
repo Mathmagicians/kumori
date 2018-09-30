@@ -87,7 +87,12 @@ describe('TechComponentEditor.vue', () => {
 		}),
 		it( 'has an input field for uid that can not be edited', ()=>{
 			const wrapper = shallowMount( TechComponentEditor, {store, localVue} )
-
+			const uidInput = wrapper.find({ref: 'uidInput'})
+			console.log("uidInput")
+			console.log(uidInput)
+			
+			expect(uidInput.is('input')).to.equal(true);
+			//expect(uidInput.attributes().readOnly).to.equal(true)
 		}),
 		it( 'has editable formfields for all object elements except uid'),
 		it('can display the taxonomy in dropdown boxes'),

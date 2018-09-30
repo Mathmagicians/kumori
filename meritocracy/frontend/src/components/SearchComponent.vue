@@ -33,31 +33,33 @@
 			</b-form-text>
 		</b-card>
 		<b-card-group>
-		<b-card 
-			v-for="type in types"
-			key="type.name"
-			tag="article"
-			class="card-lifecycle">
-			<div slot="header" >
-				<b-button :variant="'outline-'+btnVariant(type)" 
-					@click="setPhase(type)"
-					:pressed="phaseModel[type]" >
-					<b-img rounded :src="images(type)" class="image-menu" top/>
-					{{type | capitalize}}
-				</b-button>
-				<b-badge pill>12</b-badge>			
-			</div>
-
-			<div class="card-text">
-					<b-button-group vertical>
-						<life-cycle :id="item+'selector'" v-for="item in itemsForType[type]" :key="item" :status="item" 
-						v-on:selected="setLcQuery(item)"
-						:isPressed.sync="lcModel[item]">	
-						</life-cycle>
-					</b-button-group>
+			<b-card 
+				v-for="type in types"
+				tag="article"
+				class="card-lifecycle">
+				<div slot="header" >
+					<b-button :variant="'outline-'+btnVariant(type)" 
+						@click="setPhase(type)"
+						:pressed="phaseModel[type]" >
+						<b-img rounded :src="images(type)" class="image-menu" top/>
+						{{type | capitalize}}
+					</b-button>
+					<b-badge pill>12</b-badge>			
 				</div>
-		</b-card>
-	</b-card-group>
+
+				<div class="card-text">
+						<b-button-group vertical>
+							<life-cycle 
+								:id="item+'selector'" 
+								v-for="item in itemsForType[type]" 
+								:status="item" 
+								v-on:selected="setLcQuery(item)"
+								:isPressed.sync="lcModel[item]">	
+							</life-cycle>
+						</b-button-group>
+					</div>
+			</b-card>
+		</b-card-group>
 
 		<b-card style="card control-left " no-body>
 			<div class="card-header">Search in Usecases <strong v-if="query">{{ query.tx | stringify }}</strong></div>
@@ -70,7 +72,6 @@
 				</sunburst-wrap>
 			</div>
 		</b-card>
-
 </div>
 
 </template>
@@ -98,7 +99,7 @@
 		data () {
 			return {
 				searchInput: '',
-				lcModel: this.$store.state.lifeCycle.items.reduce( (acc, i) => ({...acc, [i.name]: false}), {}),
+				lcModel: this.$store.getters.lifeCycle.items.reduce( (acc, i) => ({...acc, [i.name]: false}), {}),
 				//phase model represent the state of buttons that group lifecycles -it does not send its own events, but selects - deselects its group
 				phaseModel: {}
 			}
@@ -113,10 +114,10 @@
 		},
 	    computed: {
 	       taxonomyLevels: function() {
-	      	return this.$store.state.taxonomy.levels;
+	      	return this.$store.getters.taxonomy.levels;
 	      },
 	      taxonomyTags: function() {
-	      	return this.$store.state.taxonomy.tags;
+	      	return this.$store.getters.taxonomy.tags;
 	      },
 	      taxonomyTree() {
 	      	return this.buildTree( this.taxonomyTags );
