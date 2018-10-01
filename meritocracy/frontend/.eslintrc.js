@@ -29,6 +29,5 @@ module.exports = {
     'no-mixed-spaces-and-tabs': 0,
     'indent': 0, 
     'semi': 0
-    }
   }
 }

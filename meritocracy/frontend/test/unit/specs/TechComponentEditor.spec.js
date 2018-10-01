@@ -80,18 +80,16 @@ describe('TechComponentEditor.vue', () => {
 			const wrapper = shallowMount( TechComponentEditor, {store, localVue} )
 			expect( wrapper.isVueInstance()).to.equal(true)
 			expect( wrapper.name()).to.equal('techComponentEditor')
-		})
-		it('is initialized with data from property object on object update'),
-		it( 'is has empty values on object create', () => {
-
 		}),
+		it('is initialized with data from property object on object update'),
+		it( 'is has empty values on object create'),
 		it( 'has an input field for uid that can not be edited', ()=>{
 			const wrapper = shallowMount( TechComponentEditor, {store, localVue} )
 			const uidInput = wrapper.find({ref: 'uidInput'})
 			console.log("uidInput")
 			console.log(uidInput)
 			
-			expect(uidInput.is('input')).to.equal(true);
+			expect(uidInput.is('input')).to.equal(true)
 			//expect(uidInput.attributes().readOnly).to.equal(true)
 		}),
 		it( 'has editable formfields for all object elements except uid'),
@@ -99,12 +97,8 @@ describe('TechComponentEditor.vue', () => {
 		it( 'can add a usecase to the list of usecases')
 	}),
  	describe('Security and access restriction', ()=>{
- 		it('does not display editor when edit is not on', ()=>{
-
-		}),
-		it('does display the editor when edit is on', ()=>{
-
-		}),
+ 		it('does not display editor when edit is not on'),
+		it('does display the editor when edit is on'),
 		it('has a router navigation guard that protects from unauthorized access')
 	})
 })

@@ -22,3 +22,6 @@ postgres/fixture.sql
 .nyc_output/
 coverage/
 .gradlew
+.gradle
+.classpath
+buildGradle
