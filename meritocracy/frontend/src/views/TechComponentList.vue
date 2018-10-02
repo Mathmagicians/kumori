@@ -26,8 +26,7 @@
       		<tech-component 
             v-for="component in filteredTechComponents"
             :key="component.name"
-            v-bind:id="component | techId" 
-            :tech="component" 
+            v-bind:tech="component" 
             :active="component.uid === activeId">    
           </tech-component>
         </div>

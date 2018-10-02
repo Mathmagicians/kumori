@@ -1,5 +1,5 @@
 <template>
-  <b-card no-body :id="id">
+  <b-card no-body :id="tech.id">
     <span 
       slot="header" 
       :v-b-toggle="accordionId">
@@ -11,7 +11,7 @@
         >
         {{tech.name}}
       </b-button>
-			<life-cycle :status="tech.status" to="about"></life-cycle>
+			<life-cycle :status="tech.status" to="about" class="status-floater"></life-cycle>
 		</span>
 
     <b-collapse 
@@ -58,10 +58,6 @@ export default {
     LifeCycle
   },
   props: {
-    id: {
-      type: String,
-      required: true
-    },
     tech: {
       type: Object,
       required: true
@@ -94,7 +90,7 @@ export default {
 </script>
 
 <style scoped>
-.test {
-  background-color: red;
+.status-floater {
+  float: right;
 }
 </style>

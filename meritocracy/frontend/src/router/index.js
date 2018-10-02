@@ -48,7 +48,8 @@ export default new Router({
      {
       path: '/components/:uid/edit',
       name: 'edit',
-      component: TechComponentEditor
+      component: TechComponentEditor,
+      props: true
     },
     {
       path: '/db',

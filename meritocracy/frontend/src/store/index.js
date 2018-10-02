@@ -155,7 +155,8 @@ export function createStore () {
       },
       taxonomy: state => {
         return state.taxonomy;
-      }
+      }, 
+      tech: state => state.techComponents
 }
   })
 }

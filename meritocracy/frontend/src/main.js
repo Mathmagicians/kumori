@@ -21,6 +21,7 @@ import {
   heart,
   comment,
   exclamation,
+  play,
   times,
   pen,
   lock,
