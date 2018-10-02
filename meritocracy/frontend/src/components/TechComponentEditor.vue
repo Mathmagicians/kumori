@@ -95,7 +95,7 @@
 									 	:options="treeGeneration(index)"
 									 	text-field="name"
 									 	value-field="name"
-									 	@change="updateTax"
+									 	@change="updateTax(index)"
 									 	class="mb-3" />
 								</b-form-group>
 							</b-form-row>
@@ -268,12 +268,11 @@ export default {
 		addUsecase(){
 			this.techModel.usecases.push( {...this.useCaseModel})
 		},
-		updateTax(){
-			console.log("Updating tags")
-			let newTags = Object.values(this.txModel).filter( tx => tx && tx !== '' && tx !== undefined)
-			console.log(newTags)
-			this.techModel.tags = newTags
-			console.log(this.techModel.tags)
+		updateTax(index){
+			//clear to the right isLeftDefined(index)
+			this.taxonomyLevels.slice(index+1).forEach( l => this.txModel[l]='')	
+			this.techModel.tags = Object.values(this.txModel).filter( tx => tx && tx !== '' && tx !== undefined)
+			
 			
 		}
 	}
