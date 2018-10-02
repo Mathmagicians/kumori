@@ -5,6 +5,9 @@ export default {
 		},
 		toUpperCase: function(upper){
 			return upper.toUpperCase();
-		}
+		},
+		 stringify: function( list ){
+	      	return list ? list.join('>'): list;
+	      }
 	}
 }

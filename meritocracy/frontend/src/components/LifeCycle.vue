@@ -35,11 +35,6 @@
       to: {type:String, required:false},
       ispopup: {type: Boolean, required: false, default: false},
       isPressed:  {type: Boolean, required: false, default: false},
-      ispopup: {
-        type: Boolean,
-        required: false,
-        default: false
-      }
   },
   mixins: [
     lifeCycleMixin

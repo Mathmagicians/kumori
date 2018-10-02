@@ -18,10 +18,50 @@
       :id="accordionId" 
       accordion="tech" 
        :visible="active?active:false">
-      <b-card-body
-        v-for="key in Object.keys(tech)"
-        v-if="key!= 'name' && key !== 'status' && key !== 'uid' && tech[key]">
-          <p><strong>{{key | capitalize }}</strong>: {{tech[key]}}</p>
+      <b-card-body>
+        <b-list-group flush>
+          <b-list-group-item  v-if="tech.tags">
+            <p>Usecase Classification:</p>
+             <h6> {{tech.tags|stringify}}</h6>
+          </b-list-group-item>
+          <b-list-group-item v-if="tech.description">
+            <strong>Description:</strong>
+            <p>{{tech.description}}</p>
+          </b-list-group-item>
+          <b-list-group-item v-if="tech.usecases && tech.usecases.length>0">
+             <strong>Usecases:</strong>
+             <ul v-for="uc in tech.usecases" >
+              <li>
+                <p> {{uc.name}} <life-cycle :status="uc.status"/></p>
+                <p> {{uc.description}}</p>
+              </li>
+            </ul>
+          </b-list-group-item>
+          <b-list-group-item v-if="tech.log">
+            <strong>Change Log:</strong>
+            <ul>
+              <li v-for="entry in tech.log">
+                {{entry.date}}: {{entry.description}}: <life-cycle :status="entry.status"/>
+              </li>
+            </ul>
+          </b-list-group-item>
+          <b-list-group-item v-if="tech.licenses">
+            <strong>Licenses:</strong>
+            <ul>
+               <li v-for="license in tech.licenses">
+                {{license}}
+              </li>
+            </ul>
+          </b-list-group-item>
+           <b-list-group-item v-if="tech.links">
+            <strong>Links:</strong>
+            <ul>
+              <li v-for="link in tech.links">
+                {{link}}
+              </li>
+            </ul>
+          </b-list-group-item>
+        </b-list-group>
       </b-card-body>
       <b-card-footer>
         <span >
