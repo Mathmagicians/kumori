@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import About from '../views/About.vue'
-import Components from '../views/TechComponentList.vue'
+import TechComponentsList from '../views/TechComponentList.vue'
 import Errors from '../views/Errors.vue'
 import Exterminator from '../views/Exterminator.vue'
 import Home from '../views/Home.vue'
@@ -26,7 +26,8 @@ export default new Router({
       component: About
     }, {
       path: '/components',
-      component: Components
+      component: TechComponentsList,
+      name: 'component-list'
     }, {
       path: '/exterminator',
       component: Exterminator
@@ -39,11 +40,13 @@ export default new Router({
     }, 
     {
       path:'/components/search',
-      component: Components
+      component: TechComponentsList
     },
     {
       path: '/components/:uid',
-      component: Components
+      component: TechComponentsList,
+      name: 'component',
+      props: true
     }, 
      {
       path: '/components/:uid/edit',

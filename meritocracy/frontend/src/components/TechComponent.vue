@@ -5,7 +5,7 @@
       :v-b-toggle="accordionId">
 			<b-button 
         size="sm" 
-        v-on:click="changeRoute" 
+        v-on:click="activate" 
         variant="link"
         class="mb-2"
         >
@@ -79,8 +79,8 @@ export default {
       }
   },
   methods: {
-    changeRoute: function() {
-      this.$router.push('/components/' + this.tech.uid);
+    activate: function() {
+      this.$router.push({name: 'component', params: { uid: this.tech.uid}})
     },
     edit: function(){
       this.$router.push({ name: 'edit', params: { uid: this.tech.uid } });

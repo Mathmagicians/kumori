@@ -2,7 +2,7 @@
 	<div class="mb1">
     <b-alert show variant="secondary">
             #techmenu is happily governing <b>{{techComponents.length}}</b> components. 
-            {{query.tx}}
+            <p>Active id: {{activeId}}</p>
           </b-alert>
     <b-row>
       <b-col cols="5">
@@ -42,7 +42,7 @@
 
   export default {
   	name: "techComponentsList",
-    beforeRouteUpdate (to, from, next) {
+    beforeRouteUpdate(to, from, next) {
       this.activeId = to.params.uid;
       next();
     },
@@ -58,6 +58,17 @@
             fuzzySearchResults: []
     		}
 		},
+    props: {
+      uid: {
+        type: String,
+        default: ''
+      }
+    },
+    watch: { 
+        uid: function(newVal, oldVal) { 
+          this.activeId = newVal
+        }
+      },
 		components: {
 			TechComponent,
       SearchComponent
@@ -75,7 +86,7 @@
       }
 		},
 		created () {
-      this.activeId = this.$route.params.uid;
+      this.activeId = this.uid;
   		this.loading = true;
   		this.$store.dispatch('fetchTechComponents')
     			.then(techComponents => { this.loading = false});
