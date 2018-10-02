@@ -20,45 +20,35 @@
         Exterminator
       </b-nav-item>
       <b-nav-item to="/meritocracy">
-        <b-img rounded="circle" src="./assets/community.svg" class="image-overlay" />
+        <b-img rounded="circle" src="./assets/meritocracy.svg" class="image-overlay" />
         Meritocracy
       </b-nav-item>
       <b-nav-item to="/about">
-        <b-img rounded="circle" blank blank-color="white" class="image-overlay" />
+        <b-img rounded="circle" src="./assets/about.svg" class="image-overlay" />
         About
       </b-nav-item>
     </b-navbar-nav>
     <b-navbar-nav class="ml-auto">
-      <b-nav-item-dropdown 
-        v-if="isLoggedIn"
-        right>
-         <template 
-          v-if="isEditOn"
-          slot="button-content">
-          <b-button class="btn-round" variant="light">
-            <v-icon name="unlock" color="green"></v-icon>
+      <b-nav-item
+         v-if="isEditOn">
+         <b-button 
+          @click="editOff"
+          class="btn-round" 
+          variant="light">
+            <v-icon name="unlock" color="green"/>
           </b-button>
           Editing
-        </template>
-         <template 
-          v-else
-          slot="button-content">
-          <b-button class="btn-round" variant="light">
-            <v-icon name="lock" color="orange"></v-icon>
+      </b-nav-item>
+       <b-nav-item
+        v-else>
+         <b-button 
+          @click="editOn"
+          class="btn-round" 
+          variant="light">
+            <v-icon name="lock" color="orange"/>
           </b-button>
           Edit
-        </template>
-        <b-dropdown-item 
-          v-if="isEditOn"
-          @click="editOff"
-            >Edit enabled
-        </b-dropdown-item>
-        <b-dropdown-item 
-          v-else
-          @click="editOn">
-          Unlock Edit
-        </b-dropdown-item>
-      </b-nav-item-dropdown>
+      </b-nav-item>
       <b-nav-item-dropdown v-if="isLoggedIn"
         right>
         <template slot="button-content">
