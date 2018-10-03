@@ -10,30 +10,33 @@
         technologies.
       </p>
     </b-alert>
+
     <b-row>
       <b-col cols="5">
-        <search-component 
-          :amounts="amounts" 
-          v-bind:query="query" 
+        <search-component
+          :amounts="amounts"
+          v-bind:query="query"
           v-on:queryString="fuzzySearch($event)"
         >
         </search-component>
       </b-col>
       <b-col cols="7">
-      	<b-alert 
+      	<b-alert
           v-if="loading"
-          show 
+          show
           variant="warning">
-          Loading #techmenu components … 
-      		<v-icon name="spinner" scale="3" spin/></v-icon>
+          Loading #techmenu components …
+      		<v-icon name="spinner" scale="3" spin/>
       	</b-alert>
         <div
           v-else>
-      		<tech-component 
+      		<tech-component
             v-for="component in filteredTechComponents"
             :key="component.name"
+
             v-bind:tech="component" 
             :active="component.uid === activeId">    
+
           </tech-component>
         </div>
       </b-col>
@@ -42,6 +45,7 @@
 </template>
 
 <script>
+
 
   import TechComponent from '../components/TechComponent.vue'
   import SearchComponent from '../components/SearchComponent.vue'
@@ -56,17 +60,19 @@
       this.activeId = to.params.uid;
       next();
     },
+
   	data () {
     		return {
       			loading: false,
-            activeId: '', 
-            query: {
-              string: '',
-              lc: [],
-              tx: []
-            },
-            fuzzySearchResults: []
+      activeId: '',
+      query: {
+        string: '',
+        lc: [],
+        tx: []
+      },
+      fuzzySearchResults: []
     		}
+
 		},
     props: {
       uid: {
@@ -106,14 +112,42 @@
 		created () {
       this.activeId = this.uid;
   		this.loading = true;
+
   		this.$store.dispatch('fetchTechComponents')
-    			.then(techComponents => { this.loading = false});
-		},
-    filters: {
-      techId (tech) {
-        return 'tc-'+tech.uid;
+    			.then(techComponents => { this.loading = false })
+  },
+  filters: {
+    techId (tech) {
+      return 'tc-' + tech.uid
+    }
+  },
+  methods: {
+    selectLifeCycle (list) {
+      this.query.lc = list
+    },
+    fuzzySearch (query, techComponentsList) {
+      const options = {
+        id: 'name',
+        shouldSort: true,
+        includeScore: true,
+        includeMatches: true,
+        threshold: 0.6,
+        location: 0,
+        distance: 50,
+        maxPatternLength: 32,
+        minMatchCharLength: 2,
+        keys: [
+          'name',
+          'description',
+          'usecases'
+        ]
+      }
+      if (this.query.string) {
+        this.$search(query, this.techComponents, options)
+          .then(results => this.fuzzySearchResults = results)
       }
     },
+
     methods: {
       selectLifeCycle( list){
         this.query.lc = list; 
@@ -149,6 +183,8 @@
           //apply all the filters to the list
           return techList.filter( e => filters.every( f =>  f.call( null, e, query)));   
         }
+
     }
   }
+}
 </script>

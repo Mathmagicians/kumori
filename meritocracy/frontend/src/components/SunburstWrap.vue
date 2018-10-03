@@ -22,23 +22,24 @@
 
 <script>
 
-	import {
+import {
 	  breadcrumbTrail,
 	  highlightOnHover,
 	  nodeInfoDisplayer,
 	  sunburst,
 	  zoomOnClick
-	} from 'vue-d3-sunburst'
-	import "vue-d3-sunburst/dist/vue-d3-sunburst.css";
+} from 'vue-d3-sunburst'
+import 'vue-d3-sunburst/dist/vue-d3-sunburst.css'
 
-	export default {
-		name: "SunburstWrap",
-		components: {
-			breadcrumbTrail,
+export default {
+  name: 'SunburstWrap',
+  components: {
+    breadcrumbTrail,
 		    highlightOnHover,
 		    nodeInfoDisplayer,
 		    sunburst,
 		    zoomOnClick
+
 		},
 		props: [
 			'tree'

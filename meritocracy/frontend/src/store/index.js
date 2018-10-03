@@ -61,10 +61,10 @@ export function createStore () {
         ]
       },
       phaseImages: {
-		'buy': require('../assets/buy.svg'),
-		'hold': require('../assets/service.svg'), 
-		'sell': require('../assets/exterminator.svg'), 
-		'maybe': require('../assets/community.svg')
+        'buy': require('../assets/buy.svg'),
+        'hold': require('../assets/service.svg'),
+        'sell': require('../assets/exterminator.svg'),
+        'maybe': require('../assets/community.svg')
 	  },
       techComponents: [],
       meritocracy: [],
@@ -102,15 +102,15 @@ export function createStore () {
       }
     },
     actions: {
-      fetchTechComponents ({ commit}) {
-          return client
-            .fetchTechComponents()
-            .then(techComponents => commit('setTechComponents', techComponents))
+      fetchTechComponents ({ commit }) {
+        return client
+          .fetchTechComponents()
+          .then(techComponents => commit('setTechComponents', techComponents))
       },
       fetchMeritocracy ({ commit }) {
-          return client
-            .fetchMeritocracy()
-            .then(meritocracy => commit('setMeritocracy', meritocracy))
+        return client
+          .fetchMeritocracy()
+          .then(meritocracy => commit('setMeritocracy', meritocracy))
       },
       fetchServices ({ commit }) {
         return client

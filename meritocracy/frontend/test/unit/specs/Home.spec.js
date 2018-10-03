@@ -1,3 +1,4 @@
+
 import { shallowMount, mount, createLocalVue } from '@vue/test-utils'
 import { expect } from 'chai'
 import  Home  from '@/views/Home.vue'
@@ -11,5 +12,6 @@ describe('Home', () => {
   	expect(wrapper.isVueInstance()).to.equal(true)
   	expect(wrapper.name()).to.equal('home')
   	expect(wrapper.find('#techmenu-welcome').text()).to.include('techmenu')
+
   })
 })

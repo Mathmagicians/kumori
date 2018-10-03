@@ -1,4 +1,5 @@
 <template>
+
   <b-card no-body :id="tech.id">
     <span 
       slot="header" 
@@ -6,6 +7,7 @@
 			<b-button 
         size="sm" 
         v-on:click="activate" 
+
         variant="link"
         class="mb-2"
         >
@@ -13,6 +15,7 @@
       </b-button>
 			<life-cycle :status="tech.status" to="about" class="status-floater"></life-cycle>
 		</span>
+
 
     <b-collapse 
       :id="accordionId" 
@@ -88,6 +91,7 @@
             class="btn-round">
             <v-icon name="pen" color="green" scale="1"/></v-icon>
           </b-button>
+
         </span>
       </b-card-footer>
     </b-collapse>
@@ -97,7 +101,6 @@
 <script>
 import LifeCycle from '../components/LifeCycle.vue'
 import filterMixin from '../mixins/filters.js'
-
 
 export default {
   name: 'techComponent',
@@ -118,6 +121,7 @@ export default {
     filterMixin
   ],
   computed: {
+
     accordionId: function() {
       return 'accordion-' + this.tech.uid;
     },
@@ -131,6 +135,7 @@ export default {
     },
     edit: function(){
       this.$router.push({ name: 'edit', params: { uid: this.tech.uid } });
+
     }
   }
 }

@@ -9,16 +9,18 @@
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
     "test": "cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text mocha-webpack --webpack-config webpack.config.js --require test/setup.js test/**/*.spec.js",
     "test:e2e": "NODE_ENV=test node test/e2e/runner.js",
-    "lint": "eslint --ext .js,.vue src test/unit"
+    "lint": "eslint --fix --ext .js,.vue src test/unit"
   },
   "dependencies": {
+    "api-client": "^1.1.3",
     "axios": "0.18.0",
+    "bootstrap-vue": "2.0.0-rc.11",
+    "jquery": "^3.3.1",
     "vue": "^2.5.2",
     "vue-d3-sunburst": "0.1.6",
     "vue-fuse": "^2.0.2",
-    "vue-router": "^3.0.1",
     "vue-resource": "1.5.1",
-    "bootstrap-vue": "2.0.0-rc.11",
+    "vue-router": "^3.0.1",
     "vuex": "^3.0.1",
     "vuex-router-sync": "^5.0.0"
   },

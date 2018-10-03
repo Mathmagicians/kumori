@@ -5,6 +5,7 @@
     <b-card-group deck>
       <b-card v-for="type in types"
           :key="type.name"
+
           :title="type | capitalize"
           :img-src="images(type)"
           img-alt="Image"
@@ -15,7 +16,7 @@
       <div slot="footer" class="text-center">
         <h6>Lifecycle phases for {{type | capitalize}}</h6>
         <b-list-group flush>
-          <b-list-group-item v-for="item in itemsForType[type]">
+          <b-list-group-item v-for="item in itemsForType[type]" :key="item">
             <life-cycle :status="item"></life-cycle>
           </b-list-group-item>
         </b-list-group>
@@ -27,13 +28,13 @@
 
 <script>
 
-  import LifeCycle from '../components/LifeCycle.vue'
+import LifeCycle from '../components/LifeCycle.vue'
 
-  export default {
+export default {
 
-    name: 'about',
+  name: 'about',
 
-    phaseText:
+  phaseText:
     {
       'maybe': `
       <h6>About the Maybe Phase</h6>
@@ -63,36 +64,35 @@
       The day has come, where a technology has reached the end of the lifecycle, and should be retired. It is outdated, we have better alternatives, and it is really troublesome to keep supporting this oldie.
       <p>For the sake of the planet, let us reduce the carbon footprint, and clear this one from the data centers. </p>`
     },
-    components: {
-      LifeCycle
+  components: {
+    LifeCycle
+  },
+  computed: {
+    types: function () {
+      let temp = this.$store.state.lifeCycle.items.map(item => item.type).filter((v, i, a) => a.indexOf(v) === i)
+      return temp
     },
-    computed: {
-      types: function() {
-        let temp = this.$store.state.lifeCycle.items.map( item => item.type).filter((v, i, a) => a.indexOf(v) === i);
-        return temp;
-
-      },
-      itemsForType: function() {
-        const namesForType = type =>  this.$store.state.lifeCycle.items.filter( item => item.type === type).map( item => item.name);
-        const myMap = new Map();
-        this.types.forEach( type =>  myMap[type] = namesForType(type));
-        return myMap;
-      }
+    itemsForType: function () {
+      const namesForType = type => this.$store.state.lifeCycle.items.filter(item => item.type === type).map(item => item.name)
+      const myMap = new Map()
+      this.types.forEach(type => myMap[type] = namesForType(type))
+      return myMap
+    }
+  },
+  filters: {
+    capitalize: function (lower) {
+      return lower.charAt(0).toUpperCase() + lower.substr(1)
+    }
+  },
+  methods: {
+    images: function (type) {
+      return this.$store.state.phaseImages[type]
     },
-    filters: {
-      capitalize: function( lower) {
-        return lower.charAt(0).toUpperCase() + lower.substr(1);
-      }
-    },
-    methods: {
-      images: function(type) {
-        return this.$store.state.phaseImages[type];
-      },
-      texts: function(type) {
-        return this.$options.phaseText[type];
-      }
+    texts: function (type) {
+      return this.$options.phaseText[type]
     }
   }
+}
 </script>
 
 <style scoped>

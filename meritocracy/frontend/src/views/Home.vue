@@ -1,4 +1,5 @@
 <template>
+
 	 <div id="home">
     <p id="techmenu-welcome">
        Based on principles of idea meritocracy, we aim to make rational technology decisions. 
@@ -32,14 +33,18 @@
         variant="link lg" to="/components">Checkout the #techmenu...</b-btn>
       <b-btn variant="link lg" to="/about">Explain more...</b-btn>
     </b-jumbotron>  
+
   </div>
 </template>
 
 <script>
 
+
   export default {
   	name: 'home',
+
   }
 
-</script>
+}
 
+</script>

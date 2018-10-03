@@ -13,8 +13,6 @@ import TechComponentEditor from '../components/TechComponentEditor.vue'
 
 Vue.use(Router)
 
-
-
 export default new Router({
   mode: 'history',
   routes: [
@@ -37,10 +35,12 @@ export default new Router({
     }, {
       path: '/meritocracy',
       component: Meritocracy
-    }, 
+    },
     {
+
       path:'/components/search',
       component: TechComponentsList
+
     },
     {
       path: '/components/:uid',
@@ -57,6 +57,7 @@ export default new Router({
     {
       path: '/db',
       component: Database
+
     }, 
     {
       path: '/login',
@@ -69,8 +70,9 @@ export default new Router({
       component: Errors
     }, 
     {
+
       path: '*',
-      redirect:  '/404'
+      redirect: '/404'
     }
   ]
 })

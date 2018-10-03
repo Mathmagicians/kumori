@@ -1,5 +1,8 @@
 .PHONY: setup build unit e2e test serve-start serve-logs serve-stop shell
 
+autofix:
+	 find ./src -iname "*.js" -type f -exec echo {} \;
+
 setup:
 	@docker run --rm -dt --name setup -v ${PWD}:/tmp -w /tmp node
 	@docker exec setup npm install
@@ -13,6 +16,9 @@ unit:
 
 e2e:
 	@docker run --rm -v ${PWD}:/tmp -w /tmp node npm run e2e
+
+lint:
+	@docker run --rm -v ${PWD}:/tmp -w /tmp node npm run lint
 
 test: unit e2e
 

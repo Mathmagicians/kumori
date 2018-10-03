@@ -1,4 +1,5 @@
 export default {
+
 	filters: {
 		capitalize: function( lower){
 			return lower.charAt(0).toUpperCase() + lower.substr(1);
@@ -11,3 +12,4 @@ export default {
 	      }
 	}
 }
+
