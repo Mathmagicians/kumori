@@ -25,6 +25,7 @@ import {
   times,
   pen,
   lock,
+  toolbox,
   unlock,
   user
 } from 'vue-awesome/icons'

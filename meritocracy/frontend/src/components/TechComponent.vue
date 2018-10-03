@@ -30,12 +30,19 @@
           </b-list-group-item>
           <b-list-group-item v-if="tech.usecases && tech.usecases.length>0">
              <strong>Usecases:</strong>
-             <ul v-for="uc in tech.usecases" >
-              <li>
-                <p> {{uc.name}} <life-cycle :status="uc.status"/></p>
+            <b-row 
+              v-for="uc in tech.usecases" 
+              class="justify-content-md-center">
+              <b-col><b-button 
+                    class="btn-round" 
+                    variant="light">
+                      <v-icon name="toolbox" color="green"/>
+                  </b-button></b-col>
+              <b-col cols="11">
+                <b> {{uc.name}} <life-cycle :status="uc.status"/></b>
                 <p> {{uc.description}}</p>
-              </li>
-            </ul>
+              </b-col>
+          </b-row>
           </b-list-group-item>
           <b-list-group-item v-if="tech.log">
             <strong>Change Log:</strong>
@@ -133,4 +140,12 @@ export default {
 .status-floater {
   float: right;
 }
+  .usecase{
+    list-style-type:none;
+  }
+
+.btn-round {
+  border-radius: 50px;
+}
+
 </style>

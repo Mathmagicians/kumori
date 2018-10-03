@@ -22,6 +22,16 @@
         "description": "Developer commuication channel, for instant messaging, designed to improve a teams fusion with its Continuos Delivery pipeline.",
         "status": "testing",
         "scope": "Typical Taoists Inc"
+      },
+      {
+        "name": "Storage of machine secrets",
+        "description": "Although slack makes secrets like data passwords easily accessible, it is a terrible idea to use it for sensitive information.",
+        "status": "dontuse"
+      },
+      {
+        "name": "Hook up of Software Life Cycle Development tools",
+        "description": "Many teams like to have messages from the continuos delivery pipleine streamed in as part of the team conversation. Also alerts and monitoring events could make their way into the teams slack channel.",
+        "status": "POC"
       }
     ],
     "log": [{
