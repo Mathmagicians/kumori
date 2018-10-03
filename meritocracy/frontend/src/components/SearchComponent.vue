@@ -7,7 +7,7 @@
 					v-model.sync="searchInput"
 					required
 					v-on:input="sendSearchQueryEvent"
-					:placeholder="'Search in '+ amounts.components +' technology components ...'  ">
+					:placeholder="'Search in '+ amounts._total +' technology components ...'  ">
 				</b-form-input>
 				<b-input-group-append>
 					<b-button v-on:click="sendSearchQueryEvent"
@@ -38,24 +38,30 @@
 				tag="article"
 				class="card-lifecycle">
 				<div slot="header" >
-					<b-button :variant="'outline-'+btnVariant(type)" 
+					<b-button 
+						:variant="'outline-'+btnVariant(type)" 
+						class="phase"
 						@click="setPhase(type)"
 						:pressed="phaseModel[type]" >
 						<b-img rounded :src="images(type)" class="image-menu" top/>
-						{{type | capitalize}}
+						<p>{{type | capitalize}}</p>
+						<b-badge pill>{{amountsForType[type]}}</b-badge>	
 					</b-button>
-					<b-badge pill>12</b-badge>			
+							
 				</div>
 
 				<div class="card-text">
 						<b-button-group vertical>
-							<life-cycle 
-								:id="item+'selector'" 
-								v-for="item in itemsForType[type]" 
-								:status="item" 
-								v-on:selected="setLcQuery(item)"
-								:isPressed.sync="lcModel[item]">	
-							</life-cycle>
+							<span
+								v-for="item in itemsForType[type]" >
+								<life-cycle 
+									:id="item+'selector'" 
+									:status="item" 
+									v-on:selected="setLcQuery(item)"
+									:isPressed.sync="lcModel[item]">	
+								</life-cycle>
+								<b-badge pill>{{amounts[item]}}</b-badge>	
+							</span>
 						</b-button-group>
 					</div>
 			</b-card>
@@ -86,7 +92,7 @@
 	export default {
 		name:"searchComponent",
 		props: {
-			amounts:{ required: false},
+			amounts:{ required: true},
 			query: {required: true},
 		},
 		components: {
@@ -127,6 +133,12 @@
 	      },
 	      filterOn(){
 	      	return this.searchInput !== ''|| Object.values(this.lcModel).some( lcValue => lcValue ) || this.query.tx.length !== 0;
+	      },
+	      amountsForType(){
+	      	return this.types.reduce( 
+	      		(acc, t) => ({...acc, [t]: 
+	      			this.itemsForType[t].reduce( (sum, lc) => (sum + this.amounts[lc]), 0)
+	      	}), {})
 	      }
 	    },
 	    filters: {
@@ -193,8 +205,8 @@
 }
 
 .image-menu {
-    width: 64px;
-    height: 64px;
+    width: 96px;
+    height: 96px;
     background-color: #ffffff;
     border-style: solid;
     border-width: thin;
@@ -220,4 +232,8 @@
 		.control-left {
 		 height: 100%;
 	 }
+	 .phase {
+		min-width: 8em;
+  		max-width: 8em;
+	}
 </style>

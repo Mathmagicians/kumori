@@ -45,6 +45,10 @@
 
   import TechComponent from '../components/TechComponent.vue'
   import SearchComponent from '../components/SearchComponent.vue'
+  
+  const lifeCycleFilter = (tech, query) => query.lc.length === 0 || query.lc.includes(tech.status)
+  const useCaseFilter = (tech, query) => query.tx.length === 0 || query.tx.every( tx => tech.tags? tech.tags.includes( tx ):false)
+          
 
   export default {
   	name: "techComponentsList",
@@ -84,8 +88,16 @@
     		return this.$store.state.techComponents
   		},
       amounts () {
-        let am =  {components: this.techComponents.length};
-        return am;
+        let am = {}
+        am = {...am, _total: this.techComponents.length}
+        //phases
+
+        //life cycle
+        this.$store.getters.lifeCycle.items.forEach( 
+          item => am = { ...am, [item.name]: this.techComponents.filter( t => t.status === item.name ).length}
+        )
+        
+        return am
       },
       filteredTechComponents() {
         return this.filterList( this.techComponents, this.query );           
