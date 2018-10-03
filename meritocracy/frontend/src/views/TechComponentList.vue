@@ -1,9 +1,15 @@
 <template>
 	<div class="mb1">
     <b-alert show variant="secondary">
-            #techmenu is happily governing <b>{{techComponents.length}}</b> components. 
-            <p>Active id: {{activeId}}</p>
-          </b-alert>
+      <p>#techmenu is happily governing 
+        <b-badge variant="secondary">{{techComponents.length}}</b-badge>
+         technologies.
+      </p>
+      <p v-if="filteredTechComponents.length !== techComponents.length">Your search returned 
+        <b-badge variant="secondary">{{filteredTechComponents.length}}</b-badge>
+        technologies.
+      </p>
+    </b-alert>
     <b-row>
       <b-col cols="5">
         <search-component 
