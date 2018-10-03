@@ -31,26 +31,37 @@
           <b-list-group-item v-if="tech.usecases && tech.usecases.length>0">
              <strong>Usecases:</strong>
             <b-row 
-              v-for="uc in tech.usecases" 
+              v-for="(uc, index) in tech.usecases" 
               class="justify-content-md-center">
               <b-col><b-button 
                     class="btn-round" 
                     variant="light">
-                      <v-icon name="toolbox" color="green"/>
+                      <v-icon 
+                        v-if="index===0"
+                        scale="1"
+                        name="toolbox" 
+                        color="green" />
+                      <v-icon 
+                        v-else
+                        scale="1"
+                        name="toolbox" 
+                        color="grey" />
                   </b-button></b-col>
-              <b-col cols="11">
-                <b> {{uc.name}} <life-cycle :status="uc.status"/></b>
+              <b-col cols="9">
+                <b-badge 
+                  v-if="index===0"
+                  variant="success">Primary</b-badge>
+                 <b-badge 
+                  v-else
+                  variant="secondary">Secondary</b-badge>
+                <b> {{uc.name}}</b>
                 <p> {{uc.description}}</p>
+                <p v-if="uc.scope"><b>Scope:</b> {{uc.scope}}</p>
+              </b-col>
+              <b-col>
+                 <life-cycle :status="uc.status"/>
               </b-col>
           </b-row>
-          </b-list-group-item>
-          <b-list-group-item v-if="tech.log">
-            <strong>Change Log:</strong>
-            <ul>
-              <li v-for="entry in tech.log">
-                {{entry.date}}: {{entry.description}}: <life-cycle :status="entry.status"/>
-              </li>
-            </ul>
           </b-list-group-item>
           <b-list-group-item v-if="tech.licenses">
             <strong>Licenses:</strong>
@@ -67,6 +78,34 @@
                 {{link}}
               </li>
             </ul>
+          </b-list-group-item>
+          <b-list-group-item v-if="tech.log">
+            <strong>Change Log:</strong>
+            <b-row 
+              v-for="(entry, index) in tech.log"
+              class="justify-content-md-center">
+                <b-col>
+                    <v-icon 
+                      v-if="index===1"
+                      name="play" 
+                      scale="0.5"
+                      color="green"/>
+                    <v-icon 
+                      v-else
+                      scale="0.5"
+                      name="play" 
+                      color="grey"/>
+                </b-col>
+                <b-col cols="2">
+                  <em>{{entry.date}}</em>
+                </b-col>
+                <b-col cols="7">
+                    {{entry.description}}
+              </b-col>
+              <b-col>
+                <life-cycle :status="entry.status"/>
+              </b-col>
+            </b-row>
           </b-list-group-item>
         </b-list-group>
       </b-card-body>

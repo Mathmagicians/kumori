@@ -31,7 +31,7 @@
       {
         "name": "Hook up of Software Life Cycle Development tools",
         "description": "Many teams like to have messages from the continuos delivery pipleine streamed in as part of the team conversation. Also alerts and monitoring events could make their way into the teams slack channel.",
-        "status": "POC"
+        "status": "poc"
       }
     ],
     "log": [{
