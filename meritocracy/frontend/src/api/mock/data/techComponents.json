@@ -13,9 +13,31 @@
       "Development team instant messaging"
     ],
     "licenses": [
-      "See license plans at Slack.com"
+      {
+        "type": "commercial" ,
+        "description":"See license plans at Slack.com",
+        "ref": "https://slack.com/"
+      },
+       {
+        "type": "community edition" ,
+        "description":"See license plans at Slack.com - not allowed for commercial use.",
+        "ref": "https://slack.com/"
+      }
     ],
-    "links": [],
+    "links": [
+      {
+        "type": "vendor",
+        "ref": "https://slack.com/"
+      },
+      {
+        "type": "techmenu work",
+        "ref": "https://slack.com/"
+      },
+      {
+        "type": "analysis",
+        "ref": "analysis"
+      }
+    ],
     "usecases": [
       {
         "name": "Development team instant messaging",
@@ -25,7 +47,7 @@
       },
       {
         "name": "Storage of machine secrets",
-        "description": "Although slack makes secrets like data passwords easily accessible, it is a terrible idea to use it for sensitive information.",
+        "description": "Although slack makes secrets like data passwords easily accessible, it is a terrible idea to use it for sensitive information. Even worse, than a yellow postit note with the db password on your desk.",
         "status": "dontuse"
       },
       {

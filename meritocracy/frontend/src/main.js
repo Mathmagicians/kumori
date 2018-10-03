@@ -12,6 +12,7 @@ import {
 import BootstrapVue from 'bootstrap-vue'
 // add he font awesome-icons you need in the application here
 import {
+  clipboard,
   flag,
   thumbs,
   question,
@@ -21,10 +22,11 @@ import {
   heart,
   comment,
   exclamation,
+  link,
+  lock,
+  pen,
   play,
   times,
-  pen,
-  lock,
   toolbox,
   unlock,
   user

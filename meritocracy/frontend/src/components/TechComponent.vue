@@ -26,27 +26,36 @@
           </b-list-group-item>
           <b-list-group-item v-if="tech.description">
             <strong>Description:</strong>
-            <p>{{tech.description}}</p>
+            <b-row>
+              <b-col cols="1">
+                 <v-icon 
+                  name="clipboard"
+                  color="grey"  />
+              </b-col>
+              <b-col cols="9">
+                <p>{{tech.description}}</p>
+              </b-col>
+              <b-col>
+              </b-col>
+            </b-row>
           </b-list-group-item>
           <b-list-group-item v-if="tech.usecases && tech.usecases.length>0">
              <strong>Usecases:</strong>
             <b-row 
               v-for="(uc, index) in tech.usecases" 
               class="justify-content-md-center">
-              <b-col><b-button 
-                    class="btn-round" 
-                    variant="light">
-                      <v-icon 
-                        v-if="index===0"
-                        scale="1"
-                        name="toolbox" 
-                        color="green" />
-                      <v-icon 
-                        v-else
-                        scale="1"
-                        name="toolbox" 
-                        color="grey" />
-                  </b-button></b-col>
+              <b-col cols="1">
+                <v-icon 
+                  v-if="index===0"
+                  scale="1"
+                  name="toolbox" 
+                  color="green" />
+                <v-icon 
+                  v-else
+                  scale="1"
+                  name="toolbox" 
+                  color="grey" />
+              </b-col>
               <b-col cols="9">
                 <b-badge 
                   v-if="index===0"
@@ -65,28 +74,57 @@
           </b-list-group-item>
           <b-list-group-item v-if="tech.licenses">
             <strong>Licenses:</strong>
-            <ul>
-               <li v-for="license in tech.licenses">
-                {{license}}
-              </li>
-            </ul>
+             <b-row 
+              v-for="license in tech.licenses" 
+              class="justify-content-md-center">
+              <b-col cols="1">
+                <v-icon 
+                  scale="0.5"
+                  name="clipboard" 
+                  color="grey" />
+              </b-col>
+              <b-col cols="9" v-if="license">
+                <b-badge :variant="license.type === 'commercial'?'danger':'warning'">{{license.type}}</b-badge>
+                {{license.description}}
+                   <b-button 
+                  variant="link lg"
+                  :href="license.ref">
+                  {{license.ref}}
+                </b-button>
+              </b-col>
+              <b-col/>
+            </b-row>
           </b-list-group-item>
-           <b-list-group-item v-if="tech.links">
+           <b-list-group-item v-if="tech.links && tech.links.length>0">
             <strong>Links:</strong>
-            <ul>
-              <li v-for="link in tech.links">
-                {{link}}
-              </li>
-            </ul>
+            <b-row 
+              v-for="(link, index) in tech.links" 
+              class="justify-content-md-center">
+              <b-col cols="1">
+                <v-icon 
+                  scale="0.5"
+                  name="link" 
+                  color="grey" />
+              </b-col>
+              <b-col cols="9">
+                <b-badge>{{link.type}}</b-badge>
+                <b-button 
+                  variant="link lg"
+                  :href="link.ref">
+                  {{link.ref}}
+                </b-button>
+              </b-col>
+              <b-col/>
+            </b-row>
           </b-list-group-item>
           <b-list-group-item v-if="tech.log">
             <strong>Change Log:</strong>
             <b-row 
               v-for="(entry, index) in tech.log"
               class="justify-content-md-center">
-                <b-col>
+                <b-col cols="1">
                     <v-icon 
-                      v-if="index===1"
+                      v-if="index===0"
                       name="play" 
                       scale="0.5"
                       color="green"/>
