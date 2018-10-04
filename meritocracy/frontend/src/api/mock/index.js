@@ -33,6 +33,6 @@ export default {
   },
   createTechComponent(techComponent){
     console.log("mocking create")
-    return fetch({...techComponent, uid: "Date.now()"}, 100)
+    return fetch({...techComponent, uid: Date.now()}, 100)
   }
 }
