@@ -26,5 +26,13 @@ export default {
 
   fetchTaxonomy () {
     return fetch(taxonomy,0);
+  },
+  editTechComponent( techComponent ){
+      console.log("mocking edit")
+      return fetch( techComponent, 100)
+  },
+  createTechComponent(techComponent){
+    console.log("mocking create")
+    return fetch({...techComponent, uid: "Date.now()"}, 100)
   }
 }

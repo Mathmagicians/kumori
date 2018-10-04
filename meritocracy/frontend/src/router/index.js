@@ -55,6 +55,12 @@ export default new Router({
       props: true
     },
     {
+      path: 'components/create',
+      name: 'create',
+      component: TechComponentEditor,
+      props: true
+    },
+    {
       path: '/db',
       component: Database
     }, 

@@ -1,6 +1,19 @@
 <template>
 	<div class="mb1">
     <b-alert show variant="secondary">
+       <b-button id="createTechButton"
+        class="status-floater btn-round"
+        v-if="$store.getters.isEditOn"
+        variant="light"
+        @click="createNewTech">
+        <v-icon name="plus" 
+        color="green"/>
+      </b-button>
+      <b-popover 
+        target="createTechButton"
+        triggers="hover focus"
+        title="Create New Tech"
+        content="Add a new technology to #techmenu"/>
       <p>#techmenu is happily governing 
         <b-badge variant="secondary">{{techComponents.length}}</b-badge>
          technologies.
@@ -88,15 +101,10 @@
     		return this.$store.state.techComponents
   		},
       amounts () {
-        let am = {}
-        am = {...am, _total: this.techComponents.length}
-        //phases
-
-        //life cycle
+        let am = {_total: this.techComponents.length}
         this.$store.getters.lifeCycle.items.forEach( 
           item => am = { ...am, [item.name]: this.techComponents.filter( t => t.status === item.name ).length}
         )
-        
         return am
       },
       filteredTechComponents() {
@@ -148,7 +156,20 @@
           const filters = [isQueryStringInFuzzySearch, isLifeCycleIncluded, isUseCaseIncluded];
           //apply all the filters to the list
           return techList.filter( e => filters.every( f =>  f.call( null, e, query)));   
-        }
+        },
+        createNewTech(){
+          this.$router.push({ name: 'create'});
+       }
     }
   }
 </script>
+
+<style scoped>
+.status-floater {
+  float: right;
+}
+
+.btn-round {
+  border-radius: 50px;
+}
+</style>
