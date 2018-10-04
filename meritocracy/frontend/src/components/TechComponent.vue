@@ -40,7 +40,8 @@
             </b-row>
           </b-list-group-item>
           <b-list-group-item v-if="tech.usecases && tech.usecases.length>0">
-             <strong>Usecases:</strong>
+             <strong>Usecases</strong>
+             <b-badge>{{tech.usecases.length}}</b-badge>:
             <b-row 
               v-for="(uc, index) in tech.usecases" 
               class="justify-content-md-center">
@@ -79,7 +80,6 @@
               class="justify-content-md-center">
               <b-col cols="1">
                 <v-icon 
-                  scale="0.5"
                   name="clipboard" 
                   color="grey" />
               </b-col>
@@ -102,7 +102,6 @@
               class="justify-content-md-center">
               <b-col cols="1">
                 <v-icon 
-                  scale="0.5"
                   name="link" 
                   color="grey" />
               </b-col>
@@ -126,11 +125,9 @@
                     <v-icon 
                       v-if="index===0"
                       name="play" 
-                      scale="0.5"
                       color="green"/>
                     <v-icon 
                       v-else
-                      scale="0.5"
                       name="play" 
                       color="grey"/>
                 </b-col>

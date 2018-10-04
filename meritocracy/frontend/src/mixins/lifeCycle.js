@@ -61,7 +61,7 @@ export default {
       },
 
       buildTreeForSunburst( tree ){
-        let treeObj = {name: "#techmenu taxonomy"};
+        let treeObj = {name: "#techmenu"};
           treeObj.children = tree;
           return treeObj;
       },
