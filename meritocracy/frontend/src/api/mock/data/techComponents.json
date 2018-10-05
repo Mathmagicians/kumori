@@ -43,7 +43,14 @@
         "name": "Development team instant messaging",
         "description": "Developer commuication channel, for instant messaging, designed to improve a teams fusion with its Continuos Delivery pipeline.",
         "status": "testing",
-        "scope": "Typical Taoists Inc"
+        "scope": "Typical Taoists Inc",
+        "tags": [ 
+          "Delivery Services",
+          "Development",
+          "Design and Development",
+          "Developer communication",
+          "Development team instant messaging"
+        ],
       },
       {
         "name": "Storage of machine secrets",
@@ -66,7 +73,25 @@
         "description": "Added to #techmenu",
         "status": "experimental"
       }
+    ],
+    "techdebt": [
+      {
+        "date": "2018-02-01",
+        "reporter": "themathmagician",
+        "type": "api",
+        "description":"Problems when reconnecting from office, need to login every time",
+        "score": "1"
+      }
+    ],
+    "comments": [
+      {
+        "date": "2018-02-01",
+        "reporter": "themathmagician",
+        "description":"I experience problems when reconnecting, will report this as tech debt",
+        "score": 2
+      }
     ]
+
   },
   {
     "uid": "a4d2-3df1-e82b-bb44-6d6b-a548-466d-4a50",
