@@ -74,12 +74,19 @@
         "status": "experimental"
       }
     ],
-    "techdebt": [
+    "debt": [
       {
         "date": "2018-02-01",
         "reporter": "themathmagician",
         "type": "api",
-        "description":"Problems when reconnecting from office, need to login every time",
+        "description":"Design of connectivity adapter seems broken, and has been reported as an error in backlog for a the last 6 months without a fix.",
+        "score": "2"
+      },
+      {
+        "date": "2018-02-01",
+        "reporter": "themathmagician",
+        "type": "structural",
+        "description":"Setup with copying data trough zones seems redundant.",
         "score": "1"
       }
     ],

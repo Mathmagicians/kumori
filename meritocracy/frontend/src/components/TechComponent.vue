@@ -142,11 +142,58 @@
               </b-col>
             </b-row>
           </b-list-group-item>
+          <b-list-group-item v-if="tech.debt">
+            <strong>Technical debt:</strong>
+            <b-row 
+              v-for="(entry, index) in tech.debt"
+              class="justify-content-md-center">
+                <b-col cols="1">
+                    <v-icon 
+                      v-if="entry.score >= 2"
+                      name="fire" 
+                      color="orange"/>
+                    <v-icon 
+                      v-else
+                      name="fire" 
+                      color="grey"/>
+                </b-col>
+                <b-col cols="2">
+                  <em>{{entry.date}}</em>
+                </b-col>
+                <b-col cols="7">
+                    {{entry.description}}
+              </b-col>
+              <b-col>
+                 by <em>{{entry.reporter}}</em>
+              </b-col>
+            </b-row>
+          </b-list-group-item>
+          <b-list-group-item>
+            <strong>Comments:</strong>
+            <b-row 
+              v-for="(entry, index) in tech.comments"
+              class="justify-content-md-center">
+                <b-col cols="1">
+                    <v-icon 
+                      name="comment" 
+                      color="grey"/>
+                </b-col>
+                <b-col cols="2">
+                  <em>{{entry.date}}</em>
+                </b-col>
+                <b-col cols="7">
+                    {{entry.description}}
+              </b-col>
+              <b-col>
+                 <em>by {{entry.reporter}}</em>
+              </b-col>
+            </b-row>
+          </b-list-group-item>
         </b-list-group>
       </b-card-body>
       <b-card-footer>
         <span >
-					<b-button variant="outline-secondary sm" class="btn-round">
+          <b-button variant="outline-secondary sm" class="btn-round">
             <v-icon name="heart" scale="1"/></v-icon>
           </b-button>
           <b-button variant="outline-secondary sm" class="btn-round">
