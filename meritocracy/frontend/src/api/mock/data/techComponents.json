@@ -50,7 +50,7 @@
           "Design and Development",
           "Developer communication",
           "Development team instant messaging"
-        ],
+        ]
       },
       {
         "name": "Storage of machine secrets",
@@ -87,11 +87,10 @@
       {
         "date": "2018-02-01",
         "reporter": "themathmagician",
-        "description":"I experience problems when reconnecting, will report this as tech debt",
+        "description":" I experience problems when reconnecting, will report this as tech debt",
         "score": 2
       }
     ]
-
   },
   {
     "uid": "a4d2-3df1-e82b-bb44-6d6b-a548-466d-4a50",
