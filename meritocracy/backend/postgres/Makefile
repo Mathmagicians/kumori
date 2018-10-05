@@ -33,22 +33,20 @@ functions: database
 	@docker exec pgrunner psql -h postgres -U ${PGPASSWORD} -d ${PGDATABASE} -f ./backend/postgres/functions/row_updated.sql
 
 tables: functions
+	@docker exec pgrunner psql -h postgres -U ${PGPASSWORD} -d ${PGDATABASE} -f ./backend/postgres/tables/api.taxonomy.sql
+	@docker exec pgrunner psql -h postgres -U ${PGPASSWORD} -d ${PGDATABASE} -f ./backend/postgres/tables/api.statuses.sql
+	@docker exec pgrunner psql -h postgres -U ${PGPASSWORD} -d ${PGDATABASE} -f ./backend/postgres/tables/api.scopes.sql
 	@docker exec pgrunner psql -h postgres -U ${PGPASSWORD} -d ${PGDATABASE} -f ./backend/postgres/tables/api.components.sql
 	@docker exec pgrunner psql -h postgres -U ${PGPASSWORD} -d ${PGDATABASE} -f ./backend/postgres/tables/api.comments.sql
-	@docker exec pgrunner psql -h postgres -U ${PGPASSWORD} -d ${PGDATABASE} -f ./backend/postgres/tables/api.taxonomy.sql
-	@docker exec pgrunner psql -h postgres -U ${PGPASSWORD} -d ${PGDATABASE} -f ./backend/postgres/tables/api.scopes.sql
-	@docker exec pgrunner psql -h postgres -U ${PGPASSWORD} -d ${PGDATABASE} -f ./backend/postgres/tables/api.statuses.sql
+	@docker exec pgrunner psql -h postgres -U ${PGPASSWORD} -d ${PGDATABASE} -f ./backend/postgres/tables/api.links.sql
 	@docker exec pgrunner psql -h postgres -U ${PGPASSWORD} -d ${PGDATABASE} -f ./backend/postgres/tables/api.usecases.sql
+	@docker exec pgrunner psql -h postgres -U ${PGPASSWORD} -d ${PGDATABASE} -f ./backend/postgres/tables/api.component_taxonomy.sql
 
-views:
-	@docker exec pgrunner psql -h postgres -U ${PGPASSWORD} -d ${PGDATABASE} -f ./backend/postgres/tables/api.components.sql
-	@docker exec pgrunner psql -h postgres -U ${PGPASSWORD} -d ${PGDATABASE} -f ./backend/postgres/tables/api.comments.sql
-	@docker exec pgrunner psql -h postgres -U ${PGPASSWORD} -d ${PGDATABASE} -f ./backend/postgres/tables/api.taxonomy.sql
-	@docker exec pgrunner psql -h postgres -U ${PGPASSWORD} -d ${PGDATABASE} -f ./backend/postgres/tables/api.scopes.sql
-	@docker exec pgrunner psql -h postgres -U ${PGPASSWORD} -d ${PGDATABASE} -f ./backend/postgres/tables/api.statuses.sql
-	@docker exec pgrunner psql -h postgres -U ${PGPASSWORD} -d ${PGDATABASE} -f ./backend/postgres/tables/api.usecases.sql
+views: tables
+	@docker exec pgrunner psql -h postgres -U ${PGPASSWORD} -d ${PGDATABASE} -f ./backend/postgres/views/api.w_usecases.sql
+	@docker exec pgrunner psql -h postgres -U ${PGPASSWORD} -d ${PGDATABASE} -f ./backend/postgres/views/api.w_components.sql
 
-schema: tables views
+schema: views
 
 fixture:
 	@docker exec pgrunner ./backend/postgres/json2sql.sh

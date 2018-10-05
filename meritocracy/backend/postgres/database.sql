@@ -3,7 +3,7 @@ SET client_min_messages TO WARNING;
 -- Create Database
 DROP DATABASE IF EXISTS meritocracy;
 
-CREATE DATABASE meritocracy;
+CREATE DATABASE meritocracy ENCODING 'utf-8';
 
 GRANT CONNECT ON DATABASE meritocracy TO meritocracy;
 

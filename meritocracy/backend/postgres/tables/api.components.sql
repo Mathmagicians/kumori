@@ -6,10 +6,16 @@ CREATE TABLE api.components (
     id serial NOT NULL,
     name TEXT NOT NULL,
     description TEXT NOT NULL,
+    taxonomy integer NOT NULL,
+    status integer NOT NULL,
     modified TIMESTAMP without TIME zone NOT NULL,
     modifiedby TEXT NOT NULL,
     deleted boolean NOT NULL,
-    PRIMARY KEY (id)
+    PRIMARY KEY (id),
+    CONSTRAINT taxonomy FOREIGN KEY (taxonomy) REFERENCES api.taxonomy (id)
+        MATCH SIMPLE ON UPDATE NO ACTION ON DELETE NO ACTION,
+    CONSTRAINT status FOREIGN KEY (status) REFERENCES api.statuses (id)
+        MATCH SIMPLE ON UPDATE NO ACTION ON DELETE NO ACTION
 );
 
 DROP TRIGGER IF EXISTS components_insert ON api.comments;
