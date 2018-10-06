@@ -22,16 +22,18 @@ SELECT
     ) as tags,
     json_build_array() AS licenses,
     (
-      SELECT array_to_json(array_agg(co.url))
-              FROM api.links AS co
-              WHERE co.component = component.id
+      SELECT array_to_json(array_agg(json_build_object(
+        'type',co.type,
+        'ref',co.ref)))
+      FROM api.links AS co
+      WHERE co.component = component.id
     ) AS links,
     (
       SELECT array_to_json(array_agg(json_build_object(
-      	'name',us.name,
-      	'description',us.description,
-      	'status',status.name,
-      	'scope',sco.name)))
+        'name',us.name,
+        'description',us.description,
+        'status',status.name,
+        'scope',sco.name)))
       FROM api.usecases AS us
           JOIN api.statuses status ON us.status = status.id
           JOIN api.scopes sco ON us.scope = sco.id

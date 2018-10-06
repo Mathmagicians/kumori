@@ -4,10 +4,11 @@ DROP TABLE IF EXISTS api.links CASCADE;
 
 CREATE TABLE api.links (
     id serial NOT NULL,
-    url TEXT NOT NULL,
+    ref TEXT NOT NULL,
+    type TEXT,
     component integer NOT NULL,
     modified TIMESTAMP without TIME zone NOT NULL,
-    modifiedby TEXT NOT NULL,
+    modifiedby TEXT,
     deleted boolean NOT NULL,
     PRIMARY KEY (id),
     CONSTRAINT component FOREIGN KEY (component) REFERENCES api.components (id)

@@ -68,11 +68,12 @@ function add_taxonomies () {
 function links () {
   while read -r link; do
     local component_id="${1}"
-    local url="$(echo ${link} | base64 --decode)"
+    local ref="$(echo ${link} | base64 --decode)"
+    local type="Link"
 
-    if [ "${url}" != '' ]; then
+    if [ "${ref}" != '' ]; then
       if [ "${component_id}" != '' ]; then
-        _commit "INSERT INTO api.links (url,component, modifiedby, deleted) VALUES (\$tag\$${url}\$tag\$,\$tag\$${component_id}\$tag\$,\$tag\$${MODIFIED_BY}\$tag\$,false);"
+        _commit "INSERT INTO api.links (ref,type,component, deleted) VALUES (\$tag\$${ref}\$tag\$,\$tag\$${type}\$tag\$,\$tag\$${component_id}\$tag\$,false);"
       fi
     fi
 
@@ -144,7 +145,7 @@ function taxonomi () {
 }
 
 function dump_current_view () {
-  curl -X GET "http://postgrest:3000/w_components" -H  "accept: application/json" -H  "Range-Unit: items" | jq '.' > frontend/src/api/mock/data/techComponents.dump.json
+  curl -s -X GET "http://postgrest:3000/w_components" -H  "accept: application/json" -H  "Range-Unit: items" | jq '.' > frontend/src/api/mock/data/techComponents.dump.json
 }
 
 taxonomi
