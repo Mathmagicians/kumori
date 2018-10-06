@@ -5,9 +5,9 @@ No- nullable pt - id + name
 
 ## Entities general principles
 * All entities must have a unique id field (ID)
-* We construct primary keys as (ID, name)
-* We use compound foreign keys (id, name) when referring to objects (dont need to fetch references to display links then)
-* Full audit log on entities that are governed by techmenu
+* We construct primary keys as (ID, name) - postpone
+* We use compound foreign keys (id, name) when referring to objects (dont need to fetch references to display links then) - postpone
+* Full audit log on entities that are governed by techmenu - postponed
 * 
 
 # Entities 
