@@ -139,7 +139,10 @@
 	      },
 	      sunburstTree(){
 	      	let ch = this.buildTree( this.sizesForTaxonomies( this.taxonomyTags, this.techs))
-			return 	({ name: "#techmenu", children: ch})
+	      	console.log("building sunburst tree")
+			let tree =	({ name: "#techmenu", children: ch})
+			console.log(tree)
+			return tree
 	      },
 	      filterOn(){
 	      	return this.searchInput !== ''|| Object.values(this.lcModel).some( lcValue => lcValue ) || this.query.tx.length !== 0;

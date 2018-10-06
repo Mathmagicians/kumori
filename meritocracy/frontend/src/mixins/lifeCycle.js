@@ -38,6 +38,8 @@ export default {
 
         //we work on a copy to treeify  
         let myCopy = [...flatList];
+        console.log("building tree from")
+        console.log(flatList)
         
         myCopy.forEach( el => { 
           lookUp[ el.name] = el; 
@@ -53,6 +55,8 @@ export default {
           }
         });
 
+        console.log( "tree is")
+        console.log(tree)
         return tree;
       },
 
