@@ -36,11 +36,11 @@ export default {
   createTechComponent(techComponent){
     return fetch({...techComponent, uid: Date.now()}, 100)
   },
-  login2(credentials) {
+  login(credentials) {
       return fetch( token, 2000)
   },
 
-  login(credentials) {
+  login2(credentials) {
     const instance = axios.create({
       baseURL: 'https://github.com/',
       timeout: 1000,
