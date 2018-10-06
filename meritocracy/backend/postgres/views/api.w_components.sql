@@ -20,18 +20,23 @@ SELECT
         JOIN api.taxonomy AS tx ON ct.taxonomy = tx.id
         WHERE ct.component = component.id
     ) as tags,
-    json_build_array('') AS licenses,
+    json_build_array() AS licenses,
     (
       SELECT array_to_json(array_agg(co.url))
               FROM api.links AS co
               WHERE co.component = component.id
     ) AS links,
     (
-        SELECT array_to_json(array_agg(us.description))
-        FROM api.usecases AS us
-        WHERE us.component = component.id AND us.description not LIKE ''
-    ) AS usecases,
-    json_build_array('') AS scopes
+      SELECT array_to_json(array_agg(json_build_object(
+      	'name',us.name,
+      	'description',us.description,
+      	'status',status.name,
+      	'scope',sco.name)))
+      FROM api.usecases AS us
+          JOIN api.statuses status ON us.status = status.id
+          JOIN api.scopes sco ON us.scope = sco.id
+      WHERE us.component = component.id
+    ) AS usecases
 FROM
     api.components component
 JOIN api.statuses status ON component.status = status.id;

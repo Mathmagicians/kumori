@@ -80,7 +80,6 @@ function links () {
 }
 
 function convert_scopes () {
-  echo "Covert Scopes"
   while read -r scopes; do
     local component="${1}"
     local name="Allowed for"
