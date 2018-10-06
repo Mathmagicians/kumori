@@ -34,10 +34,7 @@ export default {
         let tree = [];
         let lookUp = {};
 
-        if( nonExists(flatList) ){
-          console.log("Recieved empty flatlist !")
-          return tree;
-        }
+        if( nonExists() ) return tree;
 
         //we work on a copy to treeify  
         let myCopy = [...flatList];
@@ -45,7 +42,6 @@ export default {
         myCopy.forEach( el => { 
           lookUp[ el.name] = el; 
           el.children = [];
-          el.size ="100";
         });
 
         myCopy.forEach( el => {
@@ -60,11 +56,25 @@ export default {
         return tree;
       },
 
-      buildTreeForSunburst( tree ){
-        let treeObj = {name: "#techmenu"};
-          treeObj.children = tree;
-          return treeObj;
-      },
+       /** fixme: test
+      isTagInTech({name:"Development team instant messaging"}, tech[0])
+      true
+      isTagInTech6({name:"Application Development"}, tech[0])
+      false
+
+      countTagInTechs6( "Development team instant messaging", [tech[0], tech[1]])
+      1
+      countTagInTechs6( "Delivery Services", [tech[0], tech[1]])
+      2
+        */
+        sizesForTaxonomies(tags, techs){
+          const isTagInTech = (tag,tech) => tech.tags.filter( atag => atag === tag.name).length>0
+          const countTagInTechs = ( tag, techs) => techs.reduce( (sum,tech) => isTagInTech(tag,tech)?sum+1:sum,0 )
+          let am =  tags.map( tag => ({ ...tag, size: countTagInTechs( tag, techs)}))
+          console.log("Computed sizes")
+          console.log(am)
+          return am
+        },
 
       saveFile: function( treeObj ) {
         const data = JSON.stringify(treeObj);

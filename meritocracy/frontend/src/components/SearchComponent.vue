@@ -1,5 +1,12 @@
 <template>
-	<div >
+	<b-alert 
+		v-if="loading"
+		show 
+		variant="warning">
+		Loading #techmenu taxonomies … 
+			<v-icon name="spinner" scale="3" spin/></v-icon>
+	</b-alert>
+	<div v-else>
 		<b-card no-body>
 			<b-input-group>
 				<b-form-input id="searchInput"
@@ -107,29 +114,32 @@
 				searchInput: '',
 				lcModel: this.$store.getters.lifeCycle.items.reduce( (acc, i) => ({...acc, [i.name]: false}), {}),
 				//phase model represent the state of buttons that group lifecycles -it does not send its own events, but selects - deselects its group
-				phaseModel: {}
+				phaseModel: {},
+				loading: true
 			}
 		},
 		created() {
-			this.$store.dispatch('fetchTaxonomy');
+			this.loading = true
 			
-			this.phaseModel = this.types.reduce( (acc, i) => ({...acc, [i]:false }), {});
+			this.phaseModel = this.types.reduce( (acc, i) => ({...acc, [i]:false }), {})
 			//initialize array state for life cycle buttons
-			this.query.lc.forEach( item => this.setLcQuery(item) );
+			this.query.lc.forEach( item => this.setLcQuery(item) )
+
+			this.$store
+				.dispatch('fetchTaxonomy')
+				.then(taxonomy => { this.loading = false})
 			
 		},
 	    computed: {
-	       taxonomyLevels: function() {
-	      	return this.$store.getters.taxonomy.levels;
+	      taxonomyTags () {
+	      	return this.$store.getters.taxonomy.tags
 	      },
-	      taxonomyTags: function() {
-	      	return this.$store.getters.taxonomy.tags;
-	      },
-	      taxonomyTree() {
-	      	return this.buildTree( this.taxonomyTags );
+	      techs () {
+	      	return this.$store.getters.tech;
 	      },
 	      sunburstTree(){
-	      	return this.buildTreeForSunburst( this.taxonomyTree );
+	      	let ch = this.buildTree( this.sizesForTaxonomies( this.taxonomyTags, this.techs))
+			return 	({ name: "#techmenu", children: ch})
 	      },
 	      filterOn(){
 	      	return this.searchInput !== ''|| Object.values(this.lcModel).some( lcValue => lcValue ) || this.query.tx.length !== 0;
@@ -192,7 +202,6 @@
 	      	this.query.tx=[];
 	      	//reset sunburst to root
 	      }
-
 	    }
 	}
 
