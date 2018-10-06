@@ -40,7 +40,7 @@
           Editing
       </b-nav-item>
        <b-nav-item
-        v-else>
+        v-else-if="isLoggedIn">
          <b-button 
           @click="editOn"
           class="btn-round" 

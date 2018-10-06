@@ -1,7 +1,13 @@
 <template>
-	<b-alert variant="danger">
+	<b-alert 
+		show
+		variant="danger">
 		<v-icon name="times" scale="2">
 		</v-icon>
-		Maybe something bad happened ... but, ..., this is not the page you are looking for ...
+		Uuups ... something went wrong here  ...
 	</b-alert>
 </template>
+
+export default {
+	name: 'errors'
+}

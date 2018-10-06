@@ -75,6 +75,11 @@ export default new Router({
       component: Errors
     }, 
     {
+      path: '/500',
+      name: 'error',
+      component: Errors
+    }, 
+    {
       path: '*',
       redirect:  '/404'
     }

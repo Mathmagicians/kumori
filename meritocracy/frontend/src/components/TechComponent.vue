@@ -122,14 +122,14 @@
               v-for="(entry, index) in tech.log"
               class="justify-content-md-center">
                 <b-col cols="1">
-                    <v-icon 
-                      v-if="index===0"
-                      name="play" 
-                      color="green"/>
-                    <v-icon 
-                      v-else
-                      name="play" 
-                      color="grey"/>
+                  <v-icon 
+                    v-if="index===0"
+                    name="play" 
+                    color="green"/>
+                  <v-icon 
+                    v-else
+                    name="play" 
+                    color="grey"/>
                 </b-col>
                 <b-col cols="2">
                   <em>{{entry.date}}</em>

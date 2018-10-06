@@ -98,7 +98,7 @@
 		},
 		computed: {
   		techComponents () {
-    		return this.$store.state.techComponents
+    		return this.$store.getters.techComponents
   		},
       amounts () {
         let am = {_total: this.techComponents.length}
