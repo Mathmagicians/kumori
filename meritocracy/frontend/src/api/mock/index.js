@@ -51,5 +51,6 @@ export default {
       .get('https://github.com/login/oauth/authorize', 
         { params: {client_id: 'themathmagician', state: 'meritocracy', 'crossdomain': true, 'redirect-uri': 'http://localhost:8080/callback'}})
       .then(response => response.data)
+
   }
 }

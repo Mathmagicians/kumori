@@ -1,11 +1,11 @@
 [
   {
-     "uid": "2e3b-2e7a-b285-4b99-e0ec-5377-4b02-6ec3",
+    "uid": "2e3b-2e7a-b285-4b99-e0ec-5377-4b02-6ec3",
     "name": "#Slack",
     "status": "testing",
     "description": "Slack is a cloud-based set of proprietary team collaboration tools and services.",
     "comments": "",
-    "tags": [ 
+    "tags": [
       "Delivery Services",
       "Development",
       "Design and Development",
@@ -14,13 +14,13 @@
     ],
     "licenses": [
       {
-        "type": "commercial" ,
-        "description":"See license plans at Slack.com",
+        "type": "commercial",
+        "description": "See license plans at Slack.com",
         "ref": "https://slack.com/"
       },
-       {
-        "type": "community edition" ,
-        "description":"See license plans at Slack.com - not allowed for commercial use.",
+      {
+        "type": "community edition",
+        "description": "See license plans at Slack.com - not allowed for commercial use.",
         "ref": "https://slack.com/"
       }
     ],
@@ -36,6 +36,20 @@
       {
         "type": "analysis",
         "ref": "analysis"
+      }
+    ],
+    "scopes": [
+      {
+        "org": "Typical Taoists Inc",
+        "status": "Limited"
+      },
+      {
+        "org": "Gigantic Teleporters Inc",
+        "status": "Default"
+      },
+      {
+        "org": "Brave Traders Inc",
+        "status": "Default"
       }
     ],
     "usecases": [
@@ -63,7 +77,8 @@
         "status": "poc"
       }
     ],
-    "log": [{
+    "log": [
+      {
         "date": "2018-01-01",
         "description": "Status changed",
         "status": "testing"
@@ -118,7 +133,8 @@
     "usecases": [
       "May be used for development targeted the Windows platform."
     ],
-    "scopes": [{
+    "scopes": [
+      {
         "org": "Typical Taoists Inc",
         "status": "Limited"
       },
@@ -150,7 +166,8 @@
     "usecases": [
       "7-Zip fits a nice niche in between the built-in Windows capabilities and the features of the paid products, and it is able to handle a large variety of file formats in the process."
     ],
-    "scopes": [{
+    "scopes": [
+      {
         "org": "Typical Taoists Inc",
         "status": "To be decided"
       },
@@ -177,6 +194,20 @@
     "links": [],
     "usecases": [
       "Any"
+    ],
+    "scopes": [
+      {
+        "org": "Typical Taoists Inc",
+        "status": "Default"
+      },
+      {
+        "org": "Gigantic Teleporters Inc",
+        "status": "To be decided"
+      },
+      {
+        "org": "Brave Traders Inc",
+        "status": "To be decided"
+      }
     ]
   },
   {
@@ -198,7 +229,8 @@
     "usecases": [
       "In memory computing and analytics of large datasets."
     ],
-    "scopes": [{
+    "scopes": [
+      {
         "org": "Typical Taoists Inc",
         "status": "Default"
       },
@@ -232,7 +264,8 @@
     "usecases": [
       "Should be used for deployment."
     ],
-    "scopes": [{
+    "scopes": [
+      {
         "org": "Typical Taoists Inc",
         "status": "Testing"
       },
@@ -265,7 +298,8 @@
     "usecases": [
       "May be used for deployment."
     ],
-    "scopes": [{
+    "scopes": [
+      {
         "org": "Typical Taoists Inc",
         "status": "Testing"
       },
@@ -299,7 +333,8 @@
     "usecases": [
       "Must move to Gradle asap"
     ],
-    "scopes": [{
+    "scopes": [
+      {
         "org": "Typical Taoists Inc",
         "status": "Do not use"
       },
@@ -327,7 +362,8 @@
     "usecases": [
       "Any"
     ],
-    "scopes": [{
+    "scopes": [
+      {
         "org": "Typical Taoists Inc",
         "status": "Limited"
       },
@@ -361,7 +397,8 @@
     "usecases": [
       "Any"
     ],
-    "scopes": [{
+    "scopes": [
+      {
         "org": "Typical Taoists Inc",
         "status": "Testing"
       },
@@ -394,7 +431,8 @@
     "usecases": [
       "Any"
     ],
-    "scopes": [{
+    "scopes": [
+      {
         "org": "Typical Taoists Inc",
         "status": "Experiment"
       },
@@ -422,7 +460,8 @@
     "usecases": [
       "Big data platform - use if you need to process large data sets."
     ],
-    "scopes": [{
+    "scopes": [
+      {
         "org": "Typical Taoists Inc",
         "status": "Limited"
       },
@@ -449,7 +488,8 @@
     "usecases": [
       "Any"
     ],
-    "scopes": [{
+    "scopes": [
+      {
         "org": "Typical Taoists Inc",
         "status": "Limited"
       },
@@ -478,7 +518,8 @@
     "usecases": [
       "Any"
     ],
-    "scopes": [{
+    "scopes": [
+      {
         "org": "Typical Taoists Inc",
         "status": "Limited"
       },
@@ -505,7 +546,8 @@
     "usecases": [
       "Any"
     ],
-    "scopes": [{
+    "scopes": [
+      {
         "org": "Typical Taoists Inc",
         "status": "Limited"
       },
@@ -536,7 +578,8 @@
     "usecases": [
       "Any"
     ],
-    "scopes": [{
+    "scopes": [
+      {
         "org": "Typical Taoists Inc",
         "status": "Testing"
       },
@@ -568,7 +611,8 @@
     "usecases": [
       "Any"
     ],
-    "scopes": [{
+    "scopes": [
+      {
         "org": "Typical Taoists Inc",
         "status": "Default"
       },
@@ -601,7 +645,8 @@
     "usecases": [
       "Any"
     ],
-    "scopes": [{
+    "scopes": [
+      {
         "org": "Typical Taoists Inc",
         "status": "Limited"
       },
@@ -632,7 +677,8 @@
     "usecases": [
       "Any"
     ],
-    "scopes": [{
+    "scopes": [
+      {
         "org": "Typical Taoists Inc",
         "status": "Default"
       },
@@ -659,7 +705,8 @@
     "usecases": [
       "Any"
     ],
-    "scopes": [{
+    "scopes": [
+      {
         "org": "Typical Taoists Inc",
         "status": "Limited"
       },
@@ -686,7 +733,8 @@
     "usecases": [
       "Should be used for metrics gathering on application level. "
     ],
-    "scopes": [{
+    "scopes": [
+      {
         "org": "Typical Taoists Inc",
         "status": "Default"
       },
@@ -717,7 +765,8 @@
     "usecases": [
       "Any"
     ],
-    "scopes": [{
+    "scopes": [
+      {
         "org": "Typical Taoists Inc",
         "status": "Default"
       },
@@ -748,7 +797,8 @@
     "usecases": [
       "Any"
     ],
-    "scopes": [{
+    "scopes": [
+      {
         "org": "Typical Taoists Inc",
         "status": "Default"
       },
@@ -779,7 +829,8 @@
     "usecases": [
       "Any"
     ],
-    "scopes": [{
+    "scopes": [
+      {
         "org": "Typical Taoists Inc",
         "status": "Default"
       },
@@ -810,7 +861,8 @@
     "usecases": [
       "Any"
     ],
-    "scopes": [{
+    "scopes": [
+      {
         "org": "Typical Taoists Inc",
         "status": "Default"
       },
@@ -841,7 +893,8 @@
     "usecases": [
       "Any"
     ],
-    "scopes": [{
+    "scopes": [
+      {
         "org": "Typical Taoists Inc",
         "status": "Default"
       },
@@ -875,7 +928,8 @@
     "usecases": [
       "Any"
     ],
-    "scopes": [{
+    "scopes": [
+      {
         "org": "Typical Taoists Inc",
         "status": "To be decided"
       },
@@ -902,7 +956,8 @@
     "usecases": [
       "Any"
     ],
-    "scopes": [{
+    "scopes": [
+      {
         "org": "Typical Taoists Inc",
         "status": "To be decided"
       },
@@ -933,7 +988,8 @@
     "usecases": [
       "Any"
     ],
-    "scopes": [{
+    "scopes": [
+      {
         "org": "Typical Taoists Inc",
         "status": "Limited"
       },
@@ -964,7 +1020,8 @@
     "usecases": [
       "Any"
     ],
-    "scopes": [{
+    "scopes": [
+      {
         "org": "Typical Taoists Inc",
         "status": "Default"
       },
@@ -991,7 +1048,8 @@
     "usecases": [
       "Any"
     ],
-    "scopes": [{
+    "scopes": [
+      {
         "org": "Typical Taoists Inc",
         "status": "Default"
       },
@@ -1022,7 +1080,8 @@
     "usecases": [
       "Any"
     ],
-    "scopes": [{
+    "scopes": [
+      {
         "org": "Typical Taoists Inc",
         "status": "Testing"
       },
@@ -1053,7 +1112,8 @@
     "usecases": [
       "Any"
     ],
-    "scopes": [{
+    "scopes": [
+      {
         "org": "Typical Taoists Inc",
         "status": "Default"
       },
@@ -1084,7 +1144,8 @@
     "usecases": [
       "May only be used for testing and local development."
     ],
-    "scopes": [{
+    "scopes": [
+      {
         "org": "Typical Taoists Inc",
         "status": "Default"
       },
@@ -1115,7 +1176,8 @@
     "usecases": [
       "Any"
     ],
-    "scopes": [{
+    "scopes": [
+      {
         "org": "Typical Taoists Inc",
         "status": "POC"
       },
@@ -1146,7 +1208,8 @@
     "usecases": [
       "Any"
     ],
-    "scopes": [{
+    "scopes": [
+      {
         "org": "Typical Taoists Inc",
         "status": "Limited"
       },
@@ -1177,7 +1240,8 @@
     "usecases": [
       "Any"
     ],
-    "scopes": [{
+    "scopes": [
+      {
         "org": "Typical Taoists Inc",
         "status": "Deprecated"
       },
@@ -1214,7 +1278,8 @@
       "No suppport. No infrastructure exists until requested by business",
       "Should be used for all new development projects except mainframe."
     ],
-    "scopes": [{
+    "scopes": [
+      {
         "org": "Typical Taoists Inc",
         "status": "Default"
       },
@@ -1246,7 +1311,8 @@
     "usecases": [
       "Any"
     ],
-    "scopes": [{
+    "scopes": [
+      {
         "org": "Typical Taoists Inc",
         "status": "Default"
       },
@@ -1277,7 +1343,8 @@
     "usecases": [
       "Any"
     ],
-    "scopes": [{
+    "scopes": [
+      {
         "org": "Typical Taoists Inc",
         "status": "Default"
       },
@@ -1304,7 +1371,8 @@
     "usecases": [
       "Any"
     ],
-    "scopes": [{
+    "scopes": [
+      {
         "org": "Typical Taoists Inc",
         "status": "To be decided"
       },
@@ -1336,7 +1404,8 @@
     "usecases": [
       "Any"
     ],
-    "scopes": [{
+    "scopes": [
+      {
         "org": "Typical Taoists Inc",
         "status": "To be decided"
       },
@@ -1367,7 +1436,8 @@
     "usecases": [
       "Any"
     ],
-    "scopes": [{
+    "scopes": [
+      {
         "org": "Typical Taoists Inc",
         "status": "Limited"
       },
@@ -1398,7 +1468,8 @@
     "usecases": [
       "Any"
     ],
-    "scopes": [{
+    "scopes": [
+      {
         "org": "Typical Taoists Inc",
         "status": "Default"
       },
@@ -1429,7 +1500,8 @@
     "usecases": [
       "Any"
     ],
-    "scopes": [{
+    "scopes": [
+      {
         "org": "Typical Taoists Inc",
         "status": "Default"
       },
