@@ -12,7 +12,7 @@ start-pgrunner:
 	-dt \
 	--network=${NETWORK} \
 	--name pgrunner \
-	-v ${PWD}/..:/tmp \
+	-v ${PWD}/../..:/tmp \
 	-w /tmp \
 	node
 	@docker exec pgrunner apt-get update
@@ -51,4 +51,4 @@ schema: views
 fixture:
 	@docker exec pgrunner ./backend/postgres/json2sql.sh
 
-all: tables fixture
+all: schema fixture
