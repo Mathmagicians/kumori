@@ -25,39 +25,41 @@ export function createStore () {
         title: 'Tech Menu Life Cycle',
         items: [
           {
-            name: 'experimental',
+            name: 'Experimental',
             type: 'buy'
           },
           {
-            name: 'testing',
+            name: 'Testing',
             type: 'buy'
           },
           {
-            name: 'poc',
+            name: 'Poc',
             type: 'buy'
           },
           {
-            name: 'default',
+            name: 'Default',
             type: 'hold'
           },
           {
-            name: 'limited',
+            name: 'Limited',
             type: 'hold'
           },
           {
-            name: 'deprecated',
+            name: 'Deprecated',
             type: 'sell'
           },
           {
-            name: 'dontuse',
+            //dontuse
+            name: 'Dont',
             type: 'sell'
           },
           {
-            name: 'undecided',
+            //undecided
+            name: 'Undecided',
             type: 'maybe'
           },
           {
-            name: 'wip',
+            name: 'WIP',
             type: 'maybe'
           }
         ]
