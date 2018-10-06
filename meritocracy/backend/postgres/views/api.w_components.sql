@@ -29,7 +29,7 @@ SELECT
     (
         SELECT array_to_json(array_agg(us.description))
         FROM api.usecases AS us
-        WHERE us.component = component.id
+        WHERE us.component = component.id AND us.description not LIKE ''
     ) AS usecases,
     json_build_array('') AS scopes
 FROM

@@ -16,9 +16,12 @@ function components () {
   while read -r component; do
     local name="$(echo ${component} | base64 --decode | jq -r -c '.name')"
     local description="$(echo ${component} | base64 --decode | jq -r -c '.description')"
-
     local status="$(echo ${component} | base64 --decode | jq -r '.scopes[0].status')"
+    local scope="$(echo ${component} | base64 --decode | jq -r '.scopes[0].org')"
+
     local status_id="$(_commit "SELECT status.id FROM api.statuses AS status WHERE status.name LIKE '${status}';" | awk '{$1=$1};1')"
+
+    local scope_id="$(_commit "SELECT scope.id FROM api.scopes AS scope WHERE scope.name LIKE '${scope}';" | awk '{$1=$1};1')"
 
     _commit "INSERT INTO api.components (name, description, status, deleted) VALUES (\$tag\$${name}\$tag\$,\$tag\$${description}\$tag\$,\$tag\$${status_id}\$tag\$,false);"
 
@@ -26,7 +29,9 @@ function components () {
 
     comments "${component_id}" "${component}"
 
-    usecases "${component_id}" "${component}"
+    usecases "${component_id}" "${status_id}" "${scope_id}" "${component}"
+
+    convert_scopes "${component_id}" "${component}"
 
     links "${component_id}" "${component}"
 
@@ -74,18 +79,40 @@ function links () {
   done <<< "$(echo ${component} | base64 --decode | jq -r '.links[] | @base64')"
 }
 
+function convert_scopes () {
+  echo "Covert Scopes"
+  while read -r scopes; do
+    local component="${1}"
+    local name="Allowed for"
+    local description="Converted scope"
+    local scope="$(echo ${scopes} | base64 --decode| jq -r '.org')"
+    local status="$(echo ${scopes} | base64 --decode| jq -r '.status')"
+
+    local status_id="$(_commit "SELECT status.id FROM api.statuses AS status WHERE status.name LIKE '${status}';" | awk '{$1=$1};1')"
+
+    local scope_id="$(_commit "SELECT scope.id FROM api.scopes AS scope WHERE scope.name LIKE '${scope}';" | awk '{$1=$1};1')"
+
+    if [ "${description}" != 'Any' ]; then
+      _commit "INSERT INTO api.usecases (component, name, description, scope, status, deleted) VALUES (\$tag\$${component}\$tag\$,\$tag\$${name}\$tag\$,\$tag\$${description}\$tag\$,\$tag\$${scope_id}\$tag\$,\$tag\$${status_id}\$tag\$,false);"
+    fi
+
+  done <<< "$(echo ${2} | base64 --decode | jq -r '.scopes[] | @base64')"
+}
+
 # Insert a usecase
 function usecases () {
   while read -r usecase; do
     local component="${1}"
-    local taxonomy='1'
+    local name="Missing"
     local description="$(echo ${usecase} | base64 --decode)"
-    local scope='1'
-    local status='1'
+    local scope="${3}"
+    local status="${2}"
 
-    _commit "INSERT INTO api.usecases (component, taxonomy, description, scope, status, modifiedby, deleted) VALUES (\$tag\$${component}\$tag\$,\$tag\$${taxonomy}\$tag\$,\$tag\$${description}\$tag\$,\$tag\$${scope}\$tag\$,\$tag\$${status}\$tag\$,\$tag\$${MODIFIED_BY}\$tag\$,false);"
+    if [ "${description}" != 'Any' ]; then
+      _commit "INSERT INTO api.usecases (component, name, description, scope, status, deleted) VALUES (\$tag\$${component}\$tag\$,\$tag\$${name}\$tag\$,\$tag\$${description}\$tag\$,\$tag\$${scope}\$tag\$,\$tag\$${status}\$tag\$,false);"
+    fi
 
-  done <<< "$(echo ${component} | base64 --decode | jq -r '.usecases[] | @base64')"
+  done <<< "$(echo ${4} | base64 --decode | jq -r '.usecases[] | @base64')"
 }
 
 # Insert scopes
@@ -93,7 +120,7 @@ function scopes () {
   _commit "DELETE FROM api.scopes;"
   while read -r scope; do
     _commit "INSERT INTO api.scopes (name, modifiedby, deleted) VALUES (\$tag\$${scope}\$tag\$,\$tag\$${MODIFIED_BY}\$tag\$,false);"
-  done <<< "$(cat frontend/src/api/mock/data/techComponents.json | jq  '.[].scopes[].org' | sort | uniq | jq -s '.[]')"
+  done <<< "$(cat frontend/src/api/mock/data/techComponents.json | jq  '.[].scopes[].org' | sort | uniq | jq -s '.[]' | jq -r '.')"
 }
 
 # Insert statuses
@@ -117,7 +144,12 @@ function taxonomi () {
   done <<< "$(cat frontend/src/api/mock/data/taxonomy.json | jq -r '.tags[] | @base64')"
 }
 
+function dump_current_view () {
+  curl -X GET "http://postgrest:3000/w_components" -H  "accept: application/json" -H  "Range-Unit: items" | jq '.' > frontend/src/api/mock/data/techComponents.dump.json
+}
+
 taxonomi
 scopes
 statuses
 components
+dump_current_view

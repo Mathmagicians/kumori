@@ -5,16 +5,14 @@ DROP TABLE IF EXISTS api.usecases CASCADE;
 CREATE TABLE api.usecases (
     id serial NOT NULL,
     component integer NOT NULL,
-    taxonomy integer NOT NULL,
-    description TEXT NOT NULL,
-    scope integer NOT NULL,
-    status integer NOT NULL,
+    name TEXT NOT NULL,
+    description TEXT,
+    scope integer,
+    status integer,
     modified TIMESTAMP without TIME zone NOT NULL,
-    modifiedby TEXT NOT NULL,
+    modifiedby TEXT,
     deleted boolean NOT NULL,
     PRIMARY KEY (id),
-    CONSTRAINT taxonomy FOREIGN KEY (taxonomy) REFERENCES api.taxonomy (id)
-        MATCH SIMPLE ON UPDATE NO ACTION ON DELETE NO ACTION,
     CONSTRAINT scope FOREIGN KEY (scope) REFERENCES api.scopes (id)
         MATCH SIMPLE ON UPDATE NO ACTION ON DELETE NO ACTION,
     CONSTRAINT status FOREIGN KEY (status) REFERENCES api.statuses (id)
