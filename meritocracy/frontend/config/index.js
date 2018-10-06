@@ -41,7 +41,7 @@ module.exports = {
     cacheBusting: true,
 
     cssSourceMap: true,
-    apiClient: 'mock'
+    apiClient: 'server'
   },
 
   build: {

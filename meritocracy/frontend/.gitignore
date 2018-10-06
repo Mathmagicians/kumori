@@ -26,3 +26,4 @@ coverage/
 .classpath
 buildGradle
 .settings
+techComponents.dump.json
