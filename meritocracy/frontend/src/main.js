@@ -26,6 +26,7 @@ import {
   lock,
   pen,
   play,
+  plus,
   times,
   toolbox,
   unlock,

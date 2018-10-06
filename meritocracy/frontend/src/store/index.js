@@ -11,6 +11,8 @@ export function createStore () {
   const LOGOUT = "LOGOUT";
   const EDIT_ON = "EDIT_ON";
   const EDIT_OFF = "EDIT_OFF";
+  const CREATE_TECH_COMPONENT = "CREATE_TECH_COMPONENT";
+  const EDIT_TECH_COMPONENT = "EDIT_TECH_COMPONENT";
 
   return new Vuex.Store({
     state: {
@@ -99,6 +101,13 @@ export function createStore () {
       },
       [EDIT_ON](state) {
         state.security.isEditOn = true; 
+      },
+      [CREATE_TECH_COMPONENT](state, tech) {
+        state.techComponents.push(tech)
+      },
+      [EDIT_TECH_COMPONENT]( state, tech){
+        let index = state.techComponents.findIndex( t => t.uid === tech.uid )
+        state.techComponents.splice( index, 1, tech)
       }
     },
     actions: {
@@ -141,22 +150,25 @@ export function createStore () {
       },
       editOff({commit}){
         commit(EDIT_OFF);
+      },
+      createTechComponent({commit}, techComponent ){
+        return client
+          .createTechComponent( techComponent)
+          .then( tc => commit( CREATE_TECH_COMPONENT, tc));
+
+      },
+      editTechComponent({commit}, techComponent ){
+        return client
+          .editTechComponent( techComponent )
+          .then( tc => commit ( EDIT_TECH_COMPONENT, tc));
       }
     },
     getters: {
-      isLoggedIn: state => {
-        return state.security.isLoggedIn;
-      },
-      isEditOn: state => {
-        return state.security.isEditOn;
-      },
-      lifeCycle: state => {
-        return state.lifeCycle;
-      },
-      taxonomy: state => {
-        return state.taxonomy;
-      }, 
+      isLoggedIn: state => state.security.isLoggedIn,
+      isEditOn: state =>  state.security.isEditOn,
+      lifeCycle: state =>  state.lifeCycle,
+      taxonomy: state => state.taxonomy, 
       tech: state => state.techComponents
-}
+    }
   })
 }

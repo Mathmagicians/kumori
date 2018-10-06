@@ -14,7 +14,18 @@
 
     <!-- Add bottom legend -->
 
-    <breadcrumbTrail id="breadcrumbs" :width="width" slot="top" slot-scope="{ nodes,colorGetter,width}" :current="nodes.mouseOver" :root="nodes.root" :colorGetter="colorGetter" :from="nodes.clicked" />
+    <breadcrumbTrail class="small-text"
+    	id="breadcrumbs" 
+    	:width="700" 
+    	slot="top" 
+    	slot-scope="{ nodes,colorGetter,width}" 
+    	:current="nodes.mouseOver" 
+    	:root="nodes.root" 
+    	:colorGetter="colorGetter" 
+    	:from="nodes.clicked"
+    	:item-width="105"
+    	:item-height="30"
+    	:spacing="2"/>
 
   </sunburst>
 </div>
@@ -63,7 +74,8 @@
 </script>
 
 <style scoped>
-.test {
-	margin-bottom: 30px;
+.small-text {
+	 font-size: 0.65em; 
+	 word-wrap: break-word;
 }
 </style>

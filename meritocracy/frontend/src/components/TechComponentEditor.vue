@@ -234,7 +234,9 @@ export default {
 	},
 	methods: {
 		onSubmit() {
-			console.log("todo submit")
+			console.log("submitting ")
+			this.uid? this.$store.dispatch('editTechComponent', this.techModel): this.$store.dispatch('createTechComponent', this.techModel)
+			this.$router.go(-1)
 		},
 		onReset() {
 			//pop back to calling component
