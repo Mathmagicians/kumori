@@ -20,14 +20,7 @@ function components () {
     local status="$(echo ${component} | base64 --decode | jq -r '.scopes[0].status')"
     local status_id="$(_commit "SELECT status.id FROM api.statuses AS status WHERE status.name LIKE '${status}';" | awk '{$1=$1};1')"
 
-    local taxonomy="1"
-    local status="1"
-    if [ "${description}" == '' ]
-    then
-      description='Missing'
-    fi
-
-    _commit "INSERT INTO api.components (name, description, taxonomy, status, modifiedby, deleted) VALUES (\$tag\$${name}\$tag\$,\$tag\$${description}\$tag\$,\$tag\$${taxonomy}\$tag\$,\$tag\$${status_id}\$tag\$,\$tag\$${MODIFIED_BY}\$tag\$,false);"
+    _commit "INSERT INTO api.components (name, description, status, deleted) VALUES (\$tag\$${name}\$tag\$,\$tag\$${description}\$tag\$,\$tag\$${status_id}\$tag\$,false);"
 
     local component_id="$(_commit "SELECT id from api.components order by id desc limit 1;" | awk '{$1=$1};1')"
 
