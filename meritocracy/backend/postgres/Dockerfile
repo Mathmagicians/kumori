@@ -14,3 +14,4 @@ COPY ./tables/api.usecases.sql           /docker-entrypoint-initdb.d/10.sql
 COPY ./tables/api.component_taxonomy.sql /docker-entrypoint-initdb.d/10.sql
 COPY ./views/api.w_usecases.sql          /docker-entrypoint-initdb.d/11.sql
 COPY ./views/api.w_components.sql        /docker-entrypoint-initdb.d/12.sql
+COPY ./views/api.w_taxonomy.sql          /docker-entrypoint-initdb.d/12.sql

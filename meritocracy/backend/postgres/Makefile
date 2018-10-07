@@ -45,6 +45,7 @@ tables: functions
 views: tables
 	@docker exec pgrunner psql -h postgres -U ${PGPASSWORD} -d ${PGDATABASE} -f ./backend/postgres/views/api.w_usecases.sql
 	@docker exec pgrunner psql -h postgres -U ${PGPASSWORD} -d ${PGDATABASE} -f ./backend/postgres/views/api.w_components.sql
+	@docker exec pgrunner psql -h postgres -U ${PGPASSWORD} -d ${PGDATABASE} -f ./backend/postgres/views/api.w_taxonomy.sql
 
 schema: views
 
