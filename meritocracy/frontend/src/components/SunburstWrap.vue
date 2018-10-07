@@ -26,7 +26,7 @@
     	:root="nodes.root" 
     	:colorGetter="colorGetter" 
     	:from="nodes.clicked"
-    	:item-width="115"
+    	:item-width="110"
     	:item-height="40"
     	:spacing="2"/>
 
@@ -83,7 +83,7 @@
 }
 .sunburst {
     width: 800px;
-    height: 600px;
+    height: 800px;
     position: relative;
   }
 </style>
