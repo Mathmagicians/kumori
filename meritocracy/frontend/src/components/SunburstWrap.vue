@@ -82,8 +82,15 @@
 	 word-wrap: break-word;
 }
 .sunburst {
-    width: 800px;
-    height: 800px;
+    width: 700px;
+    height: 700px;
     position: relative;
+  }
+  .father {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
   }
 </style>

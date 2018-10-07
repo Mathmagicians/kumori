@@ -218,6 +218,7 @@
 
 		.control-left {
 		 height: 100%;
+		 width: 100%;
 	 }
 	 .phase {
 		min-width: 8em;
