@@ -25,16 +25,25 @@
     </b-alert>
     <b-row>
       <b-col cols="5">
+        <b-alert 
+          v-if="loading.tax"
+          show 
+          variant="warning">
+          Loading #techmenu taxonomies … 
+          <v-icon name="spinner" scale="3" spin/></v-icon>
+        </b-alert>
         <search-component 
+          v-else
           :amounts="amounts" 
           v-bind:query="query" 
+          v-bind:tree="sunburstTree"
           v-on:queryString="fuzzySearch($event)"
         >
         </search-component>
       </b-col>
       <b-col cols="7">
       	<b-alert 
-          v-if="loading"
+          v-if="loading.tech"
           show 
           variant="warning">
           Loading #techmenu components … 
@@ -58,6 +67,8 @@
 
   import TechComponent from '../components/TechComponent.vue'
   import SearchComponent from '../components/SearchComponent.vue'
+  import lifeCycleMixin from '../mixins/lifeCycle.js'
+  
   
   const lifeCycleFilter = (tech, query) => query.lc.length === 0 || query.lc.includes(tech.status)
   const useCaseFilter = (tech, query) => query.tx.length === 0 || query.tx.every( tx => tech.tags? tech.tags.includes( tx ):false)
@@ -71,7 +82,7 @@
     },
   	data () {
     		return {
-      			loading: false,
+      			loading: {tech: false, tax: false},
             activeId: '', 
             query: {
               string: '',
@@ -87,6 +98,9 @@
         default: ''
       }
     },
+    mixins: [
+      lifeCycleMixin
+    ],
     watch: { 
         uid: function(newVal, oldVal) { 
           this.activeId = newVal
@@ -98,8 +112,11 @@
 		},
 		computed: {
   		techComponents () {
-    		return this.$store.state.techComponents
+    		return this.$store.getters.tech
   		},
+      taxonomyTags () {
+        return this.$store.getters.taxonomy.tags
+      },
       amounts () {
         let am = {_total: this.techComponents.length}
         this.$store.getters.lifeCycle.items.forEach( 
@@ -109,13 +126,20 @@
       },
       filteredTechComponents() {
         return this.filterList( this.techComponents, this.query );           
-      }
+      }, 
+      sunburstTree(){
+        let flatListWithSizes = this.addSizesForTaxonomies( this.taxonomyTags, this.techComponents)
+        return ({ name: "#techmenu", children: this.buildTree( flatListWithSizes )})
+      },
 		},
 		created () {
       this.activeId = this.uid;
-  		this.loading = true;
+  		this.loading = {tech: true, tax: true}
+      this.$store
+        .dispatch('fetchTaxonomy')
+        .then(taxonomy => { this.loading.tax = false})
   		this.$store.dispatch('fetchTechComponents')
-    			.then(techComponents => { this.loading = false});
+    			.then(techComponents => { this.loading.tech = false})
 		},
     filters: {
       techId (tech) {

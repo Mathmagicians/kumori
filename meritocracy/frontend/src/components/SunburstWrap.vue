@@ -1,6 +1,9 @@
 <template>
 <div class="test">
-  <sunburst :data="tree" v-on:clickNode="nodeClicked">
+  <sunburst 
+  	:data="tree" 
+  	v-on:clickNode="nodeClicked" 
+  	class="sunburst">
 
     <!-- Add behaviors -->
     <template slot-scope="{ nodes, actions }">
@@ -23,8 +26,8 @@
     	:root="nodes.root" 
     	:colorGetter="colorGetter" 
     	:from="nodes.clicked"
-    	:item-width="105"
-    	:item-height="30"
+    	:item-width="110"
+    	:item-height="40"
     	:spacing="2"/>
 
   </sunburst>
@@ -78,4 +81,9 @@
 	 font-size: 0.65em; 
 	 word-wrap: break-word;
 }
+.sunburst {
+    width: 800px;
+    height: 800px;
+    position: relative;
+  }
 </style>

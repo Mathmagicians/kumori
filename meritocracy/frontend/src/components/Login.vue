@@ -1,34 +1,48 @@
 <template>
   <div v-if="!isLoggedIn">
-  	<h2> Please login </h2>
-    <b-form  @submit.prevent="login">
- 		<b-form-group id="login-group-1"
-                    label="User Name"
-                    label-for="emailInput"
-                    description="We'll never share your email with anyone else.">
-	        <b-form-input id="emailInput"
-	                      type="text"
-	                      v-model="username"
-	                      required
-	                      placeholder="Your username">
+  	 <b-form  
+    	v-if="!logging"
+    	@submit.prevent="login">
+    	<h2> Please login </h2>
+ 		<b-form-group 
+ 			id="login-group-1"
+            label="User Name"
+            label-for="emailInput"
+            description="We'll never share your email with anyone else.">
+	        <b-form-input 
+				id="emailInput"
+				type="text"
+				v-model="username"
+				required
+				placeholder="Your username">
 	        </b-form-input>
     	</b-form-group>
-    	<b-form-group id="login-group-2"
-                    label="Password"
-                    label-for="passwordInput"
-                    description="We'll never share your email with anyone else.">
+    	<b-form-group 
+    		id="login-group-2"
+            label="Password"
+            label-for="passwordInput"
+            description="We'll never share your email with anyone else.">
 	        <b-form-input id="passwordInput"
-	                      type="password"
-	                      v-model="password"
-	                      required
-	                      placeholder="Your password">
+				type="password"
+				v-model="password"
+				required
+				placeholder="Your password">
 	        </b-form-input>
     	</b-form-group>
-    	<b-button type="submit" variant="success">Login</b-button>
+    	<b-button type="submit" variant="success">
+    		Login with Github 	__^-^__
+    	</b-button>
     </b-form>
+    <b-alert 
+          v-else
+          show 
+          variant="warning">
+          Logging in, wait a moment please … 
+      		<v-icon name="spinner" scale="3" spin/></v-icon>
+      	</b-alert>
   </div>
   <div v-else>
-  		You are logged in. {{token()}}
+  		You are logged in, {{token.name}}
   </div>
 </template>
 
@@ -40,7 +54,7 @@
 			return {
 				username: '', 
 				password: '',
-				isLoggedIn: false
+				logging: false
 			}
 		},
 		computed: {
@@ -50,18 +64,20 @@
 		},
 		methods: {
 			login() {
-		      this.$store.dispatch("login", {
-		        email: this.email,
-		        password: this.password
-		      }).then(() => {
-		        this.$router.push("/")
-		      });
-		      	console.log(this.username);
-				console.log(this.password);
-				console.log(this.isLoggedIn);
+				this.logging = true;
+				this.$store
+					.dispatch("login", {email: this.email, password: this.password})
+					.then(() => {
+						this.logging=false
+						this.$router.go(-1)
+					})
+					.catch((error) => {
+				        console.log(error)
+				        this.$router.push( {name: 'error'})
+				     })
 		    },
 			token(){
-				console.log(localStorage.getItem('token'));
+				return localStorage.getItem('token')
 			}
 		}
 

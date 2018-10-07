@@ -135,13 +135,13 @@ export function createStore () {
       },
       login({ commit }, creds) {
         commit(LOGIN); // show spinner
-        return new Promise(resolve => {
-          setTimeout(() => {
-            localStorage.setItem("token", "JWT");
-            commit(LOGIN_SUCCESS);
-            resolve();
-          }, 1000);
-        });
+        return client
+          .login(creds)
+          .then( token =>  {
+            localStorage.setItem("token", token)
+            console.log(token)
+            commit(LOGIN_SUCCESS)
+          })
       },
       logout({ commit }) {
         localStorage.removeItem("token");

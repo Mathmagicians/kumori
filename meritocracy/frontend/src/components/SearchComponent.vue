@@ -1,5 +1,5 @@
 <template>
-	<div >
+	<div>
 		<b-card no-body>
 			<b-input-group>
 				<b-form-input id="searchInput"
@@ -71,14 +71,14 @@
 			<div class="card-header">Search in Usecases <strong v-if="query">{{ query.tx | stringify }}</strong></div>
 			<div style="card-body father">
 				<sunburst-wrap 
-					:tree="sunburstTree" 
+					:tree="tree" 
 					class="sunburst"
 					v-on:nodeClicked="setUseCaseQuery"
 				>
 				</sunburst-wrap>
 			</div>
 		</b-card>
-</div>
+	</div>
 
 </template>
 
@@ -94,6 +94,7 @@
 		props: {
 			amounts:{ required: true},
 			query: {required: true},
+			tree: {required: true}
 		},
 		components: {
 			LifeCycle,
@@ -107,30 +108,17 @@
 				searchInput: '',
 				lcModel: this.$store.getters.lifeCycle.items.reduce( (acc, i) => ({...acc, [i.name]: false}), {}),
 				//phase model represent the state of buttons that group lifecycles -it does not send its own events, but selects - deselects its group
-				phaseModel: {}
+				phaseModel: {},
 			}
 		},
 		created() {
-			this.$store.dispatch('fetchTaxonomy');
+			this.loading = true
 			
-			this.phaseModel = this.types.reduce( (acc, i) => ({...acc, [i]:false }), {});
+			this.phaseModel = this.types.reduce( (acc, i) => ({...acc, [i]:false }), {})
 			//initialize array state for life cycle buttons
-			this.query.lc.forEach( item => this.setLcQuery(item) );
-			
+			this.query.lc.forEach( item => this.setLcQuery(item) )			
 		},
 	    computed: {
-	       taxonomyLevels: function() {
-	      	return this.$store.getters.taxonomy.levels;
-	      },
-	      taxonomyTags: function() {
-	      	return this.$store.getters.taxonomy.tags;
-	      },
-	      taxonomyTree() {
-	      	return this.buildTree( this.taxonomyTags );
-	      },
-	      sunburstTree(){
-	      	return this.buildTreeForSunburst( this.taxonomyTree );
-	      },
 	      filterOn(){
 	      	return this.searchInput !== ''|| Object.values(this.lcModel).some( lcValue => lcValue ) || this.query.tx.length !== 0;
 	      },
@@ -192,7 +180,6 @@
 	      	this.query.tx=[];
 	      	//reset sunburst to root
 	      }
-
 	    }
 	}
 
