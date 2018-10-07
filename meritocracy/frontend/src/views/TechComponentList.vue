@@ -1,28 +1,5 @@
 <template>
 	<div class="mb1">
-    <b-alert show variant="secondary">
-       <b-button id="createTechButton"
-        class="status-floater btn-round"
-        v-if="$store.getters.isEditOn"
-        variant="light"
-        @click="createNewTech">
-        <v-icon name="plus" 
-        color="green"/>
-      </b-button>
-      <b-popover 
-        target="createTechButton"
-        triggers="hover focus"
-        title="Create New Tech"
-        content="Add a new technology to #techmenu"/>
-      <p>#techmenu is happily governing 
-        <b-badge variant="secondary">{{techComponents.length}}</b-badge>
-         technologies.
-      </p>
-      <p v-if="filteredTechComponents.length !== techComponents.length">Your search returned 
-        <b-badge variant="secondary">{{filteredTechComponents.length}}</b-badge>
-        technologies.
-      </p>
-    </b-alert>
     <b-row>
       <b-col cols="5">
         <b-alert 
@@ -42,15 +19,41 @@
         </search-component>
       </b-col>
       <b-col cols="7">
-      	<b-alert 
+        <b-alert 
           v-if="loading.tech"
           show 
           variant="warning">
           Loading #techmenu components … 
-      		<v-icon name="spinner" scale="3" spin/></v-icon>
-      	</b-alert>
+          <v-icon name="spinner" scale="3" spin/></v-icon>
+        </b-alert>
         <div
           v-else>
+          <b-alert 
+            show variant="secondary">
+            <b-button id="createTechButton"
+              class="status-floater btn-round"
+              v-if="$store.getters.isEditOn"
+              variant="light"
+              @click="createNewTech">
+              <v-icon name="plus" 
+              color="green"/>
+            </b-button>
+            <b-popover 
+              target="createTechButton"
+              triggers="hover focus"
+              title="Create New Tech"
+              content="Add a new technology to #techmenu"/>
+            <p>#techmenu is happily governing 
+            <b-badge variant="secondary">{{techComponents.length}}</b-badge>
+             technologies.
+            </p>
+            <p 
+              v-if="filteredTechComponents.length !== techComponents.length">
+                Your search returned 
+                <b-badge variant="secondary">{{filteredTechComponents.length}}</b-badge>
+                technologies.
+            </p>
+          </b-alert>
       		<tech-component 
             v-for="component in filteredTechComponents"
             :key="component.name"
