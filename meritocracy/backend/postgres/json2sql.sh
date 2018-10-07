@@ -83,10 +83,11 @@ function links () {
 function convert_scopes () {
   while read -r scopes; do
     local component="${1}"
-    local name="Allowed for"
     local description="Converted scope"
     local scope="$(echo ${scopes} | base64 --decode| jq -r '.org')"
     local status="$(echo ${scopes} | base64 --decode| jq -r '.status')"
+
+    local name="Allowed for ${scope}"
 
     local status_id="$(_commit "SELECT status.id FROM api.statuses AS status WHERE status.name LIKE '${status}';" | awk '{$1=$1};1')"
 
@@ -103,7 +104,7 @@ function convert_scopes () {
 function usecases () {
   while read -r usecase; do
     local component="${1}"
-    local name="Missing"
+    local name="Missing name for usecase"
     local description="$(echo ${usecase} | base64 --decode)"
     local scope="${3}"
     local status="${2}"
@@ -146,6 +147,7 @@ function taxonomi () {
 
 function dump_current_view () {
   curl -s -X GET "http://postgrest:3000/w_components" -H  "accept: application/json" -H  "Range-Unit: items" | jq '.' > frontend/src/api/mock/data/techComponents.dump.json
+  curl -s -X GET "http://postgrest:3000/w_taxonomy" -H  "accept: application/json" -H  "Range-Unit: items" | jq '.' > frontend/src/api/mock/data/taxonomy.dump.json
 }
 
 taxonomi
