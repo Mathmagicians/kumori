@@ -34,12 +34,9 @@ export default {
         let tree = [];
         let lookUp = {};
 
-        if( nonExists() ) return tree;
-
+        if( nonExists(flatList) ) return tree;
         //we work on a copy to treeify  
         let myCopy = [...flatList];
-        console.log("building tree from")
-        console.log(flatList)
         
         myCopy.forEach( el => { 
           lookUp[ el.name] = el; 
@@ -51,12 +48,11 @@ export default {
             //it is a root
             tree.push(el);
           } else {
-            lookUp[el.parent].children.push(el);
+            lookUp[el.parent].children.push(el)
+            //set size to 0 in non leaf nodes for sunburst component to display correctly
+            lookUp[el.parent].size=0
           }
         });
-
-        console.log( "tree is")
-        console.log(tree)
         return tree;
       },
 
@@ -71,12 +67,10 @@ export default {
       countTagInTechs6( "Delivery Services", [tech[0], tech[1]])
       2
         */
-        sizesForTaxonomies(tags, techs){
+        addSizesForTaxonomies(tags, techs){
           const isTagInTech = (tag,tech) => tech.tags.filter( atag => atag === tag.name).length>0
           const countTagInTechs = ( tag, techs) => techs.reduce( (sum,tech) => isTagInTech(tag,tech)?sum+1:sum,0 )
           let am =  tags.map( tag => ({ ...tag, size: countTagInTechs( tag, techs)}))
-          console.log("Computed sizes")
-          console.log(am)
           return am
         },
 

@@ -1,12 +1,5 @@
 <template>
-	<b-alert 
-		v-if="loading"
-		show 
-		variant="warning">
-		Loading #techmenu taxonomies … 
-			<v-icon name="spinner" scale="3" spin/></v-icon>
-	</b-alert>
-	<div v-else>
+	<div>
 		<b-card no-body>
 			<b-input-group>
 				<b-form-input id="searchInput"
@@ -78,14 +71,14 @@
 			<div class="card-header">Search in Usecases <strong v-if="query">{{ query.tx | stringify }}</strong></div>
 			<div style="card-body father">
 				<sunburst-wrap 
-					:tree="sunburstTree" 
+					:tree="tree" 
 					class="sunburst"
 					v-on:nodeClicked="setUseCaseQuery"
 				>
 				</sunburst-wrap>
 			</div>
 		</b-card>
-</div>
+	</div>
 
 </template>
 
@@ -101,6 +94,7 @@
 		props: {
 			amounts:{ required: true},
 			query: {required: true},
+			tree: {required: true}
 		},
 		components: {
 			LifeCycle,
@@ -115,7 +109,6 @@
 				lcModel: this.$store.getters.lifeCycle.items.reduce( (acc, i) => ({...acc, [i.name]: false}), {}),
 				//phase model represent the state of buttons that group lifecycles -it does not send its own events, but selects - deselects its group
 				phaseModel: {},
-				loading: true
 			}
 		},
 		created() {
@@ -123,27 +116,9 @@
 			
 			this.phaseModel = this.types.reduce( (acc, i) => ({...acc, [i]:false }), {})
 			//initialize array state for life cycle buttons
-			this.query.lc.forEach( item => this.setLcQuery(item) )
-
-			this.$store
-				.dispatch('fetchTaxonomy')
-				.then(taxonomy => { this.loading = false})
-			
+			this.query.lc.forEach( item => this.setLcQuery(item) )			
 		},
 	    computed: {
-	      taxonomyTags () {
-	      	return this.$store.getters.taxonomy.tags
-	      },
-	      techs () {
-	      	return this.$store.getters.tech;
-	      },
-	      sunburstTree(){
-	      	let ch = this.buildTree( this.sizesForTaxonomies( this.taxonomyTags, this.techs))
-	      	console.log("building sunburst tree")
-			let tree =	({ name: "#techmenu", children: ch})
-			console.log(tree)
-			return tree
-	      },
 	      filterOn(){
 	      	return this.searchInput !== ''|| Object.values(this.lcModel).some( lcValue => lcValue ) || this.query.tx.length !== 0;
 	      },
