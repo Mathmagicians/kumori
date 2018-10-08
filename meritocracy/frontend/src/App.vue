@@ -8,7 +8,7 @@
 
     <b-navbar-nav>
       <b-nav-item to="/components">
-        <b-img rounded="circle" blank blank-color="white" src="./assets/techmenu.svg" class="image-overlay" />
+        <b-img rounded="circle" src="./assets/components.svg" class="image-overlay" />
         Components
       </b-nav-item>
       <b-nav-item to="/services">

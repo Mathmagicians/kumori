@@ -25,41 +25,41 @@ export function createStore () {
         title: 'Tech Menu Life Cycle',
         items: [
           {
-            name: 'Experimental',
+            name: 'experimental',
             type: 'buy'
           },
           {
-            name: 'Testing',
+            name: 'testing',
             type: 'buy'
           },
           {
-            name: 'Poc',
+            name: 'poc',
             type: 'buy'
           },
           {
-            name: 'Default',
+            name: 'default',
             type: 'hold'
           },
           {
-            name: 'Limited',
+            name: 'limited',
             type: 'hold'
           },
           {
-            name: 'Deprecated',
+            name: 'deprecated',
             type: 'sell'
           },
           {
             //dontuse
-            name: 'Dont',
+            name: 'dont',
             type: 'sell'
           },
           {
             //undecided
-            name: 'Undecided',
+            name: 'undecided',
             type: 'maybe'
           },
           {
-            name: 'WIP',
+            name: 'wip',
             type: 'maybe'
           }
         ]
@@ -86,7 +86,9 @@ export function createStore () {
         state.services = services
       },
       setTaxonomy (state, taxonomy) {
-        state.taxonomy = taxonomy
+        state.taxonomy = taxonomy.taxonomy
+        console.log(">>>vuex>>> taxonomy set")
+        console.log(state.taxonomy)
       },
       [LOGIN] (state) {
       state.security.pending = true;

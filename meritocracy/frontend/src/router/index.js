@@ -72,12 +72,14 @@ export default new Router({
     {
       path: '/404',
       name: 'not-found',
-      component: Errors
+      component: Errors,
+      props: true
     }, 
     {
       path: '/500',
       name: 'error',
-      component: Errors
+      component: Errors,
+      props: true
     }, 
     {
       path: '*',
