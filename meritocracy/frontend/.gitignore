@@ -27,3 +27,4 @@ coverage/
 buildGradle
 .settings
 techComponents.dump.json
+*.dump.json
