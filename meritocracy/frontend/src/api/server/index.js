@@ -27,7 +27,7 @@ export default {
   },
 
   fetchTechComponents() {
-    return this.getData('components')
+    return this.getData('w_components')
   },
 
   fetchMeritocracy () {
@@ -39,7 +39,7 @@ export default {
   },
 
   fetchTaxonomy () {
-  	 return this.getData('taxonomy')
+  	 return this.getData('w_taxonomy')
   },
   editTechComponent( techComponent ){
       return this.notImplemented("editTechComponent")
