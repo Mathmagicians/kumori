@@ -2,12 +2,10 @@ FROM postgres:11-alpine
 
 RUN apk add --no-cache curl jq
 
-ENV DB_NAME=""
-ENV DB_SCHEMA=""
-ENV DB_CRUD_USER=""
-ENV DB_CRUD_PASS=""
-ENV DB_R_USER=""
-ENV DB_R_PASS=""
+ENV DB_SCHEMA="api"
+ENV DB_CRUD_USER="meritocracy"
+ENV DB_CRUD_PASS="meritocracy"
+ENV DB_R_USER="web_anon"
 
 COPY ./users.sql                         /docker-entrypoint-initdb.d/01.sql
 COPY ./database.sql                      /docker-entrypoint-initdb.d/02.sql
