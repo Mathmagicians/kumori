@@ -1,10 +1,16 @@
 export default {
-	variant : {
+	variant: {
       maybe: "secondary",
       buy: "primary", 
       hold: "success",
       sell: "danger"
-    },
+  },
+  phaseImages: Object.freeze({
+    'buy': require('../assets/buy.svg'),
+    'hold': require('../assets/service.svg'), 
+    'sell': require('../assets/exterminator.svg'), 
+    'maybe': require('../assets/community.svg')
+  }),
 	filters: {
 		outline() {
 			return 'outline-';
@@ -24,6 +30,9 @@ export default {
     methods: {
     	btnVariant(type){
     		return type?this.$options.variant[type]:'';
+      },
+      images: function(type) {
+        return this.$options.phaseImages[type];
       },
       // todo - unit test!
       // returns a list of root elements, that are trees built from parent-child relations in the flatList. Assumes name, parent and no loops.

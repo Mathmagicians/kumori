@@ -25,51 +25,45 @@ export function createStore () {
         title: 'Tech Menu Life Cycle',
         items: [
           {
-            name: 'experimental',
+            name: 'Experimental',
             type: 'buy'
           },
           {
-            name: 'testing',
+            name: 'Testing',
             type: 'buy'
           },
           {
-            name: 'poc',
+            name: 'POC',
             type: 'buy'
           },
           {
-            name: 'default',
+            name: 'Default',
             type: 'hold'
           },
           {
-            name: 'limited',
+            name: 'Limited',
             type: 'hold'
           },
           {
-            name: 'deprecated',
+            name: 'Deprecated',
             type: 'sell'
           },
           {
             //dontuse
-            name: 'dont',
+            name: 'Dont',
             type: 'sell'
           },
           {
             //undecided
-            name: 'undecided',
+            name: 'Undecided',
             type: 'maybe'
           },
           {
-            name: 'wip',
+            name: 'WIP',
             type: 'maybe'
           }
         ]
       },
-      phaseImages: {
-		'buy': require('../assets/buy.svg'),
-		'hold': require('../assets/service.svg'), 
-		'sell': require('../assets/exterminator.svg'), 
-		'maybe': require('../assets/community.svg')
-	  },
       techComponents: [],
       meritocracy: [],
       services: [],
@@ -87,8 +81,6 @@ export function createStore () {
       },
       setTaxonomy (state, taxonomy) {
         state.taxonomy = taxonomy.taxonomy
-        console.log(">>>vuex>>> taxonomy set")
-        console.log(state.taxonomy)
       },
       [LOGIN] (state) {
       state.security.pending = true;
