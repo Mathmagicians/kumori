@@ -85,7 +85,7 @@
     },
   	data () {
     		return {
-      			loading: {tech: false, tax: false},
+      			loading: {tech: true, tax: true},
             activeId: '', 
             query: {
               string: '',
@@ -118,6 +118,8 @@
     		return this.$store.getters.tech
   		},
       taxonomyTags () {
+        console.log(">>>created>>> tax tags")
+        console.log(this.$store.getters.taxonomy.tags)
         return this.$store.getters.taxonomy.tags
       },
       amounts () {
@@ -131,7 +133,10 @@
         return this.filterList( this.techComponents, this.query );           
       }, 
       sunburstTree(){
-        let flatListWithSizes = this.addSizesForTaxonomies( this.taxonomyTags, this.techComponents)
+        console.log(`>>>sunburstTree: loading tax ${this.loading.tax}, loading tech: ${this.loading.tech}`)
+         console.log(`>>>sunburstTree: tags`)
+         console.log( this.taxonomyComponents)
+        let flatListWithSizes = this.addSizesForTaxonomies( this.$store.getters.taxonomy.tags, this.techComponents)
         return ({ name: "#techmenu", children: this.buildTree( flatListWithSizes )})
       },
 		},

@@ -25,8 +25,10 @@ export default {
 
 
   fetchTaxonomy () {
-  	  return axios
-      .get(`${BASE_URL}w_taxonomy`, {headers: {Accept: 'application/vnd.pgrst.object+json'}})
+    let config = {headers: {'Accept': 'application/vnd.pgrst.object+json'}}
+
+  	 return axios
+      .get(`${BASE_URL}w_taxonomy`, config)
       .then(response => response.data)
       .catch((error) => onError(error))
   },

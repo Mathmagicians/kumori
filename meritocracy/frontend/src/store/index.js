@@ -86,7 +86,9 @@ export function createStore () {
         state.services = services
       },
       setTaxonomy (state, taxonomy) {
-        state.taxonomy = taxonomy
+        state.taxonomy = taxonomy.taxonomy
+        console.log(">>>vuex>>> taxonomy set")
+        console.log(state.taxonomy)
       },
       [LOGIN] (state) {
       state.security.pending = true;

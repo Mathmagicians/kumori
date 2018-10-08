@@ -70,8 +70,10 @@ export default {
         addSizesForTaxonomies(tags, techs){
           const isTagInTech = (tag,tech) => tech.tags.filter( atag => atag === tag.name).length>0
           const countTagInTechs = ( tag, techs) => techs.reduce( (sum,tech) => isTagInTech(tag,tech)?sum+1:sum,0 )
-          let am =  tags.map( tag => ({ ...tag, size: countTagInTechs( tag, techs)}))
-          return am
+          console.log('>>>addSizesForTaxonomies: received tags + tech')
+          console.log(tags)
+          console.log(techs)
+          return tags ? tags.map( tag => ({ ...tag, size: countTagInTechs( tag, techs)})):tags
         },
 
       saveFile: function( treeObj ) {
