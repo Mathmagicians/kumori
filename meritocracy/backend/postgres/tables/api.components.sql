@@ -4,7 +4,7 @@ DROP TABLE IF EXISTS api.components CASCADE;
 
 CREATE TABLE api.components (
     id serial NOT NULL,
-    name TEXT NOT NULL,
+    name TEXT NOT NULL UNIQUE,
     description TEXT,
     status integer,
     modified TIMESTAMP without TIME zone NOT NULL,
