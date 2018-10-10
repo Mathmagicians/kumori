@@ -79,6 +79,7 @@
 			<div class="card-header">Search in Usecases <strong v-if="query">{{ query.tx | stringify }}</strong></div>
 			<div style="card-body father">
 				<sunburst-wrap 
+					ref="sunburst"
 					:tree="tree" 
 					class="sunburst"
 					v-on:nodeClicked="setUseCaseQuery"
@@ -152,10 +153,11 @@
 	      sendSearchQueryEvent(queryString) {
 	      	this.$emit('queryString', this.searchInput);
 	      	this.query.string = queryString;
+	      	this.updateRoute()
 	      },
 	      setUseCaseQuery( useCase ){
 	      	this.query.tx = useCase.trail;
-	      	//this.$emit(useCase, this.useCaseModel.trail);
+	      	this.updateRoute()
 	      },
 	      setLcQuery(item, newValue = !this.lcModel[item] ){
 	      	//have to update state here, since lcbutton is a child compponent that wraps a button
@@ -175,15 +177,20 @@
 	      }, 
 	      updateRoute() {
 	      	//todo dont push empty query parameters!
-	      	this.$router.push({path: '/components/search', query: this.query });
+	      	let prettyQuery = {}
+	      	if( this.query.string ) prettyQuery.string = this.query.string
+	      	if( this.query.tx.length > 0) prettyQuery.tx = this.query.tx
+	      	if( this.query.lc.length > 0) prettyQuery.lc = this.query.lc
+	      	this.$router.push({path: '/components/search', query: prettyQuery });
 	      },
 	      clearFilters(){
-	      	this.searchInput = '';
+	      	this.searchInput = ''
 	      	//reset the query object
-	      	this.sendSearchQueryEvent( this.searchInput);
-	      	this.types.forEach( type => this.setPhase(type, false));
-	      	this.query.tx=[];
-	      	//reset sunburst to root
+	      	this.sendSearchQueryEvent( this.searchInput)
+	      	this.types.forEach( type => this.setPhase(type, false))
+	      	this.query.tx=[]
+	      	this.$refs.sunburst.resetPath()
+	      	this.updateRoute()
 	      }
 	    }
 	}
