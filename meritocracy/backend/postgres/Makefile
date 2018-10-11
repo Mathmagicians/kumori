@@ -1,28 +1,41 @@
-PGDATABASE='meritocracy'
-PG_HOST='postgres'
-PGPASSWORD="postgres"
-NETWORK="backend"
-IMAGE="postgres"
+VERSION=latest
+IMAGE="mathmagicians/meritocracy_db:${VERSION}"
 
-.PHONY: start-pgrunner stop-pgrunner fixture
+.PHONY: login logout build push pull run console
 
-start-pgrunner:
-	@docker run \
-	-e "PGPASSWORD=${PGPASSWORD}" \
-	-dt \
-	--network=${NETWORK} \
-	--name pgrunner \
-	-v ${PWD}/../..:/tmp \
-	-w /tmp \
-	node
-	@docker exec pgrunner apt-get update
-	@docker exec pgrunner apt-get install -y postgresql jq
+build:
+	@cat ./users.sql > schema.sql
+	@cat ./database.sql >> schema.sql
+	@cat ./functions/row_inserted.sql >> schema.sql
+	@cat ./functions/row_updated.sql >> schema.sql
+	@cat ./tables/api.taxonomy.sql >> schema.sql
+	@cat ./tables/api.statuses.sql >> schema.sql
+	@cat ./tables/api.scopes.sql >> schema.sql
+	@cat ./tables/api.components.sql >> schema.sql
+	@cat ./tables/api.comments.sql >> schema.sql
+	@cat ./tables/api.links.sql >> schema.sql
+	@cat ./tables/api.usecases.sql >> schema.sql
+	@cat ./tables/api.component_taxonomy.sql >> schema.sql
+	@cat ./views/api.w_usecases.sql >> schema.sql
+	@cat ./views/api.w_components.sql >> schema.sql
+	@cat ./views/api.w_taxonomy.sql >> schema.sql
+	@docker build -t ${IMAGE} .
+	@rm schema.sql
 
-stop-pgrunner:
-	@docker stop pgrunner
-	@docker rm pgrunner
+login:
+	@docker login -u ${REGISTRY_USER} -p ${REGISTRY_PASS}
 
-fixture:
-	@docker exec pgrunner ./backend/postgres/json2sql.sh
+logout:
+	@docker logout ${REGISTRY}
 
-all: fixture
+push:
+	@docker push ${IMAGE}
+
+pull:
+	@docker pull ${IMAGE}
+
+shell:
+	@docker run --rm --name meritocracy_db_shell -it ${IMAGE} /bin/bash
+
+run:
+	@docker run --rm --name meritocracy_db_run -it ${IMAGE}

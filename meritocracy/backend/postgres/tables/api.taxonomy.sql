@@ -6,7 +6,7 @@ CREATE TABLE api.taxonomy (
     level integer NOT NULL,
     parent TEXT,
     modified TIMESTAMP without TIME zone NOT NULL,
-    modifiedby TEXT NOT NULL,
+    modifiedby TEXT,
     deleted boolean NOT NULL,
     PRIMARY KEY (id)
 );

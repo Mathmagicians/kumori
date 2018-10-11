@@ -4,7 +4,7 @@ CREATE TABLE api.statuses (
     id serial NOT NULL,
     name TEXT NOT NULL,
     modified TIMESTAMP without TIME zone NOT NULL,
-    modifiedby TEXT NOT NULL,
+    modifiedby TEXT,
     deleted boolean NOT NULL,
     PRIMARY KEY (id)
 );

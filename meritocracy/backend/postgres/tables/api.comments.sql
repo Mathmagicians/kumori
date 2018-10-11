@@ -5,7 +5,7 @@ CREATE TABLE api.comments (
     comment TEXT NOT NULL,
     component integer NOT NULL,
     modified TIMESTAMP without TIME zone NOT NULL,
-    modifiedby TEXT NOT NULL,
+    modifiedby TEXT,
     deleted boolean NOT NULL,
     PRIMARY KEY (id),
     CONSTRAINT component FOREIGN KEY (component) REFERENCES api.components (id)

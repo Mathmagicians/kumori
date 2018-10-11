@@ -30,11 +30,17 @@ services:
 
   postgres:
     container_name: postgres
-    image: meritocracy-postgres:latest
+    image: mathmagicians/meritocracy_db:latest
     ports:
       - "5432:5432"
     environment:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      DB_SCHEMA: ${POSTGREST_CONNECTION_SCHEMA}
+      DB_CRUD_USER: ${POSTGREST_CONNECTION_USER}
+      DB_CRUD_PASS: ${POSTGREST_CONNECTION_PASSWORD}
+      DB_R_USER: ${POSTGREST_ANON_ROLE}
+      TAXONOMY: ${TAXONOMY}
+      COMPONENTS: ${COMPONENTS}
     networks:
       - backend
 
