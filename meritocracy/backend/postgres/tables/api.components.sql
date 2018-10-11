@@ -1,5 +1,3 @@
-SET client_min_messages TO WARNING;
-
 DROP TABLE IF EXISTS api.components CASCADE;
 
 CREATE TABLE api.components (
@@ -15,11 +13,11 @@ CREATE TABLE api.components (
         MATCH SIMPLE ON UPDATE NO ACTION ON DELETE NO ACTION
 );
 
-DROP TRIGGER IF EXISTS components_insert ON api.comments;
+DROP TRIGGER IF EXISTS components_insert ON api.components;
 
 CREATE TRIGGER components_insert BEFORE INSERT ON api.components FOR EACH ROW EXECUTE PROCEDURE row_inserted ();
 
-DROP TRIGGER IF EXISTS components_update ON api.comments;
+DROP TRIGGER IF EXISTS components_update ON api.components;
 
 CREATE TRIGGER components_update BEFORE
 UPDATE

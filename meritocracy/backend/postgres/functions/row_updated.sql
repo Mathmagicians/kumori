@@ -1,5 +1,3 @@
-SET client_min_messages TO WARNING;
-
 DROP FUNCTION IF EXISTS row_updated ()
     CASCADE;
 

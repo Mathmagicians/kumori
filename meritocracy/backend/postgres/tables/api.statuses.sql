@@ -1,5 +1,3 @@
-SET client_min_messages TO WARNING;
-
 DROP TABLE IF EXISTS api.statuses CASCADE;
 
 CREATE TABLE api.statuses (
@@ -11,11 +9,11 @@ CREATE TABLE api.statuses (
     PRIMARY KEY (id)
 );
 
-DROP TRIGGER IF EXISTS statuses_insert ON api.comments;
+DROP TRIGGER IF EXISTS statuses_insert ON api.statuses;
 
 CREATE TRIGGER statuses_insert BEFORE INSERT ON api.statuses FOR EACH ROW EXECUTE PROCEDURE row_inserted ();
 
-DROP TRIGGER IF EXISTS statuses_update ON api.comments;
+DROP TRIGGER IF EXISTS statuses_update ON api.statuses;
 
 CREATE TRIGGER statuses_update BEFORE
 UPDATE

@@ -1,5 +1,3 @@
-SET client_min_messages TO WARNING;
-
 DROP VIEW IF EXISTS api.w_usecases;
 
 CREATE OR REPLACE VIEW api.w_usecases

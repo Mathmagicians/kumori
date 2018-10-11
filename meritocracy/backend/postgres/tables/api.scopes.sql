@@ -1,5 +1,3 @@
-SET client_min_messages TO WARNING;
-
 DROP TABLE IF EXISTS api.scopes CASCADE;
 
 CREATE TABLE api.scopes (
@@ -11,11 +9,11 @@ CREATE TABLE api.scopes (
     PRIMARY KEY (id)
 );
 
-DROP TRIGGER IF EXISTS scopes_insert ON api.comments;
+DROP TRIGGER IF EXISTS scopes_insert ON api.scopes;
 
 CREATE TRIGGER scopes_insert BEFORE INSERT ON api.scopes FOR EACH ROW EXECUTE PROCEDURE row_inserted ();
 
-DROP TRIGGER IF EXISTS scopes_update ON api.comments;
+DROP TRIGGER IF EXISTS scopes_update ON api.scopes;
 
 CREATE TRIGGER scopes_update BEFORE
 UPDATE
