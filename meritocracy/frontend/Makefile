@@ -1,12 +1,12 @@
-.PHONY: setup build unit e2e test shell
+VERSION=latest
+IMAGE="mathmagicians/meritocracy_web:${VERSION}"
+
+.PHONY: setup build unit e2e test login logout push pull shell run
 
 setup:
 	@docker run --rm -dt --name setup -v ${PWD}:/tmp -w /tmp node
 	@docker exec setup npm install
 	@docker rm -f setup
-
-build:
-	@docker run --rm -v ${PWD}:/tmp -w /tmp node npm run build
 
 unit:
 	@docker run --rm -v ${PWD}:/tmp -w /tmp node npm run unit
@@ -16,5 +16,28 @@ e2e:
 
 test: unit e2e
 
+build:
+	@docker run --rm -v ${PWD}:/tmp -w /tmp node npm run build
+	@docker build -t ${IMAGE} .
+
+build-osx:
+	@docker run --rm -v ${PWD}:/tmp -w /tmp node npm run build
+	@docker build --build-arg TARGET=Darwin -t ${IMAGE} .
+
+login:
+	@docker login -u ${REGISTRY_USER} -p ${REGISTRY_PASS}
+
+logout:
+	@docker logout ${REGISTRY}
+
+push:
+	@docker push ${IMAGE}
+
+pull:
+	@docker pull ${IMAGE}
+
 shell:
-	@docker run --rm -it -v ${PWD}:/tmp -w /tmp -p 8050:8080 node bash
+	@docker run --rm --name meritocracy_web_shell -it -p 80:80 ${IMAGE} /bin/sh
+
+run:
+	@docker run --rm --name meritocracy_web_run -p 80:80 -it ${IMAGE}

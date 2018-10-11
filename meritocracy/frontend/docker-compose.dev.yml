@@ -1,7 +1,7 @@
 version: '3.5'
 services:
   devserver:
-    container_name: dev-server
+    container_name: meritocracy_${MERITOCRACY_VERSION}-devserver
     image: node
     command: ["npm", "run", "dev"]
     working_dir: /tmp
@@ -10,11 +10,11 @@ services:
     volumes:
       - "./:/tmp"
     networks:
-      - frontend
-      - backend
+      - meritocracy-frontend
+      - meritocracy-backend
 
   postgrest:
-    container_name: postgrest
+    container_name: meritocracy_${MERITOCRACY_VERSION}-postgrest
     image: postgrest/postgrest:latest
     ports:
       - "3000:3000"
@@ -25,11 +25,11 @@ services:
     depends_on:
       - postgres
     networks:
-      - frontend
-      - backend
+      - meritocracy-frontend
+      - meritocracy-backend
 
   postgres:
-    container_name: postgres
+    container_name: meritocracy_${MERITOCRACY_VERSION}-postgres
     image: mathmagicians/meritocracy_db:latest
     ports:
       - "5432:5432"
@@ -42,21 +42,21 @@ services:
       TAXONOMY: ${TAXONOMY}
       COMPONENTS: ${COMPONENTS}
     networks:
-      - backend
+      - meritocracy-backend
 
   pgadmin:
-    container_name: pgadmin
+    container_name: meritocracy_${MERITOCRACY_VERSION}-pgadmin
     image: chorss/docker-pgadmin4:latest
     ports:
     - "5050:5050"
     networks:
-      - frontend
-      - backend
+      - meritocracy-frontend
+      - meritocracy-backend
     volumes:
     - data-pgadmin:/data
 
   swagger:
-    container_name: swagger
+    container_name: meritocracy_${MERITOCRACY_VERSION}-swagger
     image: swaggerapi/swagger-ui
     ports:
       - "8070:8080"
@@ -65,16 +65,16 @@ services:
     depends_on:
       - postgrest
     networks:
-      - frontend
+      - meritocracy-frontend
 
 volumes:
   data-pgadmin:
     name: pgadmin
 
 networks:
-  frontend:
+  meritocracy-frontend:
     driver: bridge
-    name: frontend
-  backend:
+    name: meritocracy_${MERITOCRACY_VERSION}-frontend
+  meritocracy-backend:
     driver: bridge
-    name: backend
+    name: meritocracy_${MERITOCRACY_VERSION}-backend
