@@ -139,7 +139,7 @@ function taxonomi () {
     name="$(echo ${component} | base64 -d | jq -r -c '.name')"
     level="$(echo ${component} | base64 -d | jq -r -c '.level')"
     parent="$(echo ${component} | base64 -d | jq -r -c '.parent')"
-    _commit "INSERT INTO ${DB_SCHEMA}.taxonomy (name, level, parent, deleted) VALUES (\$tag\$${name}\$tag\$,\$tag\$${level}\$tag\$,\$tag\$${parent}\$tag\$,false);"
+    _commit "INSERT INTO ${DB_SCHEMA}.taxonomy (name, level, parent) VALUES (\$tag\$${name}\$tag\$,\$tag\$${level}\$tag\$,\$tag\$${parent}\$tag\$);"
   done <<< "$(curl -s ${TAXONOMY} | jq -r '.tags[] | @base64')"
 }
 
