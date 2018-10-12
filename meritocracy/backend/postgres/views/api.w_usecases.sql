@@ -9,7 +9,6 @@ SELECT
     status.name AS status,
     sco.name AS scope,
     to_char(usecase.modified,'YYYY-MM-DD') AS modified,
-    usecase.modifiedby AS modifiedby,
     usecase.deleted AS deleted
 FROM
     api.usecases usecase
