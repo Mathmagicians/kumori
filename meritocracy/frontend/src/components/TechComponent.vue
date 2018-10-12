@@ -1,22 +1,20 @@
 <template>
   <b-card no-body :id="tech.id">
-    <span 
-      slot="header" 
+    <span
+      slot="header"
       :v-b-toggle="accordionId">
-			<b-button 
-        size="sm" 
-        v-on:click="activate" 
+			<b-button
+        v-on:click="activate"
         variant="link"
-        class="mb-2"
         >
         {{tech.name}}
       </b-button>
 			<life-cycle :status="tech.status" to="about" class="status-floater"></life-cycle>
 		</span>
 
-    <b-collapse 
-      :id="accordionId" 
-      accordion="tech" 
+    <b-collapse
+      :id="accordionId"
+      accordion="tech"
        :visible="active?active:false">
       <b-card-body>
         <b-list-group flush>
@@ -28,7 +26,7 @@
             <strong>Description:</strong>
             <b-row>
               <b-col cols="1">
-                 <v-icon 
+                 <v-icon
                   name="clipboard"
                   color="grey"  />
               </b-col>
@@ -42,26 +40,26 @@
           <b-list-group-item v-if="tech.usecases && tech.usecases.length>0">
              <strong>Usecases</strong>
              <b-badge>{{tech.usecases.length}}</b-badge>:
-            <b-row 
-              v-for="(uc, index) in tech.usecases" 
+            <b-row
+              v-for="(uc, index) in tech.usecases"
               class="justify-content-md-center">
               <b-col cols="1">
-                <v-icon 
+                <v-icon
                   v-if="index===0"
                   scale="1"
-                  name="toolbox" 
+                  name="toolbox"
                   color="green" />
-                <v-icon 
+                <v-icon
                   v-else
                   scale="1"
-                  name="toolbox" 
+                  name="toolbox"
                   color="grey" />
               </b-col>
               <b-col cols="9">
-                <b-badge 
+                <b-badge
                   v-if="index===0"
                   variant="success">Primary</b-badge>
-                 <b-badge 
+                 <b-badge
                   v-else
                   variant="secondary">Secondary</b-badge>
                 <b> {{uc.name}}</b>
@@ -75,18 +73,18 @@
           </b-list-group-item>
           <b-list-group-item v-if="tech.licenses">
             <strong>Licenses:</strong>
-             <b-row 
-              v-for="license in tech.licenses" 
+             <b-row
+              v-for="license in tech.licenses"
               class="justify-content-md-center">
               <b-col cols="1">
-                <v-icon 
-                  name="clipboard" 
+                <v-icon
+                  name="clipboard"
                   color="grey" />
               </b-col>
               <b-col cols="9" v-if="license">
                 <b-badge :variant="license.type === 'commercial'?'danger':'warning'">{{license.type}}</b-badge>
                 {{license.description}}
-                   <b-button 
+                   <b-button
                   variant="link lg"
                   :href="license.ref">
                   {{license.ref}}
@@ -97,17 +95,17 @@
           </b-list-group-item>
            <b-list-group-item v-if="tech.links && tech.links.length>0">
             <strong>Links:</strong>
-            <b-row 
-              v-for="(link, index) in tech.links" 
+            <b-row
+              v-for="(link, index) in tech.links"
               class="justify-content-md-center">
               <b-col cols="1">
-                <v-icon 
-                  name="link" 
+                <v-icon
+                  name="link"
                   color="grey" />
               </b-col>
               <b-col cols="9">
                 <b-badge>{{link.type}}</b-badge>
-                <b-button 
+                <b-button
                   variant="link lg"
                   :href="link.ref">
                   {{link.ref}}
@@ -118,17 +116,17 @@
           </b-list-group-item>
           <b-list-group-item v-if="tech.log">
             <strong>Change Log:</strong>
-            <b-row 
+            <b-row
               v-for="(entry, index) in tech.log"
               class="justify-content-md-center">
                 <b-col cols="1">
-                  <v-icon 
+                  <v-icon
                     v-if="index===0"
-                    name="play" 
+                    name="play"
                     color="green"/>
-                  <v-icon 
+                  <v-icon
                     v-else
-                    name="play" 
+                    name="play"
                     color="grey"/>
                 </b-col>
                 <b-col cols="2">
@@ -144,17 +142,17 @@
           </b-list-group-item>
           <b-list-group-item v-if="tech.debt">
             <strong>Technical debt:</strong>
-            <b-row 
+            <b-row
               v-for="(entry, index) in tech.debt"
               class="justify-content-md-center">
                 <b-col cols="1">
-                    <v-icon 
+                    <v-icon
                       v-if="entry.score >= 2"
-                      name="fire" 
+                      name="fire"
                       color="orange"/>
-                    <v-icon 
+                    <v-icon
                       v-else
-                      name="fire" 
+                      name="fire"
                       color="grey"/>
                 </b-col>
                 <b-col cols="2">
@@ -170,12 +168,12 @@
           </b-list-group-item>
           <b-list-group-item>
             <strong>Comments:</strong>
-            <b-row 
+            <b-row
               v-for="(entry, index) in tech.comments"
               class="justify-content-md-center">
                 <b-col cols="1">
-                    <v-icon 
-                      name="comment" 
+                    <v-icon
+                      name="comment"
                       color="grey"/>
                 </b-col>
                 <b-col cols="2">
@@ -202,10 +200,10 @@
           <b-button  variant="outline-secondary sm" class="btn-round">
             <v-icon name="comment" scale="1"/></v-icon>
           </b-button>
-          <b-button  
+          <b-button
             v-if="isEditOn"
             @click="edit"
-            variant="outline-secondary sm" 
+            variant="outline-secondary sm"
             class="btn-round">
             <v-icon name="pen" color="green" scale="1"/></v-icon>
           </b-button>
@@ -258,15 +256,30 @@ export default {
 </script>
 
 <style scoped>
+
 .status-floater {
   float: right;
 }
-  .usecase{
-    list-style-type:none;
-  }
+
+.usecase{
+  list-style-type:none;
+}
 
 .btn-round {
   border-radius: 50px;
+}
+
+.btn {
+  padding: .4rem .75rem;
+}
+
+.card {
+  margin: 3px 0px;
+}
+
+.card-header {
+  margin: 0px;
+  padding: 0px;
 }
 
 </style>

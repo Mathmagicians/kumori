@@ -1,17 +1,17 @@
 <template>
     <span v-if="lc"
       class="align-middle"  :title="'Lifecycle phase '+status"  >
-      <b-button 
+      <b-button
         :id="`btn_`+status"
         size="sm"
-        class="md-4 px-2 align-middle lifecycle"
-        :variant="btn" 
-        :to="to" 
-        @click="clicked" 
+        class="md-4 mt-1 mr-1 px-2 align-middle lifecycle"
+        :variant="btn"
+        :to="to"
+        @click="clicked"
         :pressed="isPressed">
         {{status | toUpperCase }}
       </b-button>
-       <b-popover 
+       <b-popover
         v-if="ispopup"
         :target="`btn_`+status"
         triggers="hover">
@@ -22,7 +22,7 @@
     <span v-else >
         <b-button
           size="sm"
-          class="md-4 px-2 align-middle lifecycle"
+          class="md-4 mt-1 mr-1 px-2 align-middle lifecycle"
           variant="outline-danger">
           Missing
       </b-button>
@@ -88,12 +88,12 @@
         return upper.toUpperCase();
       },
       title: function( title){
-        return 'Life cycle phase '+title; 
+        return 'Life cycle phase '+title;
       }
-    }, 
+    },
     methods: {
       clicked(){
-       return this.$emit('selected', this.status);   
+       return this.$emit('selected', this.status);
       }
 
     }
