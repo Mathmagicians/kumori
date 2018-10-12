@@ -118,7 +118,7 @@ function usecases () {
 function scopes () {
   _commit "DELETE FROM ${DB_SCHEMA}.scopes;"
   while read -r scope; do
-    _commit "INSERT INTO ${DB_SCHEMA}.scopes (name, deleted) VALUES (\$tag\$${scope}\$tag\$,false);"
+    _commit "INSERT INTO ${DB_SCHEMA}.scopes (name) VALUES (\$tag\$${scope}\$tag\$);"
   done <<< "$(curl -s ${COMPONENTS} | jq  '.[].scopes[].org' | sort | uniq | jq -s '.[]' | jq -r '.')"
 }
 
