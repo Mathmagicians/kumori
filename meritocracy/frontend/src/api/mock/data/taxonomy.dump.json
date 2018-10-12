@@ -1,511 +1,437 @@
-[
-  {
-    "taxonomy": {
-      "name": "TBM Service Taxonomy",
-      "levels": [
-        {
-          "level": 1,
-          "name": "Type"
-        },
-        {
-          "level": 2,
-          "name": "Category"
-        },
-        {
-          "level": 3,
-          "name": "Name"
-        },
-        {
-          "level": 4,
-          "name": "Capability"
-        },
-        {
-          "level": 5,
-          "name": "Use Case"
-        }
-      ],
-      "tags": [
-        {
-          "id": 1,
-          "level": 1,
-          "name": "Business Application Services",
-          "parent": "null"
-        },
-        {
-          "id": 2,
-          "level": 1,
-          "name": "Infrastructure Services",
-          "parent": "null"
-        },
-        {
-          "id": 3,
-          "level": 2,
-          "name": "Data Center",
-          "parent": "Infrastructure Services"
-        },
-        {
-          "id": 4,
-          "level": 3,
-          "name": "Enterprise Data Center",
-          "parent": "Data Center"
-        },
-        {
-          "id": 5,
-          "level": 3,
-          "name": "Other Data Center",
-          "parent": "Data Center"
-        },
-        {
-          "id": 6,
-          "level": 2,
-          "name": "Network",
-          "parent": "Infrastructure Services"
-        },
-        {
-          "id": 7,
-          "level": 3,
-          "name": "Data Network",
-          "parent": "Network"
-        },
-        {
-          "id": 8,
-          "level": 3,
-          "name": "Voice Network",
-          "parent": "Network"
-        },
-        {
-          "id": 9,
-          "level": 3,
-          "name": "Internet Connectivity",
-          "parent": "Network"
-        },
-        {
-          "id": 10,
-          "level": 3,
-          "name": "Domain Service",
-          "parent": "Network"
-        },
-        {
-          "id": 11,
-          "level": 3,
-          "name": "Load Balancing",
-          "parent": "Network"
-        },
-        {
-          "id": 12,
-          "level": 2,
-          "name": "Compute",
-          "parent": "Infrastructure Services"
-        },
-        {
-          "id": 13,
-          "level": 3,
-          "name": "Physical Compute",
-          "parent": "Compute"
-        },
-        {
-          "id": 14,
-          "level": 3,
-          "name": "Virtual Compute and Containers",
-          "parent": "Compute"
-        },
-        {
-          "id": 15,
-          "level": 3,
-          "name": "Compute on Demand",
-          "parent": "Compute"
-        },
-        {
-          "id": 16,
-          "level": 3,
-          "name": "Mainframe",
-          "parent": "Compute"
-        },
-        {
-          "id": 17,
-          "level": 2,
-          "name": "Storage",
-          "parent": "Infrastructure Services"
-        },
-        {
-          "id": 18,
-          "level": 1,
-          "name": "Delivery Services",
-          "parent": "null"
-        },
-        {
-          "id": 19,
-          "level": 2,
-          "name": "Strategy and Planning",
-          "parent": "Delivery Services"
-        },
-        {
-          "id": 20,
-          "level": 3,
-          "name": "Plan",
-          "parent": "Strategy and Planning"
-        },
-        {
-          "id": 21,
-          "level": 3,
-          "name": "Technology Business Management",
-          "parent": "Strategy and Planning"
-        },
-        {
-          "id": 22,
-          "level": 3,
-          "name": "Innovation and Ideation",
-          "parent": "Strategy and Planning"
-        },
-        {
-          "id": 23,
-          "level": 3,
-          "name": "Enterprise Architecture",
-          "parent": "Strategy and Planning"
-        },
-        {
-          "id": 24,
-          "level": 3,
-          "name": "Program and Project Management",
-          "parent": "Strategy and Planning"
-        },
-        {
-          "id": 25,
-          "level": 3,
-          "name": "Business Solution Consulting",
-          "parent": "Strategy and Planning"
-        },
-        {
-          "id": 26,
-          "level": 3,
-          "name": "IT Vendor Management",
-          "parent": "Strategy and Planning"
-        },
-        {
-          "id": 27,
-          "level": 2,
-          "name": "Development",
-          "parent": "Delivery Services"
-        },
-        {
-          "id": 28,
-          "level": 3,
-          "name": "Design and Development",
-          "parent": "Development"
-        },
-        {
-          "id": 29,
-          "level": 4,
-          "name": "Architecture",
-          "parent": "Design and Development"
-        },
-        {
-          "id": 30,
-          "level": 4,
-          "name": "Requirements",
-          "parent": "Design and Development"
-        },
-        {
-          "id": 31,
-          "level": 4,
-          "name": "Design",
-          "parent": "Design and Development"
-        },
-        {
-          "id": 32,
-          "level": 4,
-          "name": "Languages and Libraries",
-          "parent": "Design and Development"
-        },
-        {
-          "id": 33,
-          "level": 5,
-          "name": "Ad hoc scripting",
-          "parent": "Languages and Libraries"
-        },
-        {
-          "id": 34,
-          "level": 5,
-          "name": "Application Development",
-          "parent": "Languages and Libraries"
-        },
-        {
-          "id": 35,
-          "level": 4,
-          "name": "Frameworks",
-          "parent": "Design and Development"
-        },
-        {
-          "id": 36,
-          "level": 4,
-          "name": "IDE and plug-i����s",
-          "parent": "Design and Development"
-        },
-        {
-          "id": 37,
-          "level": 4,
-          "name": "Source Control",
-          "parent": "Design and Development"
-        },
-        {
-          "id": 38,
-          "level": 4,
-          "name": "Artifact Repositories",
-          "parent": "Design and Development"
-        },
-        {
-          "id": 39,
-          "level": 4,
-          "name": "Building",
-          "parent": "Design and Development"
-        },
-        {
-          "id": 40,
-          "level": 4,
-          "name": "Deployment",
-          "parent": "Design and Development"
-        },
-        {
-          "id": 41,
-          "level": 4,
-          "name": "Developer communication",
-          "parent": "Design and Development"
-        },
-        {
-          "id": 42,
-          "level": 5,
-          "name": "Development instant messaging",
-          "parent": "Developer communication"
-        },
-        {
-          "id": 43,
-          "level": 3,
-          "name": "System integration",
-          "parent": "Development"
-        },
-        {
-          "id": 44,
-          "level": 4,
-          "name": "Data transport",
-          "parent": "System integration"
-        },
-        {
-          "id": 45,
-          "level": 3,
-          "name": "Testing",
-          "parent": "Development"
-        },
-        {
-          "id": 46,
-          "level": 4,
-          "name": "Unit testing",
-          "parent": "Testing"
-        },
-        {
-          "id": 47,
-          "level": 4,
-          "name": "Functional testing",
-          "parent": "Testing"
-        },
-        {
-          "id": 48,
-          "level": 4,
-          "name": "Integration testing",
-          "parent": "Testing"
-        },
-        {
-          "id": 49,
-          "level": 4,
-          "name": "Testing Frameworks",
-          "parent": "Testing"
-        },
-        {
-          "id": 50,
-          "level": 2,
-          "name": "Support",
-          "parent": "Delivery Services"
-        },
-        {
-          "id": 51,
-          "level": 3,
-          "name": "Service Desk",
-          "parent": "Support"
-        },
-        {
-          "id": 52,
-          "level": 3,
-          "name": "Application Support",
-          "parent": "Support"
-        },
-        {
-          "id": 53,
-          "level": 3,
-          "name": "IT Training",
-          "parent": "Support"
-        },
-        {
-          "id": 54,
-          "level": 3,
-          "name": "Central Print",
-          "parent": "Support"
-        },
-        {
-          "id": 55,
-          "level": 2,
-          "name": "Operations",
-          "parent": "Delivery Services"
-        },
-        {
-          "id": 56,
-          "level": 3,
-          "name": "IT Service Management",
-          "parent": "Operations"
-        },
-        {
-          "id": 57,
-          "level": 3,
-          "name": "Monitoring",
-          "parent": "Operations"
-        },
-        {
-          "id": 58,
-          "level": 4,
-          "name": "Event Gathering",
-          "parent": "Monitoring"
-        },
-        {
-          "id": 59,
-          "level": 5,
-          "name": "Application Level Event Gathering",
-          "parent": "Event Gathering"
-        },
-        {
-          "id": 60,
-          "level": 3,
-          "name": "Logging",
-          "parent": "Operations"
-        },
-        {
-          "id": 61,
-          "level": 3,
-          "name": "Capacity Management",
-          "parent": "Operations"
-        },
-        {
-          "id": 62,
-          "level": 3,
-          "name": "Deployment and Administration",
-          "parent": "Operations"
-        },
-        {
-          "id": 63,
-          "level": 2,
-          "name": "Security and Compliance",
-          "parent": "Delivery Services"
-        },
-        {
-          "id": 64,
-          "level": 3,
-          "name": "Security",
-          "parent": "Security and Compliance"
-        },
-        {
-          "id": 65,
-          "level": 3,
-          "name": "Governance, Risk and Compliance",
-          "parent": "Security and Compliance"
-        },
-        {
-          "id": 66,
-          "level": 3,
-          "name": "Business Continuity and Disaster Recovery",
-          "parent": "Security and Compliance"
-        },
-        {
-          "id": 67,
-          "level": 1,
-          "name": "Platform Services",
-          "parent": "null"
-        },
-        {
-          "id": 68,
-          "level": 2,
-          "name": "Data",
-          "parent": "Platform Services"
-        },
-        {
-          "id": 69,
-          "level": 3,
-          "name": "Database",
-          "parent": "Data"
-        },
-        {
-          "id": 70,
-          "level": 3,
-          "name": "Distributed Cache",
-          "parent": "Data"
-        },
-        {
-          "id": 71,
-          "level": 3,
-          "name": "Data Management",
-          "parent": "Data"
-        },
-        {
-          "id": 72,
-          "level": 3,
-          "name": "Data Warehouse",
-          "parent": "Data"
-        },
-        {
-          "id": 73,
-          "level": 3,
-          "name": "Data Analytics and Visualization",
-          "parent": "Data"
-        },
-        {
-          "id": 74,
-          "level": 3,
-          "name": "Machine Learning",
-          "parent": "Data"
-        },
-        {
-          "id": 75,
-          "level": 2,
-          "name": "Applications",
-          "parent": "Platform Services"
-        },
-        {
-          "id": 76,
-          "level": 3,
-          "name": "Application Hosting",
-          "parent": "Applications"
-        },
-        {
-          "id": 77,
-          "level": 3,
-          "name": "Message Bus and Integration",
-          "parent": "Applications"
-        },
-        {
-          "id": 78,
-          "level": 3,
-          "name": "Content Management",
-          "parent": "Applications"
-        },
-        {
-          "id": 79,
-          "level": 3,
-          "name": "Search",
-          "parent": "Applications"
-        },
-        {
-          "id": 80,
-          "level": 3,
-          "name": "Streaming",
-          "parent": "Applications"
-        }
-      ]
-    }
-  }
-]
+{
+    "name": "TBM Service Taxonomy",
+    "statuses" : [
+      "To be decided",
+      "Experiment",
+      "Testing",
+      "POC",
+      "Default",
+      "Limited",
+      "Deprecated",
+      "Do not use"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "name": "Type"
+      },
+      {
+        "level": 2,
+        "name": "Category"
+      },
+      {
+        "level": 3,
+        "name": "Name"
+      },
+      {
+        "level": 4,
+        "name": "Capability"
+      },
+      {
+        "level": 5,
+        "name": "Use Case"
+      }
+    ],
+    "tags": [
+      {
+        "level": 1,
+        "name": "Business Application Services",
+        "parent": null
+      },
+      {
+        "level": 1,
+        "name": "Infrastructure Services",
+        "parent": null
+      },
+      {
+        "level": 2,
+        "name": "Data Center",
+        "parent": "Infrastructure Services"
+      },
+      {
+        "level": 3,
+        "name": "Enterprise Data Center",
+        "parent": "Data Center"
+      },
+      {
+        "level": 3,
+        "name": "Other Data Center",
+        "parent": "Data Center"
+      },
+      {
+        "level": 2,
+        "name": "Network",
+        "parent": "Infrastructure Services"
+      },
+      {
+        "level": 3,
+        "name": "Data Network",
+        "parent": "Network"
+      },
+      {
+        "level": 3,
+        "name": "Voice Network",
+        "parent": "Network"
+      },
+      {
+        "level": 3,
+        "name": "Internet Connectivity",
+        "parent": "Net Private Network",
+        "parent": "Network"
+      },
+      {
+        "level": 3,
+        "name": "Domain Service",
+        "parent": "Network"
+      },
+      {
+        "level": 3,
+        "name": "Load Balancing",
+        "parent": "Network"
+      },
+      {
+        "level": 2,
+        "name": "Compute",
+        "parent": "Infrastructure Services"
+      },
+      {
+        "level": 3,
+        "name": "Physical Compute",
+        "parent": "Compute"
+      },
+      {
+        "level": 3,
+        "name": "Virtual Compute and Containers",
+        "parent": "Compute"
+      },
+      {
+        "level": 3,
+        "name": "Compute on Demand",
+        "parent": "Compute"
+      },
+      {
+        "level": 3,
+        "name": "Mainframe",
+        "parent": "Compute"
+      },
+      {
+        "level": 2,
+        "name": "Storage",
+        "parent": "Infrastructure Services"
+      },
+      {
+        "level": 1,
+        "name": "Delivery Services",
+        "parent": null
+      },
+      {
+        "level": 2,
+        "name": "Strategy and Planning",
+        "parent": "Delivery Services"
+      },
+      {
+        "level": 3,
+        "name": "Plan",
+        "parent": "Strategy and Planning"
+      },
+      {
+        "level": 3,
+        "name": "Technology Business Management",
+        "parent": "Strategy and Planning"
+      },
+      {
+        "level": 3,
+        "name": "Innovation and Ideation",
+        "parent": "Strategy and Planning"
+      },
+      {
+        "level": 3,
+        "name": "Enterprise Architecture",
+        "parent": "Strategy and Planning"
+      },
+      {
+        "level": 3,
+        "name": "Program and Project Management",
+        "parent": "Strategy and Planning"
+      },
+      {
+        "level": 3,
+        "name": "Business Solution Consulting",
+        "parent": "Strategy and Planning"
+      },
+      {
+        "level": 3,
+        "name": "IT Vendor Management",
+        "parent": "Strategy and Planning"
+      },
+      {
+        "level": 2,
+        "name": "Development",
+        "parent": "Delivery Services"
+      },
+      {
+        "level": 3,
+        "name": "Design and Development",
+        "parent": "Development"
+      },
+      {
+        "level": 4,
+        "name": "Architecture",
+        "parent": "Design and Development"
+      },
+      {
+        "level": 4,
+        "name": "Requirements",
+        "parent": "Design and Development"
+      },
+      {
+        "level": 4,
+        "name": "Design",
+        "parent": "Design and Development"
+      },
+      {
+        "level": 4,
+        "name": "Languages and Libraries",
+        "parent": "Design and Development"
+      },
+      {
+        "level": 5,
+        "name": "Ad hoc scripting",
+        "parent": "Languages and Libraries"
+      },
+      { "level": 5,
+        "name": "Application Development",
+        "parent": "Languages and Libraries"
+      },
+      {
+        "level": 4,
+        "name": "Frameworks",
+        "parent": "Design and Development"
+      },
+      {
+        "level": 4,
+        "name": "IDE and plug-in’s",
+        "parent": "Design and Development"
+      },
+      {
+        "level": 4,
+        "name": "Source Control",
+        "parent": "Design and Development"
+      },
+      {
+        "level": 4,
+        "name": "Artifact Repositories",
+        "parent": "Design and Development"
+      },
+      {
+        "level": 4,
+        "name": "Building",
+        "parent": "Design and Development"
+      },
+      {
+        "level": 4,
+        "name": "Deployment",
+        "parent": "Design and Development"
+      },
+      {
+        "level": 4,
+        "name": "Developer communication",
+        "parent": "Design and Development"
+      },
+      {
+        "level": 5,
+        "name": "Development instant messaging",
+        "parent": "Developer communication"
+      },
+      {
+        "level": 3,
+        "name": "System integration",
+        "parent": "Development"
+      },
+      {
+        "level": 4,
+        "name": "Data transport",
+        "parent": "System integration"
+      },
+      {
+        "level": 3,
+        "name": "Testing",
+        "parent": "Development"
+      },
+      {
+        "level": 4,
+        "name": "Unit testing",
+        "parent": "Testing"
+      },
+      {
+        "level": 4,
+        "name": "Functional testing",
+        "parent": "Testing"
+      },
+      {
+        "level": 4,
+        "name": "Integration testing",
+        "parent": "Testing"
+      },
+      {
+        "level": 4,
+        "name": "Testing Frameworks",
+        "parent": "Testing"
+      },
+      {
+        "level": 2,
+        "name": "Support",
+        "parent": "Delivery Services"
+      },
+      {
+        "level": 3,
+        "name": "Service Desk",
+        "parent": "Support"
+      },
+      {
+        "level": 3,
+        "name": "Application Support",
+        "parent": "Support"
+      },
+      {
+        "level": 3,
+        "name": "IT Training",
+        "parent": "Support"
+      },
+      {
+        "level": 3,
+        "name": "Central Print",
+        "parent": "Support"
+      },
+      {
+        "level": 2,
+        "name": "Operations",
+        "parent": "Delivery Services"
+      },
+      {
+        "level": 3,
+        "name": "IT Service Management",
+        "parent": "Operations"
+      },
+      {
+        "level": 3,
+        "name": "Monitoring",
+        "parent": "Operations"
+      },
+      {
+        "level": 4,
+        "name": "Event Gathering",
+        "parent": "Monitoring"
+      },
+      {
+        "level": 5,
+        "name": "Application Level Event Gathering",
+        "parent": "Event Gathering"
+      },
+      {
+        "level": 3,
+        "name": "Logging",
+        "parent": "Operations"
+      },
+      {
+        "level": 3,
+        "name": "Capacity Management",
+        "parent": "Operations"
+      },
+      {
+        "level": 3,
+        "name": "Deployment and Administration",
+        "parent": "Operations"
+      },
+      {
+        "level": 2,
+        "name": "Security and Compliance",
+        "parent": "Delivery Services"
+      },
+      {
+        "level": 3,
+        "name": "Security",
+        "parent": "Security and Compliance"
+      },
+      {
+        "level": 3,
+        "name": "Governance, Risk and Compliance",
+        "parent": "Security and Compliance"
+      },
+      {
+        "level": 3,
+        "name": "Business Continuity and Disaster Recovery",
+        "parent": "Security and Compliance"
+      },
+      {
+        "level": 1,
+        "name": "Platform Services",
+        "parent": null
+      },
+      {
+        "level": 2,
+        "name": "Data",
+        "parent": "Platform Services"
+      },
+      {
+        "level": 3,
+        "name": "Database",
+        "parent": "Data"
+      },
+      {
+        "level": 3,
+        "name": "Distributed Cache",
+        "parent": "Data"
+      },
+      {
+        "level": 3,
+        "name": "Data Management",
+        "parent": "Data"
+      },
+      {
+        "level": 3,
+        "name": "Data Warehouse",
+        "parent": "Data"
+      },
+      {
+        "level": 3,
+        "name": "Data Analytics and Visualization",
+        "parent": "Data"
+      },
+      {
+        "level": 3,
+        "name": "Machine Learning",
+        "parent": "Data"
+      },
+      {
+        "level": 2,
+        "name": "Applications",
+        "parent": "Platform Services"
+      },
+      {
+        "level": 3,
+        "name": "Application Hosting",
+        "parent": "Applications"
+      },
+      {
+        "level": 3,
+        "name": "Message Bus and Integration",
+        "parent": "Applications"
+      },
+      {
+        "level": 3,
+        "name": "Content Management",
+        "parent": "Applications"
+      },
+      {
+        "level": 3,
+        "name": "Search",
+        "parent": "Applications"
+      },
+      {
+        "level": 3,
+        "name": "Streaming",
+        "parent": "Applications"
+      }
+    ]
+}
