@@ -1,5 +1,15 @@
 {
     "name": "TBM Service Taxonomy",
+    "statuses" : [
+      "To be decided",
+      "Experiment",
+      "Testing",
+      "POC",
+      "Default",
+      "Limited",
+      "Deprecated",
+      "Do not use"
+    ],
     "levels": [
       {
         "level": 1,

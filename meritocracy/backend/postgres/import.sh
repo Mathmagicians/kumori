@@ -125,11 +125,11 @@ function scopes () {
 # Insert statuses
 function statuses () {
   _commit "DELETE FROM ${DB_SCHEMA}.statuses;"
-  local scopes=("To be decided" "Experiment" "Testing" "POC" "Default" "Limited" "Deprecated" "Do not use")
 
-  for i in "${scopes[@]}"; do
-      _commit "INSERT INTO ${DB_SCHEMA}.statuses (name, deleted) VALUES (\$tag\$${i}\$tag\$,false);"
-  done
+  while read -r status; do
+    name="$(echo ${status} | base64 -d)"
+    _commit "INSERT INTO ${DB_SCHEMA}.statuses (name) VALUES (\$tag\$${name}\$tag\$);"
+  done <<< "$(curl -s ${TAXONOMY} | jq -r '.statuses[] | @base64')"
 }
 
 # Create taxonomy
