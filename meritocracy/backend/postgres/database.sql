@@ -1,5 +1,3 @@
-SET client_min_messages TO WARNING;
-
 -- Create Database
 DROP DATABASE IF EXISTS meritocracy;
 

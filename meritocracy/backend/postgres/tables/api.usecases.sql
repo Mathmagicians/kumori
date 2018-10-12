@@ -1,5 +1,3 @@
-SET client_min_messages TO WARNING;
-
 DROP TABLE IF EXISTS api.usecases CASCADE;
 
 CREATE TABLE api.usecases (
@@ -21,11 +19,11 @@ CREATE TABLE api.usecases (
         MATCH SIMPLE ON UPDATE NO ACTION ON DELETE NO ACTION
 );
 
-DROP TRIGGER IF EXISTS usecases_insert ON api.comments;
+DROP TRIGGER IF EXISTS usecases_insert ON api.usecases;
 
 CREATE TRIGGER usecases_insert BEFORE INSERT ON api.usecases FOR EACH ROW EXECUTE PROCEDURE row_inserted ();
 
-DROP TRIGGER IF EXISTS usecases_update ON api.comments;
+DROP TRIGGER IF EXISTS usecases_update ON api.usecases;
 
 CREATE TRIGGER usecases_update BEFORE
 UPDATE

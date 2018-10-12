@@ -1,5 +1,3 @@
-SET client_min_messages TO WARNING;
-
 DROP TABLE IF EXISTS api.component_taxonomy CASCADE;
 
 CREATE TABLE api.component_taxonomy (
