@@ -1,37 +1,37 @@
 <template>
-<div class="test">
-  <sunburst 
-  	:data="tree" 
-  	v-on:clickNode="nodeClicked" 
-  	class="sunburst">
+	<div class="test">
+	  <sunburst 
+	  	ref="sunburst"
+	  	:data="tree" 
+	  	v-on:clickNode="nodeClicked" 
+	  	class="sunburst">
 
-    <!-- Add behaviors -->
-    <template slot-scope="{ nodes, actions }">
-		<highlightOnHover :nodes="nodes" :actions="actions" />
-		<zoomOnClick :nodes="nodes" :actions="actions" />
+	    <!-- Add behaviors -->
+	    <template slot-scope="{ nodes, actions }">
+			<highlightOnHover :nodes="nodes" :actions="actions" />
+			<zoomOnClick :nodes="nodes" :actions="actions" />
 		</template>
 
-    <!-- Add information to be displayed on top the graph -->
+	    <!-- Add information to be displayed on top the graph -->
 
-    <nodeInfoDisplayer slot="legend" id="info" slot-scope="{ nodes }" :current="nodes.mouseOver" :root="nodes.root" description="of usecases" />
+	    <nodeInfoDisplayer slot="legend" id="info" slot-scope="{ nodes }" :current="nodes.mouseOver" :root="nodes.root" description="of usecases" />
 
-    <!-- Add bottom legend -->
+	    <!-- Add bottom legend -->
 
-    <breadcrumbTrail class="small-text"
-    	id="breadcrumbs" 
-    	:width="700" 
-    	slot="top" 
-    	slot-scope="{ nodes,colorGetter,width}" 
-    	:current="nodes.mouseOver" 
-    	:root="nodes.root" 
-    	:colorGetter="colorGetter" 
-    	:from="nodes.clicked"
-    	:item-width="110"
-    	:item-height="40"
-    	:spacing="2"/>
-
-  </sunburst>
-</div>
+	    <breadcrumbTrail class="small-text"
+	    	id="breadcrumbs" 
+	    	:width="700" 
+	    	slot="top" 
+	    	slot-scope="{ nodes,colorGetter,width}" 
+	    	:current="nodes.mouseOver" 
+	    	:root="nodes.root" 
+	    	:colorGetter="colorGetter" 
+	    	:from="nodes.clicked"
+	    	:item-width="110"
+	    	:item-height="40"
+	    	:spacing="2"/>
+	  </sunburst>
+	</div>
 </template>
 
 <script>
@@ -69,6 +69,9 @@
 					myNode = myNode.parent;
 				}
 				return trail;
+			},
+			resetPath(){
+				this.$refs.sunburst.zoomToNode(this.$refs.sunburst.graphNodes.root)
 			}
 		}
     }

@@ -31,39 +31,47 @@
 			<b-form-text id="inputLiveHelp">
 			Type what you want to search for -technology name, use case, anything ...
 			</b-form-text>
-		</b-card>
-		<b-card-group>
+		</b-card no-body>
+		<b-card-group >
 			<b-card 
+				overlay
 				v-for="type in types"
 				tag="article"
-				class="card-lifecycle">
-				<div slot="header" >
+				class="card-lifecycle"
+				>
+				<div class="card-body text-left">
+					<b-img 
+						fluid
+						class="image-lc"
+						:src="images(type)"/>
 					<b-button 
 						:variant="'outline-'+btnVariant(type)" 
 						class="phase"
 						@click="setPhase(type)"
 						:pressed="phaseModel[type]" >
-						<b-img rounded :src="images(type)" class="image-menu" top/>
-						<p>{{type | capitalize}}</p>
-						<b-badge pill>{{amountsForType[type]}}</b-badge>	
+						{{type | capitalize}}
+						<b-badge 
+							pill
+							size="lg"
+							:variant="btnVariant(type)">
+							{{amountsForType[type]}}
+						</b-badge>	
 					</b-button>
-							
+					<b-button-group vertical>
+						<span
+							style="width: 10rem;margin: 0px 2px 0px 2px;"
+							v-for="item in itemsForType[type]" >
+							<life-cycle 
+								:id="item+'selector'" 
+								ispopup
+								:status="item" 
+								v-on:selected="setLcQuery(item)"
+								:isPressed.sync="lcModel[item]">	
+							</life-cycle>
+							<b-badge pill>{{amounts[item]}}</b-badge>	
+						</span>
+					</b-button-group>
 				</div>
-
-				<div class="card-text">
-						<b-button-group vertical>
-							<span
-								v-for="item in itemsForType[type]" >
-								<life-cycle 
-									:id="item+'selector'" 
-									:status="item" 
-									v-on:selected="setLcQuery(item)"
-									:isPressed.sync="lcModel[item]">	
-								</life-cycle>
-								<b-badge pill>{{amounts[item]}}</b-badge>	
-							</span>
-						</b-button-group>
-					</div>
 			</b-card>
 		</b-card-group>
 
@@ -71,6 +79,7 @@
 			<div class="card-header">Search in Usecases <strong v-if="query">{{ query.tx | stringify }}</strong></div>
 			<div style="card-body father">
 				<sunburst-wrap 
+					ref="sunburst"
 					:tree="tree" 
 					class="sunburst"
 					v-on:nodeClicked="setUseCaseQuery"
@@ -138,19 +147,17 @@
 	      }
 	    },
 	    methods: {
-	      images: function(type) {
-	        return this.$store.state.phaseImages[type];
-	      },
 	      texts: function(type) {
 	        return this.$options.phaseText[type];
 	      },
 	      sendSearchQueryEvent(queryString) {
 	      	this.$emit('queryString', this.searchInput);
 	      	this.query.string = queryString;
+	      	this.updateRoute()
 	      },
 	      setUseCaseQuery( useCase ){
 	      	this.query.tx = useCase.trail;
-	      	//this.$emit(useCase, this.useCaseModel.trail);
+	      	this.updateRoute()
 	      },
 	      setLcQuery(item, newValue = !this.lcModel[item] ){
 	      	//have to update state here, since lcbutton is a child compponent that wraps a button
@@ -170,15 +177,20 @@
 	      }, 
 	      updateRoute() {
 	      	//todo dont push empty query parameters!
-	      	this.$router.push({path: '/components/search', query: this.query });
+	      	let prettyQuery = {}
+	      	if( this.query.string ) prettyQuery.string = this.query.string
+	      	if( this.query.tx.length > 0) prettyQuery.tx = this.query.tx
+	      	if( this.query.lc.length > 0) prettyQuery.lc = this.query.lc
+	      	this.$router.push({path: '/components/search', query: prettyQuery });
 	      },
 	      clearFilters(){
-	      	this.searchInput = '';
+	      	this.searchInput = ''
 	      	//reset the query object
-	      	this.sendSearchQueryEvent( this.searchInput);
-	      	this.types.forEach( type => this.setPhase(type, false));
-	      	this.query.tx=[];
-	      	//reset sunburst to root
+	      	this.sendSearchQueryEvent( this.searchInput)
+	      	this.types.forEach( type => this.setPhase(type, false))
+	      	this.query.tx=[]
+	      	this.$refs.sunburst.resetPath()
+	      	this.updateRoute()
 	      }
 	    }
 	}
@@ -187,17 +199,14 @@
 
 <style scoped>
 .card-lifecycle {
-  max-width: 95%;
-  height: auto;
+  height: 20rem;
+  background-color: white;
 }
 
-.image-menu {
-    width: 96px;
-    height: 96px;
-    background-color: #ffffff;
-    border-style: solid;
-    border-width: thin;
-    border-color: #aaaaaa;
+.image-lc {
+	width: 100%;
+    height: 8rem;
+    background-color: white;
     opacity: 1;
 }
 
@@ -223,5 +232,6 @@
 	 .phase {
 		min-width: 8em;
   		max-width: 8em;
+  		margin: 2px;
 	}
 </style>

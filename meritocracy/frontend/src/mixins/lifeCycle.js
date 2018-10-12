@@ -1,10 +1,16 @@
 export default {
-	variant : {
-      maybe: "secondary",
-      buy: "primary", 
-      hold: "success",
-      sell: "danger"
-    },
+	variant: {
+    maybe: "secondary",
+    buy: "primary", 
+    hold: "success",
+    sell: "danger"
+  },
+  phaseImages: Object.freeze({
+    'buy': require('../assets/buy.svg'),
+    'hold': require('../assets/service.svg'), 
+    'sell': require('../assets/exterminator.svg'), 
+    'maybe': require('../assets/community.svg')
+  }),
 	filters: {
 		outline() {
 			return 'outline-';
@@ -24,6 +30,9 @@ export default {
     methods: {
     	btnVariant(type){
     		return type?this.$options.variant[type]:'';
+      },
+      images: function(type) {
+        return this.$options.phaseImages[type];
       },
       // todo - unit test!
       // returns a list of root elements, that are trees built from parent-child relations in the flatList. Assumes name, parent and no loops.
@@ -70,9 +79,6 @@ export default {
         addSizesForTaxonomies(tags, techs){
           const isTagInTech = (tag,tech) => tech.tags.filter( atag => atag === tag.name).length>0
           const countTagInTechs = ( tag, techs) => techs.reduce( (sum,tech) => isTagInTech(tag,tech)?sum+1:sum,0 )
-          console.log('>>>addSizesForTaxonomies: received tags + tech')
-          console.log(tags)
-          console.log(techs)
           return tags ? tags.map( tag => ({ ...tag, size: countTagInTechs( tag, techs)})):tags
         },
 

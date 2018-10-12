@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server  --inline --progress --config build/webpack.dev.conf.js --hot",
-    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
+    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules --config build/webpack.prod.conf.js",
     "test": "cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text mocha-webpack --webpack-config webpack.config.js --require test/setup.js test/**/*.spec.js",
     "test:e2e": "NODE_ENV=test node test/e2e/runner.js",
     "lint": "eslint --ext .js,.vue src test/unit"

@@ -28,7 +28,8 @@
 <script>
 
   import LifeCycle from '../components/LifeCycle.vue'
-
+  import lifeCycleMixin from '../mixins/lifeCycle.js'
+    
   export default {
 
     name: 'about',
@@ -66,28 +67,15 @@
     components: {
       LifeCycle
     },
-    computed: {
-      types: function() {
-        let temp = this.$store.state.lifeCycle.items.map( item => item.type).filter((v, i, a) => a.indexOf(v) === i);
-        return temp;
-
-      },
-      itemsForType: function() {
-        const namesForType = type =>  this.$store.state.lifeCycle.items.filter( item => item.type === type).map( item => item.name);
-        const myMap = new Map();
-        this.types.forEach( type =>  myMap[type] = namesForType(type));
-        return myMap;
-      }
-    },
+    mixins: [
+      lifeCycleMixin
+    ],
     filters: {
       capitalize: function( lower) {
         return lower.charAt(0).toUpperCase() + lower.substr(1);
       }
     },
     methods: {
-      images: function(type) {
-        return this.$store.state.phaseImages[type];
-      },
       texts: function(type) {
         return this.$options.phaseText[type];
       }

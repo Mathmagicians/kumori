@@ -10,7 +10,7 @@ import {
   createStore
 } from './store'
 import BootstrapVue from 'bootstrap-vue'
-// add he font awesome-icons you need in the application here
+// add the font awesome-icons you need in the application here
 import {
   clipboard,
   comment,
