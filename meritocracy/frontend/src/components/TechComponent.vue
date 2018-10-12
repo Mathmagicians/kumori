@@ -23,7 +23,12 @@
         <b-list-group flush>
           <b-list-group-item  v-if="techContent.tags">
             <p>Usecase Classification:</p>
-             <h6> {{techContent.tags|stringify}}</h6>
+             <h6 v-if="tech.tags.length>0"> {{tech.tags|stringify}}</h6>
+             <b-badge 
+              v-else
+              variant="alert">
+              Usecase Missing
+            </b-badge>
           </b-list-group-item>
           <b-list-group-item v-if="techContent.description">
             <strong>Description:</strong>

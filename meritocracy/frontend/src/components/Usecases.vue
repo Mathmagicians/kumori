@@ -8,8 +8,7 @@
 	</div>
 </template>
 
-<script>
-	
+<script>	
 	export default {
 		name: 'usecases',
 		data () {
@@ -29,5 +28,3 @@
 	}
 
 </script>
-
-

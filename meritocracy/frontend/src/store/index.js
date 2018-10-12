@@ -79,7 +79,8 @@ export function createStore () {
       },
       meritocracy: [],
       services: [],
-      taxonomy: []
+      taxonomy: [],
+      usecases: []
     },
     mutations: {
       setTechComponents (state, techComponents) {
@@ -104,6 +105,10 @@ export function createStore () {
       setTaxonomy (state, taxonomy) {
         state.taxonomy = taxonomy
       },
+      setUsecases (state, usecases) {
+        state.usecases = usecases
+      },
+      
       [LOGIN] (state) {
       state.security.pending = true;
       },
@@ -167,6 +172,11 @@ export function createStore () {
           .fetchTaxonomy()
           .then(taxonomy => commit('setTaxonomy', taxonomy))
       },
+      fetchUsecases ({commit}) {
+        return client
+          .fetchUsecases()
+          .then( usecases => commit( 'setUsecases', usecases))
+      },
       login({ commit }, creds) {
         commit(LOGIN); // show spinner
         return client
@@ -207,6 +217,7 @@ export function createStore () {
       tech: state => state.techComponents,
       techSize: state => state.tech.page.total,
       techPage: state => state.tech.page
+      usecases: state => state.usecases
     }
   })
 }

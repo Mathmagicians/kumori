@@ -117,6 +117,10 @@ export default {
       .then(response => response.data)
       .catch((error) => onError(error))
   },
+  fetchUsecases () {
+    return this.getData('w_usecases')
+  },
+  
   editTechComponent( techComponent ){
       return this.notImplemented("editTechComponent")
   },
