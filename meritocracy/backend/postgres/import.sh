@@ -118,18 +118,18 @@ function usecases () {
 function scopes () {
   _commit "DELETE FROM ${DB_SCHEMA}.scopes;"
   while read -r scope; do
-    _commit "INSERT INTO ${DB_SCHEMA}.scopes (name, deleted) VALUES (\$tag\$${scope}\$tag\$,false);"
+    _commit "INSERT INTO ${DB_SCHEMA}.scopes (name) VALUES (\$tag\$${scope}\$tag\$);"
   done <<< "$(curl -s ${COMPONENTS} | jq  '.[].scopes[].org' | sort | uniq | jq -s '.[]' | jq -r '.')"
 }
 
 # Insert statuses
 function statuses () {
   _commit "DELETE FROM ${DB_SCHEMA}.statuses;"
-  local scopes=("To be decided" "Experiment" "Testing" "POC" "Default" "Limited" "Deprecated" "Do not use")
 
-  for i in "${scopes[@]}"; do
-      _commit "INSERT INTO ${DB_SCHEMA}.statuses (name, deleted) VALUES (\$tag\$${i}\$tag\$,false);"
-  done
+  while read -r status; do
+    name="$(echo ${status} | base64 -d)"
+    _commit "INSERT INTO ${DB_SCHEMA}.statuses (name) VALUES (\$tag\$${name}\$tag\$);"
+  done <<< "$(curl -s ${TAXONOMY} | jq -r '.statuses[] | @base64')"
 }
 
 # Create taxonomy
@@ -139,7 +139,7 @@ function taxonomi () {
     name="$(echo ${component} | base64 -d | jq -r -c '.name')"
     level="$(echo ${component} | base64 -d | jq -r -c '.level')"
     parent="$(echo ${component} | base64 -d | jq -r -c '.parent')"
-    _commit "INSERT INTO ${DB_SCHEMA}.taxonomy (name, level, parent, deleted) VALUES (\$tag\$${name}\$tag\$,\$tag\$${level}\$tag\$,\$tag\$${parent}\$tag\$,false);"
+    _commit "INSERT INTO ${DB_SCHEMA}.taxonomy (name, level, parent) VALUES (\$tag\$${name}\$tag\$,\$tag\$${level}\$tag\$,\$tag\$${parent}\$tag\$);"
   done <<< "$(curl -s ${TAXONOMY} | jq -r '.tags[] | @base64')"
 }
 

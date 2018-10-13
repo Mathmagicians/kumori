@@ -80,7 +80,7 @@ export function createStore () {
         state.services = services
       },
       setTaxonomy (state, taxonomy) {
-        state.taxonomy = taxonomy.taxonomy
+        state.taxonomy = taxonomy
       },
       [LOGIN] (state) {
       state.security.pending = true;
@@ -96,7 +96,7 @@ export function createStore () {
         state.security.isEditOn = false;
       },
       [EDIT_ON](state) {
-        state.security.isEditOn = true; 
+        state.security.isEditOn = true;
       },
       [CREATE_TECH_COMPONENT](state, tech) {
         state.techComponents.push(tech)
@@ -163,7 +163,7 @@ export function createStore () {
       isLoggedIn: state => state.security.isLoggedIn,
       isEditOn: state =>  state.security.isEditOn,
       lifeCycle: state =>  state.lifeCycle,
-      taxonomy: state => state.taxonomy, 
+      taxonomy: state => state.taxonomy,
       tech: state => state.techComponents
     }
   })
