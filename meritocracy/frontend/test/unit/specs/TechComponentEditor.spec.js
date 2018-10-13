@@ -1,14 +1,15 @@
-import { shallowMount, mount, createLocalVue } from '@vue/test-utils'
+import { shallowMount, createLocalVue } from '@vue/test-utils'
 import { expect } from 'chai'
-import  TechComponentEditor  from '@/components/TechComponentEditor.vue'
+import TechComponentEditor from '@/components/TechComponentEditor.vue'
 import BootstrapVue from 'bootstrap-vue'
 import Vuex from 'vuex'
 
+/*
 const techModel= {
-	uid: "",
-	name: "",
-	status: "",
-	description: "",
+	uid: '',
+	name: '',
+	status: '',
+	description: '',
 	comments: [],
 	tax: [],
 	licenses: [],
@@ -16,32 +17,31 @@ const techModel= {
 	usecases: [],
 	log: []
 }
+*/
 
 const localVue = createLocalVue()
-//bootstrap global dependencies
+// bootstrap global dependencies
 localVue.use(BootstrapVue)
 localVue.use(Vuex)
 
-
 describe('TechComponentEditor.vue', () => {
-	describe( 'url adressing', () => {
+	describe('url adressing', () => {
 		it('enables edit mode when query parameter action is equal update /components/:uid?action=update'),
 		it('enables create mode when query parameter action is equal create as in /components?action=create'),
 		it('displays the same uid in the form and in the url /components/:uid?action=update')
 	}),
-	describe( 'API interaction', () => {
+	describe('API interaction', () => {
 		it('calls the UPDATE API on update'),
 		it('calls the CREATE API on create')
 	}),
-	describe('Form content and user interaction', ()=>{
-
+	describe('Form content and user interaction', () => {
 		let getters
   		let store
 
-  		beforeEach( ()=>{
+  		beforeEach(() => {
   			getters = {
   				isEditOn: () => true,
-  				lifeCycle: () => ({ 
+  				lifeCycle: () => ({
         			title: 'mock',
         			items: [
 						{
@@ -55,17 +55,17 @@ describe('TechComponentEditor.vue', () => {
 			        ]
 			 	}),
 			     taxonomy: () => ({
-				    name: "Mock Taxonomy",
-				    levels:[
+				    name: 'Mock Taxonomy',
+				    levels: [
 				      {
 				        level: 1,
-				        name: "Type"
+				        name: 'Type'
 				      }
 				    ],
 				    tags: [
 						{
 							level: 1,
-							name: "Business Application Services",
+							name: 'Business Application Services',
 							parent: null
 						}
 				     ]
@@ -76,27 +76,27 @@ describe('TechComponentEditor.vue', () => {
     		})
   		})
 
-		it('is a vue component named TechComponentEditor', ()=>{
-			const wrapper = shallowMount( TechComponentEditor, {store, localVue} )
-			expect( wrapper.isVueInstance()).to.equal(true)
-			expect( wrapper.name()).to.equal('techComponentEditor')
+		it('is a vue component named TechComponentEditor', () => {
+			const wrapper = shallowMount(TechComponentEditor, {store, localVue})
+			expect(wrapper.isVueInstance()).to.equal(true)
+			expect(wrapper.name()).to.equal('techComponentEditor')
 		}),
 		it('is initialized with data from property object on object update'),
-		it( 'is has empty values on object create'),
-		it( 'has an input field for uid that can not be edited', ()=>{
-			const wrapper = shallowMount( TechComponentEditor, {store, localVue} )
+		it('is has empty values on object create'),
+		it('has an input field for uid that can not be edited', () => {
+			const wrapper = shallowMount(TechComponentEditor, {store, localVue})
 			const uidInput = wrapper.find({ref: 'uidInput'})
-			console.log("uidInput")
+			console.log('uidInput')
 			console.log(uidInput)
-			
+
 			expect(uidInput.is('input')).to.equal(true)
-			//expect(uidInput.attributes().readOnly).to.equal(true)
+			// expect(uidInput.attributes().readOnly).to.equal(true)
 		}),
-		it( 'has editable formfields for all object elements except uid'),
+		it('has editable formfields for all object elements except uid'),
 		it('can display the taxonomy in dropdown boxes'),
-		it( 'can add a usecase to the list of usecases')
+		it('can add a usecase to the list of usecases')
 	}),
- 	describe('Security and access restriction', ()=>{
+ 	describe('Security and access restriction', () => {
  		it('does not display editor when edit is not on'),
 		it('does display the editor when edit is on'),
 		it('has a router navigation guard that protects from unauthorized access')

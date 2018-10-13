@@ -7,7 +7,7 @@
           show
           variant="warning">
           Loading #techmenu taxonomies …
-          <v-icon name="spinner" scale="3" spin/></v-icon>
+          <v-icon name="spinner" scale="3" spin/>
         </b-alert>
         <search-component
           v-else
@@ -24,7 +24,7 @@
           show
           variant="warning">
           Loading #techmenu components …
-          <v-icon name="spinner" scale="3" spin/></v-icon>
+          <v-icon name="spinner" scale="3" spin/>
         </b-alert>
         <div
           v-else>
@@ -72,14 +72,9 @@
   import SearchComponent from '../components/SearchComponent.vue'
   import lifeCycleMixin from '../mixins/lifeCycle.js'
 
-
-  const lifeCycleFilter = (tech, query) => query.lc.length === 0 || query.lc.includes(tech.status)
-  const useCaseFilter = (tech, query) => query.tx.length === 0 || query.tx.every( tx => tech.tags? tech.tags.includes( tx ):false)
-
-
   export default {
-  	name: "techComponentsList",
-    beforeRouteUpdate(to, from, next) {
+  	name: 'techComponentsList',
+    beforeRouteUpdate (to, from, next) {
       this.activeId = to.params.uid;
       next();
     },
@@ -105,7 +100,7 @@
       lifeCycleMixin
     ],
     watch: {
-        uid: function(newVal, oldVal) {
+        uid: function (newVal, oldVal) {
           this.activeId = newVal
         }
       },
@@ -123,39 +118,42 @@
       amounts () {
         let am = {_total: this.techComponents.length}
         this.$store.getters.lifeCycle.items.forEach(
-          item => am = { ...am, [item.name]: this.techComponents.filter( t => t.status === item.name ).length}
+          item => am = { ...am, [item.name]: this.techComponents.filter(t => t.status === item.name).length}
         )
         return am
       },
-      filteredTechComponents() {
-        return this.filterList( this.techComponents, this.query );
+      filteredTechComponents () {
+        return this.filterList(this.techComponents, this.query);
       },
-      sunburstTree(){
-        let flatListWithSizes = this.addSizesForTaxonomies( this.$store.getters.taxonomy.tags, this.techComponents)
-        return ({ name: "#techmenu", children: this.buildTree( flatListWithSizes )})
-      },
+      sunburstTree () {
+        let flatListWithSizes = this.addSizesForTaxonomies(this.$store.getters.taxonomy.tags, this.techComponents)
+        return ({
+          name: '#techmenu',
+          children: this.buildTree(flatListWithSizes)
+        })
+      }
 		},
 		created () {
       this.activeId = this.uid;
   		this.loading = {tech: true, tax: true}
       this.$store
         .dispatch('fetchTaxonomy')
-        .then(taxonomy => { this.loading.tax = false})
+        .then(taxonomy => { this.loading.tax = false })
   		this.$store.dispatch('fetchTechComponents')
-    			.then(techComponents => { this.loading.tech = false})
+    			.then(techComponents => { this.loading.tech = false })
 		},
     filters: {
       techId (tech) {
-        return 'tc-'+tech.uid;
+        return 'tc-' + tech.uid;
       }
     },
     methods: {
-      selectLifeCycle( list){
+      selectLifeCycle (list) {
         this.query.lc = list;
       },
-      fuzzySearch( query, techComponentsList ){
+      fuzzySearch (query, techComponentsList) {
           const options = {
-            id: "name",
+            id: 'name',
             shouldSort: true,
             includeScore: true,
             includeMatches: true,
@@ -165,26 +163,26 @@
             maxPatternLength: 32,
             minMatchCharLength: 2,
             keys: [
-              "name",
-              "description",
-              "usecases"
+              'name',
+              'description',
+              'usecases'
             ]
           };
-          if( this.query.string) {
+          if (this.query.string) {
              this.$search(query, this.techComponents, options)
             .then(results => this.fuzzySearchResults = results);
           }
         },
-        filterList( techList, query ){
-          //const isQueryStringIncluded = (tech,query) => query.string === '' || tech.name.toLowerCase().includes(query.string.toLowerCase());
-          const isQueryStringInFuzzySearch = (tech, query) => query.string === '' || this.fuzzySearchResults.find( fuzzy => fuzzy.item === tech.name );
+        filterList (techList, query) {
+          // const isQueryStringIncluded = (tech,query) => query.string === '' || tech.name.toLowerCase().includes(query.string.toLowerCase());
+          const isQueryStringInFuzzySearch = (tech, query) => query.string === '' || this.fuzzySearchResults.find(fuzzy => fuzzy.item === tech.name);
           const isLifeCycleIncluded = (tech, query) => query.lc.length === 0 || query.lc.includes(tech.status);
-          const isUseCaseIncluded = (tech, query) => query.tx.length === 0 || query.tx.every( tx => tech.tags? tech.tags.includes( tx ):false);
+          const isUseCaseIncluded = (tech, query) => query.tx.length === 0 || query.tx.every(tx => tech.tags ? tech.tags.includes(tx) : false);
           const filters = [isQueryStringInFuzzySearch, isLifeCycleIncluded, isUseCaseIncluded];
-          //apply all the filters to the list
-          return techList.filter( e => filters.every( f =>  f.call( null, e, query)));
+          // apply all the filters to the list
+          return techList.filter(e => filters.every(f => f.call( null, e, query)));
         },
-        createNewTech(){
+        createNewTech() {
           this.$router.push({ name: 'create'});
        }
     }
