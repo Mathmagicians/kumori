@@ -31,9 +31,9 @@
     <b-navbar-nav class="ml-auto">
       <b-nav-item
          v-if="isEditOn">
-         <b-button 
+         <b-button
           @click="editOff"
-          class="btn-round" 
+          class="btn-round"
           variant="light">
             <v-icon name="unlock" color="green"/>
           </b-button>
@@ -41,9 +41,9 @@
       </b-nav-item>
        <b-nav-item
         v-else-if="isLoggedIn">
-         <b-button 
+         <b-button
           @click="editOn"
-          class="btn-round" 
+          class="btn-round"
           variant="light">
             <v-icon name="lock" color="orange"/>
           </b-button>
@@ -64,7 +64,7 @@
           Sign Out
         </b-dropdown-item>
       </b-nav-item-dropdown>
-      <b-nav-item-dropdown 
+      <b-nav-item-dropdown
         v-else
         right>
         <template slot="button-content">
@@ -84,15 +84,17 @@
     </transition>
   </b-container>
 
-  <footer>
-    Copyright 2018 by Mathmagicians. Powered by Kumori.
+  <footer class="footer bg-dark">
+    <div class="container text-center">
+        <span class="text-muted" title="Copyright 2018 by Mathmagicians.">Powered by Kumori.</span>
+      </div>
   </footer>
 
 </div>
 </template>
 
 <script>
-  
+
   export default {
     name: 'App',
     computed: {
@@ -102,7 +104,7 @@
       isEditOn() {
         return this.$store.getters.isEditOn;
       }
-    }, 
+    },
     methods: {
       logout() {
         console.log("logging user out");
@@ -137,5 +139,27 @@
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 65px; /* Margin bottom by footer height */
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 50px; /* Set the fixed height of the footer here */
+  line-height: 50px; /* Vertically center the text there */
+}
+
+.container {
+  width: auto;
+  max-width: 680px;
+  padding: 0 15px;
 }
 </style>

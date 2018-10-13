@@ -1,8 +1,10 @@
 <template>
 	<div>
-		<b-card no-body>
+		<b-card no-body class="mb-2">
 			<b-input-group>
-				<b-form-input id="searchInput"
+				<b-form-input
+					title="Type what you want to search for - technology name, use case, anything ..."
+					id="searchInput"
 					type="text"
 					v-model.sync="searchInput"
 					required
@@ -10,77 +12,76 @@
 					:placeholder="'Search in '+ amounts._total +' technology components ...'  ">
 				</b-form-input>
 				<b-input-group-append>
-					<b-button v-on:click="sendSearchQueryEvent"
+					<b-button
+						title="Search"
+						v-on:click="sendSearchQueryEvent"
 						variant="secondary">
-						Search
-					<v-icon name="search" ></v-icon>
+						<v-icon name="search"/>
 					</b-button>
-					<b-button 
-						variant="secondary lg" 
+					<b-button
+						title="Clear Filters"
+						variant="secondary"
 						:disabled="!filterOn"
-						@click="clearFilters"> 
-						Clear Filters
-			    		<v-icon 
-			    			label="reset filters">
-			    			<v-icon name="filter" scale="2"></v-icon>
-			    			<v-icon name="ban" scale="2" color="orange"></v-icon>
-			    		</v-icon>
+						@click="clearFilters">
+						<v-icon
+			    		label="reset filters">
+			    		<v-icon name="filter" scale="1"/>
+			    		<v-icon name="ban" scale="1" color="orange"/>
+			    	</v-icon>
 					</b-button >
 				</b-input-group-append>
 			</b-input-group>
-			<b-form-text id="inputLiveHelp">
-			Type what you want to search for -technology name, use case, anything ...
-			</b-form-text>
 		</b-card no-body>
-		<b-card-group >
-			<b-card 
+		<b-card-group class="mb-2">
+			<b-card
 				overlay
 				v-for="type in types"
 				tag="article"
 				class="card-lifecycle"
 				>
 				<div class="card-body text-left">
-					<b-img 
+					<b-img
 						fluid
 						class="image-lc"
 						:src="images(type)"/>
-					<b-button 
-						:variant="'outline-'+btnVariant(type)" 
+					<b-button
+						:variant="'outline-'+btnVariant(type)"
 						class="phase"
 						@click="setPhase(type)"
 						:pressed="phaseModel[type]" >
 						{{type | capitalize}}
-						<b-badge 
+						<b-badge
 							pill
 							size="lg"
 							:variant="btnVariant(type)">
 							{{amountsForType[type]}}
-						</b-badge>	
+						</b-badge>
 					</b-button>
+
 					<b-button-group vertical>
 						<span
-							style="width: 10rem;margin: 0px 2px 0px 2px;"
+							style="width: 10rem;margin: 2px;"
 							v-for="item in itemsForType[type]" >
-							<life-cycle 
-								:id="item+'selector'" 
+							<life-cycle
+								:id="item+'selector'"
 								ispopup
-								:status="item" 
+								:status="item"
 								v-on:selected="setLcQuery(item)"
-								:isPressed.sync="lcModel[item]">	
+								:isPressed.sync="lcModel[item]">
 							</life-cycle>
-							<b-badge pill>{{amounts[item]}}</b-badge>	
+							<b-badge pill>{{amounts[item]}}</b-badge>
 						</span>
 					</b-button-group>
 				</div>
 			</b-card>
 		</b-card-group>
 
-		<b-card style="card control-left " no-body>
+		<b-card style="card control-left" no-body>
 			<div class="card-header">Search in Usecases <strong v-if="query">{{ query.tx | stringify }}</strong></div>
 			<div style="card-body father">
-				<sunburst-wrap 
+				<sunburst-wrap
 					ref="sunburst"
-					:tree="tree" 
+					:tree="tree"
 					class="sunburst"
 					v-on:nodeClicked="setUseCaseQuery"
 				>
@@ -95,8 +96,7 @@
 
 	import LifeCycle from '../components/LifeCycle.vue'
 	import lifeCycleMixin from '../mixins/lifeCycle.js'
-  	import SunburstWrap from '../components/SunburstWrap.vue'
-
+	import SunburstWrap from '../components/SunburstWrap.vue'
 
 	export default {
 		name:"searchComponent",
@@ -122,18 +122,18 @@
 		},
 		created() {
 			this.loading = true
-			
+
 			this.phaseModel = this.types.reduce( (acc, i) => ({...acc, [i]:false }), {})
 			//initialize array state for life cycle buttons
-			this.query.lc.forEach( item => this.setLcQuery(item) )			
+			this.query.lc.forEach( item => this.setLcQuery(item) )
 		},
 	    computed: {
 	      filterOn(){
 	      	return this.searchInput !== ''|| Object.values(this.lcModel).some( lcValue => lcValue ) || this.query.tx.length !== 0;
 	      },
 	      amountsForType(){
-	      	return this.types.reduce( 
-	      		(acc, t) => ({...acc, [t]: 
+	      	return this.types.reduce(
+	      		(acc, t) => ({...acc, [t]:
 	      			this.itemsForType[t].reduce( (sum, lc) => (sum + this.amounts[lc]), 0)
 	      	}), {})
 	      }
@@ -141,7 +141,7 @@
 	    filters: {
 	      capitalize: function( lower) {
 	        return lower.charAt(0).toUpperCase() + lower.substr(1);
-	      }, 
+	      },
 	      stringify: function( list ){
 	      	return list ? list.join('>'): list;
 	      }
@@ -174,7 +174,7 @@
 	      	let sunburstTree = this.buildTreeForSunburst();
 	      	console.log("Trying to save file");
 	      	this.saveFile( sunburstTree );
-	      }, 
+	      },
 	      updateRoute() {
 	      	//todo dont push empty query parameters!
 	      	let prettyQuery = {}
