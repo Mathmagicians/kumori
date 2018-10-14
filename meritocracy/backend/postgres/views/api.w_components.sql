@@ -3,7 +3,7 @@ DROP VIEW IF EXISTS api.w_components;
 CREATE OR REPLACE VIEW api.w_components
 AS
 SELECT
-    MD5(COALESCE(component.name, '') || COALESCE(component.description, '')) AS uid,
+    component.id AS uid
     component.name as name,
     status.name as status,
     component.description,
@@ -44,7 +44,7 @@ SELECT
       WHERE us.component = component.id
     ) AS usecases
 FROM
-    api.components component
+    api.components AS component
 JOIN api.statuses status ON component.status = status.id;
 
 GRANT SELECT ON TABLE api.w_components TO web_anon;

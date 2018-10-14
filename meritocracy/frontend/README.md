@@ -42,16 +42,6 @@ The postgrest service will be available at:http://127.0.0.1:3000
 The swagger ui will be available at:http://127.0.0.1:8070
 The postgres ui will be avaialble at http://127.0.0.1:5050
 
-For now, you need to bootstrap the database manually by running
-
-    $ cd ../postgres
-    $ make start-pgrunner
-    $ make all
-
-Get a shell with node
-
-    $ make shell
-
  ---
  Unit tests - work in local environment - didn't update the make file:
  npm test
