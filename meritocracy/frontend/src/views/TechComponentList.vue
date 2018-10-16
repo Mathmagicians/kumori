@@ -54,6 +54,11 @@
                 technologies.
             </p>
           </b-alert>
+          <list-with-pagination 
+            :list-size="10" 
+            v-bind:list-total="listTotal"
+            :button-panel-size="7">
+          </list-with-pagination>
       		<tech-component
             v-for="component in filteredTechComponents"
             :key="component.name"
@@ -70,6 +75,7 @@
 
   import TechComponent from '../components/TechComponent.vue'
   import SearchComponent from '../components/SearchComponent.vue'
+  import ListWithPagination from '../components/ListWithPagination.vue'
   import lifeCycleMixin from '../mixins/lifeCycle.js'
 
   export default {
@@ -80,7 +86,7 @@
     },
   	data () {
     		return {
-      			loading: {tech: true, tax: true},
+      			loading: {tech: true, tax: true, size: true},
             activeId: '',
             query: {
               string: '',
@@ -106,12 +112,16 @@
       },
 		components: {
 			TechComponent,
-      SearchComponent
+      SearchComponent,
+      ListWithPagination
 		},
 		computed: {
   		techComponents () {
     		return this.$store.getters.tech
   		},
+      listTotal () {
+        return this.$store.getters.techSize
+      },
       taxonomyTags () {
        return this.$store.getters.taxonomy.tags
       },
@@ -141,6 +151,8 @@
         .then(taxonomy => { this.loading.tax = false })
   		this.$store.dispatch('fetchTechComponents')
     			.then(techComponents => { this.loading.tech = false })
+      this.$store.dispatch('fetchTechSize')
+        .then( size => { this.loading.size = false})
 		},
     filters: {
       techId (tech) {
