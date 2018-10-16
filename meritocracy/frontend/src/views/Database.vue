@@ -3,8 +3,7 @@
   <h1>Demo access to database</h1>
   <div v-if="page.loading">Loading data ... </div>
   <div v-else>
-      <h6>I alt {{page.total}}, page size: {{page.size}}, viser page {{page.activePageIndex}} </h6>
-        <b-button-toolbar key-nav>
+        <b-button-toolbar>
           <b-button-group>
             <b-btn
               @click="scrollButtonsToStart()">
@@ -17,7 +16,7 @@
           </b-button-group>
           <b-button-group class="mx-1">
             <b-btn 
-              class="mx-1"
+              class="mx-1 pagination"
               v-for="i in numOfPages" 
               v-if="isButtonPageVisible(i-1)"
               :key="i" 
@@ -132,7 +131,7 @@
       getHeaders: function(from=0, to=10) {
         // Prefer: count=exact
         // Range-Unit: items
-        //Range: 0-19
+        //Range: 0-10
         let config = {headers: {
           'Prefer': 'count=exact',
           'Range-Unit': 'w_components',
@@ -159,3 +158,9 @@
     }
   }
 </script>
+
+<style scoped>
+.pagination {
+  min-width: 3rem;
+}
+</style>

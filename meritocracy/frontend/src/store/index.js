@@ -65,6 +65,7 @@ export function createStore () {
         ]
       },
       techComponents: [],
+      techSize: 0,
       meritocracy: [],
       services: [],
       taxonomy: []
@@ -72,6 +73,9 @@ export function createStore () {
     mutations: {
       setTechComponents (state, techComponents) {
         state.techComponents = techComponents
+      },
+      setTechSize(state, size) {
+        state.techSize = size
       },
       setMeritocracy (state, meritocracy) {
         state.meritocracy = meritocracy
@@ -111,6 +115,11 @@ export function createStore () {
           return client
             .fetchTechComponents()
             .then(techComponents => commit('setTechComponents', techComponents))
+      },
+      fetchTechSize ({commit}) {
+        return client
+          .fetchTechComponentsSize()
+          .then( size => commit('setTechSize', size))
       },
       fetchMeritocracy ({ commit }) {
           return client
@@ -164,7 +173,8 @@ export function createStore () {
       isEditOn: state =>  state.security.isEditOn,
       lifeCycle: state =>  state.lifeCycle,
       taxonomy: state => state.taxonomy,
-      tech: state => state.techComponents
+      tech: state => state.techComponents,
+      techSize: state => state.fetchTechComponentsSize
     }
   })
 }
