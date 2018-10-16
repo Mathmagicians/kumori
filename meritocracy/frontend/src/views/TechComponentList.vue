@@ -93,7 +93,8 @@
               lc: [],
               tx: []
             },
-            fuzzySearchResults: []
+            fuzzySearchResults: [],
+            listTotal: 0
     		}
 		},
     props: {
@@ -119,9 +120,6 @@
   		techComponents () {
     		return this.$store.getters.tech
   		},
-      listTotal () {
-        return this.$store.getters.techSize
-      },
       taxonomyTags () {
        return this.$store.getters.taxonomy.tags
       },
@@ -152,7 +150,10 @@
   		this.$store.dispatch('fetchTechComponents')
     			.then(techComponents => { this.loading.tech = false })
       this.$store.dispatch('fetchTechSize')
-        .then( size => { this.loading.size = false})
+        .then( size => { 
+          this.listTotal = this.$store.getters.techSize
+          this.loading.size = false
+        })
 		},
     filters: {
       techId (tech) {
