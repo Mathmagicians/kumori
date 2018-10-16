@@ -17,15 +17,16 @@ export default {
   paramsToUrl(params){
     return Object.keys(params).reduce( (acc, pk) => `${acc}${pk}=${params[pk]}&` , '?')
   },
-  configForRange(from, to){
-    return 
-      ({headers: 
-        {
-          'Prefer': 'count=exact',
-          'Range-Unit': 'w_components',
-          'Range': `${from}-${to}`
-        }
-      })
+  configForRange(from,to){
+    let conf = {
+      headers: 
+      {
+        'Prefer': 'count=exact',
+        'Range-Unit': 'w_components',
+        'Range': `${from}-${to}`
+      }
+    }
+    return conf
   },
 
   //TODO move search serverside, then we will not have to fetch the full component list anymore
@@ -35,20 +36,23 @@ export default {
   fetchTechComponentsDetails(from=0, to=10) {
     return this.getData( this.urlBuilder(COMPONENTS_READ), this.configForRange(from, to))
   },
-  /*
+ 
   fetchTechComponentsSize() {
     return this.getData(
       this.urlBuilder(COMPONENTS_READ, {select: 'name'}), 
-      this.configForRange(0,1),
-      (response) => { return 17
-         console.log(`We are interested in ${response.headers.get('content-range')} `)
-          let range = response.headers.get('content-range')
-          return range.split('/')[1]
+      this.configForRange(0,0),
+      (response) => { 
+        console.log(`We are interested in ${response.headers['content-range']} `)
+        const [current,total] = response.headers['content-range'].split('/')
+        //const [to, from] = current.split('-')
+        //const page = {from, to, total, tech: response.data}
+        console.log(`total is ${total}`)
+        return Number(total)
       })
   },
-  */
+  
 
-  fetchTechComponentsSize() {
+  fetchTechComponentsSize2() {
         // Prefer: count=exact
         // Range-Unit: items
         //Range: 0-10
