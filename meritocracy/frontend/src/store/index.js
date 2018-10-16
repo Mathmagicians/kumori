@@ -174,7 +174,7 @@ export function createStore () {
       lifeCycle: state =>  state.lifeCycle,
       taxonomy: state => state.taxonomy,
       tech: state => state.techComponents,
-      techSize: state => state.fetchTechComponentsSize
+      techSize: state => state.techSize
     }
   })
 }
