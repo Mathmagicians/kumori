@@ -56,15 +56,16 @@
           </b-alert>
           <list-with-pagination 
             :list-size="10" 
-            v-bind:list-total="listTotal"
+            v-bind:list-total="filteredTechComponents.length"
             :button-panel-size="7">
+            <tech-component
+              slot-scope="props"
+              :num="props.num"
+              :tech="filteredTechComponents[props.listSeq]"
+              v-bind:active="filteredTechComponents[props.listSeq].uid === activeId">
+            </tech-component>
           </list-with-pagination>
-      		<tech-component
-            v-for="component in filteredTechComponents"
-            :key="component.name"
-            v-bind:tech="component"
-            :active="component.uid === activeId">
-          </tech-component>
+      		
         </div>
       </b-col>
     </b-row>
