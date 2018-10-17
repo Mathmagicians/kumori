@@ -1,155 +1,221 @@
 #!/usr/bin/env bash
-PGDATABASE='meritocracy'
-PGPASSWORD='postgres'
+set -e
 
+declare PGDATABASE='meritocracy'
+declare PGPASSWORD='postgres'
+declare COMPONENTS_DATA TAXONOMY_DATA
+declare -A STATUS_LOOKUP TAXONOMY_LOOKUP SCOPE_LOOKUP
+declare VERBOSE=1
+
+# Check input
+function check_input () {
+  COMPONENTS_DATA="$(curl -s "${COMPONENTS}")"
+  TAXONOMY_DATA="$(curl -s "${TAXONOMY}")"
+
+  if jq -e . >/dev/null 2>&1 <<<"${COMPONENTS_DATA}"; then
+    print_message "Component JSON valid" "True"
+  else
+    print_message "Component JSON valid" "False"
+    exit 1
+  fi
+
+  if jq -e . >/dev/null 2>&1 <<<"${TAXONOMY_DATA}"; then
+    print_message "Taxonomy JSON valid" "True"
+  else
+    print_message "Taxonomy JSON valid" "False"
+    exit 1
+  fi
+}
+
+# Commit query to database
 function _commit () {
   psql -U ${PGPASSWORD} -d ${PGDATABASE} -t -q -c "${1}"
 }
 
+# Insert components
 function components () {
-  _commit "DELETE FROM ${DB_SCHEMA}.comments;"
-  _commit "DELETE FROM ${DB_SCHEMA}.usecases;"
-  _commit "DELETE FROM ${DB_SCHEMA}.components;"
+  local count current
+  count="$(echo "${COMPONENTS_DATA}" | jq '. |length')"
+  current=1
 
   while read -r component; do
-    local name="$(echo ${component} | base64 -d | jq -r -c '.name')"
-    local description="$(echo ${component} | base64 -d | jq -r -c '.description')"
-    local status="$(echo ${component} | base64 -d | jq -r '.scopes[0].status')"
-    local scope="$(echo ${component} | base64 -d | jq -r '.scopes[0].org')"
-
-    local status_id="$(_commit "SELECT status.id FROM ${DB_SCHEMA}.statuses AS status WHERE status.name LIKE '${status}';" | awk '{$1=$1};1')"
-
-    local scope_id="$(_commit "SELECT scope.id FROM ${DB_SCHEMA}.scopes AS scope WHERE scope.name LIKE '${scope}';" | awk '{$1=$1};1')"
+    local name description status scope status_id scope_id component_id
+    name="$(echo "${component}" | base64 -d | jq -r -c '.name')"
+    description="$(echo "${component}" | base64 -d | jq -r -c '.description')"
+    status="$(echo "${component}" | base64 -d | jq -r '.scopes[0].status')"
+    scope="$(echo "${component}" | base64 -d | jq -r '.scopes[0].org')"
+    status_id=${STATUS_LOOKUP["${status}"]}
+    scope_id=${SCOPE_LOOKUP["${scope}"]}
 
     _commit "INSERT INTO ${DB_SCHEMA}.components (name, description, status, deleted) VALUES (\$tag\$${name}\$tag\$,\$tag\$${description}\$tag\$,\$tag\$${status_id}\$tag\$,false);"
 
-    local component_id="$(_commit "SELECT id from ${DB_SCHEMA}.components order by id desc limit 1;" | awk '{$1=$1};1')"
+    print_message "Added Component (${current}/${count})" "${name}"
 
-    comments "${component_id}" "${component}"
-
-    usecases "${component_id}" "${status_id}" "${scope_id}" "${component}"
-
-    convert_scopes "${component_id}" "${component}"
-
-    links "${component_id}" "${component}"
-
-    add_taxonomies "${component_id}" "${component}"
-
-    links "${component_id}" "${component}"
-
-  done <<< "$(curl -s ${COMPONENTS} | jq -r '.[] | @base64')"
+    comments "${current}" "${component}"
+    usecases "${current}" "${status_id}" "${scope_id}" "${component}"
+    convert_scopes "${current}" "${component}"
+    links "${current}" "${component}"
+    add_taxonomies "${current}" "${component}"
+    links "${current}" "${component}"
+    current=$((current+1))
+  done <<< "$(echo "${COMPONENTS_DATA}" | jq -r '.[] | @base64')"
 }
 
-# Insert a comment
+# Insert comment
 function comments () {
-  local comments="$(echo ${2} | base64 -d | jq -r -c '.comments')"
+  local comments
+  comments="$(echo "${2}" | base64 -d | jq -r -c '.comments')"
+
   if [ "${comments}" != '' ]; then
     _commit "INSERT INTO ${DB_SCHEMA}.comments (comment, component, deleted) VALUES (\$tag\$${comments}\$tag\$,\$tag\$${1}\$tag\$,false);"
+    print_message_component "Added Comment" "${comments}"
   fi
 }
 
-# Add taxonomies to component
+# Insert tags
 function add_taxonomies () {
   while read -r tag; do
+    local component_id tag_name taxonomy_id
+    component_id="${1}"
+    tag_name="$(echo "${tag}" | base64 -d)"
 
-    local component_id="${1}"
-    local tag_name="$(echo ${tag} | base64 -d)"
-    local taxonomy_id="$(_commit "SELECT taxonomy.id FROM ${DB_SCHEMA}.taxonomy AS taxonomy WHERE upper(taxonomy.name) LIKE upper('${tag_name}');" | awk '{$1=$1};1')"
+    if [ "${tag_name}" != '' ]; then
+      taxonomy_id=${TAXONOMY_LOOKUP["${tag_name}"]}
+    fi
 
     if [ "${taxonomy_id}" != '' ]; then
       _commit "INSERT INTO ${DB_SCHEMA}.component_taxonomy (component, taxonomy) VALUES (\$tag\$${component_id}\$tag\$,\$tag\$${taxonomy_id}\$tag\$);"
+      print_message_component "Added Tag" "${tag_name}"
     fi
-  done <<< "$(echo ${component} | base64 -d | jq -r '.tags[] | @base64')"
+  done <<< "$(echo "${component}" | base64 -d | jq -r '.tags[] | @base64')"
 }
 
-# Add links
+# Insert links
 function links () {
   while read -r link; do
-    local component_id="${1}"
-    local ref="$(echo ${link} | base64 -d)"
-    local type="Link"
+    local component_id ref link_type
+    component_id="${1}"
+    ref="$(echo "${link}" | base64 -d)"
+    link_type="Link"
 
     if [ "${ref}" != '' ]; then
       if [ "${component_id}" != '' ]; then
-        _commit "INSERT INTO ${DB_SCHEMA}.links (ref,type,component, deleted) VALUES (\$tag\$${ref}\$tag\$,\$tag\$${type}\$tag\$,\$tag\$${component_id}\$tag\$,false);"
+        _commit "INSERT INTO ${DB_SCHEMA}.links (ref,type,component, deleted) VALUES (\$tag\$${ref}\$tag\$,\$tag\$${link_type}\$tag\$,\$tag\$${component_id}\$tag\$,false);"
+        print_message_component "Added Link" "${ref}"
       fi
     fi
 
-  done <<< "$(echo ${component} | base64 -d | jq -r '.links[] | @base64')"
+  done <<< "$(echo "${component}" | base64 -d | jq -r '.links[] | @base64')"
 }
 
+# Convert scopes to usecases
 function convert_scopes () {
   while read -r scopes; do
-    local component="${1}"
-    local description="Converted scope"
-    local scope="$(echo ${scopes} | base64 -d| jq -r '.org')"
-    local status="$(echo ${scopes} | base64 -d| jq -r '.status')"
-
-    local name="Allowed for ${scope}"
-
-    local status_id="$(_commit "SELECT status.id FROM ${DB_SCHEMA}.statuses AS status WHERE status.name LIKE '${status}';" | awk '{$1=$1};1')"
-
-    local scope_id="$(_commit "SELECT scope.id FROM ${DB_SCHEMA}.scopes AS scope WHERE scope.name LIKE '${scope}';" | awk '{$1=$1};1')"
+    local component description scope status name status_id scope_id
+    component="${1}"
+    description="Converted scope"
+    scope="$(echo "${scopes}" | base64 -d| jq -r '.org')"
+    status="$(echo "${scopes}" | base64 -d| jq -r '.status')"
+    name="Allowed for ${scope}"
+    status_id=${STATUS_LOOKUP["${status}"]}
+    scope_id=${SCOPE_LOOKUP["${scope}"]}
 
     if [ "${description}" != 'Any' ]; then
       _commit "INSERT INTO ${DB_SCHEMA}.usecases (component, name, description, scope, status, deleted) VALUES (\$tag\$${component}\$tag\$,\$tag\$${name}\$tag\$,\$tag\$${description}\$tag\$,\$tag\$${scope_id}\$tag\$,\$tag\$${status_id}\$tag\$,false);"
+      print_message_component "Added Usecase" "${name}"
     fi
 
-  done <<< "$(echo ${2} | base64 -d | jq -r '.scopes[] | @base64')"
+  done <<< "$(echo "${2}" | base64 -d | jq -r '.scopes[] | @base64')"
 }
 
 # Insert a usecase
 function usecases () {
   while read -r usecase; do
-    local component="${1}"
-    local name="Missing name for usecase"
-    local description="$(echo ${usecase} | base64 -d)"
-    local scope="${3}"
-    local status="${2}"
+    local component name description scope status
+    component="${1}"
+    name="Missing name for usecase"
+    description="$(echo "${usecase}" | base64 -d)"
+    scope="${3}"
+    status="${2}"
 
     if [ "${description}" != 'Any' ]; then
       _commit "INSERT INTO ${DB_SCHEMA}.usecases (component, name, description, scope, status, deleted) VALUES (\$tag\$${component}\$tag\$,\$tag\$${name}\$tag\$,\$tag\$${description}\$tag\$,\$tag\$${scope}\$tag\$,\$tag\$${status}\$tag\$,false);"
+      print_message_component "Added Usecase" "${name}"
     fi
 
-  done <<< "$(echo ${4} | base64 -d | jq -r '.usecases[] | @base64')"
+  done <<< "$(echo "${4}" | base64 -d | jq -r '.usecases[] | @base64')"
 }
 
-# Insert scopes
+# Create scopes
 function scopes () {
-  _commit "DELETE FROM ${DB_SCHEMA}.scopes;"
+  local current=1
   while read -r scope; do
+    local scope_id
     _commit "INSERT INTO ${DB_SCHEMA}.scopes (name) VALUES (\$tag\$${scope}\$tag\$);"
-  done <<< "$(curl -s ${COMPONENTS} | jq  '.[].scopes[].org' | sort | uniq | jq -s '.[]' | jq -r '.')"
+    print_message "Added Scope" "${scope}"
+    SCOPE_LOOKUP["${scope}"]="${current}"
+    current=$((current+1))
+  done <<< "$(echo "${COMPONENTS_DATA}" | jq  '.[].scopes[].org' | sort | uniq | jq -s '.[]' | jq -r '.')"
 }
 
-# Insert statuses
+# Create statuses
 function statuses () {
-  _commit "DELETE FROM ${DB_SCHEMA}.statuses;"
-
+  local current=1
   while read -r status; do
-    name="$(echo ${status} | base64 -d)"
+    local name status_id
+    name="$(echo "${status}" | base64 -d)"
     _commit "INSERT INTO ${DB_SCHEMA}.statuses (name) VALUES (\$tag\$${name}\$tag\$);"
-  done <<< "$(curl -s ${TAXONOMY} | jq -r '.statuses[] | @base64')"
+    print_message "Added Status" "${name}"
+    STATUS_LOOKUP["${name}"]="${current}"
+    current=$((current+1))
+  done <<< "$(echo "${TAXONOMY_DATA}" | jq -r '.statuses[] | @base64')"
 }
 
 # Create taxonomy
 function taxonomi () {
-  _commit "DELETE FROM ${DB_SCHEMA}.taxonomy;"
+  local current=1
   while read -r component; do
-    name="$(echo ${component} | base64 -d | jq -r -c '.name')"
-    level="$(echo ${component} | base64 -d | jq -r -c '.level')"
-    parent="$(echo ${component} | base64 -d | jq -r -c '.parent')"
+    local name level parent
+    name="$(echo "${component}" | base64 -d | jq -r -c '.name')"
+    level="$(echo "${component}" | base64 -d | jq -r -c '.level')"
+    parent="$(echo "${component}" | base64 -d | jq -r -c '.parent')"
     _commit "INSERT INTO ${DB_SCHEMA}.taxonomy (name, level, parent) VALUES (\$tag\$${name}\$tag\$,\$tag\$${level}\$tag\$,\$tag\$${parent}\$tag\$);"
-  done <<< "$(curl -s ${TAXONOMY} | jq -r '.tags[] | @base64')"
+    print_message "Added Taxonomy Tag" "${name}"
+    TAXONOMY_LOOKUP["${name}"]="${current}"
+    current=$((current+1))
+  done <<< "$(echo "${TAXONOMY_DATA}" | jq -r '.tags[] | @base64')"
 }
 
+# Print message
+function print_message () {
+  if [[ ${VERBOSE} -gt 0 ]] ; then
+    local yellow nc
+    yellow='\033[0;33m'
+    nc='\033[0m'
+    printf " -- %-25s: ${yellow}%s${nc}\n" "${1}" "${2}"
+  fi
+}
+
+# Print component message
+function print_message_component () {
+  if [[ ${VERBOSE} -gt 1 ]] ; then
+    local yellow='\033[0;33m'
+    local nc='\033[0m'
+    printf " -- -> %-25s: ${yellow}%s${nc}\n" "${1}" "${2}"
+  fi
+}
+
+start="$(date +%s)"
 if [ "${TAXONOMY}" != '' ]; then
   if [ "${COMPONENTS}" != '' ]; then
+    check_input
     taxonomi
     scopes
     statuses
     components
-    echo "Import complete"
+    end="$(date +%s)"
+    runtime=$((end-start))
+    echo "Import compleded in: ${runtime}sec"
   else
     echo "Nothing imported"
   fi
