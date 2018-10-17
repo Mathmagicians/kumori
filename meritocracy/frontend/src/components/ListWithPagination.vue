@@ -36,22 +36,14 @@
 		          &raquo;
 		        </b-btn>
 		      </b-button-group>
-		  </b-button-toolbar>
-		  	<b-list-group>
-		    <b-list-group-item 
-		      v-for="i in listSize" 
-		      >
-		      <slot :num="i" :listSeq="index2List(i)" :id="i">
-		      	{{i+1}}: waiting for slot
-		      </slot>
-		    </b-list-group-item>
-		</b-list-group>
-		  
-		  
+			 </b-button-toolbar>
+			 <div v-for="i in listSize">
+			    <slot :num="i" :listSeq="index2List(i)" :id="i">
+			      	{{i+1}}: waiting for slot
+			    </slot>
+			</div>
 		</div>
-
 	</div>
-	
 </template>
 
 <script>

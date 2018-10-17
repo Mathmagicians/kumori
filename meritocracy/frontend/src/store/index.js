@@ -147,7 +147,10 @@ export function createStore () {
       fetchTechDetails ({commit}, id){
         return client
           .fetchTechComponentDetails(id)
-          .then(tech => commit('setTechDetails', tech))
+          .then(tech => {
+            console.log(`Fetched details for ${id}: ... ${tech.description}`)
+            return tech
+          } )
       },
       fetchMeritocracy ({ commit }) {
           return client
