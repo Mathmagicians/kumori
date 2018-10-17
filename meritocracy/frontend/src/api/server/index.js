@@ -28,13 +28,37 @@ export default {
     }
     return conf
   },
+  configForSingleObject(){
+    let conf = {
+      headers: {
+        'Accept': 'application/vnd.pgrst.object+json'
+      }
+    }
+    return conf
+  },
+  constructResponseAsPage(response){
+    const [current,total] = response.headers['content-range'].split('/')
+    const [to, from] = current.split('-')
+    const page = {from, to, total: Number(total), content: response.data}
+    return page
+  },
 
   //TODO move search serverside, then we will not have to fetch the full component list anymore
+  //currently we are getting in the headers only with information necessary to search
   fetchTechComponents() {
-    return this.getData(this.urlBuilder(COMPONENTS_READ, {select: 'name,status,tags'}))
+    return this.getData(this.urlBuilder(COMPONENTS_READ, {select: 'uid,name,status,tags'}))
   },
-  fetchTechComponentsDetails(from=0, to=10) {
-    return this.getData( this.urlBuilder(COMPONENTS_READ), this.configForRange(from, to))
+  fetchTechComponentsHeadersPage(from=0, to=10){
+    return this.getData( 
+      this.urlBuilder(COMPONENTS_READ, {select: 'name,status,tags'}), 
+      this.configForRange(from, to),
+      constructResponseAsPage)
+  },
+  fetchTechComponentDetails(id) {
+    return this.getData( 
+      this.urlBuilder(COMPONENTS_READ, {id:`eq.${id}`}), 
+      this.configForSingleObject,
+      constructResponseAsPage)
   },
  
   fetchTechComponentsSize() {
@@ -51,40 +75,6 @@ export default {
       })
   },
   
-
-  fetchTechComponentsSize2() {
-        // Prefer: count=exact
-        // Range-Unit: items
-        //Range: 0-10
-        let config = {headers: 
-          {
-            'Prefer': 'count=exact',
-            'Range-Unit': 'w_components',
-            'Range': `0-0`
-          }
-        }
-
-        return axios
-        .get('http://0.0.0.0:3000/w_components?select=name', config)
-        .then(response => {
-          console.log("response received")
-          console.log(response)
-          console.log(response.headers)
-         // console.log(`We are interested in ${response.headers.get('content-range')} `)
-          let range = response.headers['content-range']
-          const [current,total] = range.split('/')
-          //let total = rs[1]
-         // this.page.total = Number(total)
-          //let current = rs[0]
-          const [to, from] = current.split('-')
-          const page = {from, to, total, tech: response.data}
-         // let page = { from: rs[0].split('-')[0], to:rs[0].split('-')[1]}
-         // this.tech = response.body
-          //this.page.loading = false
-          console.log(`total is ${total}`)
-          return Number(total)
-        }).catch( error => this.onError(error))
-  },
 
   getHeaders: function(from=0, to=10) {
         // Prefer: count=exact

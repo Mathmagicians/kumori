@@ -1,6 +1,8 @@
 <template>
 	<div ref="ListWithPagination">
-		<div v-if="page.loading">Loading data ... </div>
+		<loading v-if="page.loading">
+			Loading data ...
+		</loading>
 		<div v-else>
 		    <b-button-toolbar>
 		      <b-button-group>
@@ -35,22 +37,16 @@
 		        </b-btn>
 		      </b-button-group>
 		  </b-button-toolbar>
-		  <slot>
-		  	Default content if you dont provide anything
 		  	<b-list-group>
 		    <b-list-group-item 
-		      v-for="(t, index) in tech" 
-		      :active="index===page.activeIndex"
+		      v-for="i in listSize" 
 		      >
-		      {{pi2page(page.activePageIndex)+index+1}}: {{t.name}} | {{t.status}}
-		      <b-badge class="mx-1"
-		        v-for="t in t.tags">
-		        {{t}}
-		      </b-badge>
-		      <v-icon v-if="page.activeIndex=== index" name="clipboard" scale="2" color="orange"/>
+		      <slot :num="i" :listSeq="index2List(i)" :id="i">
+		      	{{i+1}}: waiting for slot
+		      </slot>
 		    </b-list-group-item>
 		</b-list-group>
-		  </slot>
+		  
 		  
 		</div>
 
@@ -59,9 +55,13 @@
 </template>
 
 <script>
-	
+	import Loading from '../components/Loading.vue'
+
 	export default {
 		name: 'ListWithPagination',
+		components: {
+			Loading
+		},
 		props: {
 			listSize: {
 				type: Number,
@@ -73,11 +73,6 @@
 				required: false,
 				default: 9
 			},
-			list: {
-				type: Array,
-				required: false,
-				default: () => [{name: 'test', status: 'Default'}]
-			},
 			listTotal: {
 				type: Number,
 				required: false,
@@ -86,7 +81,6 @@
 		},
 		data() {
 	      return {
-	        tech: [],
 	        page: {
 	          loading: false,
 	          firstVisible: 0,
@@ -131,6 +125,9 @@
 	        for( 101,10)
 	         [ { "from": 1, "to": 10 }, { "from": 11, "to": 20 }, { "from": 21, "to": 30 }, { "from": 31, "to": 40 }, { "from": 41, "to": 50 }, { "from": 51, "to": 60 }, { "from": 61, "to": 70 }, { "from": 71, "to": 80 }, { "from": 81, "to": 90 }, { "from": 91, "to": 100 }, { "from": 101, "to": 101 } ]
 	          */
+	        index2List(i){
+	        	return this.pi2page(this.page.activePageIndex)+i
+	        },
 			pi2page(pageIndex) {
 			return pageIndex*this.listSize
 			},
@@ -152,6 +149,9 @@
 				}
 				//this.tech.forEach((t,i) => this.tech[i].name = `00${i} --- ${t.name}`)
 			},
+			isOnPage(uid){
+				return true
+			}
 	    }
 	}
 	

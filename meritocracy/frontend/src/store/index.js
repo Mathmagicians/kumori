@@ -65,7 +65,18 @@ export function createStore () {
         ]
       },
       techComponents: [],
-      techSize: 0,
+      tech: {
+        page: {
+          from: 0,
+          to: 0,
+          total: 0,
+          content: []
+        },
+        details: {
+          id: undefined,
+          content: {}
+        }
+      },
       meritocracy: [],
       services: [],
       taxonomy: []
@@ -75,7 +86,14 @@ export function createStore () {
         state.techComponents = techComponents
       },
       setTechSize(state, size) {
-        state.techSize = size
+        state.tech.page.total = size
+      },
+      setTechHeadersPage(state, page){
+        ({ from: state.tech.page.from, 
+          to: state.tech.page.to, 
+          total: state.tech.page.total,
+          content: state.tech.page.content
+        } = page)
       },
       setMeritocracy (state, meritocracy) {
         state.meritocracy = meritocracy
@@ -119,7 +137,17 @@ export function createStore () {
       fetchTechSize ({commit}) {
         return client
           .fetchTechComponentsSize()
-          .then( size => commit('setTechSize', size))
+          .then(size => commit('setTechSize', size))
+      },
+      fetchTechHeadersPage ({commit}, from, to) {
+        return client
+          .fetchTechHeadersPage(from, to)
+          .then(page => commit('setTechHeadersPage', page))
+      },
+      fetchTechDetails ({commit}, id){
+        return client
+          .fetchTechComponentDetails(id)
+          .then(tech => commit('setTechDetails', tech))
       },
       fetchMeritocracy ({ commit }) {
           return client
@@ -174,7 +202,8 @@ export function createStore () {
       lifeCycle: state =>  state.lifeCycle,
       taxonomy: state => state.taxonomy,
       tech: state => state.techComponents,
-      techSize: state => state.techSize
+      techSize: state => state.tech.page.total,
+      techPage: state => state.tech.page
     }
   })
 }

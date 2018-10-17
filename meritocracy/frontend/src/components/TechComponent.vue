@@ -1,5 +1,5 @@
 <template>
-  <b-card no-body :id="tech.id">
+  <b-card no-body :id="tech.uid">
     <span
       slot="header"
       :v-b-toggle="accordionId">
@@ -16,6 +16,7 @@
       :id="accordionId"
       accordion="tech"
        :visible="active?active:false">
+
       <b-card-body>
         <b-list-group flush>
           <b-list-group-item  v-if="tech.tags">
@@ -220,6 +221,12 @@ import filterMixin from '../mixins/filters.js'
 
 export default {
   name: 'techComponent',
+  data() {
+    return {
+      techDetails: {...this.tech},
+      loading: false
+    }
+  },
   components: {
     LifeCycle
   },
@@ -243,6 +250,14 @@ export default {
     isEditOn() {
         return this.$store.getters.isEditOn;
       }
+  },
+  created() {
+    this.loading = true
+    this.$store.dispatch('fetchTechDetails', this.tech.uid)
+        .then( details => { 
+          this.techDetails = details
+          this.loading = false
+        })
   },
   methods: {
     activate: function() {
