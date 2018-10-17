@@ -52,13 +52,12 @@ export default {
     return this.getData( 
       this.urlBuilder(COMPONENTS_READ, {select: 'name,status,tags'}), 
       this.configForRange(from, to),
-      constructResponseAsPage)
+      this.constructResponseAsPage)
   },
   fetchTechComponentDetails(id) {
     return this.getData( 
-      this.urlBuilder(COMPONENTS_READ, {id:`eq.${id}`}), 
-      this.configForSingleObject,
-      constructResponseAsPage)
+      this.urlBuilder(COMPONENTS_READ, {uid:`eq.${id}`}), 
+      this.configForSingleObject())
   },
  
   fetchTechComponentsSize() {
@@ -68,9 +67,6 @@ export default {
       (response) => { 
         console.log(`We are interested in ${response.headers['content-range']} `)
         const [current,total] = response.headers['content-range'].split('/')
-        //const [to, from] = current.split('-')
-        //const page = {from, to, total, tech: response.data}
-        console.log(`total is ${total}`)
         return Number(total)
       })
   },

@@ -16,14 +16,16 @@
       :id="accordionId"
       accordion="tech"
        :visible="active?active:false">
-
-      <b-card-body>
+       <loading v-if="this.loading">
+        Loading details for tech component {{tech.uid}}
+      </loading>
+      <b-card-body v-else>
         <b-list-group flush>
-          <b-list-group-item  v-if="tech.tags">
+          <b-list-group-item  v-if="techContent.tags">
             <p>Usecase Classification:</p>
-             <h6> {{tech.tags|stringify}}</h6>
+             <h6> {{techContent.tags|stringify}}</h6>
           </b-list-group-item>
-          <b-list-group-item v-if="tech.description">
+          <b-list-group-item v-if="techContent.description">
             <strong>Description:</strong>
             <b-row>
               <b-col cols="1">
@@ -32,17 +34,17 @@
                   color="grey"  />
               </b-col>
               <b-col cols="9">
-                <p>{{tech.description}}</p>
+                <p>{{techContent.description}}</p>
               </b-col>
               <b-col>
               </b-col>
             </b-row>
           </b-list-group-item>
-          <b-list-group-item v-if="tech.usecases && tech.usecases.length>0">
+          <b-list-group-item v-if="techContent.usecases && techContent.usecases.length>0">
              <strong>Usecases</strong>
-             <b-badge>{{tech.usecases.length}}</b-badge>:
+             <b-badge>{{techContent.usecases.length}}</b-badge>:
             <b-row
-              v-for="(uc, index) in tech.usecases"
+              v-for="(uc, index) in techContent.usecases"
               class="justify-content-md-center">
               <b-col cols="1">
                 <v-icon
@@ -72,10 +74,10 @@
               </b-col>
           </b-row>
           </b-list-group-item>
-          <b-list-group-item v-if="tech.licenses">
+          <b-list-group-item v-if="techContent.licenses">
             <strong>Licenses:</strong>
              <b-row
-              v-for="license in tech.licenses"
+              v-for="license in techContent.licenses"
               class="justify-content-md-center">
               <b-col cols="1">
                 <v-icon
@@ -94,10 +96,10 @@
               <b-col/>
             </b-row>
           </b-list-group-item>
-           <b-list-group-item v-if="tech.links && tech.links.length>0">
+           <b-list-group-item v-if="techContent.links && techContent.links.length>0">
             <strong>Links:</strong>
             <b-row
-              v-for="(link, index) in tech.links"
+              v-for="(link, index) in techContent.links"
               class="justify-content-md-center">
               <b-col cols="1">
                 <v-icon
@@ -115,10 +117,10 @@
               <b-col/>
             </b-row>
           </b-list-group-item>
-          <b-list-group-item v-if="tech.log">
+          <b-list-group-item v-if="techContent.log">
             <strong>Change Log:</strong>
             <b-row
-              v-for="(entry, index) in tech.log"
+              v-for="(entry, index) in techContent.log"
               class="justify-content-md-center">
                 <b-col cols="1">
                   <v-icon
@@ -141,10 +143,10 @@
               </b-col>
             </b-row>
           </b-list-group-item>
-          <b-list-group-item v-if="tech.debt">
+          <b-list-group-item v-if="techContent.debt">
             <strong>Technical debt:</strong>
             <b-row
-              v-for="(entry, index) in tech.debt"
+              v-for="(entry, index) in techContent.debt"
               class="justify-content-md-center">
                 <b-col cols="1">
                     <v-icon
@@ -170,7 +172,7 @@
           <b-list-group-item>
             <strong>Comments:</strong>
             <b-row
-              v-for="(entry, index) in tech.comments"
+              v-for="(entry, index) in techContent.comments"
               class="justify-content-md-center">
                 <b-col cols="1">
                     <v-icon
@@ -216,6 +218,7 @@
 
 <script>
 import LifeCycle from '../components/LifeCycle.vue'
+import Loading from '../components/Loading.vue'
 import filterMixin from '../mixins/filters.js'
 
 
@@ -223,12 +226,12 @@ export default {
   name: 'techComponent',
   data() {
     return {
-      techDetails: {...this.tech},
+      techContent: {},
       loading: false
     }
   },
   components: {
-    LifeCycle
+    LifeCycle, Loading
   },
   props: {
     tech: {
@@ -251,22 +254,29 @@ export default {
         return this.$store.getters.isEditOn;
       }
   },
-  created() {
-    this.loading = true
-    this.$store.dispatch('fetchTechDetails', this.tech.uid)
-        .then( details => { 
-          this.techDetails = details
-          this.loading = false
-        })
-  },
   methods: {
     activate: function() {
+      this.loadData()
       this.$router.push({name: 'component', params: { uid: this.tech.uid}})
     },
     edit: function(){
       this.$router.push({ name: 'edit', params: { uid: this.tech.uid } });
+    },
+    loadData() {
+      this.loading = true
+      this.$store.dispatch('fetchTechDetails', this.tech.uid)
+        .then( details => { 
+          this.techContent = details
+          this.loading = false
+          console.log(details)
+        })
     }
-  }
+  },
+  watch: {
+    active: function (newVal, oldVal) {
+      this.activeId = newVal
+    }
+  },
 }
 </script>
 
