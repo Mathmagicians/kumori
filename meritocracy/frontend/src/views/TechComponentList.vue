@@ -60,6 +60,7 @@
             :button-panel-size="7">
             <tech-component
               slot-scope="props"
+              v-if="props.isOn"
               :num="props.num"
               :tech="filteredTechComponents[props.listSeq]"
               v-bind:active="filteredTechComponents[props.listSeq].uid === activeId">
