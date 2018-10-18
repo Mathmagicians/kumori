@@ -3,7 +3,7 @@ DROP VIEW IF EXISTS api.w_components;
 CREATE OR REPLACE VIEW api.w_components
 AS
 SELECT
-    component.id AS uid
+    component.id AS uid,
     component.name as name,
     status.name as status,
     component.description,
