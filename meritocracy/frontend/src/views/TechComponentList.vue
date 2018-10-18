@@ -55,7 +55,7 @@
             </p>
           </b-alert>
           <list-with-pagination 
-            :list-size="10" 
+            :list-size="25" 
             v-bind:list-total="filteredTechComponents.length"
             :button-panel-size="7">
             <tech-component
