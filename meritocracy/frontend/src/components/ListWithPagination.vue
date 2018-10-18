@@ -23,7 +23,7 @@
 		          :key="i" 
 		          @click="scrollToPage(i-1)"
 		          :variant="buttonVariant(i-1)">
-		            {{ buttonName(i-1)}} 
+		            {{buttonName(i-1)}} 
 		        </b-btn>
 		      </b-button-group>
 		      <b-button-group>
@@ -38,7 +38,11 @@
 		      </b-button-group>
 			 </b-button-toolbar>
 			 <div v-for="i in listSize">
-			    <slot :num="i" :listSeq="index2List(i)" :id="i">
+			    <slot 
+			    	:num="i" 
+			    	:listSeq="index2ListOrdinal(i)" 
+			    	:id="i"
+			    	:isOn="isOnPage(i)">
 			      	{{i+1}}: waiting for slot
 			    </slot>
 			</div>
@@ -116,9 +120,12 @@
 	       /*fixme: unit test: input (42,10) out  [ { "from": 1, "to": 10 }, { "from": 11, "to": 20 }, { "from": 21, "to": 30 }, { "from": 31, "to": 40 }, { "from": 41, "to": 42 } ]
 	        for( 101,10)
 	         [ { "from": 1, "to": 10 }, { "from": 11, "to": 20 }, { "from": 21, "to": 30 }, { "from": 31, "to": 40 }, { "from": 41, "to": 50 }, { "from": 51, "to": 60 }, { "from": 61, "to": 70 }, { "from": 71, "to": 80 }, { "from": 81, "to": 90 }, { "from": 91, "to": 100 }, { "from": 101, "to": 101 } ]
+	         0: computed list ordinal to 20, activePage 2
+	         0: computed list ordinal to 10, activePage 1
 	          */
-	        index2List(i){
-	        	return this.pi2page(this.page.activePageIndex)+i
+	        index2ListOrdinal(i){
+	        	//slots start counting from 1, ordinals in list from 0
+	        	return this.pi2page(this.page.activePageIndex)+i-1
 	        },
 			pi2page(pageIndex) {
 			return pageIndex*this.listSize
@@ -141,8 +148,8 @@
 				}
 				//this.tech.forEach((t,i) => this.tech[i].name = `00${i} --- ${t.name}`)
 			},
-			isOnPage(uid){
-				return true
+			isOnPage(i){
+				return this.index2ListOrdinal(i) < this.listTotal 
 			}
 	    }
 	}
