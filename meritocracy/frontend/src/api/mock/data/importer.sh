@@ -7,6 +7,7 @@ function import () {
   local COMPONENTS_DATA="$(cat techComponents.json)"
   while read p; do
     local uid name description comments tags licenses links usecases scopes entry
+    
     name="${p}"
     description="Apache project"
     uid="$(echo "${name}${description}" | base64)"

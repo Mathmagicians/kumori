@@ -5361,38 +5361,6 @@
     ]
   },
   {
-    "uid": "QXBhY2hlIEhpdmVBcGFjaGUgcHJvamVjdAo=",
-    "name": "Apache Hive",
-    "description": "Apache project",
-    "comments": "This is a Apache project.",
-    "tags": [
-      "Delivery Services",
-      "Development",
-      "Design and Development"
-    ],
-    "licenses": [],
-    "links": [
-      "https://projects.apache.org"
-    ],
-    "usecases": [
-      "May be used for experiments."
-    ],
-    "scopes": [
-      {
-        "org": "Typical Taoists Inc",
-        "status": "Default"
-      },
-      {
-        "org": "Gigantic Teleporters Inc",
-        "status": "To be decided"
-      },
-      {
-        "org": "Brave Traders Inc",
-        "status": "To be decided"
-      }
-    ]
-  },
-  {
     "uid": "d6aa-80cd-d3a2-59f3-caf9-2677-f98d-e2ce",
     "name": "Apache Hive",
     "description": "Apache Hive is a data warehouse software project built on top of Apache Hadoop for providing data query and analysis. Hive gives an SQL-like interface to query data stored in various databases and file systems that integrate with Hadoop.",
