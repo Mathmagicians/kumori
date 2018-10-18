@@ -66,13 +66,11 @@
               v-bind:active="filteredTechComponents[props.listSeq].uid === activeId">
             </tech-component>
           </list-with-pagination>
-      		
         </div>
       </b-col>
     </b-row>
   </div>
 </template>
-
 <script>
 
   import TechComponent from '../components/TechComponent.vue'

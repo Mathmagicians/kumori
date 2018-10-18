@@ -1,5 +1,11 @@
 <template>
 <div>
+  <h1>Demo list with pagination</h1>
+  <list-with-pagination
+    :list-total="7"
+    :list-size="2"
+    :button-panel-size="2">
+  </list-with-pagination>
   <h1>Demo access to database</h1>
   <div v-if="page.loading">Loading data ... </div>
   <div v-else>
@@ -54,6 +60,9 @@
 </template>
 
 <script>
+
+  import ListWithPagination from '../components/ListWithPagination.vue'
+
   export default {
     name: 'database',
     data() {
@@ -69,7 +78,7 @@
         }
       }
     },
-
+    components: {ListWithPagination},
     computed: {
       numOfPages(){
         return Math.ceil(this.page.total/this.page.size)
