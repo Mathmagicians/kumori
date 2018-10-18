@@ -2,6 +2,7 @@
 set -e
 
 # Add data to existing list of components
+# Latest import from https://projects.apache.org/projects.html
 function import () {
   local COMPONENTS_DATA="$(cat techComponents.json)"
   while read p; do
