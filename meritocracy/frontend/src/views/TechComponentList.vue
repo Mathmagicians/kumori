@@ -54,22 +54,28 @@
                 technologies.
             </p>
           </b-alert>
-      		<tech-component
-            v-for="component in filteredTechComponents"
-            :key="component.name"
-            v-bind:tech="component"
-            :active="component.uid === activeId">
-          </tech-component>
+          <list-with-pagination 
+            :list-size="25" 
+            v-bind:list-total="filteredTechComponents.length"
+            :button-panel-size="7">
+            <tech-component
+              slot-scope="props"
+              v-if="props.isOn"
+              :num="props.num"
+              :tech="filteredTechComponents[props.listSeq]"
+              v-bind:active="filteredTechComponents[props.listSeq].uid === activeId">
+            </tech-component>
+          </list-with-pagination>
         </div>
       </b-col>
     </b-row>
   </div>
 </template>
-
 <script>
 
   import TechComponent from '../components/TechComponent.vue'
   import SearchComponent from '../components/SearchComponent.vue'
+  import ListWithPagination from '../components/ListWithPagination.vue'
   import lifeCycleMixin from '../mixins/lifeCycle.js'
 
   export default {
@@ -80,14 +86,15 @@
     },
   	data () {
     		return {
-      			loading: {tech: true, tax: true},
+      			loading: {tech: true, tax: true, size: true},
             activeId: '',
             query: {
               string: '',
               lc: [],
               tx: []
             },
-            fuzzySearchResults: []
+            fuzzySearchResults: [],
+            listTotal: 0
     		}
 		},
     props: {
@@ -106,7 +113,8 @@
       },
 		components: {
 			TechComponent,
-      SearchComponent
+      SearchComponent,
+      ListWithPagination
 		},
 		computed: {
   		techComponents () {
@@ -141,6 +149,11 @@
         .then(taxonomy => { this.loading.tax = false })
   		this.$store.dispatch('fetchTechComponents')
     			.then(techComponents => { this.loading.tech = false })
+      this.$store.dispatch('fetchTechSize')
+        .then( size => { 
+          this.listTotal = this.$store.getters.techSize
+          this.loading.size = false
+        })
 		},
     filters: {
       techId (tech) {

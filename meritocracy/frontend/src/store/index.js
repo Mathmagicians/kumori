@@ -65,6 +65,18 @@ export function createStore () {
         ]
       },
       techComponents: [],
+      tech: {
+        page: {
+          from: 0,
+          to: 0,
+          total: 0,
+          content: []
+        },
+        details: {
+          id: undefined,
+          content: {}
+        }
+      },
       meritocracy: [],
       services: [],
       taxonomy: []
@@ -72,6 +84,16 @@ export function createStore () {
     mutations: {
       setTechComponents (state, techComponents) {
         state.techComponents = techComponents
+      },
+      setTechSize(state, size) {
+        state.tech.page.total = size
+      },
+      setTechHeadersPage(state, page){
+        ({ from: state.tech.page.from, 
+          to: state.tech.page.to, 
+          total: state.tech.page.total,
+          content: state.tech.page.content
+        } = page)
       },
       setMeritocracy (state, meritocracy) {
         state.meritocracy = meritocracy
@@ -111,6 +133,24 @@ export function createStore () {
           return client
             .fetchTechComponents()
             .then(techComponents => commit('setTechComponents', techComponents))
+      },
+      fetchTechSize ({commit}) {
+        return client
+          .fetchTechComponentsSize()
+          .then(size => commit('setTechSize', size))
+      },
+      fetchTechHeadersPage ({commit}, from, to) {
+        return client
+          .fetchTechHeadersPage(from, to)
+          .then(page => commit('setTechHeadersPage', page))
+      },
+      fetchTechDetails ({commit}, id){
+        return client
+          .fetchTechComponentDetails(id)
+          .then(tech => {
+            console.log(`Fetched details for ${id}: ... ${tech.description}`)
+            return tech
+          } )
       },
       fetchMeritocracy ({ commit }) {
           return client
@@ -164,7 +204,9 @@ export function createStore () {
       isEditOn: state =>  state.security.isEditOn,
       lifeCycle: state =>  state.lifeCycle,
       taxonomy: state => state.taxonomy,
-      tech: state => state.techComponents
+      tech: state => state.techComponents,
+      techSize: state => state.tech.page.total,
+      techPage: state => state.tech.page
     }
   })
 }
