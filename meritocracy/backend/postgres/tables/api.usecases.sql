@@ -30,3 +30,5 @@ UPDATE
     ON api.usecases FOR EACH ROW EXECUTE PROCEDURE row_updated ();
 
 GRANT SELECT ON api.usecases TO web_anon;
+GRANT ALL ON api.usecases to editor;
+GRANT USAGE, SELECT ON SEQUENCE api.usecases_id_seq TO editor;

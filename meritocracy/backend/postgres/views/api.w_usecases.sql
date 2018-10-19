@@ -17,3 +17,4 @@ FROM
     JOIN api.scopes sco ON usecase.scope = sco.id;
 
 GRANT SELECT ON TABLE api.w_usecases TO web_anon;
+GRANT ALL ON api.w_usecases to editor;

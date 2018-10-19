@@ -24,3 +24,5 @@ UPDATE
     ON api.links FOR EACH ROW EXECUTE PROCEDURE row_updated ();
 
 GRANT SELECT ON api.links TO web_anon;
+GRANT ALL ON api.links to editor;
+GRANT USAGE, SELECT ON SEQUENCE api.links_id_seq TO editor;

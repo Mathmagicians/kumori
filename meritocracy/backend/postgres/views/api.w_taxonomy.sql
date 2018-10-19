@@ -23,3 +23,4 @@ FROM
     api.taxonomy taxonomy;
 
 GRANT SELECT ON TABLE api.w_taxonomy TO web_anon;
+GRANT ALL ON api.w_taxonomy to editor;

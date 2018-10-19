@@ -22,6 +22,7 @@ services:
       PGRST_DB_URI: postgres://${POSTGREST_CONNECTION_USER}:${POSTGREST_CONNECTION_PASSWORD}@postgres:5432/${POSTGREST_CONNECTION_DB}
       PGRST_DB_SCHEMA: ${POSTGREST_CONNECTION_SCHEMA}
       PGRST_DB_ANON_ROLE: ${POSTGREST_ANON_ROLE}
+      PGRST_JWT_SECRET: ${PGRST_JWT_SECRET} # Must be minimum 32 characters
     depends_on:
       - postgres
     networks:
