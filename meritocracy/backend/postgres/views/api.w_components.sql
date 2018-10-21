@@ -48,4 +48,4 @@ FROM
 JOIN api.statuses status ON component.status = status.id;
 
 GRANT SELECT ON TABLE api.w_components TO web_anon;
-GRANT ALL ON api.w_components to editor;
+GRANT SELECT ON TABLE api.w_components TO editor;

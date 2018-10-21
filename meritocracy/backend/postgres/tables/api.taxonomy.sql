@@ -9,5 +9,4 @@ CREATE TABLE api.taxonomy (
 );
 
 GRANT SELECT ON api.taxonomy TO web_anon;
-GRANT ALL ON api.taxonomy to editor;
-GRANT USAGE, SELECT ON SEQUENCE api.taxonomy_id_seq TO editor;
+GRANT SELECT ON api.taxonomy TO editor;

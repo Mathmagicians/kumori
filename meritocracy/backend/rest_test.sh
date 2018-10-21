@@ -9,7 +9,7 @@ function print_test () {
     local yellow nc
     yellow='\033[0;33m'
     nc='\033[0m'
-    printf " -> %-15s ${yellow}%-6s${nc}: [%s] %s\n" "${1}" "${2}" "${3}" "${4}"
+    printf " -> %-25s ${yellow}%-6s${nc}: [%s] %s\n" "${1}" "${2}" "${3}" "${4}"
 }
 
 function parse_location () {
@@ -22,6 +22,7 @@ function parse_location () {
   done </tmp/headers.txt
 }
 
+# Test CRUD for comments
 function test_comments () {
   local url method data response_status
   url='/comments'
@@ -59,11 +60,237 @@ function test_comments () {
       else print_test "Comment" "Delete" "FAILED" "${response_status}";
     fi
   }
-
-  comment_create
-  comment_read
-  comment_update
-  comment_delete
+    comment_create
+    comment_read
+    comment_update
+    comment_delete
 }
 
+
+# Test CRUD for Usecases
+function test_usecases () {
+  local url method data response_status
+  url='/usecases'
+
+  function usecase_create () {
+    data='{"component": 1,"name":"Awesome","description": "test","scope":1,"status":1,"deleted": false}'
+    response_status="$(curl -s -D /tmp/headers.txt -w "%{http_code}" "${HOST}${url}" -X POST -H "${AUTH}" -H "${CONTENT}" -d "${data}")"
+    if [[ ${response_status} == 201 ]];
+      then print_test "Usecase" "Create" "OK";
+      else print_test "Usecase" "Create" "FAILED" "${response_status}";
+    fi
+  }
+
+  function usecase_read () {
+    response_status="$(curl -s -o /dev/null -w "%{http_code}" "${HOST}${url}?id=eq.$(parse_location)" -X GET -H "${AUTH}" -H "${CONTENT}")"
+    if [[ ${response_status} == 200 ]];
+      then print_test "Usecase" "Read" "OK";
+      else print_test "Usecase" "Read" "FAILED" "${response_status}";
+    fi
+  }
+
+  function usecase_update () {
+    data='{"description": "Test 2"}'
+    response_status="$(curl -s -o /dev/null -w "%{http_code}" "${HOST}${url}?id=eq.$(parse_location)" -X PATCH -H "${AUTH}" -H "${CONTENT}" -d "${data}")"
+    if [[ ${response_status} == 204 ]];
+      then print_test "Usecase" "Update" "OK";
+      else print_test "Usecase" "Update" "FAILED" "${response_status}";
+    fi
+  }
+
+  function usecase_delete () {
+    response_status="$(curl -s -o /dev/null -w "%{http_code}" "${HOST}${url}?id=eq.$(parse_location)" -X DELETE -H "${AUTH}" -H "${CONTENT}" -d "${data}")"
+    if [[ ${response_status} == 204 ]];
+      then print_test "Usecase" "Delete" "OK";
+    else print_test "Usecase" "Delete" "FAILED" "${response_status}";
+    fi
+  }
+    usecase_create
+    usecase_read
+    usecase_update
+    usecase_delete
+}
+
+# Test CRUD for Components
+function test_components () {
+  local url method data response_status
+  url='/components'
+
+  function component_create () {
+    data='{"name": "Hula","description": "test","status":1,"deleted": false}'
+    response_status="$(curl -s -D /tmp/headers.txt -w "%{http_code}" "${HOST}${url}" -X POST -H "${AUTH}" -H "${CONTENT}" -d "${data}")"
+    if [[ ${response_status} == 201 ]];
+      then print_test "Component" "Create" "OK";
+      else print_test "Component" "Create" "FAILED" "${response_status}";
+    fi
+  }
+
+  function component_read () {
+    response_status="$(curl -s -o /dev/null -w "%{http_code}" "${HOST}${url}?id=eq.$(parse_location)" -X GET -H "${AUTH}" -H "${CONTENT}")"
+    if [[ ${response_status} == 200 ]];
+      then print_test "Component" "Read" "OK";
+      else print_test "Component" "Read" "FAILED" "${response_status}";
+    fi
+  }
+
+  function component_update () {
+    data='{"description": "Hula Hop"}'
+    response_status="$(curl -s -o /dev/null -w "%{http_code}" "${HOST}${url}?id=eq.$(parse_location)" -X PATCH -H "${AUTH}" -H "${CONTENT}" -d "${data}")"
+    if [[ ${response_status} == 204 ]];
+      then print_test "Component" "Update" "OK";
+      else print_test "Component" "Update" "FAILED" "${response_status}";
+    fi
+  }
+
+  function component_delete () {
+    response_status="$(curl -s -o /dev/null -w "%{http_code}" "${HOST}${url}?id=eq.$(parse_location)" -X DELETE -H "${AUTH}" -H "${CONTENT}" -d "${data}")"
+    if [[ ${response_status} == 204 ]];
+      then print_test "Component" "Delete" "OK";
+      else print_test "Component" "Delete" "FAILED" "${response_status}";
+    fi
+  }
+    component_create
+    component_read
+    component_update
+    component_delete
+}
+
+# Test CRUD for Links
+function test_links () {
+  local url method data response_status
+  url='/links'
+
+  function links_create () {
+      data='{"ref": "http://www.example.com","type": "Link","component":1,"deleted": false}'
+    response_status="$(curl -s -D /tmp/headers.txt -w "%{http_code}" "${HOST}${url}" -X POST -H "${AUTH}" -H "${CONTENT}" -d "${data}")"
+    if [[ ${response_status} == 201 ]];
+      then print_test "Links" "Create" "OK";
+      else print_test "Links" "Create" "FAILED" "${response_status}";
+    fi
+  }
+
+  function links_read () {
+    response_status="$(curl -s -o /dev/null -w "%{http_code}" "${HOST}${url}?id=eq.$(parse_location)" -X GET -H "${AUTH}" -H "${CONTENT}")"
+    if [[ ${response_status} == 200 ]];
+      then print_test "Links" "Read" "OK";
+      else print_test "Links" "Read" "FAILED" "${response_status}";
+    fi
+  }
+
+  function links_update () {
+    data='{"ref": "http://www.nowhere.com"}'
+    response_status="$(curl -s -o /dev/null -w "%{http_code}" "${HOST}${url}?id=eq.$(parse_location)" -X PATCH -H "${AUTH}" -H "${CONTENT}" -d "${data}")"
+    if [[ ${response_status} == 204 ]];
+      then print_test "Links" "Update" "OK";
+      else print_test "Links" "Update" "FAILED" "${response_status}";
+    fi
+  }
+
+  function links_delete () {
+    response_status="$(curl -s -o /dev/null -w "%{http_code}" "${HOST}${url}?id=eq.$(parse_location)" -X DELETE -H "${AUTH}" -H "${CONTENT}" -d "${data}")"
+    if [[ ${response_status} == 204 ]];
+      then print_test "Links" "Delete" "OK";
+    else print_test "Links" "Delete" "FAILED" "${response_status}";
+    fi
+  }
+    links_create
+    links_read
+    links_update
+    links_delete
+}
+
+# Test CRUD for component taxonomies
+function test_component_taxonomy () {
+  local url method data response_status
+  url='/component_taxonomy'
+
+  function component_taxonomy_create () {
+      data='{"component":1,"taxonomy": 1}'
+    response_status="$(curl -s -D /tmp/headers.txt -w "%{http_code}" "${HOST}${url}" -X POST -H "${AUTH}" -H "${CONTENT}" -d "${data}")"
+    if [[ ${response_status} == 201 ]];
+      then print_test "Component Taxonomy" "Create" "OK";
+      else print_test "Component Taxonomy" "Create" "FAILED" "${response_status}";
+    fi
+  }
+
+  function component_taxonomy_read () {
+    response_status="$(curl -s -o /dev/null -w "%{http_code}" "${HOST}${url}?component=eq.1&taxonomy=eq.1" -X GET -H "${AUTH}" -H "${CONTENT}")"
+    if [[ ${response_status} == 200 ]];
+      then print_test "Component Taxonomy" "Read" "OK";
+      else print_test "Component Taxonomy" "Read" "FAILED" "${response_status}";
+    fi
+  }
+
+  function component_taxonomy_update () {
+    data='{"taxonomy": 2}'
+    response_status="$(curl -s -o /dev/null -w "%{http_code}" "${HOST}${url}?component=eq.1&taxonomy=eq.1" -X PATCH -H "${AUTH}" -H "${CONTENT}" -d "${data}")"
+    if [[ ${response_status} == 204 ]];
+      then print_test "Component Taxonomy" "Update" "OK";
+      else print_test "Component Taxonomy" "Update" "FAILED" "${response_status}";
+    fi
+  }
+
+  function component_taxonomy_delete () {
+    response_status="$(curl -s -o /dev/null -w "%{http_code}" "${HOST}${url}?component=eq.1&taxonomy=eq.1" -X DELETE -H "${AUTH}" -H "${CONTENT}" -d "${data}")"
+    if [[ ${response_status} == 204 ]];
+      then print_test "Component Taxonomy" "Delete" "OK";
+    else print_test "Component Taxonomy" "Delete" "FAILED" "${response_status}";
+    fi
+  }
+    component_taxonomy_create
+    component_taxonomy_read
+    component_taxonomy_update
+    component_taxonomy_delete
+}
+
+# Test CRUD for Scope
+function test_scopes () {
+  local url method data response_status
+  url='/scopes'
+
+  function scope_create () {
+    data='{"name": "Nifty"}'
+    response_status="$(curl -s -D /tmp/headers.txt -w "%{http_code}" "${HOST}${url}" -X POST -H "${AUTH}" -H "${CONTENT}" -d "${data}")"
+    if [[ ${response_status} == 201 ]];
+      then print_test "Scope" "Create" "OK";
+      else print_test "Scope" "Create" "FAILED" "${response_status}";
+    fi
+  }
+
+  function scope_read () {
+    response_status="$(curl -s -o /dev/null -w "%{http_code}" "${HOST}${url}?id=eq.$(parse_location)" -X GET -H "${AUTH}" -H "${CONTENT}")"
+    if [[ ${response_status} == 200 ]];
+      then print_test "Scope" "Read" "OK";
+      else print_test "Scope" "Read" "FAILED" "${response_status}";
+    fi
+  }
+
+  function scope_update () {
+    data='{"name": "Niftyness"}'
+    response_status="$(curl -s -o /dev/null -w "%{http_code}" "${HOST}${url}?id=eq.$(parse_location)" -X PATCH -H "${AUTH}" -H "${CONTENT}" -d "${data}")"
+    if [[ ${response_status} == 204 ]];
+      then print_test "Scope" "Update" "OK";
+      else print_test "Scope" "Update" "FAILED" "${response_status}";
+    fi
+  }
+
+  function scope_delete () {
+    response_status="$(curl -s -o /dev/null -w "%{http_code}" "${HOST}${url}?id=eq.$(parse_location)" -X DELETE -H "${AUTH}" -H "${CONTENT}" -d "${data}")"
+    if [[ ${response_status} == 204 ]];
+      then print_test "Scope" "Delete" "OK";
+      else print_test "Scope" "Delete" "FAILED" "${response_status}";
+    fi
+  }
+    scope_create
+    scope_read
+    scope_update
+    scope_delete
+}
+
+
 test_comments
+test_components
+test_usecases
+test_links
+test_scopes
+test_component_taxonomy
