@@ -97,20 +97,9 @@
             listTotal: 0
     		}
 		},
-    props: {
-      uid: {
-        type: String,
-        default: ''
-      }
-    },
     mixins: [
       lifeCycleMixin
     ],
-    watch: {
-        uid: function (newVal, oldVal) {
-          this.activeId = newVal
-        }
-      },
 		components: {
 			TechComponent,
       SearchComponent,
