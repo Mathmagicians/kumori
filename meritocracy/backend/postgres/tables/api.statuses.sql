@@ -7,3 +7,4 @@ CREATE TABLE api.statuses (
 );
 
 GRANT SELECT ON api.statuses TO web_anon;
+GRANT SELECT ON api.statuses TO editor;

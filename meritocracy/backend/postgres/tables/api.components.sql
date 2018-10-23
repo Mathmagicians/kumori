@@ -24,3 +24,5 @@ UPDATE
     ON api.components FOR EACH ROW EXECUTE PROCEDURE row_updated ();
 
 GRANT SELECT ON api.components TO web_anon;
+GRANT ALL ON api.components to editor;
+GRANT USAGE, SELECT ON SEQUENCE api.components_id_seq TO editor;

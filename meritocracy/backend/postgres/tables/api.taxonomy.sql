@@ -9,3 +9,4 @@ CREATE TABLE api.taxonomy (
 );
 
 GRANT SELECT ON api.taxonomy TO web_anon;
+GRANT SELECT ON api.taxonomy TO editor;

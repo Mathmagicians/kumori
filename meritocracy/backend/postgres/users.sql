@@ -26,4 +26,18 @@ BEGIN
     END IF;
 END $body$;
 
+DO $body$
+BEGIN
+    IF NOT EXISTS (
+            SELECT
+            FROM
+                pg_catalog.pg_user
+            WHERE
+                usename = 'editor') THEN
+            CREATE ROLE editor NOLOGIN;
+        COMMENT ON ROLE editor IS 'This is a editor user with CRUD.';
+    END IF;
+END $body$;
+
 GRANT web_anon TO meritocracy;
+GRANT editor TO meritocracy;

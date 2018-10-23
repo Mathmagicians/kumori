@@ -23,3 +23,5 @@ UPDATE
     ON api.comments FOR EACH ROW EXECUTE PROCEDURE row_updated ();
 
 GRANT SELECT ON api.comments TO web_anon;
+GRANT ALL ON api.comments to editor;
+GRANT USAGE, SELECT ON SEQUENCE api.comments_id_seq TO editor;
