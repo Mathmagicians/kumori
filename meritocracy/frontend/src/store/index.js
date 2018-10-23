@@ -216,7 +216,7 @@ export function createStore () {
       taxonomy: state => state.taxonomy,
       tech: state => state.techComponents,
       techSize: state => state.tech.page.total,
-      techPage: state => state.tech.page
+      techPage: state => state.tech.page,
       usecases: state => state.usecases
     }
   })

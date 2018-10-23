@@ -55,8 +55,10 @@
             </p>
           </b-alert>
           <list-with-pagination 
+            ref="pagination"
             :list-size="25" 
             v-bind:list-total="filteredTechComponents.length"
+            v-bind:activeOrdinal="activeOrdinal"
             :button-panel-size="7">
             <tech-component
               slot-scope="props"
@@ -97,6 +99,17 @@
             listTotal: 0
     		}
 		},
+    props: {
+      uid: {
+        type: String,
+        default: ''
+      }
+    },
+    watch: {
+      uid: function (newVal, oldVal) {
+        this.activeId = newVal
+      }
+    },
     mixins: [
       lifeCycleMixin
     ],
@@ -106,6 +119,9 @@
       ListWithPagination
 		},
 		computed: {
+       activeOrdinal(){
+        return this.filteredTechComponents.findIndex( t => t.uid === this.activeId)
+      },
   		techComponents () {
     		return this.$store.getters.tech
   		},

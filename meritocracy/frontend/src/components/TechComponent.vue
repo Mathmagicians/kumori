@@ -235,6 +235,9 @@ export default {
       loading: false
     }
   },
+  created() {
+    this.active && this.loadData()
+  },
   components: {
     LifeCycle, Loading
   },
@@ -273,15 +276,9 @@ export default {
         .then( details => { 
           this.techContent = details
           this.loading = false
-          console.log(details)
         })
     }
-  },
-  watch: {
-    active: function (newVal, oldVal) {
-      this.activeId = newVal
-    }
-  },
+  }
 }
 </script>
 
