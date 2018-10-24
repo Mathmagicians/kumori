@@ -66,6 +66,11 @@
 				type: Number,
 				required: false,
 				default: 15
+			},
+			activeOrdinal: {
+				type: Number,
+				required: false,
+				default: 0
 			}
 		},
 		data() {
@@ -75,6 +80,7 @@
 	      }
     	},
     	created () {
+    		this.activePageIndex = this.ordinal2pi(this.activeOrdinal)
 			this.scrollToPage(this.activePageIndex)
 		},
 	    computed: {
@@ -110,6 +116,9 @@
 	         index2ListOrdinal(i){
 	        	//slots start counting from 1, ordinals in list from 0
 	        	return this.pi2page(this.activePageIndex)+i-1
+	        },
+	        ordinal2pi(i){
+	        	return i >= 0 ? Math.floor(i / this.listSize) : 0 
 	        },
 			pi2page(pageIndex) {
 			return pageIndex*this.listSize
