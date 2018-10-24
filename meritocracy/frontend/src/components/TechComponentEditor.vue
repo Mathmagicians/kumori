@@ -174,7 +174,7 @@ export default {
 	components: { LifeCycle },
 	mixins: [lifeCycleMixin],
 	props: {
-	    uid: {
+	    name: {
 	      type: String,
 	      default: ''
 	    }

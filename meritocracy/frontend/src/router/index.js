@@ -43,13 +43,13 @@ export default new Router({
       component: TechComponentsList
     },
     {
-      path: '/components/:uid',
+      path: '/components/:name',
       component: TechComponentsList,
       name: 'component',
       props: true
     }, 
      {
-      path: '/components/:uid/edit',
+      path: '/components/:name/edit',
       name: 'edit',
       component: TechComponentEditor,
       props: true
