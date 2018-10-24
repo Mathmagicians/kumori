@@ -4,9 +4,9 @@
 		variant="danger">
 		<v-icon name="times" scale="2">
 		</v-icon>
-		 <h4 class="alert-heading">Error code: {{error}}</h4>
+		 <h4 class="alert-heading">Error code: {{code}}</h4>
 
-		Uuups ... something went wrong here  ... I was just trying to find data for {{asset}}, and received error code <b>{{error}}</b>
+		Uuups ... something went wrong here  ... I was just trying to find data for {{asset}}, and received error code <b>{{code}}</b>
 
 	</b-alert>
 </template>
@@ -14,12 +14,13 @@
 export default {
 	name: 'errors',
 	props: {
-		error: {
+		code: {
 			type: String,
 			default: '???'
 		}, 
 		asset: {
-			default: {uid: 'unknown'}
+			type: String,
+			default: '???'
 		}
     },
 }
