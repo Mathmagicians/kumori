@@ -78,13 +78,13 @@ export default new Router({
       path: '/404',
       name: 'not-found',
       component: Errors,
-      props: true
+      props: {error: 404}
     }, 
     {
-      path: '/500',
+      path: '/error',
       name: 'error',
       component: Errors,
-      props: true
+      props: route => ({code: route.query.error, asset: route.query.asset})
     }, 
     {
       path: '*',

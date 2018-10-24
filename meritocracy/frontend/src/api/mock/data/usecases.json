@@ -1,0 +1,72 @@
+[
+ {
+    "id": "1",
+    "name": "Development team instant messaging",
+    "scope": "Typical Taoists Inc",
+    "tags": [
+      "Delivery Services",
+      "Development",
+      "Design and Development",
+      "Developer communication",
+      "Development team instant messaging"
+    ],
+     "cases": [
+      {
+        "id": "1", //id=uid of component
+        "component": "#Slack", 
+        "description": "Developer commuication channel, for instant messaging, designed to improve a teams fusion with its Continuos Delivery pipeline.",
+        "status": "testing"
+      }
+    ]
+  },
+  {
+    "id": "2",
+    "name": "Storage of machine secrets",
+    "tags": [
+      "Delivery Services",
+      "Security and Compliance",
+      "Security",
+      "Storage of secrets",
+      "Storage of machine secrets"
+    ],
+    "cases": [
+      {
+        "id": "1",
+        "component": "#Slack", 
+        "description": "Although slack makes secrets like data passwords easily accessible, it is a terrible idea to use it for sensitive information. Even worse, than a yellow postit note with the db password on your desk.",
+        "status": "dontuse"
+      },
+      {
+        "id": "2",
+        "component": "Hashicorp Vault", 
+        "description": "Should be used for storing machine secrets like tokens and certifikates, but never private keys",
+        "status": "Default"
+      }
+    ]
+  },
+  {
+    "id": "3",
+    "name": "Feedback from Software Life Cycle Development tools",
+    "tags": [
+      "Delivery Services",
+      "Development",
+      "Design and Development",
+      "Deployment",
+      "Continuos Delivery"
+    ],
+    "cases": [
+      {
+        "id": "1", //id=uid of component
+        "component": "#Slack", 
+        "description": "Many teams like to have messages from the continuos delivery pipleine streamed in as part of the team conversation. Also alerts and monitoring events could make their way into the teams slack channel.",
+        "status": "poc"
+      },
+      {
+        "id": "120", //id=uid of component
+        "component": "Outlook Mail", 
+        "description": "Emails can be used as a way to provide feedback for developers in a team from the SLCD tools, like successful build, failed build.",
+        "status": "Default"
+      }
+    ],
+  }      
+]

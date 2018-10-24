@@ -2,6 +2,7 @@ import techComponents from './data/techComponents'
 import meritocracy from './data/meritocracy'
 import services from './data/services'
 import taxonomy from './data/taxonomy'
+//import usecases from '.data/token'
 import token from './data/token'
 
 import axios from 'axios'
@@ -19,6 +20,15 @@ export default {
     return fetch(techComponents, 1000); // wait 1s before returning posts
   },
 
+  fetchTechComponentDetails(id) {
+     return new Promise( (resolve) => resolve(techComponents).find( t => t.uid === id) )
+  },
+  fetchTechComponentsSize(){
+    return new Promise( (resolve) => resolve(techComponents).length )
+  },
+  fetchUsecases () {
+    return fetch( usecases, 200);
+  },
   fetchMeritocracy () {
     return fetch(meritocracy, 2000);
   },

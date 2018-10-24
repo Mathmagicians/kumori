@@ -3,7 +3,8 @@
 // usecases should they have their own component, like technology? (then tech will include usecases as child components)
 
 <template>
-	<div>
+	<loading v-if="loading.uc"/>
+	<div v-else>
 		{{usecases}}
 	</div>
 </template>

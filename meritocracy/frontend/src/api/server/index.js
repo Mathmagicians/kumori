@@ -3,6 +3,7 @@ import axios from 'axios'
 	//const BASE_URL="http://127.0.0.1:3000/"
 	const BASE_URL="api/"
   const COMPONENTS_READ ="w_components"
+  const USECASES_READ = "w_usecases"
 
 export default {
 
@@ -18,7 +19,7 @@ export default {
       .then( (response) => {console.log(response.data); return response.data})
       .catch( (error) => this.onError(error))
   },
-  urlBuilder(apiurl,params){
+  urlBuilder(apiurl,params={}){
     return `${BASE_URL}${apiurl}${this.paramsToUrl(params)}`
   },
   paramsToUrl(params){
@@ -84,6 +85,12 @@ export default {
         return Number(total)
       })
   },
+<<<<<<< 8961918f92267b1399001d850c0de72427696f72
+=======
+   fetchUsecases () {
+     return this.getData(this.urlBuilder(USECASES_READ, {select: 'id, status, component, description'}))
+  },
+>>>>>>> Mock data for usecase
   fetchMeritocracy () {
   	return this.notImplemented("fetchMeritocracy")
   },
@@ -95,18 +102,24 @@ export default {
 
   fetchTaxonomy () {
     let config = {headers: {'Accept': 'application/vnd.pgrst.object+json'}}
-
-  	 return axios
+  	 return this.getData(
+        this.urlBuilder(USECASES_READ, {select:'name, id, status, component'}))
       .get(`${BASE_URL}w_taxonomy`, config)
       .then(response => response.data)
       .catch((error) => onError(error))
   },
+<<<<<<< 8961918f92267b1399001d850c0de72427696f72
   fetchUsecases () {
     return this.getData('w_usecases')
   },
 
   editTechComponent(techComponent){
       return this.postData(this.urlBuilder(COMPONENTS_READ), techComponent, configForResponseOnChange())
+=======
+  
+  editTechComponent( techComponent ){
+      return this.notImplemented("editTechComponent")
+>>>>>>> Mock data for usecase
   },
   createTechComponent(techComponent){
     return this.notImplemented("createTechComponent")
@@ -126,7 +139,7 @@ export default {
       console.log(error.response.data);
       console.log(error.response.status);
       console.log(error.response.headers);
-      this.$router.push({name: 'not-found', params: {code: error.response.status, asset: url}})
+      this.$router.push({name: 'error', params: {code: error.response.status, asset: url}})
     } else if (error.request) {
       console.log('>>> error in request >>>')
        console.log(error.request)
