@@ -12,6 +12,12 @@ export default {
       .then(responseBehavior)
       .catch((error) => this.onError(error))
   },
+  postData(url, toPost){
+    return axios
+      .post( url, toPost)
+      .then( (response) => {console.log(response.data); return response.data})
+      .catch( (error) => this.onError(error))
+  },
   urlBuilder(apiurl,params){
     return `${BASE_URL}${apiurl}${this.paramsToUrl(params)}`
   },
@@ -33,6 +39,14 @@ export default {
     let conf = {
       headers: {
         'Accept': 'application/vnd.pgrst.object+json'
+      }
+    }
+    return conf
+  },
+  configForResponseOnChange(){
+    const conf = {
+      headers: {
+        'Prefer': 'return=representation'
       }
     }
     return conf
@@ -90,8 +104,9 @@ export default {
   fetchUsecases () {
     return this.getData('w_usecases')
   },
- editTechComponent(techComponent){
-      return this.notImplemented("editTechComponent")
+
+  editTechComponent(techComponent){
+      return this.postData(this.urlBuilder(COMPONENTS_READ), techComponent, configForResponseOnChange())
   },
   createTechComponent(techComponent){
     return this.notImplemented("createTechComponent")
