@@ -87,8 +87,7 @@
       console.log(`active id ${this.activeId}, prop ${this.name}, param ${to.params.name}`)
       next();
     },
-    props: ['name'],
-  	data () {
+    data () {
     		return {
       			loading: {tech: true, tax: true, size: true},
             activeId: '',
@@ -102,7 +101,7 @@
     		}
 		},
     props: {
-      uid: {
+      name: {
         type: String,
         default: ''
       }

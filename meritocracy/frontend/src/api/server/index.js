@@ -2,6 +2,7 @@ import axios from 'axios'
 
 	const BASE_URL="http://0.0.0.0:3000/"
   const COMPONENTS_READ ="w_components"
+  const TAXONOMY_READ="w_taxonomy"
   const USECASES_READ = "w_usecases"
 
 export default {
@@ -83,12 +84,9 @@ export default {
 
 
   fetchTaxonomy () {
-    let config = {headers: {'Accept': 'application/vnd.pgrst.object+json'}}
-  	 return this.getData(
-        this.urlBuilder(USECASES_READ, {select:'name, id, status, component'}))
-      .get(`${BASE_URL}w_taxonomy`, config)
-      .then(response => response.data)
-      .catch((error) => onError(error))
+    return this.getData(
+        this.urlBuilder(TAXONOMY_READ), 
+        this.configForSingleObject())
   },
   
   editTechComponent( techComponent ){
