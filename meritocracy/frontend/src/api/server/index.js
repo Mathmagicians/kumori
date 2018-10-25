@@ -59,7 +59,6 @@ export default {
       this.urlBuilder(COMPONENTS_READ, {uid:`eq.${id}`}), 
       this.configForSingleObject())
   },
- 
   fetchTechComponentsSize() {
     return this.getData(
       this.urlBuilder(COMPONENTS_READ, {select: 'name'}), 
