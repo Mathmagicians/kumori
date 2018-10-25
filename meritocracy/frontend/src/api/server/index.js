@@ -2,6 +2,8 @@ import axios from 'axios'
 
 	const BASE_URL="http://0.0.0.0:3000/"
   const COMPONENTS_READ ="w_components"
+  const TAXONOMY_READ="w_taxonomy"
+  const USECASES_READ = "w_usecases"
 
 export default {
 
@@ -17,7 +19,7 @@ export default {
       .then( (response) => {console.log(response.data); return response.data})
       .catch( (error) => this.onError(error))
   },
-  urlBuilder(apiurl,params){
+  urlBuilder(apiurl,params={}){
     return `${BASE_URL}${apiurl}${this.paramsToUrl(params)}`
   },
   paramsToUrl(params){
@@ -79,11 +81,17 @@ export default {
       this.configForRange(0,0),
       (response) => { 
         console.log(`We are interested in ${response.headers['content-range']} `)
-        const [current,total] = response.headers['content-range'].split('/')
+        const [current,total] = response.headers['content-range'].split('/')  
         return Number(total)
       })
   },
+<<<<<<< HEAD
   
+=======
+   fetchUsecases () {
+     return this.getData(this.urlBuilder(USECASES_READ, {select: 'id, status, component, description'}))
+  },
+>>>>>>> usecases-view
   fetchMeritocracy () {
   	return this.notImplemented("fetchMeritocracy")
   },
@@ -94,15 +102,9 @@ export default {
 
 
   fetchTaxonomy () {
-    let config = {headers: {'Accept': 'application/vnd.pgrst.object+json'}}
-
-  	 return axios
-      .get(`${BASE_URL}w_taxonomy`, config)
-      .then(response => response.data)
-      .catch((error) => onError(error))
-  },
-  fetchUsecases () {
-    return this.getData('w_usecases')
+    return this.getData(
+        this.urlBuilder(TAXONOMY_READ), 
+        this.configForSingleObject())
   },
   
   editTechComponent(techComponent){
@@ -126,7 +128,7 @@ export default {
       console.log(error.response.data);
       console.log(error.response.status);
       console.log(error.response.headers);
-      this.$router.push({name: 'not-found', params: {code: error.response.status, asset: url}})
+      this.$router.push({name: 'error', params: {code: error.response.status, asset: url}})
     } else if (error.request) {
       console.log('>>> error in request >>>')
        console.log(error.request)
