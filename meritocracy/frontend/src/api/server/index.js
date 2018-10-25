@@ -70,36 +70,6 @@ export default {
         return Number(total)
       })
   },
-
-
-  getHeaders: function(from=0, to=10) {
-        // Prefer: count=exact
-        // Range-Unit: items
-        //Range: 0-10
-        let config = {headers: {
-          'Prefer': 'count=exact',
-          'Range-Unit': 'w_components',
-          'Range': `${from}-${to}`
-        }}
-
-        let headersResponse = {headers: [], total: 0}
-
-        this.$http.get('http://0.0.0.0:3000/w_components?select=name,status,tags', config)
-        .then(response => {
-          console.log(response)
-          console.log(`We are interested in ${response.headers.get('content-range')} `)
-          /*let range = response.headers.get('content-range')
-          let rs = range.split('/')
-          let total = rs[1]
-          this.page.total = Number(total)
-          let current = rs[0]
-          let page = { from: rs[0].split('-')[0], to:rs[0].split('-')[1]}
-          this.tech = response.body
-          this.page.loading = false */
-        }, response => {
-          return headersResponse
-        })},
-
   fetchMeritocracy () {
   	return this.notImplemented("fetchMeritocracy")
   },
@@ -120,8 +90,7 @@ export default {
   fetchUsecases () {
     return this.getData('w_usecases')
   },
-
-  editTechComponent( techComponent ){
+ editTechComponent(techComponent){
       return this.notImplemented("editTechComponent")
   },
   createTechComponent(techComponent){
