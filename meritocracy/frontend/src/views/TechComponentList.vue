@@ -83,9 +83,11 @@
   export default {
   	name: 'techComponentsList',
     beforeRouteUpdate (to, from, next) {
-      this.activeId = to.params.uid;
+      this.activeId = this.findIdFromName(to.params.name);
+      console.log(`active id ${this.activeId}, prop ${this.name}, param ${to.params.name}`)
       next();
     },
+    props: ['name'],
   	data () {
     		return {
       			loading: {tech: true, tax: true, size: true},
@@ -146,14 +148,16 @@
         })
       }
 		},
-		created () {
-      this.activeId = this.uid;
+		created () { 
   		this.loading = {tech: true, tax: true}
       this.$store
         .dispatch('fetchTaxonomy')
         .then(taxonomy => { this.loading.tax = false })
   		this.$store.dispatch('fetchTechComponents')
-    			.then(techComponents => { this.loading.tech = false })
+    			.then(techComponents => { 
+            this.loading.tech = false
+             this.activeId = this.findIdFromName(this.name)
+           })
       this.$store.dispatch('fetchTechSize')
         .then( size => { 
           this.listTotal = this.$store.getters.techSize
@@ -166,6 +170,10 @@
       }
     },
     methods: {
+      findIdFromName(name){
+        const item = this.techComponents.find( t => t.name === name)
+        return item ? item.uid : undefined
+      },
       selectLifeCycle (list) {
         this.query.lc = list;
       },

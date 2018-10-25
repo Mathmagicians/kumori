@@ -262,13 +262,16 @@ export default {
         return this.$store.getters.isEditOn;
       }
   },
+  created() {
+    if(this.active) this.activate()
+  },
   methods: {
     activate: function() {
       this.loadData()
-      this.$router.push({name: 'component', params: { uid: this.tech.uid}})
+      this.$router.push({name: 'component', params: {name: this.tech.name}})
     },
     edit: function(){
-      this.$router.push({ name: 'edit', params: { uid: this.tech.uid } });
+      this.$router.push({ name: 'edit', params: {name: this.tech.name}});
     },
     loadData() {
       this.loading = true
