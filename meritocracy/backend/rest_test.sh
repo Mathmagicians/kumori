@@ -3,7 +3,7 @@
 declare TOKEN="${1}"
 declare AUTH="Authorization: Bearer ${TOKEN}"
 declare CONTENT="Content-Type: application/json"
-declare HOST='http://localhost:3000'
+declare HOST="${2}"
 
 function print_test () {
     local yellow nc
