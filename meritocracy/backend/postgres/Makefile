@@ -39,4 +39,4 @@ shell:
 	@docker run --rm --name meritocracy_db_shell -it ${IMAGE} /bin/bash
 
 run:
-	@docker run --rm --name meritocracy_db_run -it ${IMAGE}
+	@docker run --env-file .env --rm --name meritocracy_db_run -it ${IMAGE}

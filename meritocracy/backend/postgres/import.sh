@@ -110,22 +110,44 @@ function links () {
 
 # Convert scopes to usecases
 function convert_scopes () {
-  while read -r scopes; do
-    local component description scope status name status_id scope_id
+  local component description scope status name status_id scope_id status_1 status_2 status_3 scope_1 scope_2 scope_3
+
+  status_1="$(echo "${2}" | base64 -d | jq -r '.scopes[0].status')"
+  status_2="$(echo "${2}" | base64 -d | jq -r '.scopes[1].status')"
+  status_3="$(echo "${2}" | base64 -d | jq -r '.scopes[2].status')"
+
+  scope_1="$(echo "${2}" | base64 -d | jq -r '.scopes[0].org')"
+  scope_2="$(echo "${2}" | base64 -d | jq -r '.scopes[1].org')"
+  scope_3="$(echo "${2}" | base64 -d | jq -r '.scopes[2].org')"
+
+  function _add_usecase () {
     component="${1}"
-    description="Converted scope"
-    scope="$(echo "${scopes}" | base64 -d| jq -r '.org')"
-    status="$(echo "${scopes}" | base64 -d| jq -r '.status')"
-    name="Allowed for ${scope}"
-    status_id=${STATUS_LOOKUP["${status}"]}
-    scope_id=${SCOPE_LOOKUP["${scope}"]}
+    description="${2}"
+    name="${3}"
+    status_id="${4}"
+    scope_id="${5}"
 
-    if [ "${description}" != 'Any' ]; then
-      _commit "INSERT INTO ${DB_SCHEMA}.usecases (component, name, description, scope, status, deleted) VALUES (\$tag\$${component}\$tag\$,\$tag\$${name}\$tag\$,\$tag\$${description}\$tag\$,\$tag\$${scope_id}\$tag\$,\$tag\$${status_id}\$tag\$,false);"
-      print_message_component "Added Usecase" "${name}"
+    _commit "INSERT INTO ${DB_SCHEMA}.usecases (component, name, description, scope, status, deleted) VALUES (\$tag\$${component}\$tag\$,\$tag\$${name}\$tag\$,\$tag\$${description}\$tag\$,\$tag\$${scope_id}\$tag\$,\$tag\$${status_id}\$tag\$,false);"
+    print_message_component "Added Usecase" "${name}"
+  }
+
+  if [ "${status_1}" = "${status_2}" ] && [ "${status_2}" = "${status_3}" ]
+  then
+    if [ "${status_3}" != "To be decided" ]
+    then
+      _add_usecase "${1}" "Converted scope" "Allowed for All" "${STATUS_LOOKUP["${status_1}"]}" "${SCOPE_LOOKUP["${scope_1}"]}"
     fi
-
-  done <<< "$(echo "${2}" | base64 -d | jq -r '.scopes[] | @base64')"
+  else
+    if [ "${status_1}" != "To be decided" ]; then
+      _add_usecase "${1}" "Converted scope" "${status_1} for ${scope_1}" "${STATUS_LOOKUP["${status_1}"]}" "${SCOPE_LOOKUP["${scope_1}"]}"
+    fi
+    if [ "${status_2}" != "To be decided" ]; then
+      _add_usecase "${1}" "Converted scope" "${status_2} for ${scope_2}" "${STATUS_LOOKUP["${status_2}"]}" "${SCOPE_LOOKUP["${scope_2}"]}"
+    fi
+    if [ "${status_3}" != "To be decided" ]; then
+      _add_usecase "${1}" "Converted scope" "${status_3} for ${scope_3}" "${STATUS_LOOKUP["${status_3}"]}" "${SCOPE_LOOKUP["${scope_3}"]}"
+    fi
+  fi
 }
 
 # Insert a usecase
