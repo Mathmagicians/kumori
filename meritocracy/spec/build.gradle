@@ -1,0 +1,73 @@
+defaultTasks 'clean','test','aggregate'
+
+repositories {
+    mavenLocal()
+    jcenter()
+}
+
+buildscript {
+    repositories {
+        mavenLocal()
+        jcenter()
+    }
+    dependencies {
+        classpath("net.serenity-bdd:serenity-gradle-plugin:2.0.8")
+    }
+}
+
+project.ext{
+    slf4jVersion = '1.7.7'
+    serenityCoreVersion = '2.0.7'
+    serenityCucumberVersion = '1.9.19'
+    junitVersion='4.12'
+    assertJVersion='3.8.0'
+    logbackVersion='1.2.3'
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'net.serenity-bdd.aggregator'
+
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+project.ext{
+    slf4jVersion = '1.7.7'
+    serenityCoreVersion = '2.0.7'
+    serenityCucumberVersion = '1.9.19'
+    junitVersion='4.12'
+    assertJVersion='3.8.0'
+    logbackVersion='1.2.3'
+}
+
+dependencies {
+    compile "org.slf4j:slf4j-api:$slf4jVersion"
+    compile "ch.qos.logback:logback-classic:${logbackVersion}"
+
+	testCompile "net.serenity-bdd:serenity-core:${serenityCoreVersion}"
+	testCompile "net.serenity-bdd:serenity-junit:${serenityCoreVersion}"
+	testCompile "net.serenity-bdd:serenity-rest-assured:${serenityCoreVersion}"
+	testCompile "net.serenity-bdd:serenity-screenplay-rest:${serenityCoreVersion}"
+	testCompile "net.serenity-bdd:serenity-screenplay:${serenityCoreVersion}"
+	testCompile "net.serenity-bdd:serenity-screenplay-webdriver:${serenityCoreVersion}"
+	testCompile "net.serenity-bdd:serenity-cucumber:${serenityCucumberVersion}"
+	testCompile "junit:junit:${junitVersion}"
+	testCompile "org.assertj:assertj-core:${assertJVersion}"
+}
+
+test {
+    testLogging.showStandardStreams = true
+    systemProperties System.getProperties()
+}
+
+gradle.startParameter.continueOnFailure = true
+test.finalizedBy(aggregate)
+
+task showResults(type:Exec) {
+	group 'verification'
+	description 'Shows Serenity test results in the browser'
+	commandLine 'open', buildDir.path + "/site/serenity/index.html"
+}
+
+
