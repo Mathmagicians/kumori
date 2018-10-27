@@ -14,7 +14,7 @@ class tells JUnit to kick off Cucumber.
 
 ## Viewing the reports
 
-Both of the commands provided above will produce a Serenity test report in the `target/site/serenity` directory. Type:
+Both of the commands provided above will produce a Serenity test report in the `build/site/serenity` directory. Type:
 
     ./gradlew showResults
 
