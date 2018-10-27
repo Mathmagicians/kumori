@@ -2,6 +2,7 @@ import axios from 'axios'
 
 	const BASE_URL="http://0.0.0.0:3000/"
   const COMPONENTS_READ ="w_components"
+  const COMPONENT_EDIT="components"
   const TAXONOMY_READ="w_taxonomy"
   const USECASES_READ = "w_usecases"
 
@@ -47,9 +48,11 @@ export default {
   configForResponseOnChange(){
     const conf = {
       headers: {
-        'Prefer': 'return=representation'
+        'Prefer': 'return=representation',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
       }
     }
+    console.log(conf)
     return conf
   },
   constructResponseAsPage(response){
@@ -85,13 +88,9 @@ export default {
         return Number(total)
       })
   },
-<<<<<<< HEAD
-  
-=======
    fetchUsecases () {
      return this.getData(this.urlBuilder(USECASES_READ, {select: 'id, status, component, description'}))
   },
->>>>>>> usecases-view
   fetchMeritocracy () {
   	return this.notImplemented("fetchMeritocracy")
   },
@@ -108,10 +107,15 @@ export default {
   },
   
   editTechComponent(techComponent){
-      return this.postData(this.urlBuilder(COMPONENTS_READ), techComponent, configForResponseOnChange())
+      const t = {uid: techComponent.id, name: techComponent.name, status: techComponent.status}
+      return this.postData(this.urlBuilder(COMPONENT_EDIT), t, this.configForResponseOnChange())
   },
   createTechComponent(techComponent){
     return this.notImplemented("createTechComponent")
+  },
+  login(creds){
+    console.log("Todo, not implemented ... cheating with token")
+    return new Promise( (resolve) => resolve('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiZWRpdG9yIn0.tYUlheVyisdr0ezFYf92mC_dvSS02cpDvPBu9aKLySk') )
   },
 
   notImplemented(name){
