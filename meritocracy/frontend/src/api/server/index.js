@@ -86,12 +86,9 @@ export default {
         return Number(total)
       })
   },
-<<<<<<< 8961918f92267b1399001d850c0de72427696f72
-=======
    fetchUsecases () {
      return this.getData(this.urlBuilder(USECASES_READ, {select: 'id, status, component, description'}))
   },
->>>>>>> Mock data for usecase
   fetchMeritocracy () {
   	return this.notImplemented("fetchMeritocracy")
   },
@@ -106,18 +103,8 @@ export default {
         this.urlBuilder(TAXONOMY_READ), 
         this.configForSingleObject())
   },
-<<<<<<< 8961918f92267b1399001d850c0de72427696f72
-  fetchUsecases () {
-    return this.getData('w_usecases')
-  },
-
-  editTechComponent(techComponent){
-      return this.postData(this.urlBuilder(COMPONENTS_READ), techComponent, configForResponseOnChange())
-=======
-  
   editTechComponent( techComponent ){
       return this.notImplemented("editTechComponent")
->>>>>>> Mock data for usecase
   },
   createTechComponent(techComponent){
     return this.notImplemented("createTechComponent")
