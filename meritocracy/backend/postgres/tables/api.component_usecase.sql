@@ -6,7 +6,8 @@ CREATE TABLE api.component_usecase (
     CONSTRAINT usecases FOREIGN KEY (usecase) REFERENCES api.usecases (id)
         MATCH SIMPLE ON UPDATE NO ACTION ON DELETE NO ACTION,
     CONSTRAINT components FOREIGN KEY (component) REFERENCES api.components (id)
-        MATCH SIMPLE ON UPDATE NO ACTION ON DELETE NO ACTION
+        MATCH SIMPLE ON UPDATE NO ACTION ON DELETE NO ACTION,
+    PRIMARY KEY (component,usecase)
 );
 
 GRANT SELECT ON api.component_usecase TO web_anon;

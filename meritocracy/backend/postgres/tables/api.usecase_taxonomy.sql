@@ -6,7 +6,8 @@ CREATE TABLE api.usecase_taxonomy (
     CONSTRAINT taxonomy FOREIGN KEY (taxonomy) REFERENCES api.taxonomy (id)
         MATCH SIMPLE ON UPDATE NO ACTION ON DELETE NO ACTION,
     CONSTRAINT usecases FOREIGN KEY (usecase) REFERENCES api.usecases (id)
-        MATCH SIMPLE ON UPDATE NO ACTION ON DELETE NO ACTION
+        MATCH SIMPLE ON UPDATE NO ACTION ON DELETE NO ACTION,
+    PRIMARY KEY (usecase,taxonomy)
 );
 
 GRANT SELECT ON api.usecase_taxonomy TO web_anon;
