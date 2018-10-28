@@ -15,11 +15,18 @@ SELECT
 	 ELSE (json_build_array()) END
 	) AS comments,
 	(
-	 CASE WHEN 0 < (SELECT COUNT(ct.component) FROM api.component_taxonomy AS ct WHERE ct.component = component.id)
-	 THEN (SELECT array_to_json(array_agg(tx.name))
-        FROM api.component_taxonomy AS ct
-        JOIN api.taxonomy AS tx ON ct.taxonomy = tx.id
-        WHERE ct.component = component.id)
+	 CASE WHEN 0 < (SELECT COUNT(usec.component)
+                  FROM api.usecase_taxonomy AS usetax
+                  LEFT JOIN api.usecases AS usec ON usetax.usecase = usec.id LEFT JOIN api.taxonomy AS tax ON usetax.taxonomy = tax.id WHERE usec.component = component.id)
+	 THEN (SELECT array_to_json(array_agg(tax.name))
+         FROM api.usecase_taxonomy AS usetax
+         LEFT JOIN api.usecases AS usec ON usetax.usecase = usec.id
+         LEFT JOIN api.taxonomy AS tax ON usetax.taxonomy = tax.id
+         WHERE usec.component = component.id
+         AND usetax.usecase = (SELECT MIN(usetax.usecase)
+         FROM api.usecase_taxonomy AS usetax
+         LEFT JOIN api.usecases AS usec ON usetax.usecase = usec.id
+         LEFT JOIN api.taxonomy AS tax ON usetax.taxonomy = tax.id WHERE usec.component = component.id))
 	 ELSE (json_build_array()) END
 	) AS tags,
     json_build_array() AS licenses,
@@ -46,6 +53,7 @@ SELECT
 FROM
     api.components AS component
 JOIN api.statuses status ON component.status = status.id;
+
 
 GRANT SELECT ON TABLE api.w_components TO web_anon;
 GRANT SELECT ON TABLE api.w_components TO editor;
