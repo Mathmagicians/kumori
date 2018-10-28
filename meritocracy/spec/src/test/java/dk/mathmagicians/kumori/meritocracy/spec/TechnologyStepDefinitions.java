@@ -19,6 +19,7 @@ public class TechnologyStepDefinitions {
 	private EnvironmentVariables environmentVariables; 
 	private Actor jesper; 
 	private String apiUrl;
+	private String jwt_token;
 	
 	@Before
 	public void configureUrls() {
@@ -36,8 +37,8 @@ public class TechnologyStepDefinitions {
 
 	    @Given("^I have a valid security token$")
 	    public void i_have_a_valid_security_token() {
-	        // Write code here that turns the phrase above into concrete actions
-	        throw new PendingException();
+	    	//fixme should use login instead when available
+	        jwt_token = environmentVariables.getProperty("jwt_token"); 
 	    }
 
 	    @Given("^I edit technology with name \"([^\"]*)\"$")
@@ -58,10 +59,15 @@ public class TechnologyStepDefinitions {
 	        throw new PendingException();
 	    }
 
-	    @Then("^the API return a technology record with the name \"([^\"]*)\"$")
-	    public void the_API_for_technology_returns_a_record_with_name(String arg1) {
+	    @When("^I navigate to edit page for a technology with name \"([^\"]*)\"$")
+	    public void i_navigate_to_edit_page_for_a_technology_with_name(String arg1) {
 	        // Write code here that turns the phrase above into concrete actions
 	        throw new PendingException();
 	    }
 
+	    @Then("^the API returns a technology record with the name \"([^\"]*)\"$")
+	    public void the_API_returns_a_technology_record_with_the_name(String arg1) {
+	        // Write code here that turns the phrase above into concrete actions
+	        throw new PendingException();
+	    }
 }
