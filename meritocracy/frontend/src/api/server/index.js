@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-	//const BASE_URL="http://127.0.0.1:3000/"
-	const BASE_URL="api/"
+	const BASE_URL="http://127.0.0.1:3000/"
+	//const BASE_URL="api/"
   const COMPONENTS_READ ="w_components"
   const COMPONENT_EDIT="components"
   const TAXONOMY_READ="w_taxonomy"
@@ -15,9 +15,13 @@ export default {
       .then(responseBehavior)
       .catch((error) => this.onError(error))
   },
-  postData(url, toPost){
+  patchData(url, toPost, config={}){
+    console.log(`url, config, posting`)
+    console.log(url)
+    console.log(config)
+    console.log(toPost)
     return axios
-      .post( url, toPost)
+      .patch( url, toPost, config)
       .then( (response) => {console.log(response.data); return response.data})
       .catch( (error) => this.onError(error))
   },
@@ -49,7 +53,6 @@ export default {
   configForResponseOnChange(){
     const conf = {
       headers: {
-
         'Prefer': 'return=representation',
         'Authorization': `Bearer ${localStorage.getItem('token')}`
       }
@@ -67,7 +70,7 @@ export default {
   //TODO move search serverside, then we will not have to fetch the full component list anymore
   //currently we are getting in the headers only with information necessary to search
   fetchTechComponents() {
-    return this.getData(this.urlBuilder(COMPONENTS_READ, {select: 'uid,name,status,tags'}))
+    return this.getData(this.urlBuilder(COMPONENTS_READ, {select: 'uid,name,status,tags', order: 'name.asc'}))
   },
   fetchTechComponentsHeadersPage(from=0, to=10){
     return this.getData(
@@ -85,13 +88,12 @@ export default {
       this.urlBuilder(COMPONENTS_READ, {select: 'name'}),
       this.configForRange(0,0),
       (response) => {
-        console.log(`We are interested in ${response.headers['content-range']} `)
         const [current,total] = response.headers['content-range'].split('/')  
         return Number(total)
       })
   },
    fetchUsecases () {
-     return this.getData(this.urlBuilder(USECASES_READ, {select: 'id, status, component, description'}))
+     return this.getData(this.urlBuilder(USECASES_READ, {select: 'id, status, component, description', order: 'id.asc'}))
   },
   fetchMeritocracy () {
   	return this.notImplemented("fetchMeritocracy")
@@ -101,12 +103,12 @@ export default {
   },
   fetchTaxonomy () {
     return this.getData(
-        this.urlBuilder(TAXONOMY_READ), 
+        this.urlBuilder(TAXONOMY_READ, {order: 'name.asc'}), 
         this.configForSingleObject())
   },
   editTechComponent(techComponent){
-      const t = {uid: techComponent.id, name: techComponent.name, status: techComponent.status}
-      return this.postData(this.urlBuilder(COMPONENT_EDIT), t, this.configForResponseOnChange())
+      const t = {name: techComponent.name}
+      return this.patchData(this.urlBuilder(COMPONENT_EDIT, {id:`eq.${techComponent.uid}`}), t, this.configForResponseOnChange())
   },
   createTechComponent(techComponent){
     return this.notImplemented("createTechComponent")

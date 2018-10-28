@@ -54,7 +54,7 @@
                 technologies.
             </p>
           </b-alert>
-          <list-with-pagination 
+         <list-with-pagination 
             ref="pagination"
             :list-size="25" 
             v-bind:list-total="filteredTechComponents.length"
@@ -63,7 +63,6 @@
             <tech-component
               slot-scope="props"
               v-if="props.isOn"
-              :num="props.num"
               :tech="filteredTechComponents[props.listSeq]"
               v-bind:active="filteredTechComponents[props.listSeq].uid === activeId">
             </tech-component>
@@ -83,8 +82,8 @@
   export default {
   	name: 'techComponentsList',
     beforeRouteUpdate (to, from, next) {
-      this.activeId = this.findIdFromName(to.params.name);
-      console.log(`active id ${this.activeId}, prop ${this.name}, param ${to.params.name}`)
+      this.activeId = this.findUidFromName(to.params.name);
+      console.log(`before update: activeId ${this.activeId}, last name passed from params ${this.name}, next name: ${to.params.name}`)
       next();
     },
     data () {
@@ -107,8 +106,8 @@
       }
     },
     watch: {
-      uid: function (newVal, oldVal) {
-        this.activeId = newVal
+      name: function (newName, oldName) {
+        this.activeId = this.findUidFromName(newName)
       }
     },
     mixins: [
@@ -155,7 +154,7 @@
   		this.$store.dispatch('fetchTechComponents')
     			.then(techComponents => { 
             this.loading.tech = false
-             this.activeId = this.findIdFromName(this.name)
+             this.activeId = this.findUidFromName(this.name)
            })
       this.$store.dispatch('fetchTechSize')
         .then( size => { 
@@ -169,7 +168,7 @@
       }
     },
     methods: {
-      findIdFromName(name){
+      findUidFromName(name){
         const item = this.techComponents.find( t => t.name === name)
         return item ? item.uid : undefined
       },

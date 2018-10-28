@@ -36,12 +36,12 @@
 	      </b-button-group>
 		 </b-button-toolbar>
 		 <div v-for="i in listSize">
-		    <slot 
+		 	 <slot 
 		    	:num="i" 
 		    	:listSeq="index2ListOrdinal(i)" 
 		    	:id="i"
 		    	:isOn="isOnPage(i)">
-		      	{{i}}: waiting for slot
+		      	{{i}}: waiting for slot content to be substituted. 
 		    </slot>
 		</div>
 	</div>
