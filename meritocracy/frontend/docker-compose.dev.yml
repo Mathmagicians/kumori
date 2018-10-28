@@ -1,4 +1,4 @@
-version: '3.5'
+version: '2.0'
 services:
   devserver:
     container_name: meritocracy_${MERITOCRACY_VERSION}-devserver
@@ -10,8 +10,7 @@ services:
     volumes:
       - "./:/tmp"
     networks:
-      - meritocracy-frontend
-      - meritocracy-backend
+      - meritocracy
 
   postgrest:
     container_name: meritocracy_${MERITOCRACY_VERSION}-postgrest
@@ -26,14 +25,11 @@ services:
     depends_on:
       - postgres
     networks:
-      - meritocracy-frontend
-      - meritocracy-backend
+      - meritocracy
 
   postgres:
     container_name: meritocracy_${MERITOCRACY_VERSION}-postgres
     image: mathmagicians/meritocracy_db:latest
-    ports:
-      - "5432:5432"
     environment:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       DB_SCHEMA: ${POSTGREST_CONNECTION_SCHEMA}
@@ -43,7 +39,7 @@ services:
       TAXONOMY: ${TAXONOMY}
       COMPONENTS: ${COMPONENTS}
     networks:
-      - meritocracy-backend
+      - meritocracy
 
   pgadmin:
     container_name: meritocracy_${MERITOCRACY_VERSION}-pgadmin
@@ -51,8 +47,7 @@ services:
     ports:
     - "5050:5050"
     networks:
-      - meritocracy-frontend
-      - meritocracy-backend
+      - meritocracy
     volumes:
     - data-pgadmin:/data
 
@@ -66,16 +61,11 @@ services:
     depends_on:
       - postgrest
     networks:
-      - meritocracy-frontend
+      - meritocracy
 
 volumes:
   data-pgadmin:
-    name: pgadmin
 
 networks:
-  meritocracy-frontend:
+  meritocracy:
     driver: bridge
-    name: meritocracy_${MERITOCRACY_VERSION}-frontend
-  meritocracy-backend:
-    driver: bridge
-    name: meritocracy_${MERITOCRACY_VERSION}-backend

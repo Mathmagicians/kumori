@@ -10,4 +10,4 @@ CREATE TABLE api.component_taxonomy (
 );
 
 GRANT SELECT ON api.component_taxonomy TO web_anon;
-GRANT ALL ON api.component_taxonomy to editor;
+GRANT SELECT, INSERT, UPDATE, DELETE ON api.component_taxonomy to editor;
