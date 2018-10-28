@@ -55,8 +55,6 @@ function components () {
     usecases "${current}" "${status_id}" "${scope_id}" "${component}"
     convert_scopes "${current}" "${component}"
     links "${current}" "${component}"
-    add_taxonomies "${current}" "${component}"
-    links "${current}" "${component}"
     current=$((current+1))
   done <<< "$(echo "${COMPONENTS_DATA}" | jq -r '.[] | @base64')"
 }
@@ -72,11 +70,11 @@ function comments () {
   fi
 }
 
-# Insert tags
+# Insert tags on usecases
 function add_taxonomies () {
   while read -r tag; do
-    local component_id tag_name taxonomy_id
-    component_id="${1}"
+    local usecase_id tag_name taxonomy_id
+    usecase_id="${1}"
     tag_name="$(echo "${tag}" | base64 -d)"
 
     if [ "${tag_name}" != '' ]; then
@@ -84,10 +82,10 @@ function add_taxonomies () {
     fi
 
     if [ "${taxonomy_id}" != '' ]; then
-      _commit "INSERT INTO ${DB_SCHEMA}.component_taxonomy (component, taxonomy) VALUES (\$tag\$${component_id}\$tag\$,\$tag\$${taxonomy_id}\$tag\$);"
-      print_message_component "Added Tag" "${tag_name}"
+      _commit "INSERT INTO ${DB_SCHEMA}.usecase_taxonomy (usecase, taxonomy) VALUES (\$tag\$${usecase_id}\$tag\$,\$tag\$${taxonomy_id}\$tag\$);"
+      print_message_component "Added Taxonomy to Usecase" "${tag_name}"
     fi
-  done <<< "$(echo "${component}" | base64 -d | jq -r '.tags[] | @base64')"
+  done <<< "$(echo "${2}" | base64 -d | jq -r '.tags[] | @base64')"
 }
 
 # Insert links
@@ -120,52 +118,59 @@ function convert_scopes () {
   scope_2="$(echo "${2}" | base64 -d | jq -r '.scopes[1].org')"
   scope_3="$(echo "${2}" | base64 -d | jq -r '.scopes[2].org')"
 
-  function _add_usecase () {
-    component="${1}"
-    description="${2}"
-    name="${3}"
-    status_id="${4}"
-    scope_id="${5}"
-
-    _commit "INSERT INTO ${DB_SCHEMA}.usecases (component, name, description, scope, status, deleted) VALUES (\$tag\$${component}\$tag\$,\$tag\$${name}\$tag\$,\$tag\$${description}\$tag\$,\$tag\$${scope_id}\$tag\$,\$tag\$${status_id}\$tag\$,false);"
-    print_message_component "Added Usecase" "${name}"
-  }
-
   if [ "${status_1}" = "${status_2}" ] && [ "${status_2}" = "${status_3}" ]
   then
     if [ "${status_3}" != "To be decided" ]
     then
-      _add_usecase "${1}" "Converted scope" "Allowed for All" "${STATUS_LOOKUP["${status_1}"]}" "${SCOPE_LOOKUP["${scope_1}"]}"
+       add_usecase "${1}" "Converted scope" "Allowed for All"  "${SCOPE_LOOKUP["${scope_1}"]}" "${STATUS_LOOKUP["${status_1}"]}" "${2}"
     fi
   else
     if [ "${status_1}" != "To be decided" ]; then
-      _add_usecase "${1}" "Converted scope" "${status_1} for ${scope_1}" "${STATUS_LOOKUP["${status_1}"]}" "${SCOPE_LOOKUP["${scope_1}"]}"
+      add_usecase "${1}" "Converted scope" "${status_1} for ${scope_1}" "${SCOPE_LOOKUP["${scope_1}"]}" "${STATUS_LOOKUP["${status_1}"]}" "${2}"
     fi
     if [ "${status_2}" != "To be decided" ]; then
-      _add_usecase "${1}" "Converted scope" "${status_2} for ${scope_2}" "${STATUS_LOOKUP["${status_2}"]}" "${SCOPE_LOOKUP["${scope_2}"]}"
+      add_usecase "${1}" "Converted scope" "${status_2} for ${scope_2}" "${SCOPE_LOOKUP["${scope_1}"]}" "${STATUS_LOOKUP["${status_1}"]}" "${2}"
     fi
     if [ "${status_3}" != "To be decided" ]; then
-      _add_usecase "${1}" "Converted scope" "${status_3} for ${scope_3}" "${STATUS_LOOKUP["${status_3}"]}" "${SCOPE_LOOKUP["${scope_3}"]}"
+      add_usecase "${1}" "Converted scope" "${status_3} for ${scope_3}" "${SCOPE_LOOKUP["${scope_1}"]}" "${STATUS_LOOKUP["${status_1}"]}" "${2}"
     fi
   fi
 }
 
-# Insert a usecase
+# Insert usecases for a component
 function usecases () {
+  local current
   while read -r usecase; do
     local component name description scope status
-    component="${1}"
+    component_id="${1}"
     name="Missing name for usecase"
     description="$(echo "${usecase}" | base64 -d)"
     scope="${3}"
     status="${2}"
 
     if [ "${description}" != 'Any' ]; then
-      _commit "INSERT INTO ${DB_SCHEMA}.usecases (component, name, description, scope, status, deleted) VALUES (\$tag\$${component}\$tag\$,\$tag\$${name}\$tag\$,\$tag\$${description}\$tag\$,\$tag\$${scope}\$tag\$,\$tag\$${status}\$tag\$,false);"
-      print_message_component "Added Usecase" "${name}"
+      add_usecase "${component_id}" "${name}" "${description}" "${scope}" "${status}" "${4}"
     fi
 
   done <<< "$(echo "${4}" | base64 -d | jq -r '.usecases[] | @base64')"
+}
+
+# Insert a usecase
+function add_usecase () {
+  local component_id name description scope_id status component current
+
+  component_id="${1}"
+  name="${2}"
+  description="${3}"
+  scope_id="${4}"
+  status_id="${5}"
+  component="${6}"
+
+  _commit "INSERT INTO ${DB_SCHEMA}.usecases (component, name, description, scope, status, deleted) VALUES (\$tag\$${component_id}\$tag\$,\$tag\$${name}\$tag\$,\$tag\$${description}\$tag\$,\$tag\$${scope_id}\$tag\$,\$tag\$${status_id}\$tag\$,false);"
+  print_message_component "Added Usecase" "${name}"
+
+  current="$(_commit "SELECT id FROM ${DB_SCHEMA}.usecases ORDER BY id DESC LIMIT 1;" | xargs)"
+  add_taxonomies "${current}" "${component}"
 }
 
 # Create scopes
