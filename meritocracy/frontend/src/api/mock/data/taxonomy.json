@@ -1,14 +1,38 @@
 {
     "name": "TBM Service Taxonomy",
     "statuses" : [
-      "To be decided",
-      "Experiment",
-      "Testing",
-      "POC",
-      "Default",
-      "Limited",
-      "Deprecated",
-      "Do not use"
+      {
+        "name": "To be decided",
+        "phase": "Buy"
+      },
+      {
+        "name": "Experiment",
+        "phase": "Buy"
+      },
+      {
+        "name": "Testing",
+        "phase": "Buy"
+      },
+      {
+        "name": "POC",
+        "phase": "Buy"
+      },
+      {
+        "name": "Default",
+        "phase": "Buy"
+      },
+      {
+        "name": "Limited",
+        "phase": "Buy"
+      },
+      {
+        "name": "Deprecated",
+        "phase": "Buy"
+      },
+      {
+        "name": "Do not use",
+        "phase": "Buy"
+      }
     ],
     "levels": [
       {
@@ -233,6 +257,11 @@
         "name": "Deployment",
         "parent": "Design and Development"
       },
+       {
+        "level": 5,
+        "name": "Continuos Delivery",
+        "parent": "Deployment"
+      },
       {
         "level": 4,
         "name": "Developer communication",
@@ -352,6 +381,20 @@
         "level": 3,
         "name": "Security",
         "parent": "Security and Compliance"
+      },
+      {
+        "level": 4,
+        "name": "Storage of secrets",
+        "parent": "Security"
+      },
+      {
+        "level": 5,
+        "name": "Storage of machine secrets",
+        "parent": "Storage of secrets"
+      },{
+        "level": 5,
+        "name": "Storage of human secrets",
+        "parent": "Storage of secrets"
       },
       {
         "level": 3,
