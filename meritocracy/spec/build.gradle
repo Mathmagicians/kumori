@@ -64,6 +64,8 @@ test {
 gradle.startParameter.continueOnFailure = true
 test.finalizedBy(aggregate)
 
+clean.dependsOn clearReports
+
 task showResults(type:Exec) {
 	group 'verification'
 	description 'Shows Serenity test results in the browser'
