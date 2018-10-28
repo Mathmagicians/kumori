@@ -1,14 +1,38 @@
 {
     "name": "TBM Service Taxonomy",
     "statuses" : [
-      "To be decided",
-      "Experiment",
-      "Testing",
-      "POC",
-      "Default",
-      "Limited",
-      "Deprecated",
-      "Do not use"
+      {
+        "name": "To be decided",
+        "phase": "Buy"
+      },
+      {
+        "name": "Experiment",
+        "phase": "Buy"
+      },
+      {
+        "name": "Testing",
+        "phase": "Buy"
+      },
+      {
+        "name": "POC",
+        "phase": "Buy"
+      },
+      {
+        "name": "Default",
+        "phase": "Buy"
+      },
+      {
+        "name": "Limited",
+        "phase": "Buy"
+      },
+      {
+        "name": "Deprecated",
+        "phase": "Buy"
+      },
+      {
+        "name": "Do not use",
+        "phase": "Buy"
+      }
     ],
     "levels": [
       {
