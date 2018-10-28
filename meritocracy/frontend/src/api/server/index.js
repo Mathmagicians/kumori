@@ -107,7 +107,7 @@ export default {
         this.configForSingleObject())
   },
   editTechComponent(techComponent){
-      const t = {name: techComponent.name}
+      const t = {name: techComponent.name, description: techComponent.description}
       return this.patchData(this.urlBuilder(COMPONENT_EDIT, {id:`eq.${techComponent.uid}`}), t, this.configForResponseOnChange())
   },
   createTechComponent(techComponent){
