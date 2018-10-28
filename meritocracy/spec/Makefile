@@ -1,5 +1,5 @@
 VERSION=latest
-IMAGE="mathmagicians/meritocracy_integration:${VERSION}"
+IMAGE="mathmagicians/meritocracy_spec:${VERSION}"
 
 .PHONY: login logout build push pull run console
 
@@ -19,7 +19,7 @@ pull:
 	@docker pull ${IMAGE}
 
 shell:
-	@docker run --rm --name meritocracy_int_shell -it ${IMAGE} /bin/bash
+	@docker run --rm --name meritocracy_int_shell -it ${IMAGE} /bin/sh
 
 run:
-	@docker run --env-file .env --rm --name meritocracy_int_run -it ${IMAGE}
+	@docker run --rm --name meritocracy_int_run ${IMAGE}
