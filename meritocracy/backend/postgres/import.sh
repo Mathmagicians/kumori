@@ -187,13 +187,11 @@ function scopes () {
 
 # Create statuses
 function statuses () {
-  local current=1
+  local current=1  
   while read -r status; do
     local name 
     name="$(echo "${status}" | base64 -d | jq -r -c '.name')"
     phase="$(echo "${status}" | base64 -d | jq -r -c '.phase')"
-    echo "statuses>>>${name} ${phase}"
-    
     _commit "INSERT INTO ${DB_SCHEMA}.statuses (name, phase) VALUES (\$tag\$${name}\$tag\$, \$tag\$${phase}\$tag\$);"
     print_message "Added Status" "${name}"
     STATUS_LOOKUP["${name}"]="${current}"
