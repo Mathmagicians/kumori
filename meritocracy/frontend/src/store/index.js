@@ -178,10 +178,11 @@ export function createStore () {
           .then( usecases => commit( 'setUsecases', usecases))
       },
       login({ commit }, creds) {
-        commit(LOGIN); // show spinner
+        commit(LOGIN) // show spinner
         return client
           .login(creds)
           .then( token =>  {
+            console.log("storing token")
             localStorage.setItem("token", token)
             console.log(token)
             commit(LOGIN_SUCCESS)

@@ -66,7 +66,7 @@
 			login() {
 				this.logging = true;
 				this.$store
-					.dispatch("login", {email: this.email, password: this.password})
+					.dispatch("login", {username: this.username, password: this.password})
 					.then(() => {
 						this.logging=false
 						this.$router.go(-1)

@@ -50,7 +50,7 @@ export default new Router({
       props: true
     }, 
      {
-      path: '/components/:name/edit',
+      path: '/components/:uid/edit',
       name: 'edit',
       component: TechComponentEditor,
       props: true

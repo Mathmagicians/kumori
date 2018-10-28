@@ -3,6 +3,7 @@ import axios from 'axios'
 	//const BASE_URL="http://127.0.0.1:3000/"
 	const BASE_URL="api/"
   const COMPONENTS_READ ="w_components"
+  const COMPONENT_EDIT="components"
   const TAXONOMY_READ="w_taxonomy"
   const USECASES_READ = "w_usecases"
 
@@ -48,9 +49,12 @@ export default {
   configForResponseOnChange(){
     const conf = {
       headers: {
-        'Prefer': 'return=representation'
+
+        'Prefer': 'return=representation',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
       }
     }
+    console.log(conf)
     return conf
   },
   constructResponseAsPage(response){
@@ -82,7 +86,7 @@ export default {
       this.configForRange(0,0),
       (response) => {
         console.log(`We are interested in ${response.headers['content-range']} `)
-        const [current,total] = response.headers['content-range'].split('/')
+        const [current,total] = response.headers['content-range'].split('/')  
         return Number(total)
       })
   },
@@ -92,31 +96,31 @@ export default {
   fetchMeritocracy () {
   	return this.notImplemented("fetchMeritocracy")
   },
-
   fetchServices () {
   	return this.notImplemented("fetchServices")
   },
-
-
   fetchTaxonomy () {
     return this.getData(
         this.urlBuilder(TAXONOMY_READ), 
         this.configForSingleObject())
   },
-  editTechComponent( techComponent ){
-      return this.notImplemented("editTechComponent")
+  editTechComponent(techComponent){
+      const t = {uid: techComponent.id, name: techComponent.name, status: techComponent.status}
+      return this.postData(this.urlBuilder(COMPONENT_EDIT), t, this.configForResponseOnChange())
   },
   createTechComponent(techComponent){
     return this.notImplemented("createTechComponent")
   },
-
+  login(creds){
+    console.log("Todo, not implemented ... cheating with token")
+    return new Promise( (resolve) => resolve('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiZWRpdG9yIn0.tYUlheVyisdr0ezFYf92mC_dvSS02cpDvPBu9aKLySk') )
+  },
   notImplemented(name){
     console.log(`Not implemented ${name} in the backend - returning empty data`)
     return new Promise((resolve) => {
       resolve([])
     })
   },
-
   onError( error ){
     console.log(`Application encountered an error when communicating with backend:\n${error.message}`)
     if (error.response) {
