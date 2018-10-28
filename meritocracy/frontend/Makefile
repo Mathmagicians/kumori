@@ -40,7 +40,7 @@ pull:
 	@docker pull ${IMAGE}
 
 shell:
-	@docker run --rm --name meritocracy_web_shell -it -p 80:80 ${IMAGE} /bin/sh
+	@docker run --rm --name meritocracy_web_shell -it -p 80:80 node /bin/sh
 
 run:
 	@docker run --rm --name meritocracy_web_run -p 80:80 -it ${IMAGE}

@@ -1,4 +1,4 @@
-version: '3.5'
+version: '2.0'
 services:
   web:
     container_name: meritocracy_${MERITOCRACY_VERSION}-web
@@ -6,8 +6,7 @@ services:
     ports:
       - "80:80"
     networks:
-      - meritocracy-frontend
-      - meritocracy-backend
+      - meritocracy
     restart: unless-stopped
 
   postgrest:
@@ -23,15 +22,11 @@ services:
     depends_on:
       - postgres
     networks:
-      - meritocracy-frontend
-      - meritocracy-backend
-    restart: unless-stopped
+      - meritocracy
 
   postgres:
     container_name: meritocracy_${MERITOCRACY_VERSION}-postgres
     image: mathmagicians/meritocracy_db:latest
-    ports:
-      - "5432:5432"
     environment:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       DB_SCHEMA: ${POSTGREST_CONNECTION_SCHEMA}
@@ -41,8 +36,7 @@ services:
       TAXONOMY: ${TAXONOMY}
       COMPONENTS: ${COMPONENTS}
     networks:
-      - meritocracy-backend
-    restart: unless-stopped
+      - meritocracy
 
   swagger:
     container_name: meritocracy_${MERITOCRACY_VERSION}-swagger
@@ -54,13 +48,8 @@ services:
     depends_on:
       - postgrest
     networks:
-      - meritocracy-frontend
-    restart: unless-stopped
+      - meritocracy
 
 networks:
-  meritocracy-frontend:
+  meritocracy:
     driver: bridge
-    name: meritocracy_${MERITOCRACY_VERSION}-frontend
-  meritocracy-backend:
-    driver: bridge
-    name: meritocracy_${MERITOCRACY_VERSION}-backend

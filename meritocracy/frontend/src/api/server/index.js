@@ -1,6 +1,7 @@
 import axios from 'axios'
 
-	const BASE_URL="http://0.0.0.0:3000/"
+	//const BASE_URL="http://127.0.0.1:3000/"
+	const BASE_URL="api/"
   const COMPONENTS_READ ="w_components"
 
 export default {
@@ -19,7 +20,7 @@ export default {
   },
   configForRange(from,to){
     let conf = {
-      headers: 
+      headers:
       {
         'Prefer': 'count=exact',
         'Range-Unit': 'w_components',
@@ -49,27 +50,27 @@ export default {
     return this.getData(this.urlBuilder(COMPONENTS_READ, {select: 'uid,name,status,tags'}))
   },
   fetchTechComponentsHeadersPage(from=0, to=10){
-    return this.getData( 
-      this.urlBuilder(COMPONENTS_READ, {select: 'name,status,tags'}), 
+    return this.getData(
+      this.urlBuilder(COMPONENTS_READ, {select: 'name,status,tags'}),
       this.configForRange(from, to),
       this.constructResponseAsPage)
   },
   fetchTechComponentDetails(id) {
-    return this.getData( 
-      this.urlBuilder(COMPONENTS_READ, {uid:`eq.${id}`}), 
+    return this.getData(
+      this.urlBuilder(COMPONENTS_READ, {uid:`eq.${id}`}),
       this.configForSingleObject())
   },
   fetchTechComponentsSize() {
     return this.getData(
-      this.urlBuilder(COMPONENTS_READ, {select: 'name'}), 
+      this.urlBuilder(COMPONENTS_READ, {select: 'name'}),
       this.configForRange(0,0),
-      (response) => { 
+      (response) => {
         console.log(`We are interested in ${response.headers['content-range']} `)
         const [current,total] = response.headers['content-range'].split('/')
         return Number(total)
       })
   },
-  
+
 
   getHeaders: function(from=0, to=10) {
         // Prefer: count=exact
@@ -119,7 +120,7 @@ export default {
   fetchUsecases () {
     return this.getData('w_usecases')
   },
-  
+
   editTechComponent( techComponent ){
       return this.notImplemented("editTechComponent")
   },
@@ -132,7 +133,7 @@ export default {
     return new Promise((resolve) => {
       resolve([])
     })
-  }, 
+  },
 
   onError( error ){
     console.log(`Application encountered an error when communicating with backend:\n${error.message}`)
