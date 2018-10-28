@@ -271,7 +271,7 @@ export default {
       this.$router.push({name: 'component', params: {name: this.tech.name}})
     },
     edit: function(){
-      this.$router.push({ name: 'edit', params: {name: this.tech.name}});
+      this.$router.push({ name: 'edit', params: {uid: this.tech.uid}});
     },
     loadData() {
       this.loading = true

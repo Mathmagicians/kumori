@@ -80,6 +80,13 @@
 								</b-form-textarea>
 							</b-form-group>
 						</b-list-group-item>
+					</b-list-group>
+					<b-button type="submit" variant="success">Save</b-button>
+					<b-button type="reset" variant="outline-secondary">Cancel</b-button>
+				</b-form>
+				<!-- Second form - not ready for updating yet -->
+				<b-form>
+					<b-list-group>
 						<b-list-group-item>
 							<h4>Classify the use case in the TBM Taxonomy</h4>
 							<b-form-row>
@@ -156,6 +163,13 @@
 							{{entry.date}}: {{entry.description}} 
 							<life-cycle :status="entry.status"/>
 						</b-list-group-item>
+						<b-list-group-item 
+							v-if="techModel.log"
+							v-for="entry in techModel.log">
+							<v-icon name="play"/>
+							{{entry.date}}: {{entry.description}} 
+							<life-cycle :status="entry.status"/>
+						</b-list-group-item>
 					</b-list-group>
 					<b-button type="submit" variant="success">Save</b-button>
 					<b-button type="reset" variant="outline-secondary">Cancel</b-button>
@@ -174,9 +188,9 @@ export default {
 	components: { LifeCycle },
 	mixins: [lifeCycleMixin],
 	props: {
-	    name: {
-	      type: String,
-	      default: ''
+	    uid: {
+	      type: Number,
+	      default: undefined
 	    }
 	},
 	data() {
@@ -234,7 +248,7 @@ export default {
 	},
 	methods: {
 		onSubmit() {
-			console.log("submitting ")
+			console.log("submitting core")
 			this.uid? this.$store.dispatch('editTechComponent', this.techModel): this.$store.dispatch('createTechComponent', this.techModel)
 			this.$router.go(-1)
 		},

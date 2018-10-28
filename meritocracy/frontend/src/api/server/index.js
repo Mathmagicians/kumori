@@ -1,8 +1,11 @@
 import axios from 'axios'
 
-	//const BASE_URL="http://127.0.0.1:3000/"
-	const BASE_URL="api/"
+	const BASE_URL="http://127.0.0.1:3000/"
+	//const BASE_URL="api/"
   const COMPONENTS_READ ="w_components"
+  const COMPONENT_EDIT="components"
+  const TAXONOMY_READ="w_taxonomy"
+  const USECASES_READ = "w_usecases"
 
 export default {
 
@@ -12,7 +15,17 @@ export default {
       .then(responseBehavior)
       .catch((error) => this.onError(error))
   },
-  urlBuilder(apiurl,params){
+  patchData(url, toPost, config={}){
+    console.log(`url, config, posting`)
+    console.log(url)
+    console.log(config)
+    console.log(toPost)
+    return axios
+      .patch( url, toPost, config)
+      .then( (response) => {console.log(response.data); return response.data})
+      .catch( (error) => this.onError(error))
+  },
+  urlBuilder(apiurl,params={}){
     return `${BASE_URL}${apiurl}${this.paramsToUrl(params)}`
   },
   paramsToUrl(params){
@@ -37,6 +50,16 @@ export default {
     }
     return conf
   },
+  configForResponseOnChange(){
+    const conf = {
+      headers: {
+        'Prefer': 'return=representation',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    }
+    console.log(conf)
+    return conf
+  },
   constructResponseAsPage(response){
     const [current,total] = response.headers['content-range'].split('/')
     const [to, from] = current.split('-')
@@ -47,7 +70,7 @@ export default {
   //TODO move search serverside, then we will not have to fetch the full component list anymore
   //currently we are getting in the headers only with information necessary to search
   fetchTechComponents() {
-    return this.getData(this.urlBuilder(COMPONENTS_READ, {select: 'uid,name,status,tags'}))
+    return this.getData(this.urlBuilder(COMPONENTS_READ, {select: 'uid,name,status,tags', order: 'name.asc'}))
   },
   fetchTechComponentsHeadersPage(from=0, to=10){
     return this.getData(
@@ -65,76 +88,41 @@ export default {
       this.urlBuilder(COMPONENTS_READ, {select: 'name'}),
       this.configForRange(0,0),
       (response) => {
-        console.log(`We are interested in ${response.headers['content-range']} `)
-        const [current,total] = response.headers['content-range'].split('/')
+        const [current,total] = response.headers['content-range'].split('/')  
         return Number(total)
       })
   },
-
-
-  getHeaders: function(from=0, to=10) {
-        // Prefer: count=exact
-        // Range-Unit: items
-        //Range: 0-10
-        let config = {headers: {
-          'Prefer': 'count=exact',
-          'Range-Unit': 'w_components',
-          'Range': `${from}-${to}`
-        }}
-
-        let headersResponse = {headers: [], total: 0}
-
-        this.$http.get('http://0.0.0.0:3000/w_components?select=name,status,tags', config)
-        .then(response => {
-          console.log(response)
-          console.log(`We are interested in ${response.headers.get('content-range')} `)
-          /*let range = response.headers.get('content-range')
-          let rs = range.split('/')
-          let total = rs[1]
-          this.page.total = Number(total)
-          let current = rs[0]
-          let page = { from: rs[0].split('-')[0], to:rs[0].split('-')[1]}
-          this.tech = response.body
-          this.page.loading = false */
-        }, response => {
-          return headersResponse
-        })},
-
+   fetchUsecases () {
+     return this.getData(this.urlBuilder(USECASES_READ, {select: 'id, status, component, description', order: 'id.asc'}))
+  },
   fetchMeritocracy () {
   	return this.notImplemented("fetchMeritocracy")
   },
-
   fetchServices () {
   	return this.notImplemented("fetchServices")
   },
-
-
   fetchTaxonomy () {
-    let config = {headers: {'Accept': 'application/vnd.pgrst.object+json'}}
-
-  	 return axios
-      .get(`${BASE_URL}w_taxonomy`, config)
-      .then(response => response.data)
-      .catch((error) => onError(error))
+    return this.getData(
+        this.urlBuilder(TAXONOMY_READ, {order: 'name.asc'}), 
+        this.configForSingleObject())
   },
-  fetchUsecases () {
-    return this.getData('w_usecases')
-  },
-
-  editTechComponent( techComponent ){
-      return this.notImplemented("editTechComponent")
+  editTechComponent(techComponent){
+      const t = {name: techComponent.name, description: techComponent.description}
+      return this.patchData(this.urlBuilder(COMPONENT_EDIT, {id:`eq.${techComponent.uid}`}), t, this.configForResponseOnChange())
   },
   createTechComponent(techComponent){
     return this.notImplemented("createTechComponent")
   },
-
+  login(creds){
+    console.log("Todo, not implemented ... cheating with token")
+    return new Promise( (resolve) => resolve('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiZWRpdG9yIn0.tYUlheVyisdr0ezFYf92mC_dvSS02cpDvPBu9aKLySk') )
+  },
   notImplemented(name){
     console.log(`Not implemented ${name} in the backend - returning empty data`)
     return new Promise((resolve) => {
       resolve([])
     })
   },
-
   onError( error ){
     console.log(`Application encountered an error when communicating with backend:\n${error.message}`)
     if (error.response) {
@@ -142,7 +130,7 @@ export default {
       console.log(error.response.data);
       console.log(error.response.status);
       console.log(error.response.headers);
-      this.$router.push({name: 'not-found', params: {code: error.response.status, asset: url}})
+      this.$router.push({name: 'error', params: {code: error.response.status, asset: url}})
     } else if (error.request) {
       console.log('>>> error in request >>>')
        console.log(error.request)

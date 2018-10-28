@@ -16,6 +16,8 @@ build:
 	@cat ./tables/api.links.sql >> schema.sql
 	@cat ./tables/api.usecases.sql >> schema.sql
 	@cat ./tables/api.component_taxonomy.sql >> schema.sql
+	@cat ./tables/api.usecase_taxonomy.sql >> schema.sql
+	@cat ./tables/api.component_usecase.sql >> schema.sql
 	@cat ./views/api.w_usecases.sql >> schema.sql
 	@cat ./views/api.w_components.sql >> schema.sql
 	@cat ./views/api.w_taxonomy.sql >> schema.sql
