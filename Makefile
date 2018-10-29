@@ -12,6 +12,10 @@ push:
 	@cd meritocracy/frontend && \
 	make -f Makefile push
 
+test:
+	@cd meritocracy/frontend && \
+	make -f Makefile rest
+
 sonar-scan:
 	@docker run \
 	 --network=kumori_backend \
