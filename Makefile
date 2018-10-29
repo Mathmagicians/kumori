@@ -1,7 +1,12 @@
-.PHONY: sonar-scan
+.PHONY: build push sonar-scan
+
 build:
 	@cd meritocracy/backend/postgres && \
 	make -f Makefile build
+
+push:
+	@cd meritocracy/backend/postgres && \
+	make -f Makefile push
 
 sonar-scan:
 	@docker run \
