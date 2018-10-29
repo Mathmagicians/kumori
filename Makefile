@@ -4,7 +4,7 @@ build:
 	@cd meritocracy/backend/postgres && \
 	make -f Makefile build
 	@cd meritocracy/frontend && \
-	make -f Makefile build
+	make -f Makefile setup build
 
 push:
 	@cd meritocracy/backend/postgres && \
