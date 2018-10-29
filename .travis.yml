@@ -23,8 +23,8 @@ script:
   - cp meritocracy/.env.sample .env
   - ls -la
   - docker-compose -f meritocracy/docker-compose.yml up -d
-#  - make test
-  - docker-compose down
+  - make test
+  - docker-compose  -f meritocracy/docker-compose.yml down
 
 after_success:
 - codecov
