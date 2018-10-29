@@ -17,10 +17,7 @@ before_install:
 before_script:
 
 script:
-  - cd meritocracy/backend/postgrest
   - make build
-  - cd ../../frontend
-  - make build 
 
 after_success:
 - codecov

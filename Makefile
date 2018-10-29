@@ -1,15 +1,7 @@
-REPO=$(shell pwd)
-
-.PHONY: populate sonar-scan
-
-populate:
-	@docker run -it \
-	 --network=kumori_backend \
-	 --rm \
-	 --name populate \
-	 -v $(shell pwd):/usr/src/myapp \
-	 -v ${REPO}:/usr/src/repo \
-	 -w /usr/src/myapp php_parser_image:latest php parser/populate.php parse
+.PHONY: sonar-scan
+build:
+	@cd meritocracy/backend/postgres && \
+	make -f Makefile build
 
 sonar-scan:
 	@docker run \
