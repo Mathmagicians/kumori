@@ -20,11 +20,11 @@ before_script:
 script:
 #  - make build
 #  - if [ "$TRAVIS_BRANCH" = "master" ]; then make push; fi
-  - cp meritocracy/.env.sample meritocracy/.env
+  - cp meritocracy/.env.sample .env
   - ls -la
-#  - docker-compose -f meritocracy/docker-compose.yml up -d
+  - docker-compose -f meritocracy/docker-compose.yml up -d
 #  - make test
-#  - docker-compose down
+  - docker-compose down
 
 after_success:
 - codecov
