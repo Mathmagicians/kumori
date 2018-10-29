@@ -1,23 +1,26 @@
-language: java
+sudo: required
+
+services:
+  - docker
 
 dist: trusty
 
-sudo: required
+env:
+  COMPOSE_VERSION: 1.22.0
 
 os:
   - linux
-
-jdk:
-  - oraclejdk8
 
 before_install:
   - pip install --user codecov
 
 before_script:
-  - cd ./backend && make build test
 
 script:
-  - ./gradlew
+  - cd meritocracy/backend/postgrest
+  - make build
+  - cd ../../frontend
+  - make build 
 
 after_success:
 - codecov
