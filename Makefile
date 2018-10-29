@@ -3,9 +3,13 @@
 build:
 	@cd meritocracy/backend/postgres && \
 	make -f Makefile build
+	@cd meritocracy/frontend && \
+	make -f Makefile build
 
 push:
 	@cd meritocracy/backend/postgres && \
+	make -f Makefile push
+	@cd meritocracy/frontend && \
 	make -f Makefile push
 
 sonar-scan:

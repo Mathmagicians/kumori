@@ -18,8 +18,7 @@ before_script:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 
 script:
-  - make build
-  - make push
+  - make build push
 
 after_success:
 - codecov
