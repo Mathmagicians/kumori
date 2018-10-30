@@ -1,23 +1,30 @@
-language: java
+sudo: required
+
+services:
+  - docker
 
 dist: trusty
 
-sudo: required
+env:
+  COMPOSE_VERSION: 1.22.0
 
 os:
   - linux
-
-jdk:
-  - oraclejdk8
 
 before_install:
   - pip install --user codecov
 
 before_script:
-  - cd ./backend && make build test
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 
 script:
-  - ./gradlew
+  - make build
+  - if [ "$TRAVIS_BRANCH" = "master" ]; then make push; fi
+  - cp meritocracy/.env.sample .env
+  - ls -la
+  - docker-compose -f meritocracy/docker-compose.yml up -d
+  - make test
+  - docker-compose  -f meritocracy/docker-compose.yml down
 
 after_success:
 - codecov

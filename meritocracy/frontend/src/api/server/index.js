@@ -1,7 +1,6 @@
 import axios from 'axios'
 
 	const BASE_URL="http://127.0.0.1:3000/"
-	//const BASE_URL="api/"
   const COMPONENTS_READ ="w_components"
   const COMPONENT_EDIT="components"
   const TAXONOMY_READ="w_taxonomy"
