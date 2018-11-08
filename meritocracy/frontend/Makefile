@@ -24,10 +24,10 @@ rest:
 test: unit e2e
 
 build:
-	@docker run --rm -v ${PWD}:/tmp -w /tmp node sed -i 's|http://127.0.0.1:3000/|api/|' src/api/server/index.js
+	@docker run --rm -v ${PWD}:/tmp -w /tmp node sed -i 's|BASE_URL=".*"|BASE_URL="/api/"|' src/api/server/index.js
 	@docker run --rm -v ${PWD}:/tmp -w /tmp node npm run build
 	@docker build -t ${IMAGE} .
-	@docker run --rm -v ${PWD}:/tmp -w /tmp node sed -i 's|api/|http://127.0.0.1:3000/|' src/api/server/index.js
+	@docker run --rm -v ${PWD}:/tmp -w /tmp node sed -i 's|BASE_URL=".*"|BASE_URL="http://127.0.0.1:3000/"|' src/api/server/index.js
 
 login:
 	@docker login -u ${REGISTRY_USER} -p ${REGISTRY_PASS}
