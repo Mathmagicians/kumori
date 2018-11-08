@@ -6,13 +6,14 @@ IMAGE="mathmagicians/meritocracy_web:${VERSION}"
 setup:
 	@docker run --rm -dt --name setup -v ${PWD}:/tmp -w /tmp node
 	@docker exec setup npm install
+	@docker exec setup sed -i '32893s/^/\/\//' node_modules/prettier/index.js
 	@docker rm -f setup
 
 unit:
-	@docker run --rm -v ${PWD}:/tmp -w /tmp node npm run unit
+	@docker run --rm -v ${PWD}:/tmp -w /tmp node npm run test
 
 e2e:
-	@docker run --rm -v ${PWD}:/tmp -w /tmp node npm run e2e
+	@docker run --rm -v ${PWD}:/tmp -w /tmp node npm run test:e2e
 
 rest:
 	@../backend/rest_test.sh eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiZWRpdG9yIn0.tYUlheVyisdr0ezFYf92mC_dvSS02cpDvPBu9aKLySk http://localhost:3000
@@ -38,7 +39,7 @@ pull:
 	@docker pull ${IMAGE}
 
 shell:
-	@docker run --rm --name meritocracy_web_shell -it -p 80:80 node /bin/sh
+	@docker run --rm --name meritocracy_web_shell -v ${PWD}:/tmp -w /tmp -it node /bin/sh
 
 run:
 	@docker run --rm --name meritocracy_web_run -p 80:80 -it ${IMAGE}
