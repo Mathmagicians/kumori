@@ -4,10 +4,8 @@ IMAGE="mathmagicians/meritocracy_web:${VERSION}"
 .PHONY: setup build unit e2e test login logout push pull shell run
 
 setup:
-	@docker run --rm -dt --name setup -v ${PWD}:/tmp -w /tmp node
-	@docker exec setup npm install
-	@docker exec setup sed -i '32893s/^/\/\//' node_modules/prettier/index.js
-	@docker rm -f setup
+	@docker run --rm -v ${PWD}:/tmp -w /tmp node npm install
+	@docker run --rm -v ${PWD}:/tmp -w /tmp node sed -i '32893s/^/\/\//' node_modules/prettier/index.js
 
 unit:
 	@docker run --rm -v ${PWD}:/tmp -w /tmp node npm run test
@@ -42,4 +40,4 @@ shell:
 	@docker run --rm --name meritocracy_web_shell -v ${PWD}:/tmp -w /tmp -it node /bin/sh
 
 run:
-	@docker run --rm --name meritocracy_web_run -p 80:80 -it ${IMAGE}
+	@docker run --rm --name meritocracy_web_run -v ${PWD}:/tmp -w /tmp -p 80:80 -it ${IMAGE}
