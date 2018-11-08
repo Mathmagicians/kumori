@@ -14,31 +14,31 @@ import net.thucydides.core.util.EnvironmentVariables;
 
 
 public class TechnologyStepDefinitions {
-	
+
 	private String theRestApiBaseUrl;
-	private EnvironmentVariables environmentVariables; 
-	private Actor jesper; 
+	private EnvironmentVariables environmentVariables;
+	private Actor jesper;
 	private String apiUrl;
 	private String jwt_token;
-	
+
 	@Before
 	public void configureUrls() {
-		 	
+
 		// jesper = Actor.named("jesper/admin").whoCan(CallAnApi.at(apiUrl));
 	}
-	
+
 	 @Given("^(\\w+) service is running$")
 	    public void a_service_is_running(String serviceName) {
-		 String serviceUrl = environmentVariables.getProperty(serviceName+".url"); 
+		 String serviceUrl = environmentVariables.getProperty(serviceName+".url");
 		 RestAssured.baseURI = serviceUrl;
 		 when().get("/")
-		 .then().statusCode(200);
+		.then().statusCode(200);
 	    }
 
 	    @Given("^I have a valid security token$")
 	    public void i_have_a_valid_security_token() {
 	    	//fixme should use login instead when available
-	        jwt_token = environmentVariables.getProperty("jwt_token"); 
+	        jwt_token = environmentVariables.getProperty("jwt_token");
 	    }
 
 	    @Given("^I edit technology with name \"([^\"]*)\"$")
@@ -70,4 +70,16 @@ public class TechnologyStepDefinitions {
 	        // Write code here that turns the phrase above into concrete actions
 	        throw new PendingException();
 	    }
+
+			@Given("^Jesper has a valid security token$")
+public void jesper_has_a_valid_security_token() {
+		// Write code here that turns the phrase above into concrete actions
+		throw new PendingException();
+}
+
+@When("^Jesper wants to edit a technology with the name \"([^\"]*)\"$")
+public void jesper_wants_to_edit_a_technology_with_the_name(String arg1) {
+		// Write code here that turns the phrase above into concrete actions
+		throw new PendingException();
+}
 }

@@ -6,7 +6,7 @@ This is the frontend for Kumori Meritocracy.
 
 Checkout project, and in a shell navigate to the kumori/meritocracy/frontend folder
 
-Install all npm dependencies locally.
+Install all npm dependencies locally and fix prettier/index.js bug.
 
     $ make setup
 
@@ -22,13 +22,13 @@ Run all the test for the project.
 
     $ make test
 
+CAVEAT: there is a bug in mocha, currently you need to :
+comment out line 32893 of prettier/index.js.
+See: <https://stackoverflow.com/questions/52202399/typeerror-super-expression-must-either-be-null-or-a-function/52204427>
+
 Run the unit tests
 
     $ make unit
-
-Run the e2e tests (Not working at this time)
-
-    $ make e2e
 
 Run the backend tests (postgres/postgrest)
 
@@ -49,15 +49,3 @@ The dev environment includes the postgrest/postgres/swagger backend. You start i
 Default web token for for edit access is `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiZWRpdG9yIn0.tYUlheVyisdr0ezFYf92mC_dvSS02cpDvPBu9aKLySk`
 
 You make generate new token for deployment here: <https://jwt.io/#debugger-io>
-
-## Tests
-
- Unit tests - work in local environment - didn't update the make file:
- npm test
-
- Start dev server:
- npm run dev
-
- CAVEAT: there is a bug in mocha, currently you need to :
- comment out line 32893 of prettier/index.js.
- See: <https://stackoverflow.com/questions/52202399/typeerror-super-expression-must-either-be-null-or-a-function/52204427>

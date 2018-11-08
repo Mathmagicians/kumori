@@ -14,7 +14,9 @@ push:
 
 test:
 	@cd meritocracy/frontend && \
-	make -f Makefile rest
+	make -f Makefile rest unit
+	@cd meritocracy/spec && \
+	./gradlew
 
 sonar-scan:
 	@docker run \
