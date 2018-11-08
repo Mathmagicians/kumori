@@ -6,7 +6,7 @@ services:
     command: ["npm", "run", "dev"]
     working_dir: /tmp
     ports:
-      - "8080:8080"
+      - "80:8080"
     volumes:
       - "./:/tmp"
     networks:
