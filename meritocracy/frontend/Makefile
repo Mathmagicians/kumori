@@ -7,6 +7,11 @@ setup:
 	@docker run --rm -v ${PWD}:/tmp -w /tmp node npm install
 	@docker run --rm -v ${PWD}:/tmp -w /tmp node sed -i '32893s/^/\/\//' node_modules/prettier/index.js
 
+nuke_node:
+	rm -rf node_modules
+
+peaceNode: node_modules setup
+
 unit:
 	@docker run --rm -v ${PWD}:/tmp -w /tmp node npm run test
 
