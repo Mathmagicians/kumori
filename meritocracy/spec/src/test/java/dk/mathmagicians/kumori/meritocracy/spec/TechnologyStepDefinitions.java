@@ -29,10 +29,10 @@ public class TechnologyStepDefinitions {
 
 	 @Given("^(\\w+) service is running$")
 	    public void a_service_is_running(String serviceName) {
-		// String serviceUrl = environmentVariables.getProperty(serviceName+".url");
-		// RestAssured.baseURI = serviceUrl;
-		// when().get("/")
-		 //.then().statusCode(200);
+		 String serviceUrl = environmentVariables.getProperty(serviceName+".url");
+		 RestAssured.baseURI = serviceUrl;
+		 when().get("/")
+		.then().statusCode(200);
 	    }
 
 	    @Given("^I have a valid security token$")
