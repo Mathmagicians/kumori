@@ -18,13 +18,14 @@ before_script:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 
 script:
-  - make build
-  - if [ "$TRAVIS_BRANCH" = "master" ]; then make push; fi
-  - cp meritocracy/.env.sample .env
-  - ls -la
-  - docker-compose -f meritocracy/docker-compose.yml up -d
-  - make test
-  - docker-compose  -f meritocracy/docker-compose.yml down
+   - make tag
+#  - make build
+#  - if [ "$TRAVIS_BRANCH" = "master" ]; then make push; fi
+#  - cp meritocracy/.env.sample .env
+#  - ls -la
+#  - docker-compose -f meritocracy/docker-compose.yml up -d
+#  - make test
+#  - docker-compose  -f meritocracy/docker-compose.yml down
 
 after_success:
 - codecov
