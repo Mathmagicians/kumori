@@ -34,7 +34,7 @@ function _commit () {
 
 # Insert components
 function components () {
-  local count current
+  local count current pri_use
   count="$(echo "${COMPONENTS_DATA}" | jq '. |length')"
   current=1
 
@@ -47,7 +47,7 @@ function components () {
     status_id=${STATUS_LOOKUP["${status}"]}
     scope_id=${SCOPE_LOOKUP["${scope}"]}
 
-    _commit "INSERT INTO ${DB_SCHEMA}.components (name, description, status, deleted) VALUES (\$tag\$${name}\$tag\$,\$tag\$${description}\$tag\$,\$tag\$${status_id}\$tag\$,false);"
+    _commit "INSERT INTO ${DB_SCHEMA}.components (name, description, deleted) VALUES (\$tag\$${name}\$tag\$,\$tag\$${description}\$tag\$,false);"
 
     print_message "Added Component (${current}/${count})" "${name}"
 
@@ -55,6 +55,15 @@ function components () {
     usecases "${current}" "${status_id}" "${scope_id}" "${component}"
     convert_scopes "${current}" "${component}"
     links "${current}" "${component}"
+
+    # Get a primary usecases
+    pri_use="$(_commit "SELECT usecase FROM ${DB_SCHEMA}.component_usecase WHERE component = ${current} LIMIT 1;" | xargs)"
+
+    if [ "${pri_use}" != '' ]; then
+      _commit "UPDATE api.components SET primary_usecase = ${pri_use} WHERE id = ${current};"
+
+      print_message_component "Added primary usecase" "${comments}"
+    fi
     current=$((current+1))
   done <<< "$(echo "${COMPONENTS_DATA}" | jq -r '.[] | @base64')"
 }
@@ -166,10 +175,12 @@ function add_usecase () {
   status_id="${5}"
   component="${6}"
 
-  _commit "INSERT INTO ${DB_SCHEMA}.usecases (component, name, description, scope, status, deleted) VALUES (\$tag\$${component_id}\$tag\$,\$tag\$${name}\$tag\$,\$tag\$${description}\$tag\$,\$tag\$${scope_id}\$tag\$,\$tag\$${status_id}\$tag\$,false);"
-  print_message_component "Added Usecase" "${name}"
+  _commit "INSERT INTO ${DB_SCHEMA}.usecases (name, description, scope, status, deleted) VALUES (\$tag\$${name}\$tag\$,\$tag\$${description}\$tag\$,\$tag\$${scope_id}\$tag\$,\$tag\$${status_id}\$tag\$,false);"
 
   current="$(_commit "SELECT id FROM ${DB_SCHEMA}.usecases ORDER BY id DESC LIMIT 1;" | xargs)"
+
+  _commit "INSERT INTO ${DB_SCHEMA}.component_usecase (component, usecase) VALUES (\$tag\$${component_id}\$tag\$,\$tag\$${current}\$tag\$);"
+  print_message_component "Added Usecase" "${name}"
   add_taxonomies "${current}" "${component}"
 }
 
@@ -187,9 +198,9 @@ function scopes () {
 
 # Create statuses
 function statuses () {
-  local current=1  
+  local current=1
   while read -r status; do
-    local name 
+    local name
     name="$(echo "${status}" | base64 -d | jq -r -c '.name')"
     phase="$(echo "${status}" | base64 -d | jq -r -c '.phase')"
     _commit "INSERT INTO ${DB_SCHEMA}.statuses (name, phase) VALUES (\$tag\$${name}\$tag\$, \$tag\$${phase}\$tag\$);"

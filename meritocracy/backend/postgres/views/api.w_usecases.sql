@@ -4,7 +4,6 @@ CREATE OR REPLACE VIEW api.w_usecases
 AS
 SELECT
     usecase.id,
-    component.name AS component,
     usecase.description,
     status.name AS status,
     sco.name AS scope,
@@ -12,7 +11,6 @@ SELECT
     usecase.deleted AS deleted
 FROM
     api.usecases usecase
-    JOIN api.components component ON usecase.component = component.id
     JOIN api.statuses status ON usecase.status = status.id
     JOIN api.scopes sco ON usecase.scope = sco.id;
 

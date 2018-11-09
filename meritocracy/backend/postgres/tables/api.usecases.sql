@@ -2,7 +2,6 @@ DROP TABLE IF EXISTS api.usecases CASCADE;
 
 CREATE TABLE api.usecases (
     id serial NOT NULL,
-    component integer NOT NULL,
     name TEXT NOT NULL,
     description TEXT,
     scope integer,
@@ -14,8 +13,6 @@ CREATE TABLE api.usecases (
     CONSTRAINT scope FOREIGN KEY (scope) REFERENCES api.scopes (id)
         MATCH SIMPLE ON UPDATE NO ACTION ON DELETE NO ACTION,
     CONSTRAINT status FOREIGN KEY (status) REFERENCES api.statuses (id)
-        MATCH SIMPLE ON UPDATE NO ACTION ON DELETE NO ACTION,
-    CONSTRAINT component FOREIGN KEY (component) REFERENCES api.components (id)
         MATCH SIMPLE ON UPDATE NO ACTION ON DELETE NO ACTION
 );
 
