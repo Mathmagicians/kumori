@@ -5,6 +5,8 @@
 This project is about generating the architecture, roadmap and strategy using qualified experts - people that know about things should decide about things, and display the result in an easy to navigate way.
 
 ## Run
+When you run this project, you start the production version of the application.
+For development, checkout the startscript from the `frontend` folder.
 
     $ cp .env.sample .env
 
