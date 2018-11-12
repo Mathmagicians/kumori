@@ -16,7 +16,7 @@ SELECT
         LEFT JOIN api.usecases AS us ON comp.primary_usecase = us.id
         LEFT JOIN api.statuses AS st ON us.status = st.id
         WHERE comp.id = component.id)
-      ELSE ('To be decided') END
+      ELSE (SELECT name FROM api.statuses WHERE id = 1) END
     ) AS status,
     component.description,
 	(
