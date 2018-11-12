@@ -25,15 +25,12 @@ push:
 	@cd meritocracy/frontend && \
 	make -f Makefile push
 
-<<<<<<< HEAD
 test:
 	@cd meritocracy/frontend && \
 	make -f Makefile rest unit
 	@cd meritocracy/spec && \
 	./gradlew
 
-=======
->>>>>>> bd3020a38153ad882967a231ccb50b064b6a2e0f
 sonar-scan:
 	@docker run \
 	 --network=kumori_backend \
