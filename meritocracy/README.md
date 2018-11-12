@@ -12,11 +12,14 @@ Update `.env` if necessary.
 
     $ cp docker-compose up -d
 
+    -   The site will be available at: <http://127.0.0.1>
+    -   The postgrest service will be available at:<http://127.0.0.1:3000>
+
 ## Milestones
 
 ### Milestone one - Technology governance
 
-  * Components
-  * Services
-  * Blueprints
-  * Patterns and principles
+-   Components
+-   Services
+-   Blueprints
+-   Patterns and principles

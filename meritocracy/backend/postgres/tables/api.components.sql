@@ -4,13 +4,11 @@ CREATE TABLE api.components (
     id serial NOT NULL,
     name TEXT NOT NULL UNIQUE,
     description TEXT,
-    status integer,
+    primary_usecase integer,
     modified TIMESTAMP without TIME zone NOT NULL,
     modifiedby TEXT,
     deleted boolean NOT NULL,
-    PRIMARY KEY (id),
-    CONSTRAINT status FOREIGN KEY (status) REFERENCES api.statuses (id)
-        MATCH SIMPLE ON UPDATE NO ACTION ON DELETE NO ACTION
+    PRIMARY KEY (id)
 );
 
 DROP TRIGGER IF EXISTS components_insert ON api.components;

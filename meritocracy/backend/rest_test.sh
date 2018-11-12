@@ -73,7 +73,7 @@ function test_usecases () {
   url='/usecases'
 
   function usecase_create () {
-    data='{"component": 1,"name":"Awesome","description": "test","scope":1,"status":1,"deleted": false}'
+    data='{"name":"Awesome","description": "test","scope":1,"status":1,"deleted": false}'
     response_status="$(curl -s -D /tmp/headers.txt -w "%{http_code}" "${HOST}${url}" -X POST -H "${AUTH}" -H "${CONTENT}" -d "${data}")"
     if [[ ${response_status} == 201 ]];
       then print_test "Usecase" "Create" "OK";
@@ -117,7 +117,7 @@ function test_components () {
   url='/components'
 
   function component_create () {
-    data='{"name": "Hula","description": "test","status":1,"deleted": false}'
+    data='{"name": "Hula","description": "test","deleted": false}'
     response_status="$(curl -s -D /tmp/headers.txt -w "%{http_code}" "${HOST}${url}" -X POST -H "${AUTH}" -H "${CONTENT}" -d "${data}")"
     if [[ ${response_status} == 201 ]];
       then print_test "Component" "Create" "OK";
@@ -199,48 +199,92 @@ function test_links () {
     links_delete
 }
 
-# Test CRUD for component taxonomies
-function test_component_taxonomy () {
+# Test CRUD for component usecases
+function test_component_usecase () {
   local url method data response_status
-  url='/component_taxonomy'
+  url='/component_usecase'
 
-  function component_taxonomy_create () {
-      data='{"component":1,"taxonomy": 1}'
+  function component_usecase_create () {
+      data='{"component":1,"usecase": 20}'
     response_status="$(curl -s -D /tmp/headers.txt -w "%{http_code}" "${HOST}${url}" -X POST -H "${AUTH}" -H "${CONTENT}" -d "${data}")"
     if [[ ${response_status} == 201 ]];
-      then print_test "Component Taxonomy" "Create" "OK";
-      else print_test "Component Taxonomy" "Create" "FAILED" "${response_status}";
+      then print_test "Component Usecase" "Create" "OK";
+      else print_test "Component Usecase" "Create" "FAILED" "${response_status}";
     fi
   }
 
-  function component_taxonomy_read () {
-    response_status="$(curl -s -o /dev/null -w "%{http_code}" "${HOST}${url}?component=eq.1&taxonomy=eq.1" -X GET -H "${AUTH}" -H "${CONTENT}")"
+  function component_usecase_read () {
+    response_status="$(curl -s -o /dev/null -w "%{http_code}" "${HOST}${url}?component=eq.1&usecase=eq.20" -X GET -H "${AUTH}" -H "${CONTENT}")"
     if [[ ${response_status} == 200 ]];
-      then print_test "Component Taxonomy" "Read" "OK";
-      else print_test "Component Taxonomy" "Read" "FAILED" "${response_status}";
+      then print_test "Component Usecase" "Read" "OK";
+      else print_test "Component Usecase" "Read" "FAILED" "${response_status}";
     fi
   }
 
-  function component_taxonomy_update () {
-    data='{"taxonomy": 2}'
-    response_status="$(curl -s -o /dev/null -w "%{http_code}" "${HOST}${url}?component=eq.1&taxonomy=eq.1" -X PATCH -H "${AUTH}" -H "${CONTENT}" -d "${data}")"
+  function component_usecase_update () {
+    data='{"usecase": 22}'
+    response_status="$(curl -s -o /dev/null -w "%{http_code}" "${HOST}${url}?component=eq.1&usecase=eq.20" -X PATCH -H "${AUTH}" -H "${CONTENT}" -d "${data}")"
     if [[ ${response_status} == 204 ]];
-      then print_test "Component Taxonomy" "Update" "OK";
-      else print_test "Component Taxonomy" "Update" "FAILED" "${response_status}";
+      then print_test "Component Usecase" "Update" "OK";
+      else print_test "Component Usecase" "Update" "FAILED" "${response_status}";
     fi
   }
 
-  function component_taxonomy_delete () {
-    response_status="$(curl -s -o /dev/null -w "%{http_code}" "${HOST}${url}?component=eq.1&taxonomy=eq.1" -X DELETE -H "${AUTH}" -H "${CONTENT}" -d "${data}")"
+  function component_usecase_delete () {
+    response_status="$(curl -s -o /dev/null -w "%{http_code}" "${HOST}${url}?component=eq.1&usecase=eq.22" -X DELETE -H "${AUTH}" -H "${CONTENT}" -d "${data}")"
     if [[ ${response_status} == 204 ]];
-      then print_test "Component Taxonomy" "Delete" "OK";
-    else print_test "Component Taxonomy" "Delete" "FAILED" "${response_status}";
+      then print_test "Component Usecase" "Delete" "OK";
+    else print_test "Component Usecase" "Delete" "FAILED" "${response_status}";
     fi
   }
-    component_taxonomy_create
-    component_taxonomy_read
-    component_taxonomy_update
-    component_taxonomy_delete
+    component_usecase_create
+    component_usecase_read
+    component_usecase_update
+    component_usecase_delete
+}
+
+# Test CRUD for usecase taxonomy
+function test_usecase_taxonomy () {
+  local url method data response_status
+  url='/usecase_taxonomy'
+
+  function usecase_taxonomy_create () {
+      data='{"usecase":1,"taxonomy": 1}'
+    response_status="$(curl -s -D /tmp/headers.txt -w "%{http_code}" "${HOST}${url}" -X POST -H "${AUTH}" -H "${CONTENT}" -d "${data}")"
+    if [[ ${response_status} == 201 ]];
+      then print_test "Usecase Taxonomy" "Create" "OK";
+      else print_test "Usecase Taxonomy" "Create" "FAILED" "${response_status}";
+    fi
+  }
+
+  function usecase_taxonomy_read () {
+    response_status="$(curl -s -o /dev/null -w "%{http_code}" "${HOST}${url}?usecase=eq.1&taxonomy=eq.1" -X GET -H "${AUTH}" -H "${CONTENT}")"
+    if [[ ${response_status} == 200 ]];
+      then print_test "Usecase Taxonomy" "Read" "OK";
+      else print_test "Usecase Taxonomy" "Read" "FAILED" "${response_status}";
+    fi
+  }
+
+  function usecase_taxonomy_update () {
+    data='{"usecase": 2}'
+    response_status="$(curl -s -o /dev/null -w "%{http_code}" "${HOST}${url}?usecase=eq.1&taxonomy=eq.1" -X PATCH -H "${AUTH}" -H "${CONTENT}" -d "${data}")"
+    if [[ ${response_status} == 204 ]];
+      then print_test "Usecase Taxonomy" "Update" "OK";
+      else print_test "Usecase Taxonomy" "Update" "FAILED" "${response_status}";
+    fi
+  }
+
+  function usecase_taxonomy_delete () {
+    response_status="$(curl -s -o /dev/null -w "%{http_code}" "${HOST}${url}?usecase=eq.2&taxonomy=eq.1" -X DELETE -H "${AUTH}" -H "${CONTENT}" -d "${data}")"
+    if [[ ${response_status} == 204 ]];
+      then print_test "Usecase Taxonomy" "Delete" "OK";
+    else print_test "Usecase Taxonomy" "Delete" "FAILED" "${response_status}";
+    fi
+  }
+    usecase_taxonomy_create
+    usecase_taxonomy_read
+    usecase_taxonomy_update
+    usecase_taxonomy_delete
 }
 
 # Test CRUD for Scope
@@ -298,4 +342,5 @@ test_components
 test_usecases
 test_links
 test_scopes
-test_component_taxonomy
+test_component_usecase
+test_usecase_taxonomy
