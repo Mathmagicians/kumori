@@ -8,13 +8,13 @@ SELECT
     (
       CASE WHEN 0 < (
         SELECT COUNT(st.name) FROM api.components AS comp
-        LEFT JOIN api.usecases AS us ON comp.primary_usecase = us.id
-        LEFT JOIN api.statuses AS st ON us.status = st.id
+        LEFT JOIN api.component_usecase AS cmus ON comp.primary_usecase = cmus.usecase
+        LEFT JOIN api.statuses AS st ON cmus.status = st.id
         WHERE comp.id = component.id)
       THEN (
         SELECT st.name FROM api.components AS comp
-        LEFT JOIN api.usecases AS us ON comp.primary_usecase = us.id
-        LEFT JOIN api.statuses AS st ON us.status = st.id
+        LEFT JOIN api.component_usecase AS cmus ON comp.primary_usecase = cmus.usecase
+                LEFT JOIN api.statuses AS st ON cmus.status = st.id
         WHERE comp.id = component.id)
       ELSE (SELECT name FROM api.statuses WHERE id = 1) END
     ) AS status,
@@ -29,8 +29,8 @@ SELECT
   (
     CASE WHEN 0 < (
       SELECT COUNT(st.name) FROM api.components AS comp
-      LEFT JOIN api.usecases AS us ON comp.primary_usecase = us.id
-      LEFT JOIN api.statuses AS st ON us.status = st.id
+      LEFT JOIN api.component_usecase AS cmus ON comp.primary_usecase = cmus.usecase
+      LEFT JOIN api.statuses AS st ON cmus.status = st.id
       WHERE comp.id = component.id)
     THEN (
       SELECT array_to_json(array_agg(tax.name)) FROM api.components AS comp
@@ -66,7 +66,7 @@ SELECT
       FROM api.usecases AS us
       LEFT JOIN api.component_usecase AS uscom ON us.id = uscom.usecase
       LEFT JOIN api.scopes AS sco ON us.scope = sco.id
-      LEFT JOIN api.statuses AS st ON us.status = st.id
+      LEFT JOIN api.statuses AS st ON uscom.status = st.id
       WHERE uscom.component = component.id)
       ELSE (json_build_array()) END
   ) AS usecases
