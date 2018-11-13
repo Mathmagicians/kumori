@@ -5,14 +5,11 @@ CREATE TABLE api.usecases (
     name TEXT NOT NULL,
     description TEXT,
     scope integer,
-    status integer,
     modified TIMESTAMP without TIME zone NOT NULL,
     modifiedby TEXT,
     deleted boolean NOT NULL,
     PRIMARY KEY (id),
     CONSTRAINT scope FOREIGN KEY (scope) REFERENCES api.scopes (id)
-        MATCH SIMPLE ON UPDATE NO ACTION ON DELETE NO ACTION,
-    CONSTRAINT status FOREIGN KEY (status) REFERENCES api.statuses (id)
         MATCH SIMPLE ON UPDATE NO ACTION ON DELETE NO ACTION
 );
 

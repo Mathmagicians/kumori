@@ -73,7 +73,7 @@ function test_usecases () {
   url='/usecases'
 
   function usecase_create () {
-    data='{"name":"Awesome","description": "test","scope":1,"status":1,"deleted": false}'
+    data='{"name":"Awesome","description": "test","scope":1,"deleted": false}'
     response_status="$(curl -s -D /tmp/headers.txt -w "%{http_code}" "${HOST}${url}" -X POST -H "${AUTH}" -H "${CONTENT}" -d "${data}")"
     if [[ ${response_status} == 201 ]];
       then print_test "Usecase" "Create" "OK";
@@ -205,7 +205,7 @@ function test_component_usecase () {
   url='/component_usecase'
 
   function component_usecase_create () {
-      data='{"component":1,"usecase": 20}'
+      data='{"component":1,"usecase": 20,"status":1,"description":"This is a test"}'
     response_status="$(curl -s -D /tmp/headers.txt -w "%{http_code}" "${HOST}${url}" -X POST -H "${AUTH}" -H "${CONTENT}" -d "${data}")"
     if [[ ${response_status} == 201 ]];
       then print_test "Component Usecase" "Create" "OK";
