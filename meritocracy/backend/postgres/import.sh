@@ -175,11 +175,11 @@ function add_usecase () {
   status_id="${5}"
   component="${6}"
 
-  _commit "INSERT INTO ${DB_SCHEMA}.usecases (name, description, scope, status, deleted) VALUES (\$tag\$${name}\$tag\$,\$tag\$${description}\$tag\$,\$tag\$${scope_id}\$tag\$,\$tag\$${status_id}\$tag\$,false);"
+  _commit "INSERT INTO ${DB_SCHEMA}.usecases (name, description, scope, deleted) VALUES (\$tag\$${name}\$tag\$,\$tag\$${description}\$tag\$,\$tag\$${scope_id}\$tag\$,false);"
 
   current="$(_commit "SELECT id FROM ${DB_SCHEMA}.usecases ORDER BY id DESC LIMIT 1;" | xargs)"
 
-  _commit "INSERT INTO ${DB_SCHEMA}.component_usecase (component, usecase) VALUES (\$tag\$${component_id}\$tag\$,\$tag\$${current}\$tag\$);"
+  _commit "INSERT INTO ${DB_SCHEMA}.component_usecase (component, usecase,status) VALUES (\$tag\$${component_id}\$tag\$,\$tag\$${current}\$tag\$,\$tag\$${status_id}\$tag\$);"
   print_message_component "Added Usecase" "${name}"
   add_taxonomies "${current}" "${component}"
 }
