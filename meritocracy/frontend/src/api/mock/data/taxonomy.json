@@ -19,19 +19,27 @@
       },
       {
         "name": "Default",
-        "phase": "Buy"
+        "phase": "Hold"
       },
       {
         "name": "Limited",
-        "phase": "Buy"
+        "phase": "Hold"
       },
       {
         "name": "Deprecated",
-        "phase": "Buy"
+        "phase": "Sell"
       },
       {
         "name": "Do not use",
-        "phase": "Buy"
+        "phase": "Sell"
+      },
+       {
+        "name": "Undecided",
+        "phase": "Maybe"
+      },
+       {
+        "name": "WIP",
+        "phase": "Maybe"
       }
     ],
     "levels": [
