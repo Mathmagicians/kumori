@@ -1,6 +1,6 @@
 <template>
     <span v-if="lc"
-      class="align-middle"  :title="'Lifecycle phase '+status"  >
+      class="align-middle" :title="'Lifecycle phase '+status">
       <b-button
         :id="`btn_`+status"
         size="sm"

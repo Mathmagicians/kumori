@@ -7,27 +7,13 @@
     </b-navbar-brand>
 
     <b-navbar-nav>
-      <b-nav-item to="/components">
-        <b-img rounded="circle" src="./assets/components.svg" class="image-overlay" />
-        Components
-      </b-nav-item>
-      <b-nav-item to="/services">
-        <b-img rounded="circle" src="./assets/service.svg" class="image-overlay" />
-        Services
-      </b-nav-item>
-      <b-nav-item to="/exterminator">
-        <b-img rounded="circle" src="./assets/exterminator.svg" class="image-overlay" />
-        Exterminator
-      </b-nav-item>
-      <b-nav-item to="/meritocracy">
-        <b-img rounded="circle" src="./assets/meritocracy.svg" class="image-overlay" />
-        Meritocracy
-      </b-nav-item>
-      <b-nav-item to="/about">
-        <b-img rounded="circle" src="./assets/about.svg" class="image-overlay" />
-        About
-      </b-nav-item>
+      <b-nav-item to="/components"><v-icon name="boxes"/> Components</b-nav-item>
+      <b-nav-item to="/services"><v-icon name="cubes"/> Services</b-nav-item>
+      <b-nav-item to="/exterminator"><v-icon name="book-dead"/> Exterminator</b-nav-item>
+      <b-nav-item to="/meritocracy"><v-icon name="comments"/> Meritocracy</b-nav-item>
+      <b-nav-item to="/about"><v-icon name="paw"/> About</b-nav-item>
     </b-navbar-nav>
+
     <b-navbar-nav class="ml-auto">
       <b-nav-item
          v-if="isEditOn">
@@ -161,5 +147,9 @@ body {
   width: auto;
   max-width: 680px;
   padding: 0 15px;
+}
+
+.navbar-dark .navbar-nav .active > .nav-link, .navbar-dark .navbar-nav .nav-link.active, .navbar-dark .navbar-nav .nav-link.show, .navbar-dark .navbar-nav .show > .nav-link {
+  border-bottom: 1px solid green;
 }
 </style>
