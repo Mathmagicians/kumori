@@ -130,7 +130,7 @@
       },
       amounts () {
         let am = {_total: this.techComponents.length}
-        this.$store.getters.lifeCycle.items.forEach(
+        this.$store.getters.lifeCycle.forEach(
           item => am = { ...am, [item.name]: this.techComponents.filter(t => t.status === item.name).length}
         )
         return am

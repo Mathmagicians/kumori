@@ -5,6 +5,7 @@ import axios from 'axios'
   const COMPONENT_EDIT="components"
   const TAXONOMY_READ="w_taxonomy"
   const USECASES_READ = "w_usecases"
+  const LIFECYCLE_READ = "statuses"
 
 export default {
 
@@ -91,7 +92,10 @@ export default {
         return Number(total)
       })
   },
-   fetchUsecases () {
+  fetchLifeCycle () {
+    return this.getData(this.urlBuilder(LIFECYCLE_READ), {order: 'name.asc'})
+  },
+  fetchUsecases () {
      return this.getData(this.urlBuilder(USECASES_READ, {select: 'id, status, component, description', order: 'id.asc'}))
   },
   fetchMeritocracy () {

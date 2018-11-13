@@ -115,7 +115,7 @@
 		data () {
 			return {
 				searchInput: '',
-				lcModel: this.$store.getters.lifeCycle.items.reduce( (acc, i) => ({...acc, [i.name]: false}), {}),
+				lcModel: this.$store.getters.lifeCycle.reduce( (acc, i) => ({...acc, [i.name]: false}), {}),
 				//phase model represent the state of buttons that group lifecycles -it does not send its own events, but selects - deselects its group
 				phaseModel: {},
 			}

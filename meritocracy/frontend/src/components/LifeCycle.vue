@@ -44,7 +44,7 @@
     lifeCycleMixin
   ],
   lcText: {
-    'Experimental': `A brand new, (possibly) bleeding edge technology that we want to investigate.`,
+    'Experiment': `A brand new, (possibly) bleeding edge technology that we want to investigate.`,
     'Testing': `
       <p>This is the part of the <strong>lifecycle</strong>, where we try out things.</p>
       <p>The technology seems to have <strong> significant advantages</strong> for some use cases, that are superior over the currently approved technologies. We want to explore this to learn more.</p>
@@ -59,15 +59,15 @@
       No further questions asked, you can go ahead and use this technology to build your applications, for all the defined use cases.
       `,
     'Limited': `A mature technology, with well known characteristics, for which there is amature operational capability, but which for various reasons <em>(cost, licensing, strategic direction, etc, </em> it is desirable to limit the exceptional situations and use cases in which it is used.`,
-    'deprecated': `A technology that we are actively phasing out (e.g. due to lack of support, security, stability, cost issues, impossible to staff, very inefficient in use or to be replaced with another technology, etc.)
+    'Deprecated': `A technology that we are actively phasing out (e.g. due to lack of support, security, stability, cost issues, impossible to staff, very inefficient in use or to be replaced with another technology, etc.)
       `,
-    'DONT': `Must not be used, either for maintenance, or for new development. This is typically due to legal, policy or architecture reasons.`,
-    'WIP': `#techmenu is currently working on updating the life cycle state of this technology`,
-    'Undecided': `#techmenu has no opinion about this technology. Do we need it? Let us get this into #techmenu.`
+    'Do Not Use': `Must not be used, either for maintenance, or for new development. This is typically due to legal, policy or architecture reasons.`,
+    'Undecided': `#techmenu is currently working on updating the life cycle state of this technology`,
+    'To Be Decided': `#techmenu has no opinion about this technology. Do we need it? Let us get this into #techmenu.`
   },
     computed: {
        lc () {
-        return this.$store.getters.lifeCycle.items.filter( item => item.name === this.status).pop();
+        return this.$store.getters.lifeCycle.filter( item => item.name === this.status).pop();
       },
 
 

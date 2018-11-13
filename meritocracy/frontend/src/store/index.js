@@ -21,49 +21,7 @@ export function createStore () {
         pending: false,
         isEditOn: false
       },
-      lifeCycle: {
-        title: 'Tech Menu Life Cycle',
-        items: [
-          {
-            name: 'Experimental',
-            type: 'buy'
-          },
-          {
-            name: 'Testing',
-            type: 'buy'
-          },
-          {
-            name: 'POC',
-            type: 'buy'
-          },
-          {
-            name: 'Default',
-            type: 'hold'
-          },
-          {
-            name: 'Limited',
-            type: 'hold'
-          },
-          {
-            name: 'Deprecated',
-            type: 'sell'
-          },
-          {
-            //dontuse
-            name: 'Dont',
-            type: 'sell'
-          },
-          {
-            //undecided
-            name: 'Undecided',
-            type: 'maybe'
-          },
-          {
-            name: 'WIP',
-            type: 'maybe'
-          }
-        ]
-      },
+      lifeCycle: [],
       techComponents: [],
       tech: {
         page: {
@@ -83,6 +41,9 @@ export function createStore () {
       usecases: []
     },
     mutations: {
+      setLifeCycle(state, lifeCycle) {
+        state.lifeCycle = lifeCycle
+      },
       setTechComponents (state, techComponents) {
         state.techComponents = techComponents
       },
@@ -134,7 +95,12 @@ export function createStore () {
       }
     },
     actions: {
-      fetchTechComponents ({ commit}) {
+      fetchLifeCycle ({commit}) {
+        return client
+          .fetchLifeCycle()
+          .then(lifeCycle => commit('setLifeCycle', lifeCycle))
+      },
+      fetchTechComponents ({commit}) {
           return client
             .fetchTechComponents()
             .then(techComponents => commit('setTechComponents', techComponents))
@@ -157,17 +123,17 @@ export function createStore () {
             return tech
           } )
       },
-      fetchMeritocracy ({ commit }) {
+      fetchMeritocracy ({commit}) {
           return client
             .fetchMeritocracy()
             .then(meritocracy => commit('setMeritocracy', meritocracy))
       },
-      fetchServices ({ commit }) {
+      fetchServices ({commit}) {
         return client
           .fetchServices()
           .then(services => commit('setServices', services))
       },
-      fetchTaxonomy ({ commit }) {
+      fetchTaxonomy ({commit}) {
         return client
           .fetchTaxonomy()
           .then(taxonomy => commit('setTaxonomy', taxonomy))
@@ -177,7 +143,7 @@ export function createStore () {
           .fetchUsecases()
           .then( usecases => commit( 'setUsecases', usecases))
       },
-      login({ commit }, creds) {
+      login({commit}, creds) {
         commit(LOGIN) // show spinner
         return client
           .login(creds)

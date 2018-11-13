@@ -1,15 +1,15 @@
 export default {
 	variant: {
-    maybe: "secondary",
-    buy: "primary", 
-    hold: "success",
-    sell: "danger"
+    Maybe: "secondary",
+    Buy: "primary", 
+    Hold: "success",
+    Sell: "danger"
   },
   phaseImages: Object.freeze({
-    'buy': require('../assets/buy.svg'),
-    'hold': require('../assets/service.svg'), 
-    'sell': require('../assets/exterminator.svg'), 
-    'maybe': require('../assets/community.svg')
+    'Buy': require('../assets/buy.svg'),
+    'Hold': require('../assets/service.svg'), 
+    'Sell': require('../assets/exterminator.svg'), 
+    'Maybe': require('../assets/community.svg')
   }),
 	filters: {
 		outline() {
@@ -18,12 +18,17 @@ export default {
 	},
 	computed: {
       types: function() {
-        return this.$store.getters.lifeCycle.items.map( item => item.type).filter((v, i, a) => a.indexOf(v) === i);
+        return this.$store.getters.lifeCycle.reduce( 
+          (acc,item)=> { 
+            if(!acc.includes(item.phase)) acc.push(item.phase)
+            return acc 
+          }, [])
+        //return this.$store.getters.lifeCycle.map(item => item.phase).filter((v, i, a) => a.indexOf(v) === i);
       },
       itemsForType: function() {
-        const namesForType = type =>  this.$store.getters.lifeCycle.items.filter( item => item.type === type).map( item => item.name);
+        const namesForType = type => this.$store.getters.lifeCycle.filter(item => item.phase === type).map( item => item.name);
         const myMap = new Map();
-        this.types.forEach( type =>  myMap[type] = namesForType(type));
+        this.types.forEach(type => myMap[type] = namesForType(type));
         return myMap;
       }
     },
