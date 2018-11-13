@@ -3,7 +3,7 @@
     "statuses" : [
       {
         "name": "To be decided",
-        "phase": "Buy"
+        "phase": "Maybe"
       },
       {
         "name": "Experiment",
@@ -35,10 +35,6 @@
       },
        {
         "name": "Undecided",
-        "phase": "Maybe"
-      },
-       {
-        "name": "WIP",
         "phase": "Maybe"
       }
     ],
