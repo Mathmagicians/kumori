@@ -37,8 +37,7 @@
 				overlay
 				v-for="type in types"
 				tag="article"
-				class="card-lifecycle"
-				>
+				class="card-lifecycle">
 				<div class="card-body text-left">
 					<b-img
 						fluid
@@ -60,7 +59,7 @@
 
 					<b-button-group vertical>
 						<span
-							style="width: 10rem;margin: 2px;"
+							class="bgroup"
 							v-for="item in itemsForType[type]" >
 							<life-cycle
 								:id="item+'selector'"
@@ -198,40 +197,51 @@
 </script>
 
 <style scoped>
+
 .card-lifecycle {
   height: 20rem;
   background-color: white;
 }
 
+.card-body {
+	padding: 0.5rem;
+}
+
 .image-lc {
 	width: 100%;
-    height: 8rem;
-    background-color: white;
-    opacity: 1;
+	height: 8rem;
+	background-color: white;
+	opacity: 1;
 }
 
 .sunburst {
-    width: 400px;
-    height: 400px;
-    margin-top: 10px;
-    position: relative;
-  }
+	width: 400px;
+	height: 400px;
+	margin-top: 10px;
+	position: relative;
+}
 
-	.father {
-	    position: relative;
-	    width: 100%;
-	    height: 100%;
-	    display: flex;
-	    justify-content: center;
-	  }
+.father {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+}
 
-		.control-left {
-		 height: 100%;
-		 width: 100%;
-	 }
-	 .phase {
-		min-width: 8em;
-  		max-width: 8em;
-  		margin: 2px;
-	}
+.control-left {
+	height: 100%;
+	width: 100%;
+}
+
+.phase {
+	min-width: 8em;
+	max-width: 8em;
+	margin: 2px;
+}
+
+.bgroup {
+	width: 10rem;
+	margin: 2px;
+}
 </style>

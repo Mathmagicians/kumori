@@ -15,7 +15,7 @@ import {
   clipboard,
   comment,
   exclamation,
-  flag, 
+  flag,
   fire,
   heart,
   github,
@@ -31,14 +31,19 @@ import {
   times,
   toolbox,
   unlock,
-  user
+  user,
+  boxes,
+  cubes,
+  comments,
+  paw
 } from 'vue-awesome/icons'
+import 'vue-awesome/icons/book-dead'
 import Icon from 'vue-awesome/components/Icon'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import './app.css'
 import VueFuse from 'vue-fuse'
- 
+
 Vue.use(BootstrapVue)
 Vue.use(VueResource)
 Vue.use(VueFuse)

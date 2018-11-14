@@ -1,7 +1,7 @@
 <template>
 	<div class="my-2">
     <b-row>
-      <b-col cols="5">
+      <b-col cols="6">
         <b-alert
           v-if="loading.tax"
           show
@@ -18,7 +18,7 @@
         >
         </search-component>
       </b-col>
-      <b-col cols="7">
+      <b-col cols="6">
         <b-alert
           v-if="loading.tech"
           show
@@ -54,9 +54,9 @@
                 technologies.
             </p>
           </b-alert>
-         <list-with-pagination 
+         <list-with-pagination
             ref="pagination"
-            :list-size="25" 
+            :list-size="25"
             v-bind:list-total="filteredTechComponents.length"
             v-bind:activeOrdinal="activeOrdinal"
             :button-panel-size="7">
@@ -146,18 +146,18 @@
         })
       }
 		},
-		created () { 
+		created () {
   		this.loading = {tech: true, tax: true}
       this.$store
         .dispatch('fetchTaxonomy')
         .then(taxonomy => { this.loading.tax = false })
   		this.$store.dispatch('fetchTechComponents')
-    			.then(techComponents => { 
+    			.then(techComponents => {
             this.loading.tech = false
              this.activeId = this.findUidFromName(this.name)
            })
       this.$store.dispatch('fetchTechSize')
-        .then( size => { 
+        .then( size => {
           this.listTotal = this.$store.getters.techSize
           this.loading.size = false
         })
