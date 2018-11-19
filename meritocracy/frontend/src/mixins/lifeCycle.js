@@ -1,5 +1,11 @@
 export default {
-	
+
+	variant: {
+    Maybe: "secondary",
+    Buy: "primary", 
+    Hold: "success",
+    Sell: "danger"
+  },
   phaseImages: Object.freeze({
     'Buy': require('../assets/buy.svg'),
     'Hold': require('../assets/service.svg'), 
