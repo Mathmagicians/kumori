@@ -25,6 +25,7 @@ script:
   - make test
   - docker-compose  -f meritocracy/docker-compose.yml down
   - if [ "$TRAVIS_BRANCH" = "master" ]; then make push; fi
+  - if [ "$TRAVIS_BRANCH" = "master" ]; then make sonar; fi
 
 after_success:
 - codecov
