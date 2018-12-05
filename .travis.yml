@@ -20,9 +20,9 @@ before_script:
 
 script:
 # Build backend
-   - cd meritocracy/backend/postgres && make -f Makefile build
+   - cd meritocracy/backend/postgres && make -f Makefile build && cd ../../../
 # Build Frontend
-   - cd meritocracy/frontend && make -f Makefile server_start setup build server_stop
+   - cd meritocracy/frontend && make -f Makefile server_start setup build server_stop && cd ../../
 #  - make build
 #  - cp meritocracy/.env.sample .env
 #  - docker-compose -f meritocracy/docker-compose.yml up -d
