@@ -3,7 +3,13 @@ sudo: required
 services:
   - docker
 
-dist: trusty
+dist: xenial
+addons:
+  apt:
+    packages:
+    - docker
+
+cache: npm
 
 env:
   COMPOSE_VERSION: 1.22.0
@@ -23,13 +29,19 @@ script:
    - cd meritocracy/backend/postgres && make -f Makefile build && cd ../../../
 # Build Frontend
    - cd meritocracy/frontend && make -f Makefile server_start setup build server_stop && cd ../../
-#  - make build
-#  - cp meritocracy/.env.sample .env
-#  - docker-compose -f meritocracy/docker-compose.yml up -d
-#  - make test
-#  - docker-compose  -f meritocracy/docker-compose.yml down
-#  - if [ "$TRAVIS_BRANCH" = "master" ]; then make push; fi
-#  - if [ "$TRAVIS_BRANCH" = "master" ]; then make sonar; fi
+# Configure environment
+   - cp meritocracy/.env.sample .env
+# Start Environment
+   - docker-compose -f meritocracy/docker-compose.yml up -d
+# Run test
+   - cd meritocracy/frontend && make -f Makefile rest unit && ../../
+   - cd meritocracy/spec && ./gradlew && ../../
+# Stop Environment
+   - docker-compose  -f meritocracy/docker-compose.yml down
+# Run Sonarqube scan
+   - if [ "$TRAVIS_BRANCH" = "master" ]; then make sonar; fi
+# Push to dockerhub
+   - if [ "$TRAVIS_BRANCH" = "master" ]; then make push; fi
 
 after_success:
 - codecov
