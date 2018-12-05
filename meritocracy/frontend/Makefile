@@ -20,6 +20,12 @@ setup:
 	@docker exec kumori_dev_server npm install
 	@docker exec kumori_dev_server sed -i '32893s/^/\/\//' node_modules/prettier/index.js
 
+build:
+	@docker exec kumori_dev_server sed -i 's|BASE_URL=".*"|BASE_URL="/api/"|' src/api/server/index.js
+	@docker exec kumori_dev_server npm run build
+	@docker build -t ${IMAGE} .
+	@docker exec kumori_dev_server sed -i 's|BASE_URL=".*"|BASE_URL="http://127.0.0.1:3000/"|' src/api/server/index.js
+
 nuke_node:
 	@docker exec kumori_dev_server rm -rf node_modules
 
@@ -29,18 +35,9 @@ unit:
 	@docker exec kumori_dev_server npm run test
 
 e2e:
-	@docker exec kumori_dev_server  npm run test:e2e
-
-rest:
-	@../backend/rest_test.sh eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiZWRpdG9yIn0.tYUlheVyisdr0ezFYf92mC_dvSS02cpDvPBu9aKLySk http://localhost:3000
+	@docker exec kumori_dev_server npm run test:e2e
 
 test: unit e2e
-
-build:
-	@docker exec kumori_dev_server sed -i 's|BASE_URL=".*"|BASE_URL="/api/"|' src/api/server/index.js
-	@docker exec kumori_dev_server npm run build
-	@docker build -t ${IMAGE} .
-	@docker exec kumori_dev_server sed -i 's|BASE_URL=".*"|BASE_URL="http://127.0.0.1:3000/"|' src/api/server/index.js
 
 login:
 	@docker login -u ${REGISTRY_USER} -p ${REGISTRY_PASS}

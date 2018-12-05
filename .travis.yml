@@ -27,14 +27,20 @@ before_script:
 script:
 # Build backend
    - cd meritocracy/backend/postgres && make -f Makefile build && cd ../../../
+# Start build container
+   - cd meritocracy/frontend && make -f Makefile server_start && cd ../../
 # Build Frontend
-   - cd meritocracy/frontend && make -f Makefile server_start setup build server_stop && cd ../../
+   - cd meritocracy/frontend && make -f Makefile setup build && cd ../../
+# Run frontend unit test
+   - cd meritocracy/frontend && make -f Makefile unit && cd ../../
+# Stop build container
+   - cd meritocracy/frontend && make -f Makefile server_stop && cd ../../
 # Configure environment
    - cp meritocracy/.env.sample .env
 # Start Environment
    - docker-compose -f meritocracy/docker-compose.yml up -d
-# Run test
-   - cd meritocracy/frontend && make -f Makefile server_start rest unit server_stop && ../../
+# Run integration tests
+   - meritocracy/backend/rest_test.sh eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiZWRpdG9yIn0.tYUlheVyisdr0ezFYf92mC_dvSS02cpDvPBu9aKLySk http://localhost:3000
    - cd meritocracy/spec && ./gradlew && ../../
 # Stop Environment
    - docker-compose  -f meritocracy/docker-compose.yml down
