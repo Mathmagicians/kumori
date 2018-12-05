@@ -2,7 +2,7 @@ version: '2.0'
 services:
   devserver:
     container_name: meritocracy_${MERITOCRACY_VERSION}-devserver
-    image: node
+    image: mathmagicians/kumori-build
     command: ["npm", "run", "dev"]
     working_dir: /tmp
     ports:

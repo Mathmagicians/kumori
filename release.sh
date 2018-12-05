@@ -23,7 +23,7 @@ function create_release () {
   curl -s -X POST ${PATH} -d ${data}
 }
 
-# delete a release
+# Delete a release
 function delete_release () {
   curl -s -X DELETE ${PATH}/${1}
 }

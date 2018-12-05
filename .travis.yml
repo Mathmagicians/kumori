@@ -16,16 +16,20 @@ before_install:
 
 before_script:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker pull mathmagicians/kumori-build:latest
 
 script:
-  - make build
-  - cp meritocracy/.env.sample .env
-  - ls -la
-  - docker-compose -f meritocracy/docker-compose.yml up -d
-  - make test
-  - docker-compose  -f meritocracy/docker-compose.yml down
-  - if [ "$TRAVIS_BRANCH" = "master" ]; then make push; fi
-  - if [ "$TRAVIS_BRANCH" = "master" ]; then make sonar; fi
+# Build backend
+   - cd meritocracy/backend/postgres && make -f Makefile build
+# Build Frontend
+   - cd meritocracy/frontend && make -f Makefile server_start setup build server_stop
+#  - make build
+#  - cp meritocracy/.env.sample .env
+#  - docker-compose -f meritocracy/docker-compose.yml up -d
+#  - make test
+#  - docker-compose  -f meritocracy/docker-compose.yml down
+#  - if [ "$TRAVIS_BRANCH" = "master" ]; then make push; fi
+#  - if [ "$TRAVIS_BRANCH" = "master" ]; then make sonar; fi
 
 after_success:
 - codecov
