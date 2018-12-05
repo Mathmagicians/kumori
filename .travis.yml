@@ -41,7 +41,7 @@ script:
    - docker-compose -f meritocracy/docker-compose.yml up -d
 # Run integration tests
    - meritocracy/backend/rest_test.sh eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiZWRpdG9yIn0.tYUlheVyisdr0ezFYf92mC_dvSS02cpDvPBu9aKLySk http://localhost:3000
-   - cd meritocracy/spec && ./gradlew && ../../
+   - docker-compose -f meritocracy/docker-compose.yml exec integration bash -c 'cd spec && ./gradlew'
 # Stop Environment
    - docker-compose  -f meritocracy/docker-compose.yml down
 # Run Sonarqube scan
