@@ -34,7 +34,7 @@ script:
 # Start Environment
    - docker-compose -f meritocracy/docker-compose.yml up -d
 # Run test
-   - cd meritocracy/frontend && make -f Makefile rest unit && ../../
+   - cd meritocracy/frontend && make -f Makefile server_start rest unit server_stop && ../../
    - cd meritocracy/spec && ./gradlew && ../../
 # Stop Environment
    - docker-compose  -f meritocracy/docker-compose.yml down
