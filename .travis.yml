@@ -3,7 +3,13 @@ sudo: required
 services:
   - docker
 
-dist: trusty
+dist: xenial
+addons:
+  apt:
+    packages:
+    - docker
+
+cache: npm
 
 env:
   COMPOSE_VERSION: 1.22.0
@@ -16,16 +22,34 @@ before_install:
 
 before_script:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker pull mathmagicians/kumori-build:latest
 
 script:
-  - make build
-  - cp meritocracy/.env.sample .env
-  - ls -la
-  - docker-compose -f meritocracy/docker-compose.yml up -d
-  - make test
-  - docker-compose  -f meritocracy/docker-compose.yml down
-  - if [ "$TRAVIS_BRANCH" = "master" ]; then make push; fi
-  - if [ "$TRAVIS_BRANCH" = "master" ]; then make sonar; fi
+# Build backend
+   - cd meritocracy/backend/postgres && make -f Makefile build && cd ../../../
+# Start build container
+   - cd meritocracy/frontend && make -f Makefile server_start && cd ../../
+# Build Frontend
+   - cd meritocracy/frontend && make -f Makefile setup build && cd ../../
+# Run frontend unit test
+   - cd meritocracy/frontend && make -f Makefile unit && cd ../../
+# Stop build container
+   - cd meritocracy/frontend && make -f Makefile server_stop && cd ../../
+# Configure environment
+   - cp meritocracy/.env.sample .env
+# Start Environment
+   - docker-compose -f meritocracy/docker-compose.yml up -d
+# Run integration tests
+   - meritocracy/backend/rest_test.sh eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiZWRpdG9yIn0.tYUlheVyisdr0ezFYf92mC_dvSS02cpDvPBu9aKLySk http://localhost:3000
+   - docker-compose -f meritocracy/docker-compose.yml exec integration bash -c 'cd spec && ./gradlew'
+# Stop Environment
+   - docker-compose  -f meritocracy/docker-compose.yml down
+# Run Sonarqube scan
+   - if [ "$TRAVIS_BRANCH" = "master" ]; then make sonar; fi
+# Push to dockerhub
+   - if [ "$TRAVIS_BRANCH" = "master" ]; then make push; fi
+# Create Release
+   - if [ "$TRAVIS_BRANCH" = "master" ]; then docker run -e GITHUB_TOKEN -e TRAVIS_BUILD_NUMBER --rm -v ${PWD}:/tmp -w /tmp  mathmagicians/kumori-build:latest ./release.sh; fi
 
 after_success:
 - codecov

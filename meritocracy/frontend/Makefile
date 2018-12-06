@@ -1,33 +1,45 @@
+BUILD_IMAGE=mathmagicians/kumori-build:latest
 VERSION=latest
 IMAGE="mathmagicians/meritocracy_web:${VERSION}"
 
-.PHONY: setup build unit e2e test login logout push pull shell run
+.PHONY: server_start server_shell server_stop setup build unit e2e test login logout push pull
+
+# Start docker image for development
+server_start:
+	@docker run \
+	-e GITHUB_TOKEN \
+	-e TRAVIS_BUILD_NUMBE --rm -dt --name kumori_dev_server -v ${PWD}:/tmp -w /tmp ${BUILD_IMAGE}
+
+# Run shell on dev server
+server_shell:
+	@docker exec -i -t kumori_dev_server bash
+
+# Stop dev server
+server_stop:
+	@docker rm -f kumori_dev_server
 
 setup:
-	@docker run --rm -v ${PWD}:/tmp -w /tmp node npm install
-	@docker run --rm -v ${PWD}:/tmp -w /tmp node sed -i '32893s/^/\/\//' node_modules/prettier/index.js
-
-nuke_node:
-	rm -rf node_modules
-
-peaceNode: node_modules setup
-
-unit:
-	@docker run --rm -v ${PWD}:/tmp -w /tmp node npm run test
-
-e2e:
-	@docker run --rm -v ${PWD}:/tmp -w /tmp node npm run test:e2e
-
-rest:
-	@../backend/rest_test.sh eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiZWRpdG9yIn0.tYUlheVyisdr0ezFYf92mC_dvSS02cpDvPBu9aKLySk http://localhost:3000
-
-test: unit e2e
+	@docker exec kumori_dev_server npm install
+	@docker exec kumori_dev_server sed -i '32893s/^/\/\//' node_modules/prettier/index.js
 
 build:
-	@docker run --rm -v ${PWD}:/tmp -w /tmp node sed -i 's|BASE_URL=".*"|BASE_URL="/api/"|' src/api/server/index.js
-	@docker run --rm -v ${PWD}:/tmp -w /tmp node npm run build
+	@docker exec kumori_dev_server sed -i 's|BASE_URL=".*"|BASE_URL="/api/"|' src/api/server/index.js
+	@docker exec kumori_dev_server npm run build
 	@docker build -t ${IMAGE} .
-	@docker run --rm -v ${PWD}:/tmp -w /tmp node sed -i 's|BASE_URL=".*"|BASE_URL="http://127.0.0.1:3000/"|' src/api/server/index.js
+	@docker exec kumori_dev_server sed -i 's|BASE_URL=".*"|BASE_URL="http://127.0.0.1:3000/"|' src/api/server/index.js
+
+nuke_node:
+	@docker exec kumori_dev_server rm -rf node_modules
+
+peaceNode: nuke_node setup
+
+unit:
+	@docker exec kumori_dev_server npm run test
+
+e2e:
+	@docker exec kumori_dev_server npm run test:e2e
+
+test: unit e2e
 
 login:
 	@docker login -u ${REGISTRY_USER} -p ${REGISTRY_PASS}
@@ -40,9 +52,3 @@ push:
 
 pull:
 	@docker pull ${IMAGE}
-
-shell:
-	@docker run --rm --name meritocracy_web_shell -v ${PWD}:/tmp -w /tmp -it node /bin/sh
-
-run:
-	@docker run --rm --name meritocracy_web_run -v ${PWD}:/tmp -w /tmp -p 80:80 -it ${IMAGE}

@@ -1,5 +1,15 @@
 version: '2.0'
 services:
+  integration:
+    container_name: meritocracy_${MERITOCRACY_VERSION}-integration
+    image: mathmagicians/kumori-build
+    command: ["tail", "-F", "README.md"]
+    working_dir: /tmp
+    volumes:
+      - "./:/tmp"
+    networks:
+      - meritocracy
+
   web:
     container_name: meritocracy_${MERITOCRACY_VERSION}-web
     image: mathmagicians/meritocracy_web:latest

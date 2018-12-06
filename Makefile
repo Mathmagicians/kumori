@@ -6,19 +6,19 @@ build:
 	@cd meritocracy/frontend && \
 	make -f Makefile setup build
 
-push:
-	@cd meritocracy/backend/postgres && \
-	make -f Makefile push
-	@cd meritocracy/frontend && \
-	make -f Makefile push
-
 test:
 	@cd meritocracy/frontend && \
 	make -f Makefile rest unit
 	@cd meritocracy/spec && \
 	./gradlew
 
-sonar:
+push:
+	@cd meritocracy/backend/postgres && \
+	make -f Makefile push
+	@cd meritocracy/frontend && \
+	make -f Makefile push
+
+sonar-scan:
 	@docker run \
 	 --rm \
 	 --user $(shell id -u):$(shell id -g) \
