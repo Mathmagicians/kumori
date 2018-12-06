@@ -69,7 +69,7 @@ function get_release_id () {
 release_exists () {
   local message
   message="$(get_release "${1}" | /usr/bin/jq -c -r '.message')"
-  if [ ${message} = "null" ]; then echo 1; else echo 0; fi
+  if [ "${message}" = "null" ]; then echo 1; else echo 0; fi
 }
 
 create_release "${BUILD_RELEASE}" "${BUILD_RELEASE}" "" "false" "false"
