@@ -6,7 +6,9 @@ IMAGE="mathmagicians/meritocracy_web:${VERSION}"
 
 # Start docker image for development
 server_start:
-	@docker run --rm -dt --name kumori_dev_server -v ${PWD}:/tmp -w /tmp ${BUILD_IMAGE}
+	@docker run \
+	-e GITHUB_TOKEN \
+	-e TRAVIS_BUILD_NUMBE --rm -dt --name kumori_dev_server -v ${PWD}:/tmp -w /tmp ${BUILD_IMAGE}
 
 # Run shell on dev server
 server_shell:

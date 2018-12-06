@@ -48,6 +48,8 @@ script:
    - if [ "$TRAVIS_BRANCH" = "master" ]; then make sonar; fi
 # Push to dockerhub
    - if [ "$TRAVIS_BRANCH" = "master" ]; then make push; fi
+# Create Release
+   - ./release.sh # should run in docker container
 
 after_success:
 - codecov

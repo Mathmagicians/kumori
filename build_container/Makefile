@@ -12,4 +12,4 @@ push:
 	@docker push ${IMAGE}
 
 run:
-	@docker run --rm -it -v ${PWD}/../:/tmp -w /tmp ${IMAGE}
+	@docker run -e GITHUB_TOKEN -e TRAVIS_BUILD_NUMBER --rm -it -v ${PWD}/../:/tmp -w /tmp ${IMAGE}
