@@ -45,7 +45,7 @@ script:
 # Stop Environment
    - docker-compose  -f meritocracy/docker-compose.yml down
 # Run Sonarqube scan
-   - if [ "$TRAVIS_BRANCH" = "master" ]; then make sonar; fi
+   - if [ "$TRAVIS_BRANCH" = "master" ]; then make sonar-scan; fi
 # Push to dockerhub
    - if [ "$TRAVIS_BRANCH" = "master" ]; then make push; fi
 # Create Release
