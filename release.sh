@@ -65,12 +65,24 @@ function get_release_id () {
   get_release "${1}" | /usr/bin/jq -c -r '.id'
 }
 
+# Get asset path
+function get_asset_path () {
+  get_release "${1}" | /usr/bin/jq -c -r '.assets_url'
+}
+
 # Check if a release exists
 release_exists () {
   local message
   message="$(get_release "${1}" | /usr/bin/jq -c -r '.message')"
   if [ "${message}" = "null" ]; then echo 1; else echo 0; fi
 }
+
+function add_asset () { # NOT working yet
+  /usr/bin/curl -s -X POST -H "Content-Type: text/markdown" -d "@./README.md" $(get_asset_path "${1}")?name=README.md
+}
+
+#get_asset_path "${BUILD_RELEASE}"
+#add_asset "${BUILD_RELEASE}"
 
 create_release "${BUILD_RELEASE}" "${BUILD_RELEASE}" "" "false" "false"
 #delete_release "${BUILD_RELEASE}"
