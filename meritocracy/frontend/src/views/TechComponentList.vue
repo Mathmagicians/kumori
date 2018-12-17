@@ -88,7 +88,7 @@
     },
     data () {
     		return {
-      			loading: {tech: true, tax: true, size: true},
+      			loading: {tech: true, tax: true, size: true, lc: true},
             activeId: '',
             query: {
               string: '',
@@ -161,6 +161,9 @@
           this.listTotal = this.$store.getters.techSize
           this.loading.size = false
         })
+				this.$store
+	        .dispatch('fetchLifeCycle')
+	        .then(lc => {this.loading = false})
 		},
     filters: {
       techId (tech) {
