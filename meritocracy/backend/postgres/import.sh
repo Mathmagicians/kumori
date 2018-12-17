@@ -62,7 +62,7 @@ function components () {
     if [ "${pri_use}" != '' ]; then
       _commit "UPDATE api.components SET primary_usecase = ${pri_use} WHERE id = ${current};"
 
-      print_message_component "Added primary usecase" "${comments}"
+      print_message_component "Added primary usecase" "${pri_use}"
     fi
     current=$((current+1))
   done <<< "$(echo "${COMPONENTS_DATA}" | jq -r '.[] | @base64')"

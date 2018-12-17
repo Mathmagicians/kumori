@@ -2,8 +2,8 @@
 <div id="app" >
   <b-navbar type="dark" variant="dark" class="navbar navbar-expand-md">
     <b-navbar-brand to="/" class="d-inline-block align-top" alt="techmenu logo">
-      <b-img src="./assets/techmenu.svg" width="64" height="64" class="m-1" />
-      #techmenu
+      <b-img src="./assets/logo.svg" width="32" height="32" />
+      Meritocracy
     </b-navbar-brand>
 
     <b-navbar-nav>
