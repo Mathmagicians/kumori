@@ -12,12 +12,6 @@ test:
 	@cd meritocracy/spec && \
 	./gradlew
 
-push:
-	@cd meritocracy/backend/postgres && \
-	make -f Makefile push
-	@cd meritocracy/frontend && \
-	make -f Makefile push
-
 sonar-scan:
 	@docker run \
 	 --rm \

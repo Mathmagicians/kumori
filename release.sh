@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
+
+# Release API documentation
+# https://developer.github.com/v3/repos/releases/
+
 set -e
 
 declare MAJOR=0
@@ -6,15 +10,30 @@ declare MINOR=1
 declare PATCH=0
 declare RELEASE="v${MAJOR}.${MINOR}.${PATCH}"
 declare BUILD_RELEASE="v${MAJOR}.${MINOR}.${PATCH}-${TRAVIS_BUILD_NUMBER:-999}"
-
 declare REPO='Mathmagicians/kumori'
 declare API_PATH="https://${GITHUB_TOKEN}@api.github.com/repos/${REPO}/releases"
 declare REPO_PATH="https://${GITHUB_TOKEN}@github.com/${REPO}.git"
+declare ACTION=0
 
-# Get all releases
-function get_releases () {
-  /usr/bin/curl -s -X GET ${API_PATH}
-}
+# Parse script arguments
+GETOPT=$(getopt -n "$0"  -o '' --long "create,delete,publish"  -- "$@")
+if [ $? -ne 0 ]; then exit 1; fi
+eval set -- "$GETOPT"
+
+while true;
+do
+  case "$1" in
+    --create)
+      ACTION=1; shift;;
+    --delete)
+      ACTION=2; shift;;
+    --publish)
+      ACTION=3; shift;;
+    --)
+      shift
+      break;;
+  esac
+done
 
 # Get release by tag
 function get_release () {
@@ -33,7 +52,7 @@ function create_release () {
    --arg key2   'name' \
    --arg value2 ${2} \
    --arg key3   'body' \
-   --arg value3 "$(cat release.md)" \
+   --arg value3 "$(cat release.md | sed "s/{TAG}/${1}/g")" \
    --arg key4   'draft' \
    --arg key5   'prerelease' \
    '. | .[$key0]=$value0 | .[$key1]=$value1 | .[$key2]=$value2 | .[$key3]=$value3 | .[$key4]=false | .[$key5]=false' \
@@ -45,6 +64,8 @@ function create_release () {
     /usr/bin/curl -s -X PATCH ${API_PATH}/${id} -d "${data}" | /usr/bin/jq -c -r '.html_url'
   else
     /usr/bin/curl -s -X POST ${API_PATH} -d "${data}" | /usr/bin/jq -c -r '.html_url'
+    cat meritocracy/.env.sample | sed "s/MERITOCRACY_VERSION=dev/MERITOCRACY_VERSION=${BUILD_RELEASE}/" > ./env.sample
+    add_asset "${BUILD_RELEASE}" "text/plain" "env.sample" | /usr/bin/jq -c -r '.browser_download_url'
   fi
 }
 
@@ -65,24 +86,40 @@ function get_release_id () {
   get_release "${1}" | /usr/bin/jq -c -r '.id'
 }
 
-# Get asset path
-function get_asset_path () {
-  get_release "${1}" | /usr/bin/jq -c -r '.assets_url'
-}
-
 # Check if a release exists
-release_exists () {
+function release_exists () {
   local message
   message="$(get_release "${1}" | /usr/bin/jq -c -r '.message')"
   if [ "${message}" = "null" ]; then echo 1; else echo 0; fi
 }
 
-function add_asset () { # NOT working yet
-  /usr/bin/curl -s -X POST -H "Content-Type: text/markdown" -d "@./README.md" $(get_asset_path "${1}")?name=README.md
+# Add asset to release
+function add_asset () {
+  /usr/bin/curl -s -X POST -H "Content-Type: ${2}" -d "@./${3}" "https://${GITHUB_TOKEN}@uploads.github.com/repos/Mathmagicians/kumori/releases/$(get_release_id "${1}")/assets?name=${3}"
 }
 
-#get_asset_path "${BUILD_RELEASE}"
-#add_asset "${BUILD_RELEASE}"
+function publish () {
+  docker tag "mathmagicians/meritocracy_web:latest" "mathmagicians/meritocracy_web:${1}"
+  docker tag "mathmagicians/meritocracy_db:latest" "mathmagicians/meritocracy_db:${1}"
+  docker push "mathmagicians/meritocracy_web:latest"
+  docker push "mathmagicians/meritocracy_db:latest"
+  docker push "mathmagicians/meritocracy_web:${1}"
+  docker push "mathmagicians/meritocracy_db:${1}"
+}
 
-create_release "${BUILD_RELEASE}" "${BUILD_RELEASE}" "" "false" "false"
+#get_release "${BUILD_RELEASE}"
+
+#add_asset "${BUILD_RELEASE}" "text/plain" "CHANGELOG.md"
+
+#create_release "${BUILD_RELEASE}" "${BUILD_RELEASE}" "" "false" "false"
+#publish "${BUILD_RELEASE}"
 #delete_release "${BUILD_RELEASE}"
+
+# Script entry point
+function main () {
+  if [ "${ACTION}" == "1" ]; then create_release "${BUILD_RELEASE}" "${BUILD_RELEASE}" "" "false" "false"; fi
+  if [ "${ACTION}" == "2" ]; then delete_release "${BUILD_RELEASE}"; fi
+  if [ "${ACTION}" == "3" ]; then publish "${BUILD_RELEASE}"; fi
+}
+
+main

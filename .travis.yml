@@ -47,9 +47,9 @@ script:
 # Run Sonarqube scan
    - if [ "$TRAVIS_BRANCH" = "master" ]; then make sonar-scan; fi
 # Push to dockerhub
-   - if [ "$TRAVIS_BRANCH" = "master" ]; then make push; fi
-# Create Release
-   - if [ "$TRAVIS_BRANCH" = "master" ]; then docker run -e GITHUB_TOKEN -e TRAVIS_BUILD_NUMBER --rm -v ${PWD}:/tmp -w /tmp  mathmagicians/kumori-build:latest ./release.sh; fi
+   - if [ "$TRAVIS_BRANCH" = "master" ]; then ./release.sh --publish; fi
+# Create release on github
+   - if [ "$TRAVIS_BRANCH" = "master" ]; then docker run -e GITHUB_TOKEN -e TRAVIS_BUILD_NUMBER --rm -v ${PWD}:/tmp -w /tmp  mathmagicians/kumori-build:latest ./release.sh --create; fi
 
 after_success:
 - codecov
