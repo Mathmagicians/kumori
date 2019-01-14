@@ -62,6 +62,17 @@ services:
       - postgrest
     networks:
       - meritocracy
+      
+  neo4j:
+    container_name: meritocracy_${MERITOCRACY_VERSION}-neo4j
+    image: neo4j:latest
+    ports:
+    - "7474:7474"
+    - "7687:7687"
+    networks:
+    - meritocracy
+    environment:
+      NEO4J_AUTH: none
 
 volumes:
   data-pgadmin:
