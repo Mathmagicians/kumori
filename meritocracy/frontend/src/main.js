@@ -41,7 +41,6 @@ import 'vue-awesome/icons/book-dead'
 import Icon from 'vue-awesome/components/Icon'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
-import './app.css'
 import VueFuse from 'vue-fuse'
 
 Vue.use(BootstrapVue)
