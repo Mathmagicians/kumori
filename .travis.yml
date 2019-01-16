@@ -39,6 +39,8 @@ script:
    - cp meritocracy/.env.sample .env
 # Start Environment
    - docker-compose -f meritocracy/docker-compose.yml up -d
+# Load fixture
+   - meritocracy/backend/load_fixture.sh
 # Run integration tests
    - meritocracy/backend/rest_test.sh eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiZWRpdG9yIn0.tYUlheVyisdr0ezFYf92mC_dvSS02cpDvPBu9aKLySk http://localhost:3000
    - docker-compose -f meritocracy/docker-compose.yml exec integration bash -c 'cd spec && ./gradlew'
