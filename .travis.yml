@@ -46,9 +46,13 @@ script:
    - cd ../..
 # Run integration tests
    - meritocracy/backend/rest_test.sh eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiZWRpdG9yIn0.tYUlheVyisdr0ezFYf92mC_dvSS02cpDvPBu9aKLySk http://localhost:3000
+   - cd meritocracy
    - docker-compose -f meritocracy/docker-compose.yml exec integration bash -c 'cd spec && ./gradlew'
+   - cd ../
 # Stop Environment
-   - docker-compose  -f meritocracy/docker-compose.yml down
+   - cd meritocracy
+   - docker-compose  -f docker-compose.yml down
+   - cd ../
 # Run Sonarqube scan
    - if [ "$TRAVIS_BRANCH" = "master" ]; then make sonar-scan; fi
 # Push to dockerhub
