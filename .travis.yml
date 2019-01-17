@@ -35,12 +35,15 @@ script:
    - cd meritocracy/frontend && make -f Makefile unit && cd ../../
 # Stop build container
    - cd meritocracy/frontend && make -f Makefile server_stop && cd ../../
-# Configure environment
-   - cp meritocracy/.env.sample .env
-# Start Environment
-   - docker-compose -f meritocracy/docker-compose.yml up -d
+# Configure and start environment
+   - cd meritocracy
+   - cp .env.sample .env
+   - docker-compose -f docker-compose.yml up -d
+   - cd ../
 # Load fixture
-   - cd meritocracy/backend && ./load_fixture.sh && cd ../..
+   - cd meritocracy/backend
+   - ./load_fixture.sh
+   - cd ../..
 # Run integration tests
    - meritocracy/backend/rest_test.sh eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiZWRpdG9yIn0.tYUlheVyisdr0ezFYf92mC_dvSS02cpDvPBu9aKLySk http://localhost:3000
    - docker-compose -f meritocracy/docker-compose.yml exec integration bash -c 'cd spec && ./gradlew'
