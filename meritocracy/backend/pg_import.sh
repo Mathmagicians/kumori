@@ -27,10 +27,10 @@ done
 function import () {
   local curdir="$(pwd)"
   cd ../frontend
-  docker stop meritocracy_dev-postgrest
-  docker exec -i -u postgres meritocracy_dev-postgres psql -U "${USERNAME}" < ../backend/postgres/database.sql
-  docker exec -i -u postgres meritocracy_dev-postgres psql -U "${USERNAME}" "${DATABASE}" < "${FILENAME}"
-  docker start meritocracy_dev-postgrest
+  docker stop meritocracy-postgrest
+  docker exec -i -u postgres meritocracy-postgres psql -U "${USERNAME}" < ../backend/postgres/database.sql
+  docker exec -i -u postgres meritocracy-postgres psql -U "${USERNAME}" "${DATABASE}" < "${FILENAME}"
+  docker start meritocracy-postgrest
   cd "${curdir}"
 }
 
