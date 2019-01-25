@@ -1,7 +1,7 @@
 version: '2.0'
 services:
   devserver:
-    container_name: meritocracy_${MERITOCRACY_VERSION}-devserver
+    container_name: meritocracy-devserver
     image: mathmagicians/kumori-build
     command: ["npm", "run", "dev"]
     working_dir: /tmp
@@ -13,7 +13,7 @@ services:
       - meritocracy
 
   postgrest:
-    container_name: meritocracy_${MERITOCRACY_VERSION}-postgrest
+    container_name: meritocracy-postgrest
     image: postgrest/postgrest:latest
     ports:
       - "3000:3000"
@@ -28,21 +28,19 @@ services:
       - meritocracy
 
   postgres:
-    container_name: meritocracy_${MERITOCRACY_VERSION}-postgres
-    image: mathmagicians/meritocracy_db:latest
+    container_name: meritocracy-postgres
+    image: mathmagicians/meritocracy_db:${VERSION}
     environment:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       DB_SCHEMA: ${POSTGREST_CONNECTION_SCHEMA}
       DB_CRUD_USER: ${POSTGREST_CONNECTION_USER}
       DB_CRUD_PASS: ${POSTGREST_CONNECTION_PASSWORD}
       DB_R_USER: ${POSTGREST_ANON_ROLE}
-      TAXONOMY: ${TAXONOMY}
-      COMPONENTS: ${COMPONENTS}
     networks:
       - meritocracy
 
   pgadmin:
-    container_name: meritocracy_${MERITOCRACY_VERSION}-pgadmin
+    container_name: meritocracy-pgadmin
     image: chorss/docker-pgadmin4:latest
     ports:
     - "5050:5050"
@@ -52,7 +50,7 @@ services:
     - data-pgadmin:/data
 
   swagger:
-    container_name: meritocracy_${MERITOCRACY_VERSION}-swagger
+    container_name: meritocracy-swagger
     image: swaggerapi/swagger-ui
     ports:
       - "8070:8080"
@@ -62,9 +60,9 @@ services:
       - postgrest
     networks:
       - meritocracy
-      
+
   neo4j:
-    container_name: meritocracy_${MERITOCRACY_VERSION}-neo4j
+    container_name: meritocracy-neo4j
     image: neo4j:latest
     ports:
     - "7474:7474"

@@ -18,6 +18,16 @@ server_shell:
 server_stop:
 	@docker rm -f kumori_dev_server
 
+# Import a file to the running database
+fixture:
+	@cd ../backend && \
+	./load_fixture.sh
+
+# Dump the current database to a file.
+dump:
+	@cd ../backend && \
+	./pg_export.sh
+
 setup:
 	@docker exec kumori_dev_server npm install
 	@docker exec kumori_dev_server sed -i '32893s/^/\/\//' node_modules/prettier/index.js
