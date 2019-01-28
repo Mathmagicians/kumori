@@ -22,7 +22,7 @@ before_install:
 
 before_script:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - docker pull mathmagicians/kumori-build:latest
+  - docker pull mathmagicians/kumori_build:latest
 
 script:
 # Build backend
@@ -52,7 +52,7 @@ script:
 # Push to dockerhub
    - if [ "$TRAVIS_BRANCH" == "master" ]; then ./release.sh --publish; fi
 # Create release on github
-   - if [ "$TRAVIS_BRANCH" == "master" ]; then docker run -e GITHUB_TOKEN -e TRAVIS_BUILD_NUMBER --rm -v ${PWD}:/tmp -w /tmp  mathmagicians/kumori-build:latest ./release.sh --create; fi
+   - if [ "$TRAVIS_BRANCH" == "master" ]; then docker run -e GITHUB_TOKEN -e TRAVIS_BUILD_NUMBER --rm -v ${PWD}:/tmp -w /tmp  mathmagicians/kumori_build:latest ./release.sh --create; fi
 
 after_success:
 - codecov

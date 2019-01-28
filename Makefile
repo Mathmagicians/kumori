@@ -8,11 +8,8 @@ build:
 	@cd services/frontend && \
 	make -f Makefile server_start setup build server_start
 
-test:
-	@cd services/frontend && \
-	make -f Makefile rest unit
-	@cd services/spec && \
-	./gradlew
+build_build:
+	@docker run -v ${PWD}:/tmp -w /tmp --name build_build mathmagicians/kumori_build:latest bash -c 'cd services/spec && ./gradlew'
 
 sonar-scan:
 	@docker run \

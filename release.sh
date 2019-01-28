@@ -64,7 +64,7 @@ function create_release () {
     /usr/bin/curl -s -X PATCH ${API_PATH}/${id} -d "${data}" | /usr/bin/jq -c -r '.html_url'
   else
     /usr/bin/curl -s -X POST ${API_PATH} -d "${data}" | /usr/bin/jq -c -r '.html_url'
-    cat meritocracy/.env.sample | sed "s/MERITOCRACY_VERSION=dev/MERITOCRACY_VERSION=${BUILD_RELEASE}/" > ./env.sample
+    cat .env.sample | sed "s/VERSION=latest/VERSION=${BUILD_RELEASE}/" > ./env.sample
     add_asset "${BUILD_RELEASE}" "text/plain" "env.sample" | /usr/bin/jq -c -r '.browser_download_url'
   fi
 }
