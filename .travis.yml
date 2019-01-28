@@ -26,7 +26,7 @@ before_script:
 
 script:
 # Build backend
-   - services/backend/postgres && make -f Makefile build && cd ../../../
+   - services/backend && make -f Makefile build && cd ../../
 # Start build container
    - cd services/frontend && make -f Makefile server_start && cd ../../
 # Build Frontend
