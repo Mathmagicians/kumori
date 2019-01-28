@@ -1,15 +1,17 @@
 .PHONY: build push sonar-scan
 
 build:
-	@cd meritocracy/backend/postgres && \
+	@cd services/build && \
 	make -f Makefile build
-	@cd meritocracy/frontend && \
-	make -f Makefile setup build
+	@cd services/backend && \
+	make -f Makefile build
+	@cd services/frontend && \
+	make -f Makefile server_start setup build server_start
 
 test:
-	@cd meritocracy/frontend && \
+	@cd services/frontend && \
 	make -f Makefile rest unit
-	@cd meritocracy/spec && \
+	@cd services/spec && \
 	./gradlew
 
 sonar-scan:

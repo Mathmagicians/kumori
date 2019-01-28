@@ -1,9 +1,0 @@
-/.metadata/
-RemoteSystemsTempFiles
-.env
-/.recommenders/
-target
-.classpath
-.settings
-.project
-.gradle

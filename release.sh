@@ -99,12 +99,12 @@ function add_asset () {
 }
 
 function publish () {
-  docker tag "mathmagicians/meritocracy_web:latest" "mathmagicians/meritocracy_web:${1}"
-  docker tag "mathmagicians/meritocracy_db:latest" "mathmagicians/meritocracy_db:${1}"
-  docker push "mathmagicians/meritocracy_web:latest"
-  docker push "mathmagicians/meritocracy_db:latest"
-  docker push "mathmagicians/meritocracy_web:${1}"
-  docker push "mathmagicians/meritocracy_db:${1}"
+  docker tag "mathmagicians/kumori_web:latest" "mathmagicians/kumori_web:${1}"
+  docker tag "mathmagicians/kumori_db:latest" "mathmagicians/kumori_db:${1}"
+  docker push "mathmagicians/kumori_web:latest"
+  docker push "mathmagicians/kumori_db:latest"
+  docker push "mathmagicians/kumori_web:${1}"
+  docker push "mathmagicians/kumori_db:${1}"
 }
 
 #get_release "${BUILD_RELEASE}"
