@@ -4,7 +4,6 @@ resource "digitalocean_droplet" "dockerhost" {
   region             = "fra1"
   size               = "1gb"
   private_networking = true
-  volume_ids         = ["${var.kumori_volume}"]
 
   ssh_keys = [
     "${var.ssh_fingerprint}",
