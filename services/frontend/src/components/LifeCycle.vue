@@ -1,50 +1,49 @@
 <template>
-    <span v-if="lc"
-      class="align-middle" :title="'Lifecycle phase '+status">
-      <b-button
-        :id="`btn_`+status"
-        size="sm"
-        class="md-4 mt-1 mr-1 px-2 align-middle lifecycle"
-        :variant="btn"
-        :to="to"
-        @click="clicked"
-        :pressed="isPressed">
-        {{status | toUpperCase }}
-      </b-button>
-       <b-popover
-        v-if="ispopup"
-        :target="`btn_`+status"
-        triggers="hover">
-         <template slot="title">{{lc.name | toUpperCase | title}}</template>
-        {{popup}}
-      </b-popover>
-    </span>
-    <span v-else >
-        <b-button
-          size="sm"
-          class="md-4 mt-1 mr-1 px-2 align-middle lifecycle"
-          variant="outline-danger">
-          Missing
-      </b-button>
-    </span>
+<span v-if="lc" class="align-middle" :title="'Lifecycle phase '+status">
+  <b-button :id="`btn_`+status" size="sm" class="md-4 mt-1 mr-1 px-2 align-middle lifecycle" :variant="btn" :to="to" @click="clicked" :pressed="isPressed">
+    {{status | toUpperCase }}
+  </b-button>
+  <b-popover v-if="ispopup" :target="`btn_`+status" triggers="hover">
+    <template slot="title">{{lc.name | toUpperCase | title}}</template>
+    {{popup}}
+  </b-popover>
+</span>
+<span v-else>
+  <b-button size="sm" class="md-4 mt-1 mr-1 px-2 align-middle lifecycle" variant="outline-danger">
+    Missing
+  </b-button>
+</span>
 </template>
 
 <script>
-  import lifeCycleMixin from '../mixins/lifeCycle.js'
+import lifeCycleMixin from '../mixins/lifeCycle.js'
 
-	export default {
-		name: 'lifeCycle',
-    variant: Object.freeze({
-      'Maybe': 'secondary',
-      'Buy': 'primary', 
-      'Hold': 'success',
-      'Sell': 'danger'
-    }),
-		props: {
-      status: {required: true},
-      to: {type:String, required:false},
-      ispopup: {type: Boolean, required: false, default: false},
-      isPressed:  {type: Boolean, required: false, default: false},
+export default {
+  name: 'lifeCycle',
+  variant: Object.freeze({
+    'Maybe': 'secondary',
+    'Buy': 'primary',
+    'Hold': 'success',
+    'Sell': 'danger'
+  }),
+  props: {
+    status: {
+      required: true
+    },
+    to: {
+      type: String,
+      required: false
+    },
+    ispopup: {
+      type: Boolean,
+      required: false,
+      default: false
+    },
+    isPressed: {
+      type: Boolean,
+      required: false,
+      default: false
+    }
   },
   mixins: [
     lifeCycleMixin
@@ -71,13 +70,13 @@
     'Undecided': `#techmenu is currently working on updating the life cycle state of this technology`,
     'To Be Decided': `#techmenu has no opinion about this technology. Do we need it? Let us get this into #techmenu.`
   },
-    computed: {
-       lc () {
-        return this.$store.getters.lifeCycle.filter( item => item.name === this.status).pop();
-      },
+  computed: {
+    lc() {
+      return this.$store.getters.lifeCycle.filter(item => item.name === this.status).pop();
+    },
 
 
-    btn () {
+    btn() {
       return this.btnVariant(this.lc ? this.lc.phase : 'Maybe');
     },
 
@@ -86,34 +85,31 @@
     }
 
   },
-    filters: {
-      capitalize: function( lower){
-        return lower.charAt(0).toUpperCase() + lower.substr(1);
-      },
-      toUpperCase: function(upper){
-        return upper.toUpperCase();
-      },
-      title: function( title){
-        return 'Life cycle phase '+title;
-      },
-      outline() {
-        return 'outline-';
-      }
+  filters: {
+    capitalize: function(lower) {
+      return lower.charAt(0).toUpperCase() + lower.substr(1);
     },
-    methods: {
-      clicked(){
-       return this.$emit('selected', this.status);
-      }
-
+    toUpperCase: function(upper) {
+      return upper.toUpperCase();
+    },
+    title: function(title) {
+      return 'Life cycle phase ' + title;
+    },
+    outline() {
+      return 'outline-';
     }
-
+  },
+  methods: {
+    clicked() {
+      return this.$emit('selected', this.status);
+    }
   }
-
+}
 </script>
 
 <style scoped>
 .lifecycle {
-	min-width: 8em;
+  min-width: 8em;
   max-width: 8em;
 }
 </style>

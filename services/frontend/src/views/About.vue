@@ -1,8 +1,8 @@
 <template>
-  <loading 
+  <loading
       v-if="loading"
       stuff="lifecycle data"/>
-  <div 
+  <div
     v-else
     id="about">
     <b-alert show variant="secondary">Here, you can read more about #techmenu, the process, the life cycle, the status.</b-alert>
@@ -19,7 +19,7 @@
       <div slot="footer" class="text-center">
         <h6>Lifecycle phases for {{type | capitalize}}</h6>
         <b-list-group flush>
-          <b-list-group-item v-for="item in itemsForType[type]">
+          <b-list-group-item v-for="item in itemsForType[type]" :key="item">
             <life-cycle :status="item"></life-cycle>
           </b-list-group-item>
         </b-list-group>
@@ -34,7 +34,7 @@
   import LifeCycle from '../components/LifeCycle.vue'
   import lifeCycleMixin from '../mixins/lifeCycle.js'
   import Loading from '../components/Loading.vue'
-    
+
   export default {
 
     name: 'about',
@@ -42,7 +42,7 @@
       this.loading = true
       this.$store
         .dispatch('fetchLifeCycle')
-        .then(lc => {this.loading = false})
+        .then(lc => { this.loading = false })
     },
     data () {
       return {
@@ -80,14 +80,14 @@
       <p>For the sake of the planet, let us reduce the carbon footprint, and clear this one from the data centers. </p>`
     },
     components: {
-      LifeCycle, 
+      LifeCycle,
       Loading
     },
     mixins: [
       lifeCycleMixin
     ],
     filters: {
-      capitalize: function( lower) {
+      capitalize: function(lower) {
         return lower.charAt(0).toUpperCase() + lower.substr(1);
       }
     },

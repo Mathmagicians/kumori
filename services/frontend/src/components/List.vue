@@ -1,9 +1,9 @@
 <template>
-  <ul>
-    <li v-for="item in items">
-      {{ item }}
-    </li>
-  </ul>
+<ul>
+  <li v-for="item in items" :key="item">
+    {{ item }}
+  </li>
+</ul>
 </template>
 
 <script>
@@ -14,3 +14,6 @@ export default {
   ]
 }
 </script>
+
+<style scoped>
+</style>
