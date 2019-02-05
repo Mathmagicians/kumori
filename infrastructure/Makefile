@@ -5,11 +5,14 @@ SSH_FINGER = $(shell ssh-keygen -E md5 -lf $$HOME/.ssh/id_rsa.pub | awk '{print 
 tls_setup:
 	@./tls_setup.sh
 
-start_merit:
-	./compose.sh -f ../meritocracy/docker-compose.yml up
+kumori_start:
+	./compose.sh -f ../kumori.yml up -d
 
-stop_merit:
-	./compose.sh -f ../meritocracy/docker-compose.yml down
+kumori_start:
+	./compose.sh -f ../kumori.yml down
+
+kumori_pull:
+	./compose.sh -f ../kumori.yml pull
 
 t_init:
 	@/opt/terraform/terraform init \
