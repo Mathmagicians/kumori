@@ -26,27 +26,16 @@ before_script:
 
 script:
 # Build backend
-   - cd services/backend && make -f Makefile build && cd ../../
-# Start build container
-   - cd services/frontend && make -f Makefile server_start && cd ../../
-# Build Frontend
-   - cd services/frontend && make -f Makefile setup build && cd ../../
-# Run frontend unit test
-   - cd services/frontend && make -f Makefile unit && cd ../../
-# Stop build container
-   - cd services/frontend && make -f Makefile server_stop && cd ../../
+   - make build
 # Configure and start environment
    - cp .env.sample .env
    - docker-compose -f kumori.yml up -d
 # Load fixture
-   - cd services/backend
-   - ./load_fixture.sh
-   - cd ../..
-# Run integration tests
-   - services/backend/rest_test.sh eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiZWRpdG9yIn0.tYUlheVyisdr0ezFYf92mC_dvSS02cpDvPBu9aKLySk http://localhost:3000
-   - docker exec kumori-integration bash -c 'cd services/spec && ./gradlew'
+   - make fixture
+# Run tests
+   - make test
 # Stop Environment
-   - docker-compose  -f kumori.yml down
+   - docker-compose -f kumori.yml down
 # Run Sonarqube scan
    - if [ "$TRAVIS_BRANCH" == "master" ]; then make sonar-scan; fi
 # Push to dockerhub

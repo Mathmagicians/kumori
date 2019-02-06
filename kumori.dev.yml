@@ -1,6 +1,5 @@
 version: '3.4'
 services:
-## OLD WORKING FRONTEND
   devserver:
     container_name: kumori-devserver
     image: mathmagicians/kumori_build
@@ -13,24 +12,11 @@ services:
         - type: bind
           source: ./
           target: /tmp
+    depends_on:
+      - postgrest
+      - swagger
     networks:
       - kumori
-
-## NEW ALMOST WORKING FRONTEND
-#  devserver:
-#    container_name: kumori-devserver
-#    image: mathmagicians/kumori_build
-#    command: ["npm", "run", "serve"]
-#    working_dir: /tmp/services/frontend2
-#    ports:
-#      - "80:8080"
-#      - "8000:8000"
-#    volumes:
-#        - type: bind
-#          source: ./
-#          target: /tmp
-#    networks:
-#      - kumori
 
   postgrest:
     container_name: kumori-postgrest
@@ -81,16 +67,16 @@ services:
     networks:
       - kumori
 
-#  neo4j:
-#    container_name: kumori-neo4j
-#    image: neo4j:latest
-#    ports:
-#    - "7474:7474"
-#    - "7687:7687"
-#    networks:
-#    - kumori
-#    environment:
-#      NEO4J_AUTH: none
+  neo4j:
+    container_name: kumori-neo4j
+    image: neo4j:latest
+    ports:
+    - "7474:7474"
+    - "7687:7687"
+    networks:
+    - kumori
+    environment:
+      NEO4J_AUTH: none
 
 volumes:
   data-pgadmin:
