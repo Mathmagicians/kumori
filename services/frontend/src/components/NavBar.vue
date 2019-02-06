@@ -1,7 +1,7 @@
 <template>
 <b-navbar type="dark" variant="dark" class="navbar navbar-expand-md">
   <b-navbar-brand to="/" class="d-inline-block align-top" alt="techmenu logo">
-    <b-img src="../assets/logo.svg" width="32" height="32" />
+    <b-img src="../assets/kumori_white.svg" width="32" height="32" />
     Kumori
   </b-navbar-brand>
 

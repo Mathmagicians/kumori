@@ -1,7 +1,7 @@
 <template>
 <div class="home">
-  <b-jumbotron header="Meritocracy" lead="Rational technology decisions - based on idea meritocracy">
-    <b-img class="move_up float-right" src="../assets/logo.svg" width="200" height="200" />
+  <b-jumbotron header="Kumori" lead="Rational technology decisions - based on idea meritocracy">
+    <b-img class="move_up" src="../assets/kumori.svg" width="100%" height="200" />
   </b-jumbotron>
 </div>
 </template>
@@ -15,7 +15,7 @@ export default {
 <style scoped>
 .move_up {
   position: relative;
-  top: -170px;
-  right: 50px;
+  top: -220px;
+  left: 250px;
 }
 </style>
