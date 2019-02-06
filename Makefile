@@ -18,8 +18,8 @@ fixture:
 	@docker stop kumori-postgrest
 	@docker run --rm -v ${PWD}:/tmp -w /tmp ${BUILD_IMAGE} curl -s -o dump.pgsql https://raw.githubusercontent.com/Mathmagicians/kumori/fixture/dump.pgsql
 	@docker exec -i -u postgres kumori-postgres psql -U "${POSTGRES_PASSWORD}" "${POSTGREST_CONNECTION_DB}" < dump.pgsql
+	@docker exec -i -u postgres kumori-postgres rm -rf dump.pgsql
 	@docker start kumori-postgrest
-	@rm dump.pgsql
 
 dump:
 	@docker stop kumori-postgrest
