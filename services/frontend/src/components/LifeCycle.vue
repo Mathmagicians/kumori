@@ -49,7 +49,7 @@ export default {
     lifeCycleMixin
   ],
   lcText: {
-    'To be decided': `Awesome`,
+    'To be decided': `Kumori is currently working on updating the life cycle state of this technology`,
     'Experiment': `A brand new, (possibly) bleeding edge technology that we want to investigate.`,
     'Testing': `
       <p>This is the part of the <strong>lifecycle</strong>, where we try out things.</p>
