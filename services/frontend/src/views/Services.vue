@@ -8,12 +8,12 @@
     Services are technologies implemented.
     Overview of what we have, what is good, what should be improved.
   </b-alert>
-  <b-alert show variant="warning" v-if="loading">Loading #techmenu services …
+  <b-alert show variant="warning" v-if="loading">Loading Kumori services …
     <v-icon name="spinner" scale="2" spin />
   </b-alert>
   <b-list-group v-else class="components">
     <b-alert show variant="secondary">
-      #techmenu is happily governing <b>{{services.length}}</b> services.
+      Kumori is happily governing <b>{{services.length}}</b> services.
     </b-alert>
 
     <b-list-group-item v-for="service in services" :key="service.name" class="tech-component">

@@ -24,7 +24,7 @@
           <b-form-textarea :id="'usecaseDescInput_'+index" v-model="techModel.usecases[index].description" placeholder="Descibe how to use this tech ..." :rows="3" :max-rows="6">
           </b-form-textarea>
         </b-form-group>
-        <b-form-group :id="'usecaselcGroup_'+index" label="Lifecycle status of technology for this usecase" :label-for="'usecaselc_'+index" description="What is the current status of the tech for this usecase on #techmenu?">
+        <b-form-group :id="'usecaselcGroup_'+index" label="Lifecycle status of technology for this usecase" :label-for="'usecaselc_'+index" description="What is the current status of the tech for this usecase on Kumori?">
           <b-form-row>
             <b-form-select :id="'usecaselc_'+index" v-model="techModel.usecases[index].status" :options="lc" class="mb-3" />
             <life-cycle :status="techModel.usecases[index].status"></life-cycle>

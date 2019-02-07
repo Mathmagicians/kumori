@@ -3,7 +3,7 @@
   <b-row>
     <b-col cols="6">
       <b-alert v-if="loading.tax" show variant="warning">
-        Loading #techmenu taxonomies …
+        Loading Kumori taxonomies …
         <v-icon name="spinner" scale="3" spin />
       </b-alert>
       <search-component v-else :amounts="amounts" v-bind:query="query" v-bind:tree="sunburstTree" v-on:queryString="fuzzySearch($event)">
@@ -11,7 +11,7 @@
     </b-col>
     <b-col cols="6">
       <b-alert v-if="loading.tech" show variant="warning">
-        Loading #techmenu components …
+        Loading Kumori components …
         <v-icon name="spinner" scale="3" spin />
       </b-alert>
       <div v-else>
@@ -19,8 +19,8 @@
           <b-button id="createTechButton" class="status-floater btn-round" v-if="$store.getters.isEditOn" variant="light" @click="createNewTech">
             <v-icon name="plus" color="green" />
           </b-button>
-          <b-popover target="createTechButton" triggers="hover focus" title="Create New Tech" content="Add a new technology to #techmenu" />
-          <p>#techmenu is happily governing
+          <b-popover target="createTechButton" triggers="hover focus" title="Create New Tech" content="Add a new technology to Kumori" />
+          <p>Kumori is happily governing
             <b-badge variant="secondary">{{techComponents.length}}</b-badge>
             technologies.
           </p>
@@ -80,7 +80,7 @@ export default {
     }
   },
   watch: {
-    name: function(newName, oldName) {
+    name: function (newName, oldName) {
       this.activeId = this.findUidFromName(newName)
     }
   },
@@ -120,7 +120,7 @@ export default {
     sunburstTree() {
       let flatListWithSizes = this.addSizesForTaxonomies(this.$store.getters.taxonomy.tags, this.techComponents)
       return ({
-        name: '#techmenu',
+        name: 'Kumori',
         children: this.buildTree(flatListWithSizes)
       })
     }

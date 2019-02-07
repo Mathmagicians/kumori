@@ -49,6 +49,7 @@ export default {
     lifeCycleMixin
   ],
   lcText: {
+    'To be decided': `Awesome`,
     'Experiment': `A brand new, (possibly) bleeding edge technology that we want to investigate.`,
     'Testing': `
       <p>This is the part of the <strong>lifecycle</strong>, where we try out things.</p>
@@ -66,33 +67,29 @@ export default {
     'Limited': `A mature technology, with well known characteristics, for which there is amature operational capability, but which for various reasons <em>(cost, licensing, strategic direction, etc, </em> it is desirable to limit the exceptional situations and use cases in which it is used.`,
     'Deprecated': `A technology that we are actively phasing out (e.g. due to lack of support, security, stability, cost issues, impossible to staff, very inefficient in use or to be replaced with another technology, etc.)
       `,
-    'Do Not Use': `Must not be used, either for maintenance, or for new development. This is typically due to legal, policy or architecture reasons.`,
-    'Undecided': `#techmenu is currently working on updating the life cycle state of this technology`,
-    'To Be Decided': `#techmenu has no opinion about this technology. Do we need it? Let us get this into #techmenu.`
+    'Do not use': `Must not be used, either for maintenance, or for new development. This is typically due to legal, policy or architecture reasons.`,
+    'Undecided': `Kumori is currently working on updating the life cycle state of this technology`,
+    'To Be Decided': `Kumori has no opinion about this technology. Do we need it? Let us get this into Kumori.`
   },
   computed: {
     lc() {
       return this.$store.getters.lifeCycle.filter(item => item.name === this.status).pop();
     },
-
-
     btn() {
       return this.btnVariant(this.lc ? this.lc.phase : 'Maybe');
     },
-
     popup() {
       return this.$options.lcText[(this.status)];
     }
-
   },
   filters: {
-    capitalize: function(lower) {
+    capitalize: function (lower) {
       return lower.charAt(0).toUpperCase() + lower.substr(1);
     },
-    toUpperCase: function(upper) {
+    toUpperCase: function (upper) {
       return upper.toUpperCase();
     },
-    title: function(title) {
+    title: function (title) {
       return 'Life cycle phase ' + title;
     },
     outline() {

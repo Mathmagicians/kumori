@@ -5,7 +5,7 @@
   <div
     v-else
     id="about">
-    <b-alert show variant="secondary">Here, you can read more about #techmenu, the process, the life cycle, the status.</b-alert>
+    <b-alert show variant="secondary">Here, you can read more about Kumori, the process, the life cycle, the status.</b-alert>
     <b-card-group deck>
       <b-card v-for="type in types"
           :key="type.name"
@@ -53,7 +53,7 @@
     {
       'Maybe': `
       <h6>About the Maybe Phase</h6>
-      The status of this item has not been decided yet. Either it has not been investigated, or <strong>#techmenu</strong>'s community of experts, is currently investigating this item. `,
+      The status of this item has not been decided yet. Either it has not been investigated, or <strong>Kumori</strong>'s community of experts, is currently investigating this item. `,
       'Buy': `
       <h6>About the Buy Phase</h6>
       <p>
