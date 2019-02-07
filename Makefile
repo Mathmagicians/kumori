@@ -1,5 +1,6 @@
 POSTGRES_PASSWORD = $(shell cat .env | grep 'POSTGRES_PASSWORD' | awk -F "=" '{print $$2}')
 POSTGREST_CONNECTION_DB = $(shell cat .env | grep 'POSTGREST_CONNECTION_DB' | awk -F "=" '{print $$2}')
+PGRST_JWT_KEY = $(shell cat .env | grep 'PGRST_JWT_KEY' | awk -F "=" '{print $$2}')
 BUILD_IMAGE=mathmagicians/kumori_build:latest
 .PHONY: build push sonar-scan
 
@@ -29,7 +30,7 @@ dump:
 test:
 	@./ready.sh
 	@docker run --rm -v ${PWD}/services/frontend:/tmp -w /tmp ${BUILD_IMAGE} npm run test
-	services/backend/rest_test.sh eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiZWRpdG9yIn0.tYUlheVyisdr0ezFYf92mC_dvSS02cpDvPBu9aKLySk http://localhost:3000
+	services/backend/rest_test.sh "${PGRST_JWT_KEY}" http://localhost:3000
 	@docker exec kumori-integration bash -c 'cd services/spec && ./gradlew'
 
 sonar-scan:
