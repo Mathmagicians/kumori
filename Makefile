@@ -33,9 +33,13 @@ dump:
 	@docker exec -u postgres kumori-postgres pg_dump --data-only -U "${POSTGRES_PASSWORD}" "${POSTGREST_CONNECTION_DB}" > dump.pgsql
 	@docker start kumori-postgrest
 
-test:
-	@./ready.sh
+test: unit-test integration-test
+
+unit-test:
 	@docker run --rm -v ${PWD}/services/frontend:/tmp -w /tmp ${BUILD_IMAGE} npm run test
+
+integration-test:
+	@./ready.sh
 	services/backend/rest_test.sh "${PGRST_JWT_KEY}" http://localhost:3000
 	@docker exec kumori-integration bash -c 'cd services/spec && ./gradlew'
 
