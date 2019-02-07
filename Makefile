@@ -14,6 +14,12 @@ start:
 stop:
 	@docker-compose -f kumori.yml down
 
+start-dev:
+	@docker-compose -f kumori.dev.yml up -d
+
+stop-dev:
+	@docker-compose -f kumori.dev.yml down
+
 fixture:
 	@./ready.sh
 	@docker stop kumori-postgrest

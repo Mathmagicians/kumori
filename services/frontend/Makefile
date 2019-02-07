@@ -8,6 +8,7 @@ BUILD_IMAGE=mathmagicians/kumori_build:latest
 
 install:
 	@docker run --rm -v ${PWD}:/tmp -w /tmp ${BUILD_IMAGE} npm install
+# https://stackoverflow.com/questions/52202399/typeerror-super-expression-must-either-be-null-or-a-function/52204427
 	@docker run --rm -v ${PWD}:/tmp -w /tmp ${BUILD_IMAGE} sed -i '32893s/^/\/\//' node_modules/prettier/index.js
 
 build:
