@@ -1,6 +1,6 @@
 <template>
 <div id="app">
-  <navbar />
+  <navigation />
   <b-container fluid>
     <transition name="fade" mode="out-in">
       <router-view />
@@ -15,11 +15,11 @@
 </template>
 
 <script>
-import NavBar from './components/NavBar.vue'
+import Navigation from './components/Navigation.vue'
 export default {
   name: 'App',
   components: {
-    'navbar': NavBar
+    'navigation': Navigation
   }
 }
 </script>
