@@ -20,6 +20,7 @@ build:
 	@cat ./tables/api.usecase_taxonomy.sql >> schema.sql
 	@cat ./tables/api.component_usecase.sql >> schema.sql
 	@cat ./views/api.w_usecases.sql >> schema.sql
+	@cat ./views/api.w_usecases2.sql >> schema.sql
 	@cat ./views/api.w_components.sql >> schema.sql
 	@cat ./views/api.w_taxonomy.sql >> schema.sql
 	@cat ./functions/api.search_component.sql >> schema.sql
