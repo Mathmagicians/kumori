@@ -23,6 +23,7 @@ build:
 	@cat ./views/api.w_components.sql >> schema.sql
 	@cat ./views/api.w_taxonomy.sql >> schema.sql
 	@cat ./functions/api.search_component.sql >> schema.sql
+	@cat ./functions/api.usecase_update.sql >> schema.sql
 	@docker build -t ${IMAGE} .
 	@rm schema.sql
 
