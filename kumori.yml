@@ -18,6 +18,10 @@ services:
     networks:
       - kumori
     restart: unless-stopped
+    depends_on:
+      - postgres
+      - postgrest
+      - swagger
 
   postgrest:
     container_name: kumori-postgrest

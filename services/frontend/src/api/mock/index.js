@@ -51,14 +51,8 @@ export default {
   },
 
   login2(credentials) {
-    const instance = axios.create({
-      baseURL: 'https://github.com/',
-      timeout: 1000,
-      headers: {'Access-Control-Allow-Origin': '*'}
-    });
-
     return axios
-      .get('https://github.com/login/oauth/authorize', 
+      .get('https://github.com/login/oauth/authorize',
         { params: {client_id: 'themathmagician', state: 'meritocracy', 'crossdomain': true, 'redirect-uri': 'http://localhost:8080/callback'}})
       .then(response => response.data)
 

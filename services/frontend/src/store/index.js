@@ -4,15 +4,14 @@ import client from 'api-client'
 
 Vue.use(Vuex)
 
-export function createStore () {
-
-  const LOGIN = "LOGIN";
-  const LOGIN_SUCCESS = "LOGIN_SUCCESS";
-  const LOGOUT = "LOGOUT";
-  const EDIT_ON = "EDIT_ON";
-  const EDIT_OFF = "EDIT_OFF";
-  const CREATE_TECH_COMPONENT = "CREATE_TECH_COMPONENT";
-  const EDIT_TECH_COMPONENT = "EDIT_TECH_COMPONENT";
+export function createStore() {
+  const LOGIN = 'LOGIN';
+  const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+  const LOGOUT = 'LOGOUT';
+  const EDIT_ON = 'EDIT_ON';
+  const EDIT_OFF = 'EDIT_OFF';
+  const CREATE_TECH_COMPONENT = 'CREATE_TECH_COMPONENT';
+  const EDIT_TECH_COMPONENT = 'EDIT_TECH_COMPONENT';
 
   return new Vuex.Store({
     state: {
@@ -44,36 +43,37 @@ export function createStore () {
       setLifeCycle(state, lifeCycle) {
         state.lifeCycle = lifeCycle
       },
-      setTechComponents (state, techComponents) {
+      setTechComponents(state, techComponents) {
         state.techComponents = techComponents
       },
       setTechSize(state, size) {
         state.tech.page.total = size
       },
-      setTechHeadersPage(state, page){
-        ({ from: state.tech.page.from, 
-          to: state.tech.page.to, 
+      setTechHeadersPage(state, page) {
+        ({
+          from: state.tech.page.from,
+          to: state.tech.page.to,
           total: state.tech.page.total,
           content: state.tech.page.content
         } = page)
       },
-      setMeritocracy (state, meritocracy) {
+      setMeritocracy(state, meritocracy) {
         state.meritocracy = meritocracy
       },
-      setServices (state, services) {
+      setServices(state, services) {
         state.services = services
       },
-      setTaxonomy (state, taxonomy) {
+      setTaxonomy(state, taxonomy) {
         state.taxonomy = taxonomy
       },
-      setUsecases (state, usecases) {
+      setUsecases(state, usecases) {
         state.usecases = usecases
       },
-      
-      [LOGIN] (state) {
-      state.security.pending = true;
+
+      [LOGIN](state) {
+        state.security.pending = true;
       },
-      [LOGIN_SUCCESS] (state) {
+      [LOGIN_SUCCESS](state) {
         state.security.isLoggedIn = true;
         state.security.pending = false;
       },
@@ -89,97 +89,126 @@ export function createStore () {
       [CREATE_TECH_COMPONENT](state, tech) {
         state.techComponents.push(tech)
       },
-      [EDIT_TECH_COMPONENT]( state, tech){
-        let index = state.techComponents.findIndex( t => t.uid === tech.uid )
-        state.techComponents.splice( index, 1, tech)
+      [EDIT_TECH_COMPONENT](state, tech) {
+        let index = state.techComponents.findIndex(t => t.uid === tech.uid)
+        state.techComponents.splice(index, 1, tech)
       }
     },
     actions: {
-      fetchLifeCycle ({commit}) {
+      fetchLifeCycle({
+        commit
+      }) {
         return client
           .fetchLifeCycle()
           .then(lifeCycle => commit('setLifeCycle', lifeCycle))
       },
-      fetchTechComponents ({commit}) {
-          return client
-            .fetchTechComponents()
-            .then(techComponents => commit('setTechComponents', techComponents))
+      fetchTechComponents({
+        commit
+      }) {
+        return client
+          .fetchTechComponents()
+          .then(techComponents => commit('setTechComponents', techComponents))
       },
-      fetchTechSize ({commit}) {
+      fetchTechSize({
+        commit
+      }) {
         return client
           .fetchTechComponentsSize()
           .then(size => commit('setTechSize', size))
       },
-      fetchTechHeadersPage ({commit}, from, to) {
+      fetchTechHeadersPage({
+        commit
+      }, from, to) {
         return client
           .fetchTechHeadersPage(from, to)
           .then(page => commit('setTechHeadersPage', page))
       },
-      fetchTechDetails ({commit}, id){
+      fetchTechDetails({
+        commit
+      }, id) {
         return client
           .fetchTechComponentDetails(id)
           .then(tech => {
             console.log(`Fetched details for ${id}: ... ${tech.description}`)
             return tech
-          } )
+          })
       },
-      fetchMeritocracy ({commit}) {
-          return client
-            .fetchMeritocracy()
-            .then(meritocracy => commit('setMeritocracy', meritocracy))
+      fetchMeritocracy({
+        commit
+      }) {
+        return client
+          .fetchMeritocracy()
+          .then(meritocracy => commit('setMeritocracy', meritocracy))
       },
-      fetchServices ({commit}) {
+      fetchServices({
+        commit
+      }) {
         return client
           .fetchServices()
           .then(services => commit('setServices', services))
       },
-      fetchTaxonomy ({commit}) {
+      fetchTaxonomy({
+        commit
+      }) {
         return client
           .fetchTaxonomy()
           .then(taxonomy => commit('setTaxonomy', taxonomy))
       },
-      fetchUsecases ({commit}) {
+      fetchUsecases({
+        commit
+      }) {
         return client
           .fetchUsecases()
-          .then( usecases => commit( 'setUsecases', usecases))
+          .then(usecases => commit('setUsecases', usecases))
       },
-      login({commit}, creds) {
+      login({
+        commit
+      }, creds) {
         commit(LOGIN) // show spinner
         return client
           .login(creds)
-          .then( token =>  {
-            console.log("storing token")
-            localStorage.setItem("token", token)
+          .then(token => {
+            console.log('storing token')
+            localStorage.setItem('token', token)
             console.log(token)
             commit(LOGIN_SUCCESS)
           })
       },
-      logout({ commit }) {
-        localStorage.removeItem("token");
+      logout({
+        commit
+      }) {
+        localStorage.removeItem('token');
         commit(LOGOUT);
       },
-      editOn({commit}){
+      editOn({
+        commit
+      }) {
         commit(EDIT_ON);
       },
-      editOff({commit}){
+      editOff({
+        commit
+      }) {
         commit(EDIT_OFF);
       },
-      createTechComponent({commit}, techComponent ){
+      createTechComponent({
+        commit
+      }, techComponent) {
         return client
-          .createTechComponent( techComponent)
-          .then( tc => commit( CREATE_TECH_COMPONENT, tc));
-
+          .createTechComponent(techComponent)
+          .then(tc => commit(CREATE_TECH_COMPONENT, tc));
       },
-      editTechComponent({commit}, techComponent ){
+      editTechComponent({
+        commit
+      }, techComponent) {
         return client
-          .editTechComponent( techComponent )
-          .then( tc => commit ( EDIT_TECH_COMPONENT, tc));
+          .editTechComponent(techComponent)
+          .then(tc => commit(EDIT_TECH_COMPONENT, tc));
       }
     },
     getters: {
       isLoggedIn: state => state.security.isLoggedIn,
-      isEditOn: state =>  state.security.isEditOn,
-      lifeCycle: state =>  state.lifeCycle,
+      isEditOn: state => state.security.isEditOn,
+      lifeCycle: state => state.lifeCycle,
       taxonomy: state => state.taxonomy,
       tech: state => state.techComponents,
       techSize: state => state.tech.page.total,

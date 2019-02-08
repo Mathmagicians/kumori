@@ -4,4 +4,3 @@ until $(curl --output /dev/null --silent --head --fail http://127.0.0.1:3000); d
     sleep 5
 done
 echo ""
-./pg_import.sh

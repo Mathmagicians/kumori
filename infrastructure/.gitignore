@@ -1,4 +1,3 @@
-/terraform
 /terraform.*
 /.terraform
 /tls/*.pem
@@ -7,3 +6,4 @@
 /tls/*.srl
 /compose.sh
 /docker.sh
+dump.pgsql

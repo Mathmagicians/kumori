@@ -9,26 +9,24 @@
 
 This project is about generating the architecture, roadmap and strategy using qualified experts - people that know about things should decide about things, and display the result in an easy to navigate way.
 
-## Run
-When you run this project, you start the production version of the application.
-For development, checkout the startscript from the `frontend` folder.
+## Build
+    make build
 
-    $ cp .env.sample .env
+## Start in dev mode
+    cp .env.sample .env // Update `.env` if necessary.
+    make start-dev fixture
 
-Update `.env` if necessary.
+The site will be available at: <http://127.0.0.1>
 
-    $ cp docker-compose up -d
+## Start in prod mode
+    cp .env.sample .env // Update `.env` if necessary.
+    make start fixture
 
-    -   The site will be available at: <http://127.0.0.1>
-    -   The postgrest service will be available at:<http://127.0.0.1:3000>
+The site will be available at: <http://127.0.0.1>
 
-## Milestones
+You make generate new token for deployment here: <https://jwt.io/#debugger-io>
 
-### Milestone one - Technology governance
-
--   Components
--   Services
--   Blueprints
--   Patterns and principles
+## Tests
+    make test // It is required for the test to run that an environment is runnin (dev or prod) and fixture data hase been loaded.
 
 This projects uses [Browserstack](https://www.browserstack.com) for automated testing.
