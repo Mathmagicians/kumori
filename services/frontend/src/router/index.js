@@ -8,8 +8,8 @@ import Home from '../views/Home.vue'
 import Services from '../views/Services.vue'
 import Meritocracy from '../views/Meritocracy.vue'
 import Database from '../views/Database.vue'
+import Usecases from '../views/Usecases.vue'
 import TechComponentEditor from '../components/TechComponentEditor.vue'
-import Usecases from '../components/Usecases.vue'
 
 Vue.use(Router)
 

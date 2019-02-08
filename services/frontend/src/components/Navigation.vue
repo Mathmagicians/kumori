@@ -14,6 +14,8 @@
         <v-icon name="book-dead" /> Exterminator</b-nav-item>
       <b-nav-item to="/meritocracy">
         <v-icon name="comments" /> Meritocracy</b-nav-item>
+        <b-nav-item to="/usecases">
+          <v-icon name="toolbox" /> Usecases</b-nav-item>
       <b-nav-item to="/about">
         <v-icon name="paw" /> About</b-nav-item>
     </b-navbar-nav>
@@ -47,6 +49,7 @@ import 'vue-awesome/icons/unlock'
 import 'vue-awesome/icons/lock'
 import 'vue-awesome/icons/user'
 import 'vue-awesome/icons/search'
+import 'vue-awesome/icons/toolbox'
 export default {
   name: 'navigation',
   components: {
