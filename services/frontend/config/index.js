@@ -11,7 +11,12 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      "api/**": { target: 'http://postgrest:3000', secure: false }
+      "/api": {
+        target: 'http://postgrest:3000',
+        pathRewrite: {
+          '^/api': ''
+        },
+        secure: false }
     },
 
     // Various Dev Server settings
