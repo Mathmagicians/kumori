@@ -2,13 +2,15 @@
 <div>
   <b-table striped small hover :items="items" :fields="fields">
     <template slot="actions" slot-scope="row">
-      <b-button size="sm" variant="primary" v-if="isLoggedIn && isEditOn" @click="update(row.item.id,'test2','test3',1)">
-        Update usecase one
-      </b-button>
-      <b-button size="sm" @click.stop="row.toggleDetails" class="mr-2">
-        {{ row.detailsShowing ? 'Hide' : 'Show'}} Details
-      </b-button>
-
+      <b-button-group>
+        <b-button size="sm" variant="primary" v-if="isLoggedIn && isEditOn" @click="update(row.item.id,'test2','test3',1)">
+          Update usecase one
+        </b-button>
+        <b-button size="sm" @click.stop="row.toggleDetails">
+          <v-icon name="info" />
+        </b-button>
+        <edit-usecase :id="row.item.id" />
+      </b-button-group>
     </template>
     <template slot="row-details" slot-scope="row">
       <div class="container">
@@ -27,11 +29,16 @@
     </template>
   </b-table>
   <b-pagination :total-rows="totalRows" :per-page="perPage" v-model="currentPage" align="center" />
+
 </div>
 </template>
 
 <script>
+import Icon from 'vue-awesome/components/Icon'
+import 'vue-awesome/icons/pen'
+import 'vue-awesome/icons/info'
 import Usecases from '../api/Usecases.js'
+import EditUsecase from '../components/usecase/Edit'
 export default {
   name: 'usecases',
   created() {},
@@ -60,7 +67,10 @@ export default {
       currentPage: 0
     }
   },
-  components: {},
+  components: {
+    'v-icon': Icon,
+    'edit-usecase': EditUsecase
+  },
   computed: {
     isLoggedIn() {
       return this.$store.getters.isLoggedIn;
