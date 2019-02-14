@@ -9,7 +9,9 @@
         <b-button size="sm" @click.stop="row.toggleDetails">
           <v-icon name="info" />
         </b-button>
-        <edit-usecase :id="row.item.id" />
+        <b-button size="sm" @click="showedit(row.item)">
+          <v-icon name="pen" />
+        </b-button>
       </b-button-group>
     </template>
     <template slot="row-details" slot-scope="row">
@@ -29,7 +31,7 @@
     </template>
   </b-table>
   <b-pagination :total-rows="totalRows" :per-page="perPage" v-model="currentPage" align="center" />
-
+  <edit-usecase ref="editItem"/>
 </div>
 </template>
 
@@ -42,6 +44,10 @@ import EditUsecase from '../components/usecase/Edit'
 export default {
   name: 'usecases',
   created() {},
+  components: {
+    'v-icon': Icon,
+    'edit-usecase': EditUsecase
+  },
   data() {
     return {
       fields: [{
@@ -66,10 +72,6 @@ export default {
       perPage: 10,
       currentPage: 0
     }
-  },
-  components: {
-    'v-icon': Icon,
-    'edit-usecase': EditUsecase
   },
   computed: {
     isLoggedIn() {
@@ -96,6 +98,9 @@ export default {
         that.items = data
         that.totalRows = parseInt(total)
       })
+    },
+    showedit(item) {
+      this.$refs.editItem.show(item)
     }
   }
 }
