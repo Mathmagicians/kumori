@@ -8,8 +8,8 @@
     <b-navbar-nav>
       <b-nav-item to="/components">
         <v-icon name="boxes" /> Components</b-nav-item>
-      <b-nav-item to="/services">
-        <v-icon name="cubes" /> Services</b-nav-item>
+      <b-nav-item to="/projects">
+        <v-icon name="cubes" /> Projects</b-nav-item>
       <b-nav-item to="/exterminator">
         <v-icon name="book-dead" /> Exterminator</b-nav-item>
       <b-nav-item to="/meritocracy">
