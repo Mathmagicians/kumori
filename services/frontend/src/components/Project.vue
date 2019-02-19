@@ -5,7 +5,7 @@
       {{project.name}}
     </b-button>
     {{project.status.value}}
-      <v-icon :name="statusIcon" color="grey" />
+      <weather :state="project.status.value" size="16" />
   </span>
   <div>
     {{project.status}}
@@ -16,16 +16,12 @@
 
 <script>
 
-import Icon from 'vue-awesome/components/Icon'
-import 'vue-awesome/icons/bolt'
-import 'vue-awesome/icons/cloud'
-import 'vue-awesome/icons/sun'
+import Weather from '@/components/Weather'
 
 export default {
   name: 'project',
-  icons: Object.freeze(['meteor','bolt','cloud','cloud','sun']),
   components: {
-    'v-icon': Icon
+    'weather': Weather
   },
   props: {
     project: {

@@ -1,5 +1,12 @@
 <template>
-  <div>
+<div>
+  <b-alert show variant="secondary">
+    your projects
+  </b-alert>
+  <b-alert show variant="warning" v-if="loading">Loading Kumori services …
+    <v-icon name="spinner" scale="2" spin />
+  </b-alert>
+  <b-list-group v-else class="components">
     <b-alert show variant="secondary">
       your projects
     </b-alert>
