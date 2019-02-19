@@ -1,7 +1,10 @@
 <template>
 <div>
+
+
+
   <b-alert show variant="secondary">
-  your projects
+    your projects
   </b-alert>
   <b-alert show variant="warning" v-if="loading">Loading Kumori services …
     <v-icon name="spinner" scale="2" spin />
@@ -11,25 +14,67 @@
       Kumori is happily governing <b>{{services.length}}</b> services.
     </b-alert>
 
-    <b-list-group-item v-for="service in services" :key="service.name" class="tech-component">
-      {{ service }}
+    <b-list-group-item v-for="project in projects" :key="project.name" class="tech-component">
+      {{ project }}
     </b-list-group-item>
   </b-list-group>
 </div>
 </template>
 
 <script>
+let data = [{
+  name: 'Project 1',
+  status: {
+    value: 1,
+    trend: 1,
+    timestamp: '2018-08-21:00:00:00'
+  },
+  history: [{
+    value: 1,
+    trend: 1,
+    timestamp: '2018-08-01:00:00:00'
+  },{
+    value: 1,
+    trend: 1,
+    timestamp: '2018-07-21:00:00:00'
+  },{
+    value: 1,
+    trend: 1,
+    timestamp: '2018-06-01:00:00:00'
+  }]
+},{
+  name: 'Project 1',
+  status: {
+    value: 5,
+    trend: -1,
+    timestamp: '2018-08-21:00:00:00'
+  },
+  history: [{
+    value: 1,
+    trend: 1,
+    timestamp: '2018-08-01:00:00:00'
+  },{
+    value: 1,
+    trend: 1,
+    timestamp: '2018-07-21:00:00:00'
+  },{
+    value: 1,
+    trend: 1,
+    timestamp: '2018-06-01:00:00:00'
+  }]
+}]
 import Icon from 'vue-awesome/components/Icon'
 import 'vue-awesome/icons/keyboard'
 import 'vue-awesome/icons/spinner'
 export default {
   name: 'services',
-	components: {
-		'v-icon': Icon
-	},
+  components: {
+    'v-icon': Icon
+  },
   data() {
     return {
-      loading: false
+      loading: false,
+      projects: data
     }
   },
   computed: {
