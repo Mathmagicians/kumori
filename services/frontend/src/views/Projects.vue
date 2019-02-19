@@ -4,8 +4,8 @@
       your projects
     </b-alert>
 
-    <list-with-pagination ref="pagination" :list-size="25" v-bind:list-total="projects.length" v-bind:activeOrdinal="0" :button-panel-size="7">
-      <project slot-scope="props"  >
+    <list-with-pagination ref="pagination" :list-size="projects.length" v-bind:list-total="projects.length" v-bind:activeOrdinal="0" :button-panel-size="7">
+      <project slot-scope="props"  v-if="props.isOn" :project="projects[props.listSeq]">
       </project>
     </list-with-pagination>
 
