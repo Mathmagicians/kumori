@@ -1,12 +1,6 @@
 <template>
 <div>
-  <b-alert show variant="secondary">
-    your projects
-  </b-alert>
-  <b-alert show variant="warning" v-if="loading">Loading Kumori services …
-    <v-icon name="spinner" scale="2" spin />
-  </b-alert>
-  <b-list-group v-else class="components">
+
     <b-alert show variant="secondary">
       your projects
     </b-alert>
@@ -21,7 +15,7 @@
 
 <script>
 let data = [{
-  name: 'Project Awesome',
+  name: 'Project Suspicious',
   status: {
     value: 1,
     trend: 1,
@@ -41,7 +35,7 @@ let data = [{
     timestamp: '2018-06-01:00:00:00'
   }]
 }, {
-  name: 'Project 2',
+  name: 'Project Awesome',
   status: {
     value: 5,
     trend: -1,
