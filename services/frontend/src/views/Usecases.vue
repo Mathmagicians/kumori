@@ -13,6 +13,7 @@
           <v-icon name="pen" />
         </b-button>
       </b-button-group>
+
     </template>
     <template slot="row-details" slot-scope="row">
       <div class="container">
@@ -31,7 +32,7 @@
     </template>
   </b-table>
   <b-pagination :total-rows="totalRows" :per-page="perPage" v-model="currentPage" align="center" />
-  <edit-usecase ref="editItem"/>
+  <edit-usecase ref="editItem" />
 </div>
 </template>
 
@@ -39,8 +40,9 @@
 import Icon from 'vue-awesome/components/Icon'
 import 'vue-awesome/icons/pen'
 import 'vue-awesome/icons/info'
-import Usecases from '../api/Usecases.js'
-import EditUsecase from '../components/usecase/Edit'
+import Usecases from '@/api/Usecases.js'
+import EditUsecase from '@/components/usecase/Edit'
+
 export default {
   name: 'usecases',
   created() {},
