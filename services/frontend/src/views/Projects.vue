@@ -14,7 +14,7 @@
 
 <script>
 let data = [{
-  name: 'Project Awesome',
+  name: 'Project Suspicious',
   status: {
     value: 1,
     trend: 1,
@@ -34,7 +34,7 @@ let data = [{
     timestamp: '2018-06-01:00:00:00'
   }]
 }, {
-  name: 'Project Suspicious',
+  name: 'Project Awesome',
   status: {
     value: 5,
     trend: -1,
