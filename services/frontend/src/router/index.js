@@ -5,7 +5,7 @@ import TechComponentsList from '../views/TechComponentList.vue'
 import Errors from '../views/Errors.vue'
 import Exterminator from '../views/Exterminator.vue'
 import Home from '../views/Home.vue'
-import Services from '../views/Services.vue'
+import Projects from '../views/Projects.vue'
 import Meritocracy from '../views/Meritocracy.vue'
 import Database from '../views/Database.vue'
 import Usecases from '../views/Usecases.vue'
@@ -29,8 +29,8 @@ export default new Router({
       path: '/exterminator',
       component: Exterminator
     }, {
-      path: '/services',
-      component: Services
+      path: '/projects',
+      component: Projects
     }, {
       path: '/meritocracy',
       component: Meritocracy

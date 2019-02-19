@@ -1,12 +1,7 @@
 <template>
 <div>
-  <b-alert show variant="warning">
-    <v-icon name="keyboard" scale="2" pulse />
-    Work in progress - awesome content on the way ...
-  </b-alert>
   <b-alert show variant="secondary">
-    Services are technologies implemented.
-    Overview of what we have, what is good, what should be improved.
+  your projects
   </b-alert>
   <b-alert show variant="warning" v-if="loading">Loading Kumori services …
     <v-icon name="spinner" scale="2" spin />
