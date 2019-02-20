@@ -39,7 +39,7 @@ export default {
   },
   methods: {
     iconNameFromValue: function(val) {
-        return val<2 ? 'sun' : 'bolt'
+        return val < 2 ? 'sun' : 'bolt'
     }
   }
 }

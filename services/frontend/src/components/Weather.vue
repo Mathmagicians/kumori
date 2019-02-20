@@ -7,13 +7,13 @@ export default {
   name: 'weather',
   props: {
     state: {
-      default: "1",
+      default: 1,
       validator: function (value) {
-        return ["1", "2", "3", "4", "5"].indexOf(value) !== -1
+        return [1, 2, 3, 4, 5].indexOf(value) !== -1
       }
     },
     size: {
-      default: "32"
+      default: '32'
     }
   }
 }
