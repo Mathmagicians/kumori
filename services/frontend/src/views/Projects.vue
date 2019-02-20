@@ -13,49 +13,8 @@
 </template>
 
 <script>
-let data = [{
-  name: 'Project Suspicious',
-  status: {
-    value: 1,
-    trend: 1,
-    timestamp: '2018-08-21:00:00:00'
-  },
-  history: [{
-    value: 1,
-    trend: 1,
-    timestamp: '2018-08-01:00:00:00'
-  }, {
-    value: 1,
-    trend: 1,
-    timestamp: '2018-07-21:00:00:00'
-  }, {
-    value: 1,
-    trend: 1,
-    timestamp: '2018-06-01:00:00:00'
-  }]
-}, {
-  name: 'Project Awesome',
-  status: {
-    value: 5,
-    trend: -1,
-    timestamp: '2018-08-21:00:00:00'
-  },
-  history: [{
-    value: 1,
-    trend: 1,
-    timestamp: '2018-08-01:00:00:00'
-  }, {
-    value: 1,
-    trend: 1,
-    timestamp: '2018-07-21:00:00:00'
-  }, {
-    value: 1,
-    trend: 1,
-    timestamp: '2018-06-01:00:00:00'
-  }]
-}]
-
 import Project from '../components/Project.vue'
+import Projects from '../api/Projects.js'
 import ListWithPagination from '../components/ListWithPagination.vue'
 
 export default {
@@ -67,7 +26,7 @@ export default {
   data() {
     return {
       loading: false,
-      projects: data
+      projects: Projects.list()
     }
   }
 }
