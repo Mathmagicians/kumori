@@ -3,7 +3,7 @@ export default {
   /**
    * Update a usecase
    */
-  update: function(id, name, description, scope) {
+  update: function(id, name, description, scope, callback) {
     let url = '/api/rpc/usecase_update'
     let config = {
       headers: {
@@ -17,7 +17,7 @@ export default {
         scope: scope
       }, config)
       .then(function(response) {
-        console.log(response.statusText);
+        callback(response)
       })
       .catch(function(error) {
         console.log(error);

@@ -3,13 +3,10 @@
   <b-table striped small hover :items="items" :fields="fields">
     <template slot="actions" slot-scope="row">
       <b-button-group>
-        <b-button size="sm" variant="primary" v-if="isLoggedIn && isEditOn" @click="update(row.item.id,'test2','test3',1)">
-          Update usecase one
-        </b-button>
         <b-button size="sm" @click.stop="row.toggleDetails">
           <v-icon name="info" />
         </b-button>
-        <b-button size="sm" @click="showedit(row.item)">
+        <b-button size="sm" @click="showedit(row.item)" v-if="isLoggedIn && isEditOn">
           <v-icon name="pen" />
         </b-button>
       </b-button-group>
@@ -89,9 +86,6 @@ export default {
     }
   },
   methods: {
-    update: function (a, b, c, d) {
-      Usecases.update(a, b, c, d)
-    },
     list: function () {
       let that = this
       let offset = this.currentPage * this.perPage

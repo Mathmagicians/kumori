@@ -42,7 +42,6 @@
 
 <script>
 import Icon from 'vue-awesome/components/Icon'
-import User from '../components/User.vue'
 import 'vue-awesome/icons/unlock'
 import 'vue-awesome/icons/lock'
 import 'vue-awesome/icons/user'
@@ -70,7 +69,7 @@ export default {
   },
   methods: {
     login: function () {
-      if (this.username != '' && this.password != '') {
+      if (this.username !== '' && this.password !== '') {
         this.$store
           .dispatch('login', {
             username: this.username,
