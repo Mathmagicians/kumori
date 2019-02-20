@@ -4,7 +4,6 @@ const BASE_URL = 'http://127.0.0.1:3000/'
 const COMPONENTS_READ = 'w_components'
 const COMPONENT_EDIT = 'components'
 const TAXONOMY_READ = 'w_taxonomy'
-const USECASES_READ = 'w_usecases'
 const LIFECYCLE_READ = 'statuses'
 
 export default {
@@ -111,12 +110,6 @@ export default {
     return this.getData(this.urlBuilder(LIFECYCLE_READ), {
       order: 'name.asc'
     })
-  },
-  fetchUsecases() {
-    return this.getData(this.urlBuilder(USECASES_READ, {
-      select: 'id, status, component, description',
-      order: 'id.asc'
-    }))
   },
   fetchMeritocracy() {
     return this.notImplemented('fetchMeritocracy')

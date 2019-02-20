@@ -3,7 +3,7 @@ export default {
   /**
    * Update a usecase
    */
-  update: function(id, name, description, scope, callback) {
+  update: function(id, name, description, callback) {
     let url = '/api/rpc/usecase_update'
     let config = {
       headers: {
@@ -11,10 +11,9 @@ export default {
       }
     }
     axios.post(url, {
-        id: id,
         name: name,
-        description: description,
-        scope: scope
+        id: id,
+        description: description
       }, config)
       .then(function(response) {
         callback(response)
@@ -27,7 +26,7 @@ export default {
    * Update a usecase
    */
   list: function(offset, limit, callback) {
-    let url = '/api/w_usecases2?order=id.desc'
+    let url = '/api/w_usecases?order=id.desc'
     let config = {
       headers: {
         'Range': `${offset}-${limit}`,

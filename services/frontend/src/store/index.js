@@ -154,13 +154,6 @@ export function createStore() {
           .fetchTaxonomy()
           .then(taxonomy => commit('setTaxonomy', taxonomy))
       },
-      fetchUsecases({
-        commit
-      }) {
-        return client
-          .fetchUsecases()
-          .then(usecases => commit('setUsecases', usecases))
-      },
       login({
         commit
       }, creds) {
