@@ -17,7 +17,7 @@ export default {
         scope: scope
       }, config)
       .then(function(response) {
-        console.log(response.statusText);
+        callback(response)
       })
       .catch(function(error) {
         console.log(error);
