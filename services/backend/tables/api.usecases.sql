@@ -4,13 +4,10 @@ CREATE TABLE api.usecases (
     id serial NOT NULL,
     name TEXT NOT NULL,
     description TEXT,
-    scope integer,
     modified TIMESTAMP without TIME zone NOT NULL,
     modifiedby TEXT,
     deleted boolean NOT NULL,
-    PRIMARY KEY (id),
-    CONSTRAINT scope FOREIGN KEY (scope) REFERENCES api.scopes (id)
-        MATCH SIMPLE ON UPDATE NO ACTION ON DELETE NO ACTION
+    PRIMARY KEY (id)
 );
 
 DROP TRIGGER IF EXISTS usecases_insert ON api.usecases;

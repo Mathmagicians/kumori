@@ -54,10 +54,6 @@ export default {
           label: 'Name'
         },
         {
-          key: 'scope',
-          label: 'Scope'
-        },
-        {
           key: 'status',
           label: 'Status'
         },

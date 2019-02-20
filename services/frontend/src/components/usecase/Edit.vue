@@ -1,14 +1,14 @@
 <template>
 <b-modal ref="editItem" :title="modalTitle">
+  <template slot="modal-footer">
+    <b-button variant="primary" @click="save">Save</b-button>
+  </template>
   <b-form-group description="Keep the name concise." label="Usecase name">
     <b-form-input v-model.trim="usecase.name"></b-form-input>
   </b-form-group>
   <b-form-group description="Keep the description comprehensive." label="Usecase description">
     <b-form-textarea v-model="usecase.description" placeholder="Enter something" :rows="3" :max-rows="6">
     </b-form-textarea>
-  </b-form-group>
-  <b-form-group description="The scope for this usecase." label="Selected Scope (deprecated)">
-    <b-form-select disabled v-model="selected" :options="options" class="mb-3" />
   </b-form-group>
 </b-modal>
 </template>
@@ -27,8 +27,7 @@ export default {
       usecase: {
         id: null,
         name: '',
-        description: '',
-        scope: null
+        description: ''
       },
       options: [],
       selected: null
@@ -41,20 +40,16 @@ export default {
   },
   methods: {
     save() {
-      console.log('Not implemented');
-      /*
-      Usecases.update(id, name, description, scope, function (response) {
+      Usecases.update(this.usecase.id, this.usecase.name, this.usecase.description, function (response) {
         console.log(response.statusText);
       })
       this.$refs.editItem.hide()
-      */
     },
     show(item) {
       this.usecase = {
-        id: item['.key'],
+        id: item.id,
         name: item.name,
-        description: item.description,
-        scope: item.scope
+        description: item.description
       }
       this.$refs.editItem.show()
     }
