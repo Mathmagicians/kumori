@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import Usecases from '@/api/Usecases.js'
 import Icon from 'vue-awesome/components/Icon'
 import 'vue-awesome/icons/pen'
 export default {
@@ -40,8 +41,13 @@ export default {
   },
   methods: {
     save() {
-      console.log('Not implemented')
+      console.log('Not implemented');
+      /*
+      Usecases.update(id, name, description, scope, function (response) {
+        console.log(response.statusText);
+      })
       this.$refs.editItem.hide()
+      */
     },
     show(item) {
       this.usecase = {
