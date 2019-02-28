@@ -9,6 +9,7 @@ import Projects from '../views/Projects.vue'
 import Meritocracy from '../views/Meritocracy.vue'
 import Database from '../views/Database.vue'
 import Usecases from '../views/Usecases.vue'
+import Survey from '../views/Survey.vue'
 import TechComponentEditor from '../components/TechComponentEditor.vue'
 
 Vue.use(Router)
@@ -32,6 +33,9 @@ export default new Router({
       path: '/projects',
       component: Projects
     }, {
+      path: '/survey',
+      component: Survey
+    },{
       path: '/meritocracy',
       component: Meritocracy
     },
