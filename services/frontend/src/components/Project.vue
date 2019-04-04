@@ -4,11 +4,8 @@
     <b-button variant="link">
       {{project.name}}
     </b-button>
-    <b-button to="/survey" variant="link">
-      Survey
-    </b-button>
     {{project.status.value}}
-    <v-icon :name="statusIcon" color="grey" />
+      <weather :state="project.status.value" size="16" />
   </span>
   <div>
     {{project.status}}
@@ -18,16 +15,13 @@
 </template>
 
 <script>
-import Icon from 'vue-awesome/components/Icon'
-import 'vue-awesome/icons/bolt'
-import 'vue-awesome/icons/cloud'
-import 'vue-awesome/icons/sun'
+
+import Weather from '@/components/Weather'
 
 export default {
   name: 'project',
-  icons: Object.freeze(['meteor', 'bolt', 'cloud', 'cloud', 'sun']),
   components: {
-    'v-icon': Icon
+    'weather': Weather
   },
   props: {
     project: {
@@ -44,8 +38,8 @@ export default {
     }
   },
   methods: {
-    iconNameFromValue: function (val) {
-      return val < 2 ? 'sun' : 'bolt'
+    iconNameFromValue: function(val) {
+        return val < 2 ? 'sun' : 'bolt'
     }
   }
 }
