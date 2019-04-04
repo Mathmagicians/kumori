@@ -4,6 +4,9 @@
     <b-button variant="link">
       {{project.name}}
     </b-button>
+    <b-button to="/survey" variant="link">
+      Project information
+    </b-button>
     {{project.status.value}}
       <weather :state="project.status.value" size="16" />
   </span>
