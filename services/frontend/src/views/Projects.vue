@@ -9,6 +9,7 @@
 </template>
 
 <script>
+import Icon from 'vue-awesome/components/Icon'
 import Project from '../components/Project.vue'
 import Projects from '../api/Projects.js'
 import ListWithPagination from '../components/ListWithPagination.vue'
@@ -18,6 +19,7 @@ export default {
   components: {
     'v-icon': Icon,
     'project': Project,
+    'list-with-pagination': ListWithPagination
   },
   data() {
     return {

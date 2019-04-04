@@ -35,49 +35,41 @@ export default new Router({
     }, {
       path: '/survey',
       component: Survey
-    },{
+    }, {
       path: '/meritocracy',
       component: Meritocracy
-    },
-    {
+    }, {
       path: '/components/search',
       component: TechComponentsList
-    },
-    {
+    }, {
       path: '/components/:name',
       component: TechComponentsList,
       name: 'component',
       props: true
-    },
-    {
+    }, {
       path: '/components/:uid/edit',
       name: 'edit',
       component: TechComponentEditor,
       props: true
-    },
-    {
+    }, {
       path: 'components/create',
       name: 'create',
       component: TechComponentEditor,
       props: true
-    },
-    {
+    }, {
       path: '/db',
       component: Database
-    },
-    {
+    }, {
       path: '/usecases',
       component: Usecases
-    },
-    {
+    }, {
       path: '/404',
       name: 'not-found',
       component: Errors,
       props: {
         error: 404
       }
-    },
-    {
+    }, {
       path: '/error',
       name: 'error',
       component: Errors,
@@ -85,8 +77,7 @@ export default new Router({
         code: route.query.error,
         asset: route.query.asset
       })
-    },
-    {
+    }, {
       path: '*',
       redirect: '/404'
     }
