@@ -26,13 +26,9 @@ export default {
   fetchTechComponentsSize(){
     return new Promise( (resolve) => resolve(techComponents).length )
   },
-  fetchUsecases () {
-    return fetch( usecases, 200);
-  },
   fetchMeritocracy () {
     return fetch(meritocracy, 2000);
   },
-
   fetchServices () {
     return fetch(services, 4000);
   },

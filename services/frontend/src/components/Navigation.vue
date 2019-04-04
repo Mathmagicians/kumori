@@ -6,16 +6,24 @@
     Kumori</b-navbar-brand>
   <b-collapse is-nav id="nav_collapse">
     <b-navbar-nav>
-      <b-nav-item to="/components">
-        <v-icon name="boxes" /> Components</b-nav-item>
-      <b-nav-item to="/services">
-        <v-icon name="cubes" /> Services</b-nav-item>
-      <b-nav-item to="/exterminator">
-        <v-icon name="book-dead" /> Exterminator</b-nav-item>
+      <b-nav-item-dropdown right>
+        <template slot="button-content">
+          <v-icon name="boxes" /> Architecture
+        </template>
+        <b-dropdown-item to="/components">
+          <v-icon name="boxes" /> Components</b-dropdown-item>
+        <b-dropdown-item to="/usecases">
+          <v-icon name="toolbox" /> Usecases</b-dropdown-item>
+        <b-dropdown-item to="/exterminator">
+          <v-icon name="book-dead" /> Exterminator</b-dropdown-item>
+      </b-nav-item-dropdown>
+      <b-nav-item>
+        <v-icon name="cloud-sun" /> Forecast</b-nav-item>
+      <b-nav-item to="/projects">
+        <v-icon name="cubes" /> Projects</b-nav-item>
       <b-nav-item to="/meritocracy">
         <v-icon name="comments" /> Meritocracy</b-nav-item>
-        <b-nav-item to="/usecases">
-          <v-icon name="toolbox" /> Usecases</b-nav-item>
+
       <b-nav-item to="/about">
         <v-icon name="paw" /> About</b-nav-item>
     </b-navbar-nav>
@@ -43,6 +51,7 @@ import User from '../components/User.vue'
 import 'vue-awesome/icons/boxes'
 import 'vue-awesome/icons/cubes'
 import 'vue-awesome/icons/book-dead'
+import 'vue-awesome/icons/cloud-sun'
 import 'vue-awesome/icons/comments'
 import 'vue-awesome/icons/paw'
 import 'vue-awesome/icons/unlock'

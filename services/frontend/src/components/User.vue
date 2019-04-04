@@ -35,17 +35,22 @@
       <b-button class="float-right" variant="primary" @click="login">
         Login
       </b-button>
+      <b-button class="float-right" variant="secondary" @click="auth0">
+        Auth0 Login
+      </b-button>
     </div>
   </b-modal>
 </div>
 </template>
 
 <script>
+import AuthService from '../Auth/AuthService.js'
 import Icon from 'vue-awesome/components/Icon'
-import User from '../components/User.vue'
 import 'vue-awesome/icons/unlock'
 import 'vue-awesome/icons/lock'
 import 'vue-awesome/icons/user'
+
+const auth = new AuthService()
 export default {
   name: 'Login',
   components: {
@@ -70,7 +75,7 @@ export default {
   },
   methods: {
     login: function () {
-      if (this.username != '' && this.password != '') {
+      if (this.username !== '' && this.password !== '') {
         this.$store
           .dispatch('login', {
             username: this.username,
@@ -87,6 +92,9 @@ export default {
     },
     editOff() {
       this.$store.dispatch('editOff');
+    },
+    auth0() {
+      auth.login()
     }
   }
 }

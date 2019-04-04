@@ -73,7 +73,7 @@ function test_usecases () {
   url='/usecases'
 
   function usecase_create () {
-    data='{"name":"Awesome","description": "test","scope":1,"deleted": false}'
+    data='{"name":"Awesome","description": "test","deleted": false}'
     response_status="$(curl -s -D /tmp/headers.txt -w "%{http_code}" "${HOST}${url}" -X POST -H "${AUTH}" -H "${CONTENT}" -d "${data}")"
     if [[ ${response_status} == 201 ]];
       then print_test "Usecase" "Create" "OK";
@@ -287,50 +287,6 @@ function test_usecase_taxonomy () {
     usecase_taxonomy_delete
 }
 
-# Test CRUD for Scope
-function test_scopes () {
-  local url method data response_status
-  url='/scopes'
-
-  function scope_create () {
-    data='{"name": "Nifty"}'
-    response_status="$(curl -s -D /tmp/headers.txt -w "%{http_code}" "${HOST}${url}" -X POST -H "${AUTH}" -H "${CONTENT}" -d "${data}")"
-    if [[ ${response_status} == 201 ]];
-      then print_test "Scope" "Create" "OK";
-      else print_test "Scope" "Create" "FAILED" "${response_status}";
-    fi
-  }
-
-  function scope_read () {
-    response_status="$(curl -s -o /dev/null -w "%{http_code}" "${HOST}${url}?id=eq.$(parse_location)" -X GET -H "${AUTH}" -H "${CONTENT}")"
-    if [[ ${response_status} == 200 ]];
-      then print_test "Scope" "Read" "OK";
-      else print_test "Scope" "Read" "FAILED" "${response_status}";
-    fi
-  }
-
-  function scope_update () {
-    data='{"name": "Niftyness"}'
-    response_status="$(curl -s -o /dev/null -w "%{http_code}" "${HOST}${url}?id=eq.$(parse_location)" -X PATCH -H "${AUTH}" -H "${CONTENT}" -d "${data}")"
-    if [[ ${response_status} == 204 ]];
-      then print_test "Scope" "Update" "OK";
-      else print_test "Scope" "Update" "FAILED" "${response_status}";
-    fi
-  }
-
-  function scope_delete () {
-    response_status="$(curl -s -o /dev/null -w "%{http_code}" "${HOST}${url}?id=eq.$(parse_location)" -X DELETE -H "${AUTH}" -H "${CONTENT}" -d "${data}")"
-    if [[ ${response_status} == 204 ]];
-      then print_test "Scope" "Delete" "OK";
-      else print_test "Scope" "Delete" "FAILED" "${response_status}";
-    fi
-  }
-    scope_create
-    scope_read
-    scope_update
-    scope_delete
-}
-
 echo "Waiting for postgrest to become ready:"
 until $(curl --output /dev/null --silent --head --fail http://127.0.0.1:3000); do
     printf '.'
@@ -341,6 +297,5 @@ test_comments
 test_components
 test_usecases
 test_links
-test_scopes
 test_component_usecase
 test_usecase_taxonomy

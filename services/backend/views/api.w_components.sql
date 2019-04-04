@@ -60,12 +60,10 @@ SELECT
       SELECT array_to_json(array_agg(json_build_object(
         'name',us.name,
         'description',us.description,
-        'status',st.name,
-        'scope',sco.name
+        'status',st.name
       )))
       FROM api.usecases AS us
       LEFT JOIN api.component_usecase AS uscom ON us.id = uscom.usecase
-      LEFT JOIN api.scopes AS sco ON us.scope = sco.id
       LEFT JOIN api.statuses AS st ON uscom.status = st.id
       WHERE uscom.component = component.id)
       ELSE (json_build_array()) END

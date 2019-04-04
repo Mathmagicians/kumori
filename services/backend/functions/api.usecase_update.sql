@@ -1,21 +1,19 @@
-DROP FUNCTION IF EXISTS api.usecase_update (integer, TEXT, TEXT, integer)
+DROP FUNCTION IF EXISTS api.usecase_update (integer, TEXT, TEXT)
     CASCADE;
 
-CREATE OR REPLACE FUNCTION api.usecase_update (id integer, name TEXT, description TEXT, scope integer)
+CREATE OR REPLACE FUNCTION api.usecase_update (id integer, name TEXT, description TEXT)
     RETURNS void
 AS $$
 DECLARE
     u_id ALIAS FOR id;
     u_name ALIAS FOR name;
     u_description ALIAS FOR description;
-    u_scope ALIAS FOR scope;
 BEGIN
     UPDATE
         api.usecases AS u
     SET
         NAME = u_name,
-        description = u_description,
-        scope = u_scope
+        description = u_description
     WHERE
         u.id = u_id;
 END
