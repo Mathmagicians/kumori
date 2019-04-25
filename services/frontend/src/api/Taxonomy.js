@@ -2,7 +2,7 @@ import axios from 'axios'
 export default {
   async total() {
     return this.hasToken().then(() => {
-      let url = '/api/components'
+      let url = '/api/statuses'
       let config = {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`,
@@ -17,13 +17,29 @@ export default {
         })
     })
   },
+  async sunburst() {
+    return this.hasToken().then(() => {
+      let url = '/api/w_burst?order=level.asc'
+      let config = {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`,
+          'Range-Unit': 'items',
+          'Prefer': 'count=exact'
+        }
+      }
+      return axios.get(url, config)
+        .then(function(response) {
+          return response.data
+        })
+    })
+  },
   async get(offset = 0, limit = 9, select = [], order = [], clause = ['id=gt.0']) {
     return this.hasToken().then(() => {
       let clauses = `?${this.clause(clause)}`
       let columns = this.select(select) == '' ? '' : `&${this.select(select)}`
       let ordering = this.order(order) == '' ? '' : `&${this.order(order)}`
       let arg = `${clauses}${columns}${ordering}`
-      let url = `/api/w_simple_components${arg}`
+      let url = `/api/statuses${arg}`
       let config = {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`,
@@ -65,7 +81,7 @@ export default {
   ,
   clause(fields) {
     if (fields.constructor === Array && fields.length > 0) {
-      return `${fields.join('&')}`
+      return `${fields.join(',')}`
     }
     return ''
   }
