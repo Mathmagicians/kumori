@@ -1,6 +1,6 @@
 <template>
 <div>
-  <b-badge :variant="color">{{ label }}</b-badge>
+  <b-badge :variant='color'>{{ label }}</b-badge>
 </div>
 </template>
 
@@ -14,7 +14,7 @@ export default {
       default: () => {
         return 'To be decided'
       }
-    },
+    }
   },
   data() {
     return {
@@ -24,7 +24,7 @@ export default {
   computed: {
     color() {
       let s = this.statuses.filter(entry => {
-        return entry.name == this.label;
+        return entry.name === this.label;
       })[0]
       if (s !== undefined) {
         return s.variant
@@ -33,12 +33,11 @@ export default {
     }
   },
   mounted() {
-    if (localStorage.getItem("kumoriStatuses") === null) {
+    if (localStorage.getItem('kumoriStatuses') === null) {
       this.getStatuses()
     } else {
       this.statuses = JSON.parse(localStorage.getItem('kumoriStatuses'))
     }
-
   },
   watch: {},
   methods: {
@@ -47,55 +46,55 @@ export default {
         this.statuses = response.data.map(entry => {
           let t = {}
           switch (entry.name) {
-            case "POC":
+            case 'POC':
               t = {
                 name: entry.name,
                 variant: 'primary'
               };
               break;
-            case "Testing":
+            case 'Testing':
               t = {
                 name: entry.name,
                 variant: 'primary'
               };
               break;
-            case "Experiment":
+            case 'Experiment':
               t = {
                 name: entry.name,
                 variant: 'primary'
               };
               break;
-            case "Deprecated":
+            case 'Deprecated':
               t = {
                 name: entry.name,
                 variant: 'danger'
               };
               break;
-            case "Do not use":
+            case 'Do not use':
               t = {
                 name: entry.name,
                 variant: 'danger'
               };
               break;
-            case "To be decided":
+            case 'To be decided':
               t = {
                 name: entry.name,
                 variant: 'secondary'
               };
               break;
-            case "Undecided":
+            case 'Undecided':
               t = {
                 name: entry.name,
                 variant: 'secondary'
               };
               break;
-            case "Limited":
+            case 'Limited':
               t = {
                 name: entry.name,
                 variant: 'success'
               };
               break;
-            case "Default":
+            case 'Default':
               t = {
                 name: entry.name,
                 variant: 'success'
@@ -108,7 +107,7 @@ export default {
       }).catch(error => {
         console.log(error);
       })
-    },
+    }
   }
 }
 </script>

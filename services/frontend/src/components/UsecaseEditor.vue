@@ -87,7 +87,6 @@ export default {
       .then(taxonomy => {
         this.loading.tax = false
       })
-
   },
   methods: {
     isLeftDefined(index) {
@@ -113,7 +112,7 @@ export default {
         stack.push(...node.children);
       }
       return null;
-    },
+    }
   }
 }
 </script>

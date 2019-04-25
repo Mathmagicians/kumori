@@ -43,7 +43,7 @@ export default {
     getBurst() {
       Taxonomy.sunburst().then(response => {
         this.taxonomy.root = response.filter(f => {
-          return f.level == 1
+          return f.level === 1
         }).map(g => {
           return {
             text: g.name,

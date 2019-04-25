@@ -85,7 +85,6 @@ export default {
     }
   },
   computed: {
-
   },
   mounted() {
     this.getComponents()
@@ -93,7 +92,6 @@ export default {
     EventBus.$on('taxonomy-filter-change', taxonomy => {
       this.taxonomy = taxonomy
     });
-
   },
   watch: {
     currentPage() {
