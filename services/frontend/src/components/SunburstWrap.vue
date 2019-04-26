@@ -1,23 +1,45 @@
 <template>
-<div class="test">
-  <sunburst ref="sunburst" :data="tree" v-on:clickNode="nodeClicked" class="sunburst">
+  <div class="test">
+    <sunburst
+      ref="sunburst"
+      :data="tree"
+      v-on:clickNode="nodeClicked"
+      class="sunburst"
+    >
+      <!-- Add behaviors -->
+      <template slot-scope="{ nodes, actions }">
+        <highlightOnHover :nodes="nodes" :actions="actions" />
+        <zoomOnClick :nodes="nodes" :actions="actions" />
+      </template>
 
-    <!-- Add behaviors -->
-    <template slot-scope="{ nodes, actions }">
-      <highlightOnHover :nodes="nodes" :actions="actions" />
-      <zoomOnClick :nodes="nodes" :actions="actions" />
-    </template>
+      <!-- Add information to be displayed on top the graph -->
 
-    <!-- Add information to be displayed on top the graph -->
+      <nodeInfoDisplayer
+        slot="legend"
+        id="info"
+        slot-scope="{ nodes }"
+        :current="nodes.mouseOver"
+        :root="nodes.root"
+        description="of usecases"
+      />
 
-    <nodeInfoDisplayer slot="legend" id="info" slot-scope="{ nodes }" :current="nodes.mouseOver" :root="nodes.root" description="of usecases" />
+      <!-- Add bottom legend -->
 
-    <!-- Add bottom legend -->
-
-    <breadcrumbTrail class="small-text" id="breadcrumbs" :width="700" slot="top" slot-scope="{ nodes,colorGetter,width}" :current="nodes.mouseOver" :root="nodes.root" :colorGetter="colorGetter" :from="nodes.clicked" :item-width="110" :item-height="40"
-      :spacing="2" />
-  </sunburst>
-</div>
+      <breadcrumbTrail
+        class="small-text"
+        id="breadcrumbs"
+        slot="top"
+        slot-scope="{ nodes, colorGetter }"
+        :current="nodes.mouseOver"
+        :root="nodes.root"
+        :colorGetter="colorGetter"
+        :from="nodes.clicked"
+        :item-width="110"
+        :item-height="40"
+        :spacing="2"
+      />
+    </sunburst>
+  </div>
 </template>
 
 <script>
@@ -27,11 +49,11 @@ import {
   nodeInfoDisplayer,
   sunburst,
   zoomOnClick
-} from 'vue-d3-sunburst'
-import 'vue-d3-sunburst/dist/vue-d3-sunburst.css'
+} from "vue-d3-sunburst";
+import "vue-d3-sunburst/dist/vue-d3-sunburst.css";
 
 export default {
-  name: 'SunburstWrap',
+  name: "SunburstWrap",
   components: {
     breadcrumbTrail,
     highlightOnHover,
@@ -39,12 +61,10 @@ export default {
     sunburst,
     zoomOnClick
   },
-  props: [
-    'tree'
-  ],
+  props: ["tree"],
   methods: {
     nodeClicked(obj) {
-      this.$emit('nodeClicked', {
+      this.$emit("nodeClicked", {
         clicked: obj.node.data.name,
         trail: this.findTrail(obj.node)
       });
@@ -59,10 +79,10 @@ export default {
       return trail;
     },
     resetPath() {
-      this.$refs.sunburst.zoomToNode(this.$refs.sunburst.graphNodes.root)
+      this.$refs.sunburst.zoomToNode(this.$refs.sunburst.graphNodes.root);
     }
   }
-}
+};
 </script>
 
 <style scoped>

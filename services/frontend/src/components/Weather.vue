@@ -1,23 +1,26 @@
 <template>
-<b-img :src="require('../assets/weather0'+state+'.svg')" :width="size" :height="size" />
+  <b-img
+    :src="require('../assets/weather0' + state + '.svg')"
+    :width="size"
+    :height="size"
+  />
 </template>
 
 <script>
 export default {
-  name: 'weather',
+  name: "weather",
   props: {
     state: {
       default: 1,
-      validator: function (value) {
-        return [1, 2, 3, 4, 5].indexOf(value) !== -1
+      validator: function(value) {
+        return [1, 2, 3, 4, 5].indexOf(value) !== -1;
       }
     },
     size: {
-      default: '32'
+      default: "32"
     }
   }
-}
+};
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

@@ -1,27 +1,29 @@
 <template>
-<div id="app">
-  <navigation />
-  <b-container fluid>
-    <transition name="fade" mode="out-in">
-      <router-view />
-    </transition>
-  </b-container>
-  <footer class="footer bg-dark">
-    <div class="container text-center">
-      <span class="text-muted" title="Copyright 2018 by Mathmagicians.">Powered by Kumori.</span>
-    </div>
-  </footer>
-</div>
+  <div id="app">
+    <navigation />
+    <b-container fluid>
+      <transition name="fade" mode="out-in">
+        <router-view />
+      </transition>
+    </b-container>
+    <footer class="footer bg-dark">
+      <div class="container text-center">
+        <span class="text-muted" title="Copyright 2018 by Mathmagicians."
+          >Powered by Kumori.</span
+        >
+      </div>
+    </footer>
+  </div>
 </template>
 
 <script>
-import Navigation from './components/Navigation.vue'
+import Navigation from "./components/Navigation.vue";
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    'navigation': Navigation
+    navigation: Navigation
   }
-}
+};
 </script>
 
 <style>

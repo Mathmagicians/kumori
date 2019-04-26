@@ -1,30 +1,18 @@
-import Vue from 'vue'
-import VueResource from 'vue-resource'
-import App from './App.vue'
-import {
-  sync
-} from 'vuex-router-sync'
-import router from './router'
-import {
-  createStore
-} from './store'
-import BootstrapVue from 'bootstrap-vue'
-import 'bootstrap/dist/css/bootstrap.min.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
-import VueFuse from 'vue-fuse'
+import Vue from "vue";
+import App from "./App.vue";
+import router from "./router";
+import store from "./store";
 
-Vue.use(BootstrapVue)
-Vue.use(VueResource)
-Vue.use(VueFuse)
+import BootstrapVue from "bootstrap-vue";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap-vue/dist/bootstrap-vue.css";
 
-Vue.config.productionTip = false
+Vue.use(BootstrapVue);
 
-const store = createStore()
+Vue.config.productionTip = false;
 
-sync(store, router)
-
-const app = new Vue({
-  ...App,
+new Vue({
   router,
-  store
-}).$mount('#app')
+  store,
+  render: h => h(App)
+}).$mount("#app");
