@@ -1,54 +1,25 @@
-import axios from "axios";
+import Postgrest from "./Postgrest.js";
 export default {
-  /**
-   * Update a usecase
-   */
-  update: function(id, name, description, callback) {
-    let url = "/api/rpc/usecase_update";
-    let config = {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`
-      }
-    };
-    axios
-      .post(
-        url,
-        {
-          name: name,
-          id: id,
-          description: description
-        },
-        config
-      )
-      .then(function(response) {
-        callback(response);
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
+  async update(id, name, description) {
+    return new Postgrest("/api/rpc/usecase_update").update({
+      name: name,
+      id: id,
+      description: description
+    });
   },
-  /**
-   * Update a usecase
-   */
-  list: function(offset, limit, callback) {
-    let url = "/api/w_usecases?order=id.desc";
-    let config = {
-      headers: {
-        Range: `${offset}-${limit}`,
-        "Range-Unit": "items",
-        Prefer: "count=exact"
-      }
-    };
-    axios
-      .get(url, config)
-      .then(function(response) {
-        let [page, total] = response.headers["content-range"].split("/");
-        let [offset, limit] = page.split("-");
-        callback(offset, limit, total, response.data);
-      })
-      .catch(function(error) {
-        console.log(error);
-        return [];
-      });
+  async get(
+    offset = 1,
+    limit = 10,
+    select = [],
+    order = [],
+    clause = ["id=gt.0"]
+  ) {
+    return new Postgrest("/api/w_usecases").get(
+      offset,
+      limit,
+      select,
+      order,
+      clause
+    );
   }
 };

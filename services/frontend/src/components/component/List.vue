@@ -124,7 +124,7 @@ export default {
     getComponents() {
       this.isBusy = true;
       let start =
-        this.currentPage === 1 ? 0 : (this.currentPage - 1) * this.perPage;
+        this.currentPage === 1 ? 1 : (this.currentPage - 1) * this.perPage + 1;
       let stop = this.currentPage * this.perPage;
       Components.get(
         start,

@@ -46,10 +46,7 @@ export default {
       Usecases.update(
         this.usecase.id,
         this.usecase.name,
-        this.usecase.description,
-        function(response) {
-          console.log(response.statusText);
-        }
+        this.usecase.description
       );
       this.$refs.editItem.hide();
     },

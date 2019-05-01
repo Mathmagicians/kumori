@@ -1,6 +1,11 @@
 <template>
   <div>
-    <b-table striped small hover :items="items" :fields="fields">
+    <b-pagination
+      v-model="currentPage"
+      :total-rows="totalRows"
+      :per-page="perPage"
+    ></b-pagination>
+    <b-table striped small hover :items="data" :fields="fields">
       <template slot="actions" slot-scope="row">
         <b-button-group>
           <b-button size="sm" @click.stop="row.toggleDetails">
@@ -31,12 +36,7 @@
         </div>
       </template>
     </b-table>
-    <b-pagination
-      :total-rows="totalRows"
-      :per-page="perPage"
-      v-model="currentPage"
-      align="center"
-    />
+    <br /><br /><br /><br /><br /><br />
     <edit-usecase ref="editItem" />
   </div>
 </template>
@@ -50,7 +50,13 @@ import EditUsecase from "@/components/usecase/Edit";
 
 export default {
   name: "usecases",
-  created() {},
+  props: {
+    perPage: {
+      default: () => {
+        return 10;
+      }
+    }
+  },
   components: {
     "v-icon": Icon,
     "edit-usecase": EditUsecase
@@ -71,10 +77,9 @@ export default {
           label: "Actions"
         }
       ],
-      items: [],
-      totalRows: 64,
-      perPage: 10,
-      currentPage: 0
+      currentPage: 1,
+      totalRows: 0,
+      data: []
     };
   },
   computed: {
@@ -86,19 +91,27 @@ export default {
     }
   },
   watch: {
-    currentPage: function() {
-      this.list();
+    currentPage() {
+      this.get();
     }
   },
+  mounted() {
+    this.get();
+  },
   methods: {
-    list: function() {
-      let that = this;
-      let offset = this.currentPage * this.perPage;
-      let limit = that.currentPage * that.perPage + that.perPage;
-      Usecases.list(offset, limit, function(offset, limit, total, data) {
-        that.items = data;
-        that.totalRows = parseInt(total);
-      });
+    get() {
+      let start =
+        this.currentPage === 1 ? 1 : (this.currentPage - 1) * this.perPage + 1;
+      let stop = this.currentPage * this.perPage;
+      Usecases.get(start, stop, [], ["id.desc"], [])
+        .then(response => {
+          this.data = response.data;
+          this.totalRows = parseInt(response.total);
+          this.isBusy = false;
+        })
+        .catch(error => {
+          console.log(error);
+        });
     },
     showedit(item) {
       this.$refs.editItem.show(item);
