@@ -3,7 +3,7 @@ import { expect } from "chai";
 import Home from "@/views/Home.vue";
 import BootstrapVue from "bootstrap-vue";
 
-describe("Home", () => {
+describe("/views/Home.vue", () => {
   it('should find "home" element when rendering the Home view', () => {
     const localVue = createLocalVue();
     localVue.use(BootstrapVue);

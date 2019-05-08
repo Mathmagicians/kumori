@@ -24,7 +24,7 @@ const localVue = createLocalVue()
 localVue.use(BootstrapVue)
 localVue.use(Vuex)
 
-describe('TechComponentEditor.vue', () => {
+describe('/components/TechComponentEditor.vue', () => {
 	describe('url adressing', () => {
 		it('enables edit mode when query parameter action is equal update /components/:uid?action=update'),
 		it('enables create mode when query parameter action is equal create as in /components?action=create'),

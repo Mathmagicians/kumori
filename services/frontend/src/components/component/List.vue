@@ -1,74 +1,57 @@
 <template>
-  <b-container fluid>
-    <b-row>
-      <b-col>
-        <b-row>
-          <b-col>
-            <b-pagination
-              v-model="currentPage"
-              :total-rows="totalRows"
-              :per-page="perPage"
-            ></b-pagination>
-          </b-col>
-          <b-col>
-            <b-button v-b-toggle.collapse-1 variant="primary"
-              >Manage filters</b-button
-            >
-          </b-col>
-        </b-row>
-        <b-row>
-          <b-col>
-            <b-collapse id="collapse-1" class="mt-2">
-              <b-card>
-                <b-container fluid>
-                  <b-row>
-                    <b-col>
-                      <b-form-checkbox-group
-                        v-model="status"
-                        :options="statuses"
-                        switches
-                        stacked
-                      ></b-form-checkbox-group>
-                    </b-col>
-                    <b-col>
-                      <tax-select />
-                    </b-col>
-                  </b-row>
-                </b-container>
-              </b-card>
-            </b-collapse>
-            <b-table
-              outlined
-              striped
-              hover
-              small
-              :busy="isBusy"
-              :items="data"
-              :fields="fields"
-            >
-              <div slot="table-busy" class="text-center text-danger my-2">
-                <b-spinner class="align-middle"></b-spinner>
-                <strong>Loading...</strong>
-              </div>
-              <template slot="primary_usecase.name" slot-scope="data">
-                <status-badge :label="data.value" />
-              </template>
-            </b-table>
-          </b-col>
-        </b-row>
-      </b-col>
-    </b-row>
-  </b-container>
+<b-container fluid>
+  <b-row>
+    <b-col>
+      <b-row>
+        <b-col>
+          <b-pagination v-model="currentPage" :total-rows="totalRows" :per-page="perPage"></b-pagination>
+        </b-col>
+        <b-col>
+          <b-button v-b-toggle.collapse-1 variant="primary">Manage filters</b-button>
+        </b-col>
+      </b-row>
+      <b-row>
+        <b-col>
+          <b-collapse id="collapse-1" class="mt-2">
+            <b-card>
+              <b-container fluid>
+                <b-row>
+                  <b-col>
+                    <b-form-checkbox-group v-model="status" :options="statuses" switches stacked></b-form-checkbox-group>
+                  </b-col>
+                  <b-col>
+                    <tax-select />
+                  </b-col>
+                </b-row>
+              </b-container>
+            </b-card>
+          </b-collapse>
+          <b-table outlined striped hover small :busy="isBusy" :items="data" :fields="fields">
+            <div slot="table-busy" class="text-center text-danger my-2">
+              <b-spinner class="align-middle"></b-spinner>
+              <strong>Loading...</strong>
+            </div>
+            <template slot="primary_usecase.name" slot-scope="data">
+              <status-badge :label="data.value" />
+            </template>
+          </b-table>
+        </b-col>
+      </b-row>
+    </b-col>
+  </b-row>
+</b-container>
 </template>
 
 <script>
-import { EventBus } from "@/api/event-bus.js";
+import {
+  EventBus
+} from "@/api/event-bus.js";
 import Components from "@/api/Components.js";
 import Statuses from "@/api/Statuses.js";
 import StatusBadge from "@/components/status/Badge.vue";
 import TaxSelect from "@/components/taxonomy/Select.vue";
 export default {
-  name: "list",
+  name: "component-list",
   components: {
     "status-badge": StatusBadge,
     "tax-select": TaxSelect
@@ -86,8 +69,7 @@ export default {
       currentPage: 1,
       totalRows: 0,
       data: [],
-      fields: [
-        {
+      fields: [{
           key: "name",
           label: "Name"
         },
@@ -121,25 +103,34 @@ export default {
     }
   },
   methods: {
+    toast(title, message, type) {
+      this.$bvToast.toast(message, {
+        variant: type,
+        title: title,
+        autoHideDelay: 5000,
+        toaster: 'b-toaster-bottom-right'
+      })
+    },
+
     getComponents() {
       this.isBusy = true;
       let start =
         this.currentPage === 1 ? 1 : (this.currentPage - 1) * this.perPage + 1;
       let stop = this.currentPage * this.perPage;
       Components.get(
-        start,
-        stop,
-        [],
-        [],
-        [this.calcStatus(), this.calcTaxonomy()]
-      )
+          start,
+          stop,
+          [],
+          [],
+          [this.calcStatus(), this.calcTaxonomy()]
+        )
         .then(response => {
           this.data = response.data;
           this.totalRows = parseInt(response.total);
           this.isBusy = false;
         })
         .catch(error => {
-          console.log(error);
+          this.toast('Error', error, 'danger')
         });
     },
     getStatuses() {
@@ -153,7 +144,7 @@ export default {
           });
         })
         .catch(error => {
-          console.log(error);
+          this.toast('Error', error, 'danger')
         });
     },
     calcStatus() {

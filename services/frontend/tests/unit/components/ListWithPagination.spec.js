@@ -12,7 +12,7 @@ const factory = propsData =>
     propsData
   });
 
-describe("ListWithPagination.vue", () => {
+describe("/components/ListWithPagination.vue", () => {
   const propsData = {
     listSize: 2,
     listTotal: 7,

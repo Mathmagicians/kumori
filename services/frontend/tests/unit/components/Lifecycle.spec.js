@@ -15,10 +15,9 @@ const factory = (store, propsData) =>
     propsData
   });
 
-describe("LifeCycle.vue", () => {
+describe("/components/LifeCycle.vue", () => {
   const getters = {
-    lifeCycle: () => [
-      {
+    lifeCycle: () => [{
         name: "experimental",
         type: "buy"
       },
@@ -44,7 +43,7 @@ describe("LifeCycle.vue", () => {
       status: "experimental"
     });
     const button = wrapper.find("button");
-    console.log(button.text());
+
     /*
 			const style = button.element.style
 			console.log(button.element.style)
