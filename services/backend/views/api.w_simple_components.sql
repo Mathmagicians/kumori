@@ -14,7 +14,10 @@ SELECT
             api.component_usecase AS cu
         LEFT JOIN api.statuses AS s ON cu.status = s.id
         WHERE cu.usecase = c.primary_usecase
-    ) AS primary_usecase
+    ) AS primary_usecase,
+    SETWEIGHT(TO_TSVECTOR('simple', c.name), 'A')
+    || ' ' ||
+    SETWEIGHT(TO_TSVECTOR('simple', c.description), 'B') AS fts
 FROM
     api.components AS c
     LEFT JOIN api.component_usecase AS uscom ON c.id = uscom.component

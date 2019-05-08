@@ -21,6 +21,7 @@
                   </b-col>
                   <b-col>
                     <tax-select />
+                    <b-form-input v-model="query" placeholder="filter"></b-form-input>
                   </b-col>
                 </b-row>
               </b-container>
@@ -68,6 +69,7 @@ export default {
       isBusy: true,
       currentPage: 1,
       totalRows: 0,
+      query: '',
       data: [],
       fields: [{
           key: "name",
@@ -100,6 +102,14 @@ export default {
     },
     taxonomy() {
       this.getComponents();
+    },
+    query() {
+      if (this.query.length > 3) {
+        this.getComponents();
+      }
+      if (this.query.length < 2) {
+        this.getComponents();
+      }
     }
   },
   methods: {
@@ -122,7 +132,7 @@ export default {
           stop,
           [],
           [],
-          [this.calcStatus(), this.calcTaxonomy()]
+          [this.calcStatus(), this.calcTaxonomy(),this.calcFts()]
         )
         .then(response => {
           this.data = response.data;
@@ -156,6 +166,12 @@ export default {
     calcTaxonomy() {
       if (this.taxonomy.length > 0) {
         return `tag=in.(${this.taxonomy})`;
+      }
+      return "";
+    },
+    calcFts() {
+      if (this.query.length > 2) {
+        return `fts=fts(simple).${encodeURI(this.query+':*')}`;
       }
       return "";
     }
