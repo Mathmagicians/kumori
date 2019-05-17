@@ -100,9 +100,8 @@ export default {
   },
   methods: {
     get() {
-      let start =
-        this.currentPage === 1 ? 1 : (this.currentPage - 1) * this.perPage + 1;
-      let stop = this.currentPage * this.perPage;
+      let start = this.currentPage === 1 ? 0 : (this.currentPage - 1) * this.perPage;
+      let stop = this.currentPage === 1 ? (this.currentPage * this.perPage) - 1 : (this.currentPage * this.perPage)
       Usecases.get(start, stop, [], ["id.desc"], [])
         .then(response => {
           this.data = response.data;

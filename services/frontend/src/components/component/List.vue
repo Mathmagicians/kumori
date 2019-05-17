@@ -4,7 +4,7 @@
     <b-col>
       <b-row>
         <b-col>
-          <b-pagination v-model="currentPage" :total-rows="totalRows" :per-page="perPage"></b-pagination>
+          <b-pagination class="justify-content-center" v-model="currentPage" :total-rows="totalRows" :per-page="perPage"></b-pagination>
         </b-col>
         <b-col>
           <b-button v-b-toggle.collapse-1 variant="primary">Manage filters</b-button>
@@ -98,16 +98,20 @@ export default {
       this.getComponents();
     },
     status() {
+      this.currentPage = 1
       this.getComponents();
     },
     taxonomy() {
+      this.currentPage = 1
       this.getComponents();
     },
     query() {
       if (this.query.length > 3) {
+        this.currentPage = 1
         this.getComponents();
       }
       if (this.query.length < 2) {
+        this.currentPage = 1
         this.getComponents();
       }
     }
@@ -124,13 +128,12 @@ export default {
 
     getComponents() {
       this.isBusy = true;
-      let start =
-        this.currentPage === 1 ? 1 : (this.currentPage - 1) * this.perPage + 1;
-      let stop = this.currentPage * this.perPage;
+      let start = this.currentPage === 1 ? 0 : (this.currentPage - 1) * this.perPage;
+      let stop = this.currentPage === 1 ? (this.currentPage * this.perPage) - 1 : (this.currentPage * this.perPage)
       Components.get(
           start,
           stop,
-          [],
+          ['id,name,primary_usecase'],
           [],
           [this.calcStatus(), this.calcTaxonomy(),this.calcFts()]
         )
@@ -171,7 +174,7 @@ export default {
     },
     calcFts() {
       if (this.query.length > 2) {
-        return `fts=fts(simple).${encodeURI(this.query+':*')}`;
+        return `search=ilike.*${encodeURI(this.query)}*`;
       }
       return "";
     }

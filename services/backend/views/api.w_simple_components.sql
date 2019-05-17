@@ -9,15 +9,13 @@ SELECT
     tax.id AS tag,
     st.id AS status,
     (   SELECT
-            JSON_BUILD_OBJECT('id', cu.status, 'name', s.NAME, 'phase', s.phase)
+            JSON_BUILD_OBJECT('id', cu.status, 'name', s.name, 'phase', s.phase)
         FROM
             api.component_usecase AS cu
         LEFT JOIN api.statuses AS s ON cu.status = s.id
         WHERE cu.usecase = c.primary_usecase
     ) AS primary_usecase,
-    SETWEIGHT(TO_TSVECTOR('simple', c.name), 'A')
-    || ' ' ||
-    SETWEIGHT(TO_TSVECTOR('simple', c.description), 'B') AS fts
+    c.name || ' ' || c.description as search
 FROM
     api.components AS c
     LEFT JOIN api.component_usecase AS uscom ON c.id = uscom.component
