@@ -19,6 +19,8 @@ build:
 	@cat ./tables/api.usecase_taxonomy.sql >> schema.sql
 	@cat ./tables/api.component_usecase.sql >> schema.sql
 	@cat ./views/api.w_usecases.sql >> schema.sql
+	@cat ./views/api.w_simple_components.sql >> schema.sql
+	@cat ./views/api.w_burst.sql >> schema.sql
 	@cat ./views/api.w_components.sql >> schema.sql
 	@cat ./views/api.w_simple_components.sql >> schema.sql
 	@cat ./views/api.w_burst.sql >> schema.sql

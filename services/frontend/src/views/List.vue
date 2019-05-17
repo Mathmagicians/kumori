@@ -1,23 +1,21 @@
 <template>
-<div>
-  <c-list />
-</div>
+  <div>
+    <c-list />
+  </div>
 </template>
 
 <script>
-import ComponentList from '@/components/component/List'
+import ComponentList from "@/components/component/List";
 export default {
-  name: 'list',
+  name: "list",
   components: {
-    'c-list': ComponentList
+    "c-list": ComponentList
   },
   data() {
-    return {}
+    return {};
   },
   mounted() {}
-}
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

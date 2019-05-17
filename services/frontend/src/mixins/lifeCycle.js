@@ -1,36 +1,37 @@
 export default {
-
   variant: {
-    Maybe: 'secondary',
-    Buy: 'primary',
-    Hold: 'success',
-    Sell: 'danger'
+    Maybe: "secondary",
+    Buy: "primary",
+    Hold: "success",
+    Sell: "danger"
   },
   phaseImages: Object.freeze({
-    'Buy': require('../assets/buy.svg'),
-    'Hold': require('../assets/service.svg'),
-    'Sell': require('../assets/exterminator.svg'),
-    'Maybe': require('../assets/community.svg')
+    Buy: require("../assets/buy.svg"),
+    Hold: require("../assets/service.svg"),
+    Sell: require("../assets/exterminator.svg"),
+    Maybe: require("../assets/community.svg")
   }),
   computed: {
     types: function() {
-      return this.$store.getters.lifeCycle.reduce(
-        (acc, item) => {
-          if (!acc.includes(item.phase)) acc.push(item.phase)
-          return acc
-        }, [])
+      return this.$store.getters.lifeCycle.reduce((acc, item) => {
+        if (!acc.includes(item.phase)) acc.push(item.phase);
+        return acc;
+      }, []);
       // return this.$store.getters.lifeCycle.map(item => item.phase).filter((v, i, a) => a.indexOf(v) === i);
     },
     itemsForType: function() {
-      const namesForType = type => this.$store.getters.lifeCycle.filter(item => item.phase === type).map(item => item.name);
+      const namesForType = type =>
+        this.$store.getters.lifeCycle
+          .filter(item => item.phase === type)
+          .map(item => item.name);
       const myMap = new Map();
-      this.types.forEach(type => myMap[type] = namesForType(type));
+      this.types.forEach(type => (myMap[type] = namesForType(type)));
       return myMap;
     }
   },
   methods: {
     btnVariant(type) {
-      return type ? this.$options.variant[type] : '';
+      return type ? this.$options.variant[type] : "";
     },
     images: function(type) {
       return this.$options.phaseImages[type];
@@ -40,9 +41,11 @@ export default {
     // test data: [{'name":"A", parent:"null"},{"name":"B", parent:"A"}, {"name":"C", parent:"A"}, {"name":"D", parent:""}]
     // assert  [ { "name": "A", "parent": "null", "children": [ { "name": "B", "parent": "A", "children": [] }, { "name": "C", "parent": "A", "children": [] } ] }, { "name": "D", "parent": "", "children": [] } ]
     buildTree(flatList) {
-      const nonExists = (e) => {
-        return (e === 'null') || (e === null) || (e === undefined) || (e === '') || (e === [])
-      }
+      const nonExists = e => {
+        return (
+          e === "null" || e === null || e === undefined || e === "" || e === []
+        );
+      };
       let tree = [];
       let lookUp = {};
 
@@ -60,9 +63,9 @@ export default {
           // It is a root
           tree.push(el);
         } else {
-          lookUp[el.parent].children.push(el)
+          lookUp[el.parent].children.push(el);
           // Set size to 0 in non leaf nodes for sunburst component to display correctly
-          lookUp[el.parent].size = 0
+          lookUp[el.parent].size = 0;
         }
       });
       return tree;
@@ -79,18 +82,22 @@ export default {
       2
         */
     addSizesForTaxonomies(tags, techs) {
-      const isTagInTech = (tag, tech) => tech.tags && tech.tags.filter(atag => atag === tag.name).length > 0
-      const countTagInTechs = (tag, techs) => techs.reduce((sum, tech) => isTagInTech(tag, tech) ? sum + 1 : sum, 0)
-      return tags ? tags.map(tag => ({ ...tag,
-        size: countTagInTechs(tag, techs)
-      })) : tags
+      const isTagInTech = (tag, tech) =>
+        tech.tags && tech.tags.filter(atag => atag === tag.name).length > 0;
+      const countTagInTechs = (tag, techs) =>
+        techs.reduce(
+          (sum, tech) => (isTagInTech(tag, tech) ? sum + 1 : sum),
+          0
+        );
+      return tags
+        ? tags.map(tag => ({ ...tag, size: countTagInTechs(tag, techs) }))
+        : tags;
     },
 
     saveFile: function(treeObj) {
       const data = JSON.stringify(treeObj);
-      window.localStorage.setItem('treeObj', data);
-      console.log('saved to local storage as ' + 'treeObj');
+      window.localStorage.setItem("treeObj", data);
+      console.log("saved to local storage as " + "treeObj");
     }
-
   }
-}
+};

@@ -1,75 +1,91 @@
-import axios from 'axios'
+import axios from "axios";
 export default {
   /**
    * Update a project
    */
   update: function(id, name, description, scope) {
-    let url = '/api/rpc/project_update'
+    let url = "/api/rpc/project_update";
     let config = {
       headers: {
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
+        Authorization: `Bearer ${localStorage.getItem("token")}`
       }
-    }
-    axios.post(url, {
-        id: id,
-        name: name,
-        description: description,
-        scope: scope
-      }, config)
+    };
+    axios
+      .post(
+        url,
+        {
+          id: id,
+          name: name,
+          description: description,
+          scope: scope
+        },
+        config
+      )
       .then(function(response) {
         console.log(response.statusText);
       })
       .catch(function(error) {
         console.log(error);
-      })
+      });
   },
   /**
    * List projects
    */
-  list: function(offset, limit, callback) {
-    let data = [{
-      name: 'Project Suspicious',
-      status: {
-        value: 1,
-        trend: 1,
-        timestamp: '2018-08-21:00:00:00'
+  list: function() {
+    let data = [
+      {
+        name: "Project Suspicious",
+        status: {
+          value: 1,
+          trend: 1,
+          timestamp: "2018-08-21:00:00:00"
+        },
+        history: [
+          {
+            value: 1,
+            trend: 1,
+            timestamp: "2018-08-01:00:00:00"
+          },
+          {
+            value: 1,
+            trend: 1,
+            timestamp: "2018-07-21:00:00:00"
+          },
+          {
+            value: 1,
+            trend: 1,
+            timestamp: "2018-06-01:00:00:00"
+          }
+        ]
       },
-      history: [{
-        value: 1,
-        trend: 1,
-        timestamp: '2018-08-01:00:00:00'
-      }, {
-        value: 1,
-        trend: 1,
-        timestamp: '2018-07-21:00:00:00'
-      }, {
-        value: 1,
-        trend: 1,
-        timestamp: '2018-06-01:00:00:00'
-      }]
-    }, {
-      name: 'Project Awesome',
-      status: {
-        value: 5,
-        trend: -1,
-        timestamp: '2018-08-21:00:00:00'
-      },
-      history: [{
-        value: 1,
-        trend: 1,
-        timestamp: '2018-08-01:00:00:00'
-      }, {
-        value: 1,
-        trend: 1,
-        timestamp: '2018-07-21:00:00:00'
-      }, {
-        value: 1,
-        trend: 1,
-        timestamp: '2018-06-01:00:00:00'
-      }]
-    }]
+      {
+        name: "Project Awesome",
+        status: {
+          value: 5,
+          trend: -1,
+          timestamp: "2018-08-21:00:00:00"
+        },
+        history: [
+          {
+            value: 1,
+            trend: 1,
+            timestamp: "2018-08-01:00:00:00"
+          },
+          {
+            value: 1,
+            trend: 1,
+            timestamp: "2018-07-21:00:00:00"
+          },
+          {
+            value: 1,
+            trend: 1,
+            timestamp: "2018-06-01:00:00:00"
+          }
+        ]
+      }
+    ];
 
-    return data
+    return data;
 
     /*
     let url = '/api/w_projects?order=id.desc'
@@ -92,4 +108,4 @@ export default {
       })
     */
   }
-}
+};

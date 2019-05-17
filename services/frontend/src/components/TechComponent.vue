@@ -1,188 +1,239 @@
 <template>
-<b-card no-body :id="tech.uid">
-  <span slot="header" :v-b-toggle="accordionId">
-    <b-button v-on:click="activate" variant="link">
-      {{tech.name}}
-    </b-button>
-    <life-cycle :status="tech.status" to="about" class="status-floater"></life-cycle>
-  </span>
+  <b-card no-body :id="tech.uid">
+    <span slot="header" :v-b-toggle="accordionId">
+      <b-button v-on:click="activate" variant="link">
+        {{ tech.name }}
+      </b-button>
+      <life-cycle
+        :status="tech.status"
+        to="about"
+        class="status-floater"
+      ></life-cycle>
+    </span>
 
-  <b-collapse :id="accordionId" accordion="tech" :visible="active?active:false">
-    <loading v-if="this.loading">
-      Loading details for tech component {{tech.uid}}
-    </loading>
-    <b-card-body v-else>
-      <b-list-group flush>
-        <b-list-group-item v-if="techContent.tags">
-          <p>Usecase Classification:</p>
-          <h6 v-if="tech.tags.length>0"> {{tech.tags|stringify}}</h6>
-          <b-badge v-else variant="alert">
-            Usecase Missing
-          </b-badge>
-        </b-list-group-item>
-        <b-list-group-item v-if="techContent.description">
-          <strong>Description:</strong>
-          <b-row>
-            <b-col cols="1">
-              <v-icon name="clipboard" color="grey" />
-            </b-col>
-            <b-col cols="9">
-              <p>{{techContent.description}}</p>
-            </b-col>
-            <b-col>
-            </b-col>
-          </b-row>
-        </b-list-group-item>
-        <b-list-group-item v-if="techContent.usecases && techContent.usecases.length>0">
-          <strong>Usecases</strong>
-          <b-badge>{{techContent.usecases.length}}</b-badge>:
-          <b-row v-for="(uc, index) in techContent.usecases" :key="index" class="justify-content-md-center">
-            <b-col cols="1">
-              <v-icon v-if="index===0" scale="1" name="toolbox" color="green" />
-              <v-icon v-else scale="1" name="toolbox" color="grey" />
-            </b-col>
-            <b-col cols="9">
-              <b-badge v-if="index===0" variant="success">Primary</b-badge>
-              <b-badge v-else variant="secondary">Secondary</b-badge>
-              <b> {{uc.name}}</b>
-              <p> {{uc.description}}</p>
-              <p v-if="uc.scope"><b>Scope:</b> {{uc.scope}}</p>
-            </b-col>
-            <b-col>
-              <life-cycle :status="uc.status" />
-            </b-col>
-          </b-row>
-        </b-list-group-item>
-        <b-list-group-item v-if="techContent.licenses">
-          <strong>Licenses:</strong>
-          <b-row v-for="license in techContent.licenses" :key="license" class="justify-content-md-center">
-            <b-col cols="1">
-              <v-icon name="clipboard" color="grey" />
-            </b-col>
-            <b-col cols="9" v-if="license">
-              <b-badge :variant="license.type === 'commercial'?'danger':'warning'">{{license.type}}</b-badge>
-              {{license.description}}
-              <b-button variant="link lg" :href="license.ref">
-                {{license.ref}}
-              </b-button>
-            </b-col>
-            <b-col />
-          </b-row>
-        </b-list-group-item>
-        <b-list-group-item v-if="techContent.links && techContent.links.length>0">
-          <strong>Links:</strong>
-          <b-row v-for="(link, index) in techContent.links" :key="index" class="justify-content-md-center">
-            <b-col cols="1">
-              <v-icon name="link" color="grey" />
-            </b-col>
-            <b-col cols="9">
-              <b-badge>{{link.type}}</b-badge>
-              <b-button variant="link lg" :href="link.ref">
-                {{link.ref}}
-              </b-button>
-            </b-col>
-            <b-col />
-          </b-row>
-        </b-list-group-item>
-        <b-list-group-item v-if="techContent.log">
-          <strong>Change Log:</strong>
-          <b-row v-for="(entry, index) in techContent.log" :key="index" class="justify-content-md-center">
-            <b-col cols="1">
-              <v-icon v-if="index===0" name="play" color="green" />
-              <v-icon v-else name="play" color="grey" />
-            </b-col>
-            <b-col cols="2">
-              <em>{{entry.date}}</em>
-            </b-col>
-            <b-col cols="7">
-              {{entry.description}}
-            </b-col>
-            <b-col>
-              <life-cycle :status="entry.status" />
-            </b-col>
-          </b-row>
-        </b-list-group-item>
-        <b-list-group-item v-if="techContent.debt">
-          <strong>Technical debt:</strong>
-          <b-row v-for="(entry, index) in techContent.debt" :key="index" class="justify-content-md-center">
-            <b-col cols="1">
-              <v-icon v-if="entry.score >= 2" name="fire" color="orange" />
-              <v-icon v-else name="fire" color="grey" />
-            </b-col>
-            <b-col cols="2">
-              <em>{{entry.date}}</em>
-            </b-col>
-            <b-col cols="7">
-              {{entry.description}}
-            </b-col>
-            <b-col>
-              by <em>{{entry.reporter}}</em>
-            </b-col>
-          </b-row>
-        </b-list-group-item>
-        <b-list-group-item>
-          <strong>Comments:</strong>
-          <b-row v-for="(entry, index) in techContent.comments" :key="index" class="justify-content-md-center">
-            <b-col cols="1">
-              <v-icon name="comment" color="grey" />
-            </b-col>
-            <b-col cols="2">
-              <em>{{entry.date}}</em>
-            </b-col>
-            <b-col cols="7">
-              {{entry.description}}
-            </b-col>
-            <b-col>
-              <em>by {{entry.reporter}}</em>
-            </b-col>
-          </b-row>
-        </b-list-group-item>
-      </b-list-group>
-    </b-card-body>
-    <b-card-footer>
-      <span>
-        <b-button variant="outline-secondary sm" class="btn-round">
-          <v-icon name="heart" scale="1" />
-        </b-button>
-        <b-button variant="outline-secondary sm" class="btn-round">
-          <v-icon name="fire" scale="1" />
-        </b-button>
-        <b-button variant="outline-secondary sm" class="btn-round">
-          <v-icon name="comment" scale="1" />
-        </b-button>
-        <b-button v-if="isEditOn" @click="edit" variant="outline-secondary sm" class="btn-round">
-          <v-icon name="pen" color="green" scale="1" />
-        </b-button>
-      </span>
-    </b-card-footer>
-  </b-collapse>
-</b-card>
+    <b-collapse
+      :id="accordionId"
+      accordion="tech"
+      :visible="active ? active : false"
+    >
+      <loading v-if="this.loading">
+        Loading details for tech component {{ tech.uid }}
+      </loading>
+      <b-card-body v-else>
+        <b-list-group flush>
+          <b-list-group-item v-if="techContent.tags">
+            <p>Usecase Classification:</p>
+            <h6 v-if="tech.tags.length > 0">{{ tech.tags | stringify }}</h6>
+            <b-badge v-else variant="alert">
+              Usecase Missing
+            </b-badge>
+          </b-list-group-item>
+          <b-list-group-item v-if="techContent.description">
+            <strong>Description:</strong>
+            <b-row>
+              <b-col cols="1">
+                <v-icon name="clipboard" color="grey" />
+              </b-col>
+              <b-col cols="9">
+                <p>{{ techContent.description }}</p>
+              </b-col>
+              <b-col> </b-col>
+            </b-row>
+          </b-list-group-item>
+          <b-list-group-item
+            v-if="techContent.usecases && techContent.usecases.length > 0"
+          >
+            <strong>Usecases</strong>
+            <b-badge>{{ techContent.usecases.length }}</b-badge
+            >:
+            <b-row
+              v-for="(uc, index) in techContent.usecases"
+              :key="index"
+              class="justify-content-md-center"
+            >
+              <b-col cols="1">
+                <v-icon
+                  v-if="index === 0"
+                  scale="1"
+                  name="toolbox"
+                  color="green"
+                />
+                <v-icon v-else scale="1" name="toolbox" color="grey" />
+              </b-col>
+              <b-col cols="9">
+                <b-badge v-if="index === 0" variant="success">Primary</b-badge>
+                <b-badge v-else variant="secondary">Secondary</b-badge>
+                <b> {{ uc.name }}</b>
+                <p>{{ uc.description }}</p>
+                <p v-if="uc.scope"><b>Scope:</b> {{ uc.scope }}</p>
+              </b-col>
+              <b-col>
+                <life-cycle :status="uc.status" />
+              </b-col>
+            </b-row>
+          </b-list-group-item>
+          <b-list-group-item v-if="techContent.licenses">
+            <strong>Licenses:</strong>
+            <b-row
+              v-for="license in techContent.licenses"
+              :key="license"
+              class="justify-content-md-center"
+            >
+              <b-col cols="1">
+                <v-icon name="clipboard" color="grey" />
+              </b-col>
+              <b-col cols="9" v-if="license">
+                <b-badge
+                  :variant="
+                    license.type === 'commercial' ? 'danger' : 'warning'
+                  "
+                  >{{ license.type }}</b-badge
+                >
+                {{ license.description }}
+                <b-button variant="link lg" :href="license.ref">
+                  {{ license.ref }}
+                </b-button>
+              </b-col>
+              <b-col />
+            </b-row>
+          </b-list-group-item>
+          <b-list-group-item
+            v-if="techContent.links && techContent.links.length > 0"
+          >
+            <strong>Links:</strong>
+            <b-row
+              v-for="(link, index) in techContent.links"
+              :key="index"
+              class="justify-content-md-center"
+            >
+              <b-col cols="1">
+                <v-icon name="link" color="grey" />
+              </b-col>
+              <b-col cols="9">
+                <b-badge>{{ link.type }}</b-badge>
+                <b-button variant="link lg" :href="link.ref">
+                  {{ link.ref }}
+                </b-button>
+              </b-col>
+              <b-col />
+            </b-row>
+          </b-list-group-item>
+          <b-list-group-item v-if="techContent.log">
+            <strong>Change Log:</strong>
+            <b-row
+              v-for="(entry, index) in techContent.log"
+              :key="index"
+              class="justify-content-md-center"
+            >
+              <b-col cols="1">
+                <v-icon v-if="index === 0" name="play" color="green" />
+                <v-icon v-else name="play" color="grey" />
+              </b-col>
+              <b-col cols="2">
+                <em>{{ entry.date }}</em>
+              </b-col>
+              <b-col cols="7">
+                {{ entry.description }}
+              </b-col>
+              <b-col>
+                <life-cycle :status="entry.status" />
+              </b-col>
+            </b-row>
+          </b-list-group-item>
+          <b-list-group-item v-if="techContent.debt">
+            <strong>Technical debt:</strong>
+            <b-row
+              v-for="(entry, index) in techContent.debt"
+              :key="index"
+              class="justify-content-md-center"
+            >
+              <b-col cols="1">
+                <v-icon v-if="entry.score >= 2" name="fire" color="orange" />
+                <v-icon v-else name="fire" color="grey" />
+              </b-col>
+              <b-col cols="2">
+                <em>{{ entry.date }}</em>
+              </b-col>
+              <b-col cols="7">
+                {{ entry.description }}
+              </b-col>
+              <b-col>
+                by <em>{{ entry.reporter }}</em>
+              </b-col>
+            </b-row>
+          </b-list-group-item>
+          <b-list-group-item>
+            <strong>Comments:</strong>
+            <b-row
+              v-for="(entry, index) in techContent.comments"
+              :key="index"
+              class="justify-content-md-center"
+            >
+              <b-col cols="1">
+                <v-icon name="comment" color="grey" />
+              </b-col>
+              <b-col cols="2">
+                <em>{{ entry.date }}</em>
+              </b-col>
+              <b-col cols="7">
+                {{ entry.description }}
+              </b-col>
+              <b-col>
+                <em>by {{ entry.reporter }}</em>
+              </b-col>
+            </b-row>
+          </b-list-group-item>
+        </b-list-group>
+      </b-card-body>
+      <b-card-footer>
+        <span>
+          <b-button variant="outline-secondary sm" class="btn-round">
+            <v-icon name="heart" scale="1" />
+          </b-button>
+          <b-button variant="outline-secondary sm" class="btn-round">
+            <v-icon name="fire" scale="1" />
+          </b-button>
+          <b-button variant="outline-secondary sm" class="btn-round">
+            <v-icon name="comment" scale="1" />
+          </b-button>
+          <b-button
+            v-if="isEditOn"
+            @click="edit"
+            variant="outline-secondary sm"
+            class="btn-round"
+          >
+            <v-icon name="pen" color="green" scale="1" />
+          </b-button>
+        </span>
+      </b-card-footer>
+    </b-collapse>
+  </b-card>
 </template>
 
 <script>
-import Icon from 'vue-awesome/components/Icon'
-import 'vue-awesome/icons/pen'
-import 'vue-awesome/icons/comment'
-import 'vue-awesome/icons/clipboard'
-import 'vue-awesome/icons/fire'
-import 'vue-awesome/icons/heart'
-import 'vue-awesome/icons/play'
-import 'vue-awesome/icons/link'
-import 'vue-awesome/icons/toolbox'
-import LifeCycle from '../components/LifeCycle.vue'
-import Loading from '../components/Loading.vue'
-import filterMixin from '../mixins/filters.js'
+import Icon from "vue-awesome/components/Icon";
+import "vue-awesome/icons/pen";
+import "vue-awesome/icons/comment";
+import "vue-awesome/icons/clipboard";
+import "vue-awesome/icons/fire";
+import "vue-awesome/icons/heart";
+import "vue-awesome/icons/play";
+import "vue-awesome/icons/link";
+import "vue-awesome/icons/toolbox";
+import LifeCycle from "../components/LifeCycle.vue";
+import Loading from "../components/Loading.vue";
+import filterMixin from "../mixins/filters.js";
 
 export default {
-  name: 'techComponent',
+  name: "techComponent",
   data() {
     return {
       techContent: {},
       loading: false
-    }
+    };
   },
   components: {
-    'v-icon': Icon,
+    "v-icon": Icon,
     LifeCycle,
     Loading
   },
@@ -196,49 +247,46 @@ export default {
       default: false
     }
   },
-  mixins: [
-    filterMixin
-  ],
+  mixins: [filterMixin],
   computed: {
-    accordionId: function () {
-      return 'accordion-' + this.tech.uid;
+    accordionId: function() {
+      return "accordion-" + this.tech.uid;
     },
     isEditOn() {
       return this.$store.getters.isEditOn;
     }
   },
-  created: function () {
-    this.active && this.loadData()
-    if (this.active) this.activate()
+  created: function() {
+    this.active && this.loadData();
+    if (this.active) this.activate();
   },
   methods: {
-    activate: function () {
-      this.loadData()
+    activate: function() {
+      this.loadData();
       this.$router.push({
-        name: 'component',
+        name: "component",
         params: {
           name: this.tech.name
         }
-      })
+      });
     },
-    edit: function () {
+    edit: function() {
       this.$router.push({
-        name: 'edit',
+        name: "edit",
         params: {
           uid: this.tech.uid
         }
       });
     },
     loadData() {
-      this.loading = true
-      this.$store.dispatch('fetchTechDetails', this.tech.uid)
-        .then(details => {
-          this.techContent = details
-          this.loading = false
-        })
+      this.loading = true;
+      this.$store.dispatch("fetchTechDetails", this.tech.uid).then(details => {
+        this.techContent = details;
+        this.loading = false;
+      });
     }
   }
-}
+};
 </script>
 
 <style scoped>
@@ -255,7 +303,7 @@ export default {
 }
 
 .btn {
-  padding: .4rem .75rem;
+  padding: 0.4rem 0.75rem;
 }
 
 .card {

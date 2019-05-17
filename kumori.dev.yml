@@ -3,7 +3,7 @@ services:
   devserver:
     container_name: kumori-devserver
     image: mathmagicians/kumori_build
-    command: ["npm", "run", "dev"]
+    command: ["npm", "run", "serve"]
     working_dir: /tmp/services/frontend
     ports:
       - "80:80"
@@ -77,6 +77,28 @@ services:
     - kumori
     environment:
       NEO4J_AUTH: none
+
+  zookeeper:
+    container_name: kumori-zookeeper
+    image: wurstmeister/zookeeper
+    ports:
+      - "2181:2181"
+    networks:
+    - kumori
+
+  kafka:
+    container_name: kumori-kafka
+    image: wurstmeister/kafka:latest
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: 172.23.0.1
+      KAFKA_CREATE_TOPICS: "test:1:1"
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+    - kumori
 
 volumes:
   data-pgadmin:

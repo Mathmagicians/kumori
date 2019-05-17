@@ -7,7 +7,7 @@ export default {
       return upper.toUpperCase();
     },
     stringify: function(list) {
-      return list ? list.join('>') : list;
+      return list ? list.join(">") : list;
     }
   }
-}
+};
