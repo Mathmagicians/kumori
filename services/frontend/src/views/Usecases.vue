@@ -18,6 +18,19 @@
           >
             <v-icon name="pen" />
           </b-button>
+          <b-button
+            size="sm"
+            @click="remove(row.item)"
+            v-if="isLoggedIn && isEditOn"
+          >
+            Delete
+          </b-button>
+
+
+
+
+
+
         </b-button-group>
       </template>
       <template slot="row-details" slot-scope="row">
@@ -114,7 +127,15 @@ export default {
     },
     showedit(item) {
       this.$refs.editItem.show(item);
-    }
+    },
+    remove(item) {
+      Usecases.deleteById(item.id).then(res => {
+        console.log(`Deleted: ${item.id}`)
+      }).catch(e => {
+        console.log(e)
+      })
+
+    },
   }
 };
 </script>

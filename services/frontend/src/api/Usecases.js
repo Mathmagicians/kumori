@@ -7,6 +7,15 @@ export default {
       description: description
     });
   },
+  async deleteById(id) {
+    //TODO This should probably be handled on the database side as a trigger
+    return new Postgrest("/api/usecase_taxonomy").delete([`usecase=eq.${id}`]).then(() => {
+      return new Postgrest("/api/component_usecase").delete([`usecase=eq.${id}`])
+        .then(() => {
+          return new Postgrest("/api/usecases").delete([`id=eq.${id}`]);
+        });
+    })
+  },
   async get(
     offset = 1,
     limit = 10,

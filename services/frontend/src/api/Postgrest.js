@@ -11,9 +11,6 @@ export default class Postgrest {
     }
   }
 
-  /**
-   * Get the total number of entries
-   */
   async total() {
     let config = {
       headers: {
@@ -35,6 +32,18 @@ export default class Postgrest {
         }
       };
       return axios.post(this.endpoint, data, config);
+    });
+  }
+
+  async delete(clause) {
+    let clauses = `?${this.clause(clause)}`;
+    return this.hasToken().then(() => {
+      let config = {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+      };
+      return axios.delete(`${this.endpoint}${clauses}`, config);
     });
   }
 
