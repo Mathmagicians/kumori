@@ -4,9 +4,6 @@
     <b-col>
       <b-row>
         <b-col>
-          <b-pagination class="justify-content-center" v-model="currentPage" :total-rows="totalRows" :per-page="perPage"></b-pagination>
-        </b-col>
-        <b-col>
           <b-button v-b-toggle.collapse-1 variant="primary">Manage filters</b-button>
         </b-col>
       </b-row>
@@ -27,7 +24,7 @@
               </b-container>
             </b-card>
           </b-collapse>
-          <b-table outlined striped hover small :busy="isBusy" :items="data" :fields="fields">
+          <b-table outlined striped hover small :busy="isBusy" :items="data" :fields="fields" @row-clicked="showDetails">
             <div slot="table-busy" class="text-center text-danger my-2">
               <b-spinner class="align-middle"></b-spinner>
               <strong>Loading...</strong>
@@ -36,6 +33,11 @@
               <status-badge :label="data.value" />
             </template>
           </b-table>
+        </b-col>
+      </b-row>
+      <b-row>
+        <b-col>
+          <b-pagination class="justify-content-center" v-model="currentPage" :total-rows="totalRows" :per-page="perPage"></b-pagination>
         </b-col>
       </b-row>
     </b-col>
@@ -77,7 +79,7 @@ export default {
         },
         {
           key: "primary_usecase.name",
-          label: "Primary Status"
+          label: "Primary Usecase Status"
         }
       ],
       statuses: [],
@@ -106,7 +108,7 @@ export default {
       this.getComponents();
     },
     query() {
-      if (this.query.length > 3) {
+      if (this.query.length > 2) {
         this.currentPage = 1
         this.getComponents();
       }
@@ -117,6 +119,18 @@ export default {
     }
   },
   methods: {
+    showDetails(item) {
+      let uid = item.id
+      Components.getC(
+        0,
+        1,
+        [],
+        [],
+        [`uid=eq.${uid}`]
+      ).then(result => {
+        EventBus.$emit("component-info-changed", result.data[0]);
+      })
+    },
     toast(title, message, type) {
       this.$bvToast.toast(message, {
         variant: type,
@@ -135,7 +149,7 @@ export default {
           stop,
           ['id,name,primary_usecase'],
           [],
-          [this.calcStatus(), this.calcTaxonomy(),this.calcFts()]
+          [this.calcStatus(), this.calcTaxonomy(), this.calcFts()]
         )
         .then(response => {
           this.data = response.data;
@@ -173,7 +187,7 @@ export default {
       return "";
     },
     calcFts() {
-      if (this.query.length > 2) {
+      if (this.query.length > 1) {
         return `search=ilike.*${encodeURI(this.query)}*`;
       }
       return "";

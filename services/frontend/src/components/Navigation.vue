@@ -11,7 +11,7 @@
     >
     <b-collapse is-nav id="nav_collapse">
       <b-navbar-nav>
-        <b-nav-item-dropdown right>
+        <b-nav-item-dropdown v-if="isLoggedIn" right>
           <template slot="button-content">
             <v-icon name="boxes" /> Architecture
           </template>
@@ -25,8 +25,8 @@
             <v-icon name="toolbox" /> Usecases</b-dropdown-item
           >
         </b-nav-item-dropdown>
-        <b-nav-item> <v-icon name="cloud-sun" /> Forecast</b-nav-item>
-        <b-nav-item to="/projects">
+        <b-nav-item v-if="isLoggedIn"> <v-icon name="cloud-sun" /> Forecast</b-nav-item>
+        <b-nav-item  v-if="isLoggedIn"to="/projects">
           <v-icon name="cubes" /> Projects</b-nav-item
         >
         <b-nav-item to="/about"> <v-icon name="paw" /> About</b-nav-item>

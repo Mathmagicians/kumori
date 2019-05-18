@@ -17,5 +17,20 @@ export default {
       order,
       clause
     );
+  },
+  async getC(
+    offset = 0,
+    limit = 9,
+    select = [],
+    order = [],
+    clause = ["id=gt.0"]
+  ) {
+    return new Postgrest("/api/w_components").get(
+      offset,
+      limit,
+      select,
+      order,
+      clause
+    );
   }
 };
