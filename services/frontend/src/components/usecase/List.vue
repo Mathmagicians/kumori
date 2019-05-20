@@ -28,22 +28,6 @@
               <b-spinner class="align-middle"></b-spinner>
               <strong>Loading...</strong>
             </div>
-            <template slot="actions" slot-scope="row">
-              <b-button-group>
-                <b-button size="sm" title="Edit usecase" @click="edit(row.item)" v-if="isLoggedIn && isEditOn">
-                  <v-icon name="pen" />
-                </b-button>
-                <b-button size="sm" title="Remove usecase" @click="remove(row.item)" v-if="isLoggedIn && isEditOn">
-                  <v-icon name="trash" />
-                </b-button>
-                <b-button size="sm" title="Map component" @click="mapComponent(row.item)" v-if="isLoggedIn && isEditOn">
-                  <v-icon name="boxes" />
-                </b-button>
-                <b-button size="sm" title="Map taxononomy" @click="mapTaxonomy(row.item)" v-if="isLoggedIn && isEditOn">
-                  <v-icon name="layer-group" />
-                </b-button>
-              </b-button-group>
-            </template>
           </b-table>
         </b-col>
       </b-row>
@@ -92,10 +76,6 @@ export default {
         {
           key: "status",
           label: "Status"
-        },
-        {
-          key: "actions",
-          label: "Actions"
         }
       ],
       currentPage: 1,
@@ -138,18 +118,6 @@ export default {
     },
     add() {
       EventBus.$emit("show-add-usecase-dialog");
-    },
-    remove(item) {
-      EventBus.$emit("show-remove-usecase-dialog", item);
-    },
-    edit(item) {
-      EventBus.$emit("show-edit-usecase-dialog", item);
-    },
-    mapComponent(item) {
-      EventBus.$emit("show-create-usecase-component-map-dialog", item);
-    },
-    mapTaxonomy(item) {
-      EventBus.$emit("show-create-usecase-taxonomy-map-dialog", item);
     },
     show(item) {
       let uid = item.id
