@@ -1,5 +1,4 @@
 <template>
-
 <b-container fluid>
   <b-row>
     <b-col>
@@ -24,7 +23,7 @@
               </b-container>
             </b-card>
           </b-collapse>
-          <b-table outlined striped small hover :busy="isBusy" :items="data" :fields="fields" @row-clicked="showDetails">
+          <b-table outlined striped small hover :busy="isBusy" :items="data" :fields="fields" @row-clicked="show">
             <div slot="table-busy" class="text-center text-danger my-2">
               <b-spinner class="align-middle"></b-spinner>
               <strong>Loading...</strong>
@@ -152,7 +151,17 @@ export default {
     mapTaxonomy(item) {
       EventBus.$emit("show-create-usecase-taxonomy-map-dialog", item);
     },
-    showDetails() {
+    show(item) {
+      let uid = item.id
+      Usecases.get(
+        0,
+        1,
+        [],
+        [],
+        [`id=eq.${uid}`]
+      ).then(result => {
+        EventBus.$emit("show-usecase", result.data[0]);
+      })
     }
   }
 };

@@ -39,7 +39,6 @@ export default {
   },
   methods: {
     remove() {
-      console.log('delete')
       Usecases.deleteById(this.usecase.id).then(res => {
         EventBus.$emit("update-usecase-list");
       }).catch(e => {

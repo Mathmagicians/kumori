@@ -1,14 +1,20 @@
 <template>
-<div>
-  <list-usecase />
+<b-container fluid>
+  <b-row>
+    <b-col>
+      <list-usecase />
+    </b-col>
+    <b-col>
+      <show-usecase />
+    </b-col>
+  </b-row>
   <edit-usecase />
   <add-usecase />
   <remove-usecase />
   <map-component />
   <map-taxonomy />
-</div>
+</b-container>
 </template>
-
 <script>
 import {
   EventBus
@@ -16,6 +22,7 @@ import {
 
 import Usecases from "@/api/Usecases.js";
 import ListUsecase from "@/components/usecase/List";
+import ShowUsecase from "@/components/usecase/Show";
 import AddUsecase from "@/components/usecase/Add";
 import EditUsecase from "@/components/usecase/Edit";
 import RemoveUsecase from "@/components/usecase/Remove";
@@ -34,6 +41,7 @@ export default {
   components: {
     "list-usecase": ListUsecase,
     "edit-usecase": EditUsecase,
+    "show-usecase": ShowUsecase,
     "add-usecase": AddUsecase,
     "remove-usecase": RemoveUsecase,
     "map-component": MapComponent,
@@ -41,7 +49,7 @@ export default {
   },
   data() {
     return {
-        fields: [{
+      fields: [{
           key: "name",
           label: "Name"
         },
@@ -67,12 +75,9 @@ export default {
       return this.$store.getters.isEditOn;
     }
   },
-  watch: {
-  },
-  mounted() {
-  },
-  methods: {
-  }
+  watch: {},
+  mounted() {},
+  methods: {}
 };
 </script>
 

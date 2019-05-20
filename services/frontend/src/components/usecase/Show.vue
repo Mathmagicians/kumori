@@ -1,33 +1,19 @@
 <template>
-<b-card v-if="entry.uid" no-body tag="article" border-variant="light" :header="entry.name">
+<b-card v-if="entry.id" no-body tag="article" border-variant="light" :header="entry.name">
   <b-card-body>
     <b-card-text>
       {{entry.description}}
     </b-card-text>
-    <b-card-text v-if="entry.usecases.length">
+    <b-card-text>
       <hr />
-      <h5>Usecases</h5>
-      <ul>
-        <li v-for="item in entry.usecases">
-          <h6>{{item.name}}</h6>
-          <p>{{item.name}}</p>
-          <p>{{item.status}}</p>
-        </li>
-      </ul>
+      <h5>Status</h5>
+      {{entry.status}}
     </b-card-text>
-    <b-card-text v-if="entry.links.length">
+    <b-card-text v-if="entry.components.length">
       <hr />
-      <h5>Links</h5>
+      <h5>Components</h5>
       <ul>
-        <li v-for="item in entry.links">{{item.ref}}</li>
-      </ul>
-    </b-card-text>
-    <b-card-text v-if="entry.comments.length">
-      <hr />
-      <h5>Comments</h5>
-      <ul>
-        <li v-for="item in entry.comments">{{item}}
-        </li>
+        <li v-for="item in entry.components">{{item.name}}</li>
       </ul>
     </b-card-text>
   </b-card-body>
@@ -43,20 +29,16 @@ export default {
   data() {
     return {
       entry: {
-        uid: null,
+        id: null,
         name: "",
-        status: "",
         description: "",
-        comments: [],
-        tags: [],
-        licenses: [],
-        links: [],
-        usecases: []
+        status: "",
+        components: []
       }
     }
   },
   mounted() {
-    EventBus.$on("component-info-changed", data => {
+    EventBus.$on("show-usecase", data => {
       this.entry = data;
     });
   }
