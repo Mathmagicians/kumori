@@ -35,6 +35,17 @@ export default class Postgrest {
     });
   }
 
+  async insert(data) {
+    return this.hasToken().then(() => {
+      let config = {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+      };
+      return axios.post(this.endpoint, data, config);
+    });
+  }
+
   async delete(clause) {
     let clauses = `?${this.clause(clause)}`;
     return this.hasToken().then(() => {
@@ -47,9 +58,6 @@ export default class Postgrest {
     });
   }
 
-  /**
-   * Get entries based on query
-   */
   async get(
     offset = 1,
     limit = 10,
