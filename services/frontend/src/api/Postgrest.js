@@ -24,14 +24,15 @@ export default class Postgrest {
     });
   }
 
-  async update(data) {
+  async update(clause, data) {
+    let clauses = `?${this.clause(clause)}`;
     return this.hasToken().then(() => {
       let config = {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`
         }
       };
-      return axios.post(this.endpoint, data, config);
+      return axios.patch(`${this.endpoint}${clauses}`, data, config);
     });
   }
 

@@ -94,6 +94,9 @@ export default {
     EventBus.$on("taxonomy-filter-change", taxonomy => {
       this.taxonomy = taxonomy;
     });
+    EventBus.$on("update-component-list", () => {
+      this.getComponents();
+    });
   },
   watch: {
     currentPage() {

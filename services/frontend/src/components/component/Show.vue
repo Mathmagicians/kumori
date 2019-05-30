@@ -1,5 +1,17 @@
 <template>
-<b-card v-if="entry.uid" no-body tag="article" border-variant="light" :header="entry.name">
+<b-card v-if="entry.uid"  no-body tag="article" border-variant="light">
+  <div slot="header">
+    <b-dropdown class="float-right" right size="sm" v-if="isLoggedIn && isEditOn">
+      <template slot="button-content">
+        <v-icon name="bars" /></template>
+      <b-dropdown-item title="Edit usecase" @click="edit(entry)">
+        <v-icon name="pen" /> Edit</b-dropdown-item>
+      <b-dropdown-divider></b-dropdown-divider>
+      <b-dropdown-item title="Remove usecase" @click="remove(entry)">
+        <v-icon name="trash" /> Remove</b-dropdown-item>
+    </b-dropdown>
+    <h5>{{entry.name}}</h5>
+  </div>
   <b-card-body>
     <b-card-text>
       {{entry.description}}
@@ -38,8 +50,16 @@
 import {
   EventBus
 } from "@/api/event-bus.js";
+import Icon from "vue-awesome/components/Icon";
+import "vue-awesome/icons/pen";
+import "vue-awesome/icons/info";
+import "vue-awesome/icons/trash";
+import "vue-awesome/icons/bars";
 export default {
   name: "show",
+  components: {
+    "v-icon": Icon,
+  },
   data() {
     return {
       entry: {
@@ -55,10 +75,26 @@ export default {
       }
     }
   },
+  computed: {
+    isLoggedIn() {
+      return this.$store.getters.isLoggedIn;
+    },
+    isEditOn() {
+      return this.$store.getters.isEditOn;
+    }
+  },
   mounted() {
     EventBus.$on("component-info-changed", data => {
       this.entry = data;
     });
+  },
+  methods: {
+    remove(item) {
+      EventBus.$emit("show-remove-component-dialog", item);
+    },
+    edit(item) {
+      EventBus.$emit("show-edit-component-dialog", item);
+    }
   }
 };
 </script>

@@ -1,9 +1,8 @@
 import Postgrest from "./Postgrest.js";
 export default {
   async update(id, name, description) {
-    return new Postgrest("/api/rpc/usecase_update").update({
+    return new Postgrest("/api/usecases").update([`id=eq.${id}`],{
       name: name,
-      id: id,
       description: description
     });
   },

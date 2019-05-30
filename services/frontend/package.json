@@ -9,10 +9,10 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
-    "auth0-js": "^9.10.2",
+    "auth0-js": "^9.10.3",
     "axios": "^0.18.0",
     "bootstrap-vue": "^2.0.0-rc.20",
-    "core-js": "^2.0.1",
+    "core-js": "^2.6.8",
     "jquery": "^3.4.1",
     "vue": "^2.6.10",
     "vue-awesome": "^3.5.3",
