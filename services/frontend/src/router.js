@@ -18,11 +18,7 @@ export default new Router({
       path: "/list",
       component: () => import("./views/List.vue")
     },
-    {
-      path: "/components",
-      component: () => import("./views/TechComponentList.vue"),
-      name: "component-list"
-    },
+
     {
       path: "/projects",
       component: () => import("./views/Projects.vue")
@@ -30,28 +26,6 @@ export default new Router({
     {
       path: "/survey",
       component: () => import("./views/Survey.vue")
-    },
-    {
-      path: "/components/search",
-      component: () => import("./views/TechComponentList.vue")
-    },
-    {
-      path: "/components/:name",
-      component: () => import("./views/TechComponentList.vue"),
-      name: "component",
-      props: true
-    },
-    {
-      path: "/components/:uid/edit",
-      name: "edit",
-      component: () => import("./components/TechComponentEditor.vue"),
-      props: true
-    },
-    {
-      path: "components/create",
-      name: "create",
-      component: () => import("./components/TechComponentEditor.vue"),
-      props: true
     },
     {
       path: "/usecases",

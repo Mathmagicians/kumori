@@ -60,8 +60,8 @@ export default class Postgrest {
   }
 
   async get(
-    offset = 1,
-    limit = 10,
+    offset = 0,
+    limit = 9,
     select = [],
     order = [],
     clause = ["id=gt.0"]

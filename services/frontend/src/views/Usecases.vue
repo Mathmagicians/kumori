@@ -19,7 +19,9 @@
 import {
   EventBus
 } from "@/api/event-bus.js";
-
+import {
+  mapGetters
+} from 'vuex'
 import Usecases from "@/api/Usecases.js";
 import ListUsecase from "@/components/usecase/List";
 import ShowUsecase from "@/components/usecase/Show";
@@ -68,12 +70,9 @@ export default {
     };
   },
   computed: {
-    isLoggedIn() {
-      return this.$store.getters.isLoggedIn;
-    },
-    isEditOn() {
-      return this.$store.getters.isEditOn;
-    }
+    ...mapGetters([
+      'readonly'
+    ])
   },
   watch: {},
   mounted() {},

@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import Weather from "@/components/Weather";
+import Weather from "@/components/projects/Weather";
 
 export default {
   name: "project",

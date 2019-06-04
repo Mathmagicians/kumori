@@ -4,7 +4,7 @@ CREATE TABLE api.taxonomy (
     id serial NOT NULL,
     name TEXT NOT NULL,
     level integer NOT NULL,
-    parent TEXT,
+    parent integer,
     PRIMARY KEY (id)
 );
 

@@ -7,7 +7,7 @@ export default {
     order = [],
     clause = ["id=gt.0"]
   ) {
-    return new Postgrest("/api/statuses").get(
+    return new Postgrest("/api/phases").get(
       offset,
       limit,
       select,

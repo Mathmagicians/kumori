@@ -11,6 +11,7 @@ build:
 	@cat ./functions/row_inserted.sql >> schema.sql
 	@cat ./functions/row_updated.sql >> schema.sql
 	@cat ./tables/api.taxonomy.sql >> schema.sql
+	@cat ./tables/api.phases.sql >> schema.sql
 	@cat ./tables/api.statuses.sql >> schema.sql
 	@cat ./tables/api.components.sql >> schema.sql
 	@cat ./tables/api.comments.sql >> schema.sql
@@ -27,6 +28,7 @@ build:
 	@cat ./views/api.w_taxonomy.sql >> schema.sql
 	@cat ./functions/api.search_component.sql >> schema.sql
 	@cat ./functions/api.usecase_update.sql >> schema.sql
+	@cat ./fixture/fixture.sql >> schema.sql
 	@docker build -t ${IMAGE} .
 	@rm schema.sql
 

@@ -1,6 +1,6 @@
 <template>
   <b-img
-    :src="require('../assets/weather0' + state + '.svg')"
+    :src="require('../../assets/weather0' + state + '.svg')"
     :width="size"
     :height="size"
   />

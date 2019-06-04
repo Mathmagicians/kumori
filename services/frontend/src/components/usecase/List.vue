@@ -4,7 +4,7 @@
     <b-col>
       <b-row>
         <b-col>
-          <b-button size="sm" title="Edit usecase" @click="add()" v-if="isLoggedIn && isEditOn">
+          <b-button size="sm" title="Edit usecase" @click="add()" v-if="authenticated && !readonly">
             <v-icon name="pen" />
           </b-button>
         </b-col>
@@ -45,7 +45,9 @@
 import {
   EventBus
 } from "@/api/event-bus.js";
-
+import {
+  mapGetters
+} from 'vuex'
 import Icon from "vue-awesome/components/Icon";
 import "vue-awesome/icons/pen";
 import "vue-awesome/icons/info";
@@ -84,12 +86,10 @@ export default {
     };
   },
   computed: {
-    isLoggedIn() {
-      return this.$store.getters.isLoggedIn;
-    },
-    isEditOn() {
-      return this.$store.getters.isEditOn;
-    }
+    ...mapGetters([
+      'authenticated',
+      'readonly'
+    ])
   },
   mounted() {
     EventBus.$on("update-usecase-list", () => {

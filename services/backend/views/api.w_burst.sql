@@ -17,7 +17,7 @@ SELECT
           WHEN (
             SELECT ARRAY_TO_JSON(ARRAY_AGG(api.taxonomy.name))
             FROM api.taxonomy
-            WHERE parent = tax.name) IS NULL
+            WHERE parent = tax.id) IS NULL
           THEN (JSON_BUILD_ARRAY())
           ELSE (
             SELECT
@@ -25,7 +25,7 @@ SELECT
             FROM
             api.taxonomy
             WHERE
-            parent = tax.name)
+            parent = tax.id)
           END) AS children
 FROM
     api.taxonomy AS tax;

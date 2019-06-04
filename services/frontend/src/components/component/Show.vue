@@ -1,7 +1,7 @@
 <template>
 <b-card v-if="entry.uid"  no-body tag="article" border-variant="light">
   <div slot="header">
-    <b-dropdown class="float-right" right size="sm" v-if="isLoggedIn && isEditOn">
+    <b-dropdown class="float-right" right size="sm" v-if="authenticated && !readonly">
       <template slot="button-content">
         <v-icon name="bars" /></template>
       <b-dropdown-item title="Edit usecase" @click="edit(entry)">
@@ -50,6 +50,9 @@
 import {
   EventBus
 } from "@/api/event-bus.js";
+import {
+  mapGetters
+} from 'vuex'
 import Icon from "vue-awesome/components/Icon";
 import "vue-awesome/icons/pen";
 import "vue-awesome/icons/info";
@@ -76,12 +79,10 @@ export default {
     }
   },
   computed: {
-    isLoggedIn() {
-      return this.$store.getters.isLoggedIn;
-    },
-    isEditOn() {
-      return this.$store.getters.isEditOn;
-    }
+    ...mapGetters([
+      'authenticated',
+      'readonly'
+    ])
   },
   mounted() {
     EventBus.$on("component-info-changed", data => {

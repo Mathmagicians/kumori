@@ -6,7 +6,7 @@ CREATE TABLE api.usecases (
     description TEXT,
     modified TIMESTAMP without TIME zone NOT NULL,
     modifiedby TEXT,
-    deleted boolean NOT NULL,
+    deleted boolean NOT NULL DEFAULT false,
     PRIMARY KEY (id)
 );
 
