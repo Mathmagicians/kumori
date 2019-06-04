@@ -8,7 +8,8 @@
 import {
   EventBus
 } from "@/api/event-bus.js";
-import Usecases from "@/api/Usecases.js";
+import Usecases from "@/api/Usecases";
+import Components from "@/api/Components";
 export default {
   name: "map-component",
   data() {
@@ -34,6 +35,7 @@ export default {
   methods: {
     save() {
       console.log('Not implemented')
+      Components.addUsecase(1,1,1,'test')
     },
     cancel() {
       EventBus.$emit("update-usecase-list");
