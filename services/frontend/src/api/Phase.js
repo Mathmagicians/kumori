@@ -1,5 +1,5 @@
 import Postgrest from "./Postgrest.js";
-export default {
+export default class Phase {
   async get(
     offset = 0,
     limit = 9,

@@ -39,6 +39,7 @@ const actions = {
   logout({
     commit
   }) {
+    localStorage.removeItem("token");
     commit('logout')
   },
   crud({

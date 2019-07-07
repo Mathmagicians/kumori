@@ -1,4 +1,4 @@
-import Taxonomy from "@/api/Taxonomy";
+import Status from "@/api/Status";
 const state = {
   list: [],
   selectOptions: [],
@@ -18,29 +18,28 @@ const actions = {
     state
   }) {
     if (state.list.length === 0) {
-      new Taxonomy().list()
+      new Status().get(0, 10, ["id", "name"], [], [])
         .then(response => {
-          commit('setList', response)
-          commit('setSelectOptions', response.map(entry => {
+          commit('setList', response.data)
+          commit('setSelectOptions', response.data.map(entry => {
             return {
               text: entry.name,
               value: entry.id
             }
           }))
-        })
-        .catch(error => {
+        }).catch(error => {
           commit('setError', error)
-        });
+        })
     }
   }
 }
 
 const mutations = {
-  setList(state, list) {
-    state.list = list;
-  },
   setSelected(state, selected) {
     state.selected = selected;
+  },
+  setList(state, list) {
+    state.list = list;
   },
   setSelectOptions(state, list) {
     state.selectOptions = list;

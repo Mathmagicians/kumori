@@ -1,20 +1,17 @@
 <template>
-<b-container fluid>
-  <b-row>
-    <b-col>
-      <list-usecase />
-    </b-col>
-    <b-col>
-      <show-usecase />
-    </b-col>
-  </b-row>
-  <edit-usecase />
-  <add-usecase />
-  <remove-usecase />
-  <map-component />
-  <map-taxonomy />
-</b-container>
+<split title="usecases">
+  <template v-slot:left>
+    <list-usecase /></template>
+  <template v-slot:right>
+    <show-usecase />
+    <add-usecase />
+    <remove-usecase />
+    <map-component />
+    <map-taxonomy />
+  </template>
+</split>
 </template>
+
 <script>
 import {
   EventBus
@@ -22,7 +19,7 @@ import {
 import {
   mapGetters
 } from 'vuex'
-import Usecases from "@/api/Usecases.js";
+import Split from "@/components/Split";
 import ListUsecase from "@/components/usecase/List";
 import ShowUsecase from "@/components/usecase/Show";
 import AddUsecase from "@/components/usecase/Add";
@@ -41,6 +38,7 @@ export default {
     }
   },
   components: {
+    "split": Split,
     "list-usecase": ListUsecase,
     "edit-usecase": EditUsecase,
     "show-usecase": ShowUsecase,

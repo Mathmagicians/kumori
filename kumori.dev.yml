@@ -28,6 +28,7 @@ services:
       PGRST_DB_SCHEMA: ${POSTGREST_CONNECTION_SCHEMA}
       PGRST_DB_ANON_ROLE: ${POSTGREST_ANON_ROLE}
       PGRST_JWT_SECRET: ${PGRST_JWT_SECRET} # Must be minimum 32 characters
+      PGRST_SERVER_PROXY_URI: http://localhost:3000/
     depends_on:
       - postgres
     networks:
@@ -67,38 +68,38 @@ services:
     networks:
       - kumori
 
-  neo4j:
-    container_name: kumori-neo4j
-    image: neo4j:latest
-    ports:
-    - "7474:7474"
-    - "7687:7687"
-    networks:
-    - kumori
-    environment:
-      NEO4J_AUTH: none
-
-  zookeeper:
-    container_name: kumori-zookeeper
-    image: wurstmeister/zookeeper
-    ports:
-      - "2181:2181"
-    networks:
-    - kumori
-
-  kafka:
-    container_name: kumori-kafka
-    image: wurstmeister/kafka:latest
-    ports:
-      - "9092:9092"
-    environment:
-      KAFKA_ADVERTISED_HOST_NAME: 172.23.0.1
-      KAFKA_CREATE_TOPICS: "test:1:1"
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    networks:
-    - kumori
+  # neo4j:
+  #   container_name: kumori-neo4j
+  #   image: neo4j:latest
+  #   ports:
+  #   - "7474:7474"
+  #   - "7687:7687"
+  #   networks:
+  #   - kumori
+  #   environment:
+  #     NEO4J_AUTH: none
+  #
+  # zookeeper:
+  #   container_name: kumori-zookeeper
+  #   image: wurstmeister/zookeeper
+  #   ports:
+  #     - "2181:2181"
+  #   networks:
+  #   - kumori
+  #
+  # kafka:
+  #   container_name: kumori-kafka
+  #   image: wurstmeister/kafka:latest
+  #   ports:
+  #     - "9092:9092"
+  #   environment:
+  #     KAFKA_ADVERTISED_HOST_NAME: 172.23.0.1
+  #     KAFKA_CREATE_TOPICS: "test:1:1"
+  #     KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+  #   volumes:
+  #     - /var/run/docker.sock:/var/run/docker.sock
+  #   networks:
+  #   - kumori
 
 volumes:
   data-pgadmin:

@@ -55,7 +55,7 @@ import "vue-awesome/icons/trash";
 import "vue-awesome/icons/boxes";
 import "vue-awesome/icons/layer-group";
 
-import Usecases from "@/api/Usecases.js";
+import Usecase from "@/api/Usecase";
 export default {
   name: "usecase-list",
   components: {
@@ -106,7 +106,7 @@ export default {
     get() {
       let start = this.currentPage === 1 ? 0 : (this.currentPage - 1) * this.perPage;
       let stop = this.currentPage === 1 ? (this.currentPage * this.perPage) - 1 : (this.currentPage * this.perPage)
-      Usecases.get(start, stop, [], ["id.desc"], [])
+      new Usecase().get(start, stop, [], ["id.desc"], [])
         .then(response => {
           this.data = response.data;
           this.totalRows = parseInt(response.total);
@@ -121,7 +121,7 @@ export default {
     },
     show(item) {
       let uid = item.id
-      Usecases.get(
+      new Usecase().get(
         0,
         1,
         [],

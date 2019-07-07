@@ -2,12 +2,18 @@ import Vue from "vue";
 import Vuex from "vuex";
 
 import authentication from './modules/authentication'
+import status from './modules/status'
+import taxonomy from './modules/taxonomy'
+import unit from './modules/unit'
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   modules: {
-    authentication
+    authentication,
+    status,
+    taxonomy,
+    unit
   },
   state: {
   },

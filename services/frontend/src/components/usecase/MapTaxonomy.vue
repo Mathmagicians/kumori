@@ -8,7 +8,6 @@
 import {
   EventBus
 } from "@/api/event-bus.js";
-import Usecases from "@/api/Usecases.js";
 export default {
   name: "map-taxonomy",
   data() {

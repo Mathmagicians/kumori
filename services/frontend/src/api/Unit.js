@@ -1,15 +1,17 @@
 import Postgrest from "./Postgrest.js";
-export default {
-  async total() {
-    return new Postgrest("/api/w_simple_components").total();
-  },
+export default class Unit {
+
+  constructor() {
+  }
+
   async update(id, name, description) {
     return new Postgrest("/api/components").update([`id=eq.${id}`], {
       name: name,
       description: description,
       deleted: false
     });
-  },
+  }
+
   async addUsecase(component, usecase, status, description) {
     if (typeof component !== 'number') {
       throw new Error(`'component' must be a number. Was '${typeof component}'`);
@@ -29,8 +31,25 @@ export default {
       status: status,
       description: description,
     });
-  },
+  }
+
   async get(
+    offset = 0,
+    limit = 9,
+    select = [],
+    order = [],
+    clause = ["id=gt.0"]
+  ) {
+    return new Postgrest("/api/components").get(
+      offset,
+      limit,
+      select,
+      order,
+      clause
+    );
+  }
+
+  async search(
     offset = 0,
     limit = 9,
     select = [],
@@ -44,7 +63,8 @@ export default {
       order,
       clause
     );
-  },
+  }
+
   async getC(
     offset = 0,
     limit = 9,
@@ -60,4 +80,6 @@ export default {
       clause
     );
   }
-};
+
+
+}

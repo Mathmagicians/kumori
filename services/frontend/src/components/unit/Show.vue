@@ -1,5 +1,5 @@
 <template>
-<b-card v-if="entry.uid"  no-body tag="article" border-variant="light">
+<b-card v-if="entry.uid" no-body tag="article" border-variant="light">
   <div slot="header">
     <b-dropdown class="float-right" right size="sm" v-if="authenticated && !readonly">
       <template slot="button-content">
@@ -10,11 +10,17 @@
       <b-dropdown-item title="Remove usecase" @click="remove(entry)">
         <v-icon name="trash" /> Remove</b-dropdown-item>
     </b-dropdown>
-    <h5>{{entry.name}}</h5>
+    <b-button class="float-right" variant="primary" size="sm" v-if="editable" @click="update">Save</b-button>
+    <b-form-group :description="nameDescription" :label="nameLabel">
+      <b-form-input :plaintext="!editable" v-model.trim="entry.name"></b-form-input>
+    </b-form-group>
   </div>
   <b-card-body>
     <b-card-text>
-      {{entry.description}}
+      <b-form-group :description="descDescription" :label="descLabel">
+        <b-form-textarea :plaintext="!editable" v-model="entry.description" placeholder="Enter something" :rows="3" :max-rows="6">
+        </b-form-textarea>
+      </b-form-group>
     </b-card-text>
     <b-card-text v-if="entry.usecases.length">
       <hr />
@@ -51,7 +57,9 @@ import {
   EventBus
 } from "@/api/event-bus.js";
 import {
-  mapGetters
+  mapGetters,
+  mapMutations,
+  mapActions
 } from 'vuex'
 import Icon from "vue-awesome/components/Icon";
 import "vue-awesome/icons/pen";
@@ -63,38 +71,48 @@ export default {
   components: {
     "v-icon": Icon,
   },
-  data() {
-    return {
-      entry: {
-        uid: null,
-        name: "",
-        status: "",
-        description: "",
-        comments: [],
-        tags: [],
-        licenses: [],
-        links: [],
-        usecases: []
-      }
-    }
-  },
   computed: {
     ...mapGetters([
       'authenticated',
       'readonly'
-    ])
-  },
-  mounted() {
-    EventBus.$on("component-info-changed", data => {
-      this.entry = data;
-    });
+    ]),
+    ...mapGetters('unit', {
+      entry: 'current',
+      editable: 'editable'
+    }),
+    nameDescription() {
+      if (this.editable) {
+        return `Keep the name concise.`
+      }
+    },
+    nameLabel() {
+      if (this.editable) {
+        return `Name`
+      }
+    },
+    descDescription() {
+      if (this.editable) {
+        return `Keep the description comprehensive.`
+      }
+    },
+    descLabel() {
+      if (this.editable) {
+        return `Description`
+      }
+    }
   },
   methods: {
+    ...mapMutations('unit', {
+      setEditable: 'setEditable'
+    }),
+    ...mapActions('unit', {
+      update: 'update'
+    }),
     remove(item) {
-      EventBus.$emit("show-remove-component-dialog", item);
+      this.setEditable(true)
     },
     edit(item) {
-      EventBus.$emit("show-edit-component-dialog", item);
+      this.setEditable(true)
     }
   }
 };

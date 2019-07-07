@@ -1,9 +1,10 @@
 import Vue from "vue";
 import Router from "vue-router";
+import store from "./store/store";
 
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
   mode: "history",
   routes: [
     {
@@ -15,42 +16,52 @@ export default new Router({
       component: () => import("./views/About.vue")
     },
     {
-      path: "/list",
-      component: () => import("./views/List.vue")
+      path: "/units",
+      component: () => import("./views/Units.vue"),
+      meta: { requiresAuth: true }
     },
-
     {
       path: "/projects",
-      component: () => import("./views/Projects.vue")
+      component: () => import("./views/Projects.vue"),
+      meta: { requiresAuth: true }
     },
     {
       path: "/survey",
-      component: () => import("./views/Survey.vue")
+      component: () => import("./views/Survey.vue"),
+      meta: { requiresAuth: true }
+    },
+    {
+      path: "/forecast",
+      component: () => import("./views/Forecast.vue"),
+      meta: { requiresAuth: true }
     },
     {
       path: "/usecases",
-      component: () => import("./views/Usecases.vue")
+      component: () => import("./views/Usecases.vue"),
+      meta: { requiresAuth: true }
     },
     {
-      path: "/404",
-      name: "not-found",
-      component: () => import("./views/Errors.vue"),
-      props: {
-        error: 404
-      }
-    },
-    {
-      path: "/error",
-      name: "error",
-      component: () => import("./views/Errors.vue"),
-      props: route => ({
-        code: route.query.error,
-        asset: route.query.asset
-      })
+      path: "/search",
+      component: () => import("./views/Search.vue"),
+      meta: { requiresAuth: true }
     },
     {
       path: "*",
-      redirect: "/404"
+      redirect: "/"
     }
   ]
 });
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (store.getters.authenticated) {
+      next()
+    } else {
+      next('/')
+    }
+  } else {
+    next()
+  }
+})
+
+export default router

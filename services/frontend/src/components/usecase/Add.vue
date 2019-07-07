@@ -14,7 +14,7 @@
 import {
   EventBus
 } from "@/api/event-bus.js";
-import Usecases from "@/api/Usecases.js";
+import Usecase from "@/api/Usecase";
 export default {
   name: "add",
   data() {
@@ -47,7 +47,7 @@ export default {
       }
     },
     save() {
-      Usecases.insert(
+      new Usecase().insert(
         this.usecase.name,
         this.usecase.description
       ).then(() => {

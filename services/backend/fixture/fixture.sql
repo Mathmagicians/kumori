@@ -110,6 +110,49 @@ INSERT INTO api.components (name, description) VALUES (
   'Apache HTTP Server', 'The Apache HTTP Server is an open-source HTTP server for modern operating systems including UNIX, Microsoft Windows, Mac OS/X and Netware. The goal of this project is to provide a secure, efficient and extensible server that provides HTTP services observing the current HTTP standards. Apache has been the most popular web server on the Internet since April of 1996.'
   );
 
+INSERT INTO api.components (name, description) VALUES (
+  'Apache Cassandra', 'Linear scalability and proven fault-tolerance on commodity hardware or cloud infrastructure make Apache Cassandra the perfect platform for mission-critical data. Cassandras support for replicating across multiple datacenters is best-in-class.'
+  );
+
+INSERT INTO api.components (name, description) VALUES (
+  'Apache Derby', 'Apache Derby is an open source relational database implemented entirely in Java. It has a small footprint that makes it easy to embed in any Java-based application, but it also supports the more familiar client/server mode. It is based on the Java, JDBC, and SQL standards, making code developed more portable to standards-compliant databases.'
+  );
+
+INSERT INTO api.components (name, description) VALUES (
+  'Apache Groovy', 'Apache Groovy is a powerful, optionally typed and dynamic language, with static-typing and static compilation capabilities, for the Java platform aimed at improving developer productivity thanks to a concise, familiar and easy to learn syntax. It integrates smoothly with any Java program, and immediately delivers to your application powerful features, including scripting capabilities, Domain-Specific Language authoring, runtime and compile-time meta-programming and functional programming.'
+  );
+
+INSERT INTO api.components (name, description) VALUES (
+  'Apache Guacamole', 'Apache Guacamole is a clientless remote desktop gateway which supports standard protocols like VNC, RDP, and SSH. We call it "clientless" because no plugins or client software are required. Once Guacamole is installed on a server, all you need to access your desktops is a web browser.'
+  );
+
+INSERT INTO api.components (name, description) VALUES (
+  'Apache Cordova', 'Apache Cordova is a set of device APIs that allow a mobile app developer to access native device function such as the camera or accelerometer from JavaScript. Combined with an UI framework, this allows a smartphone app to be developed with just HTML, CSS, and JavaScript.'
+  );
+
+
+INSERT INTO api.components (name, description) VALUES (
+  'Apache CouchDB', 'Apache CouchDB is a database that completely embraces the web. Store your data with JSON documents. Access your documents with your web browser, via HTTP. Query, combine, and transform your documents with JavaScript. Apache CouchDB works well with modern web and mobile apps. You can even serve web apps directly out of Apache CouchDB. And you can distribute your data, or your apps, efficiently using Apache CouchDB’s incremental replication. Apache CouchDB supports master-master setups with automatic conflict detection.'
+  );
+
+INSERT INTO api.components (name, description) VALUES (
+  'Apache JMeter', 'Apache JMeter may be used to test performance both on static and dynamic resources (files, Servlets, Perl scripts, Java Objects, Data Bases and Queries, FTP Servers and more). It can be used to simulate a heavy load on a server, network or object to test its strength or to analyze overall performance under different load types. You can use it to make a graphical analysis of performance or to test your server/script/object behavior under heavy concurrent load.'
+  );
+
+
+INSERT INTO api.components (name, description) VALUES (
+  'Apache Kafka', 'A single Kafka broker can handle hundreds of megabytes of reads and writes per second from thousands of clients. Kafka is designed to allow a single cluster to serve as the central data backbone for a large organization. It can be elastically and transparently expanded without downtime. Data streams are partitioned and spread over a cluster of machines to allow data streams larger than the capability of any single machine and to allow clusters of co-ordinated consumers. Kafka has a modern cluster-centric design that offers strong durability and fault-tolerance guarantees. Messages are persisted on disk and replicated within the cluster to prevent data loss. Each broker can handle terabytes of messages without performance impact.'
+  );
+
+
+INSERT INTO api.components (name, description) VALUES (
+  'Apache Maven', 'Maven is a project development management and comprehension tool. Based on the concept of a project object model: builds, dependency management, documentation creation, site publication, and distribution publication are all controlled from the declarative file. Maven can be extended by plugins to utilise a number of other development tools for reporting or the build process.'
+  );
+
+INSERT INTO api.components (name, description) VALUES (
+  'Apache Solr', 'Solr is an open source enterprise search server based on the Lucene Java search library, with XML/HTTP and JSON, Ruby, and Python APIs, hit highlighting, faceted search, caching, replication, and a web administration interface. '
+  );
+
 -- usecases
 INSERT INTO api.usecases (name, description) VALUES (
   'HTTP Server', 'Serve resources via the http protocol'

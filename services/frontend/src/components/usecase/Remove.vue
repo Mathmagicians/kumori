@@ -14,7 +14,7 @@
 import {
   EventBus
 } from "@/api/event-bus.js";
-import Usecases from "@/api/Usecases.js";
+import Usecase from "@/api/Usecase";
 export default {
   name: "remove-usecase",
   data() {
@@ -39,7 +39,7 @@ export default {
   },
   methods: {
     remove() {
-      Usecases.deleteById(this.usecase.id).then(res => {
+      new Usecase().deleteById(this.usecase.id).then(res => {
         EventBus.$emit("update-usecase-list");
       }).catch(e => {
         console.log(e)

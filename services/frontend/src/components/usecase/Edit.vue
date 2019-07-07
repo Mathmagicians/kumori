@@ -14,7 +14,7 @@
 import {
   EventBus
 } from "@/api/event-bus.js";
-import Usecases from "@/api/Usecases.js";
+import Usecase from "@/api/Usecase";
 export default {
   name: "edit",
   data() {
@@ -41,7 +41,7 @@ export default {
   },
   methods: {
     save() {
-      Usecases.update(
+      new Usecase().update(
         this.usecase.id,
         this.usecase.name,
         this.usecase.description

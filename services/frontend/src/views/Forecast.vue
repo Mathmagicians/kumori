@@ -1,5 +1,5 @@
 <template>
-<split title="About">
+<split title="Forecast">
   <template v-slot:left>
     Missing</template>
   <template v-slot:right>
@@ -10,7 +10,7 @@ Missing</template>
 <script>
 import Split from "@/components/Split";
 export default {
-  name: "about",
+  name: "forecast",
   data() {
     return {
     };
