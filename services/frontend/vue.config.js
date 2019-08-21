@@ -12,6 +12,13 @@ module.exports = {
           "^/api": ""
         },
         secure: false
+      },
+      "/swagger": {
+        target: "http://swagger:8080",
+        pathRewrite: {
+          "^/swagger": ""
+        },
+        secure: false
       }
     }
   }

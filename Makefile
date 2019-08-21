@@ -20,6 +20,14 @@ start-dev:
 stop-dev:
 	@docker-compose -f kumori.dev.yml down
 
+flyway:
+	@docker run --rm --net=kumori_kumori -v $(PWD)/services/flyway/sql:/flyway/sql boxfuse/flyway:latest -url=jdbc:postgresql://postgres/ -user=postgres -password=postgres -connectRetries=60 info
+
+jmeter:
+	@docker run --rm -v $(shell pwd)/services/jmeter:/jmeter --entrypoint /bin/rm localgod/jmeter -rf /jmeter/report /jmeter/output.jtl
+	@docker run --rm -v $(shell pwd)/services/jmeter:/jmeter \
+	--network=kumori_kumori localgod/jmeter -n -t /jmeter/kumori.jmx -l /jmeter/output.jtl -e -o /jmeter/report -Joutputpath=/jmeter -Jhost=devserver -Jjwt=${KUMORI_JWT}
+
 fixture:
 	@./ready.sh
 	@docker stop kumori-postgrest
