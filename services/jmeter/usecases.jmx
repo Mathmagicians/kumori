@@ -63,9 +63,9 @@
           <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Regular Expression Extractor" enabled="true">
             <stringProp name="RegexExtractor.useHeaders">true</stringProp>
             <stringProp name="RegexExtractor.refname">usecase_id</stringProp>
-            <stringProp name="RegexExtractor.regex">location:\s/usecases\?id\=eq\.(.*)</stringProp>
+            <stringProp name="RegexExtractor.regex">location:\s/usecases\?id\=eq.([0-9]*)</stringProp>
             <stringProp name="RegexExtractor.template">$1$</stringProp>
-            <stringProp name="RegexExtractor.default"></stringProp>
+            <stringProp name="RegexExtractor.default">location:\s/usecases\?id\=eq.([0-9]*)</stringProp>
             <stringProp name="RegexExtractor.match_number"></stringProp>
           </RegexExtractor>
           <hashTree/>

@@ -7,8 +7,7 @@ export default class Unit {
   async update(id, name, description) {
     return new Postgrest("/api/components").update([`id=eq.${id}`], {
       name: name,
-      description: description,
-      deleted: false
+      description: description
     });
   }
 
