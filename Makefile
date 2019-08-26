@@ -5,7 +5,6 @@ BUILD_IMAGE=mathmagicians/kumori_build:latest
 .PHONY: build push sonar-scan
 
 build:
-	@cd services/backend && make -f Makefile build && cd ../../
 	@cd services/frontend && make -f Makefile install build && cd ../../
 
 start:
@@ -27,14 +26,6 @@ jmeter:
 	@docker run --rm -v $(shell pwd)/services/jmeter:/jmeter --entrypoint /bin/rm localgod/jmeter -rf /jmeter/report /jmeter/output.jtl
 	@docker run --rm -v $(shell pwd)/services/jmeter:/jmeter \
 	--network=kumori_kumori localgod/jmeter -n -t /jmeter/kumori.jmx -l /jmeter/output.jtl -e -o /jmeter/report -Joutputpath=/jmeter -Jhost=devserver -Jjwt=${KUMORI_JWT}
-
-fixture:
-	@./ready.sh
-	@docker stop kumori-postgrest
-	@docker run --rm -v ${PWD}:/tmp -w /tmp ${BUILD_IMAGE} curl -s -o dump.pgsql https://raw.githubusercontent.com/Mathmagicians/kumori/fixture/dump.pgsql
-	@docker exec -i -u postgres kumori-postgres psql -U "${POSTGRES_PASSWORD}" "${POSTGREST_CONNECTION_DB}" < dump.pgsql
-	@docker exec -i -u postgres kumori-postgres rm -rf dump.pgsql
-	@docker start kumori-postgrest
 
 dump:
 	@docker stop kumori-postgrest
