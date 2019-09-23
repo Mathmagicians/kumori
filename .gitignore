@@ -8,4 +8,4 @@ target
 .settings
 .project
 .gradle
-dump.pgsql
+jmeter.log

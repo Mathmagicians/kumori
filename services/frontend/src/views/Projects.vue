@@ -1,39 +1,41 @@
 <template>
-  <div>
-    <h1>Projects</h1>
-    <list-with-pagination
-      ref="pagination"
-      :list-size="projects.length"
-      v-bind:list-total="projects.length"
-      v-bind:activeOrdinal="0"
-      :button-panel-size="7"
-    >
-      <project
-        slot-scope="props"
-        v-if="props.isOn"
-        :project="projects[props.listSeq]"
-      >
-      </project>
-    </list-with-pagination>
-  </div>
+<split title="Projects">
+  <template v-slot:left>
+    Missing</template>
+  Missing<template v-slot:right>
+</template>
+</split>
 </template>
 
 <script>
-import Project from "../components/Project.vue";
-import Projects from "../api/Projects.js";
-import ListWithPagination from "../components/ListWithPagination.vue";
+import Split from "@/components/Split";
+import ProjectList from "@/components/projects/List";
+import Badge from "@/components/status/Badge";
+import Project from "@/api/Project";
 
 export default {
   name: "projects",
   components: {
-    project: Project,
-    "list-with-pagination": ListWithPagination
+    "split": Split,   "badge": Badge,
+    project: ProjectList
   },
   data() {
     return {
       loading: false,
-      projects: Projects.list()
+      projects: []
     };
+  },
+  mounted() {
+    this.get()
+  },
+  methods: {
+    get() {
+     new Project().get().then(response => {
+       this.project = response;
+     }).catch(error => {
+       console.log(error)
+     })
+    }
   }
 };
 </script>

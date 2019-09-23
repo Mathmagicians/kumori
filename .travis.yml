@@ -30,10 +30,9 @@ script:
 # Configure and start environment
    - cp .env.sample .env
    - docker-compose -f kumori.yml up -d
-# Load fixture
-   - make fixture
 # Run tests
    - make test
+   - make jmeter
 # Stop Environment
    - docker-compose -f kumori.yml down
 # Run Sonarqube scan

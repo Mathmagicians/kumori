@@ -1,6 +1,7 @@
 module.exports = {
   lintOnSave: false,
   devServer: {
+    clientLogLevel: 'info',
     public: "127.0.0.1:80",
     disableHostCheck: true,
     port: 80,
@@ -9,6 +10,13 @@ module.exports = {
         target: "http://postgrest:3000",
         pathRewrite: {
           "^/api": ""
+        },
+        secure: false
+      },
+      "/swagger": {
+        target: "http://swagger:8080",
+        pathRewrite: {
+          "^/swagger": ""
         },
         secure: false
       }

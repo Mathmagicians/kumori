@@ -1,5 +1,5 @@
 <template>
-<b-modal ref="edit_usecase" :title="title" @ok="save" @cancel="cancel">
+<b-modal ref="add_usecase" :title="title" @ok="save" @cancel="cancel">
   <b-form-group description="Keep the name concise." label="Usecase name">
     <b-form-input v-model.trim="usecase.name"></b-form-input>
   </b-form-group>
@@ -16,7 +16,7 @@ import {
 } from "@/api/event-bus.js";
 import Usecase from "@/api/Usecase";
 export default {
-  name: "edit",
+  name: "add",
   data() {
     return {
       usecase: {
@@ -29,23 +29,29 @@ export default {
     };
   },
   mounted() {
-    EventBus.$on("show-edit-usecase-dialog", usecase => {
-      this.usecase = usecase
-      this.$refs.edit_usecase.show();
+    EventBus.$on("show-add-usecase-dialog", () => {
+      this.$refs.add_usecase.show();
     });
   },
   computed: {
     title() {
-      return `Edit usecase "${this.usecase.name}"`
+      return `Add usecase "${this.usecase.name}"`
     }
   },
   methods: {
+    reset() {
+      this.usecase = {
+        id: null,
+        name: "",
+        description: ""
+      }
+    },
     save() {
-      new Usecase().update(
-        this.usecase.id,
+      new Usecase().insert(
         this.usecase.name,
         this.usecase.description
       ).then(() => {
+        this.reset()
         EventBus.$emit("update-usecase-list");
       })
     },

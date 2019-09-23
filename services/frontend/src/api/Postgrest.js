@@ -11,9 +11,6 @@ export default class Postgrest {
     }
   }
 
-  /**
-   * Get the total number of entries
-   */
   async total() {
     let config = {
       headers: {
@@ -27,7 +24,19 @@ export default class Postgrest {
     });
   }
 
-  async update(data) {
+  async update(clause, data) {
+    let clauses = `?${this.clause(clause)}`;
+    return this.hasToken().then(() => {
+      let config = {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+      };
+      return axios.patch(`${this.endpoint}${clauses}`, data, config);
+    });
+  }
+
+  async insert(data) {
     return this.hasToken().then(() => {
       let config = {
         headers: {
@@ -38,12 +47,21 @@ export default class Postgrest {
     });
   }
 
-  /**
-   * Get entries based on query
-   */
+  async delete(clause) {
+    let clauses = `?${this.clause(clause)}`;
+    return this.hasToken().then(() => {
+      let config = {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+      };
+      return axios.delete(`${this.endpoint}${clauses}`, config);
+    });
+  }
+
   async get(
-    offset = 1,
-    limit = 10,
+    offset = 0,
+    limit = 9,
     select = [],
     order = [],
     clause = ["id=gt.0"]

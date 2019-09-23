@@ -1,52 +1,32 @@
 <template>
-  <div>
-    <b-pagination
-      v-model="currentPage"
-      :total-rows="totalRows"
-      :per-page="perPage"
-    ></b-pagination>
-    <b-table striped small hover :items="data" :fields="fields">
-      <template slot="actions" slot-scope="row">
-        <b-button-group>
-          <b-button size="sm" @click.stop="row.toggleDetails">
-            <v-icon name="info" />
-          </b-button>
-          <b-button
-            size="sm"
-            @click="showedit(row.item)"
-            v-if="isLoggedIn && isEditOn"
-          >
-            <v-icon name="pen" />
-          </b-button>
-        </b-button-group>
-      </template>
-      <template slot="row-details" slot-scope="row">
-        <div class="container">
-          <div class="row">
-            <div class="col-sm">
-              {{ row.item.description }}
-            </div>
-            <div class="col-sm">
-              <h6>Associated components:</h6>
-              <ul v-for="item in row.item.components" :key="item.id">
-                <li>{{ item.name }}</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </template>
-    </b-table>
-    <br /><br /><br /><br /><br /><br />
-    <edit-usecase ref="editItem" />
-  </div>
+<split title="usecases">
+  <template v-slot:left>
+    <list-usecase /></template>
+  <template v-slot:right>
+    <show-usecase />
+    <add-usecase />
+    <remove-usecase />
+    <map-component />
+    <map-taxonomy />
+  </template>
+</split>
 </template>
 
 <script>
-import Icon from "vue-awesome/components/Icon";
-import "vue-awesome/icons/pen";
-import "vue-awesome/icons/info";
-import Usecases from "@/api/Usecases.js";
+import {
+  EventBus
+} from "@/api/event-bus.js";
+import {
+  mapGetters
+} from 'vuex'
+import Split from "@/components/Split";
+import ListUsecase from "@/components/usecase/List";
+import ShowUsecase from "@/components/usecase/Show";
+import AddUsecase from "@/components/usecase/Add";
 import EditUsecase from "@/components/usecase/Edit";
+import RemoveUsecase from "@/components/usecase/Remove";
+import MapComponent from "@/components/usecase/MapComponent";
+import MapTaxonomy from "@/components/usecase/MapTaxonomy";
 
 export default {
   name: "usecases",
@@ -58,13 +38,18 @@ export default {
     }
   },
   components: {
-    "v-icon": Icon,
-    "edit-usecase": EditUsecase
+    "split": Split,
+    "list-usecase": ListUsecase,
+    "edit-usecase": EditUsecase,
+    "show-usecase": ShowUsecase,
+    "add-usecase": AddUsecase,
+    "remove-usecase": RemoveUsecase,
+    "map-component": MapComponent,
+    "map-taxonomy": MapTaxonomy
   },
   data() {
     return {
-      fields: [
-        {
+      fields: [{
           key: "name",
           label: "Name"
         },
@@ -83,39 +68,13 @@ export default {
     };
   },
   computed: {
-    isLoggedIn() {
-      return this.$store.getters.isLoggedIn;
-    },
-    isEditOn() {
-      return this.$store.getters.isEditOn;
-    }
+    ...mapGetters([
+      'readonly'
+    ])
   },
-  watch: {
-    currentPage() {
-      this.get();
-    }
-  },
-  mounted() {
-    this.get();
-  },
-  methods: {
-    get() {
-      let start = this.currentPage === 1 ? 0 : (this.currentPage - 1) * this.perPage;
-      let stop = this.currentPage === 1 ? (this.currentPage * this.perPage) - 1 : (this.currentPage * this.perPage)
-      Usecases.get(start, stop, [], ["id.desc"], [])
-        .then(response => {
-          this.data = response.data;
-          this.totalRows = parseInt(response.total);
-          this.isBusy = false;
-        })
-        .catch(error => {
-          console.log(error);
-        });
-    },
-    showedit(item) {
-      this.$refs.editItem.show(item);
-    }
-  }
+  watch: {},
+  mounted() {},
+  methods: {}
 };
 </script>
 

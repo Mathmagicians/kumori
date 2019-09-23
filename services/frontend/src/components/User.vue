@@ -1,25 +1,25 @@
 <template>
   <div>
     <b-navbar-nav class="ml-auto">
-      <b-nav-item-dropdown right v-if="isLoggedIn">
+      <b-nav-item-dropdown right v-if="authenticated">
         <template slot="button-content">
           <v-icon name="user" color="green" />
         </template>
         <b-dropdown-item href="#">Profile</b-dropdown-item>
         <b-dropdown-item v-on:click="logout">Sign out</b-dropdown-item>
       </b-nav-item-dropdown>
-      <b-nav-item-dropdown right v-if="!isLoggedIn">
+      <b-nav-item-dropdown right v-if="!authenticated">
         <template slot="button-content">
           <v-icon name="user" />
         </template>
         <b-dropdown-item v-b-modal.login_modal>Sign in</b-dropdown-item>
       </b-nav-item-dropdown>
-      <b-nav-item @click="editOff" v-if="isEditOn" title="Exit edit mode">
+      <b-nav-item @click="read" v-if="!readonly" title="Exit edit mode">
         <v-icon name="unlock" color="green" />
       </b-nav-item>
       <b-nav-item
-        @click="editOn"
-        v-if="!isEditOn && isLoggedIn"
+        @click="crud"
+        v-if="readonly && authenticated"
         title="Enter edit mode"
       >
         <v-icon name="lock" />
@@ -69,6 +69,10 @@
 </template>
 
 <script>
+import {
+  mapGetters,
+  mapActions
+} from 'vuex'
 import AuthService from "../api/AuthService.js";
 import Icon from "vue-awesome/components/Icon";
 import "vue-awesome/icons/unlock";
@@ -88,18 +92,19 @@ export default {
     };
   },
   computed: {
-    authenticated: function() {
-      return this.$store.getters.isLoggedIn;
-    },
-    isLoggedIn() {
-      return this.$store.getters.isLoggedIn;
-    },
-    isEditOn() {
-      return this.$store.getters.isEditOn;
-    }
+    ...mapGetters([
+      'authenticated',
+      'readonly'
+    ])
   },
   methods: {
+    ...mapActions([
+      'logout',
+      'crud',
+      'read'
+    ]),
     login: function() {
+      //TODO move all logic to store
       if (this.username !== "" && this.password !== "") {
         this.$store.dispatch("login", {
           username: this.username,
@@ -108,15 +113,7 @@ export default {
       }
       this.$refs.login_modal.hide();
     },
-    logout() {
-      this.$store.dispatch("logout");
-    },
-    editOn() {
-      this.$store.dispatch("editOn");
-    },
-    editOff() {
-      this.$store.dispatch("editOff");
-    },
+    //TODO move to store
     auth0() {
       auth.login();
     }
