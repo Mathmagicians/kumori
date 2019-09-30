@@ -27,7 +27,7 @@ The site will be available at: <http://127.0.0.1>
 You make generate new token for deployment here: <https://jwt.io/#debugger-io>
 
 ## Tests
-    make test // It is required for the test to run that an environment is running (dev or prod) and fixture data hase been loaded.
+    make test // It is required for the test to run that an environment is running (dev or prod) and fixture data has been loaded.
 
 ### JMeter
 
@@ -37,5 +37,5 @@ Assuming JMeter is on your path, you have exported your JWT token in your shell,
 
 To run the JMeter test without gui and assuming you have exported your JWT token in your shell:
     make jmeter
-    
+
 This projects uses [Browserstack](https://www.browserstack.com) for automated testing.
