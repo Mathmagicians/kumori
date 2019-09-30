@@ -1,9 +1,9 @@
 import { shallowMount, createLocalVue } from "@vue/test-utils";
 import { expect } from "chai";
 import BootstrapVue from "bootstrap-vue";
-import List from '@/components/Weather.vue';
+import List from '@/components/projects/Weather.vue';
 
-describe("/components/Weather.vue", () => {
+describe("/components/projects/Weather.vue", () => {
 
   it('Weather status 1', () => {
     const localVue = createLocalVue();
