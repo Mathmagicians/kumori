@@ -1,5 +1,5 @@
 <template>
-<b-card v-if="entry.uid" no-body tag="article" border-variant="light">
+<b-card v-if="entry.id" no-body tag="article" border-variant="light">
   <div slot="header">
     <b-dropdown class="float-right" right size="sm" v-if="authenticated && !readonly">
       <template slot="button-content">
@@ -22,29 +22,14 @@
         </b-form-textarea>
       </b-form-group>
     </b-card-text>
+
     <b-card-text v-if="entry.usecases.length">
       <hr />
       <h5>Usecases</h5>
       <ul>
         <li v-for="item in entry.usecases">
           <h6>{{item.name}}</h6>
-          <p>{{item.name}}</p>
-          <p>{{item.status}}</p>
-        </li>
-      </ul>
-    </b-card-text>
-    <b-card-text v-if="entry.links.length">
-      <hr />
-      <h5>Links</h5>
-      <ul>
-        <li v-for="item in entry.links">{{item.ref}}</li>
-      </ul>
-    </b-card-text>
-    <b-card-text v-if="entry.comments.length">
-      <hr />
-      <h5>Comments</h5>
-      <ul>
-        <li v-for="item in entry.comments">{{item}}
+          <p>{{item.description}}</p>
         </li>
       </ul>
     </b-card-text>

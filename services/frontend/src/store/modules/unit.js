@@ -31,7 +31,7 @@ const actions = {
     dispatch
   }) {
     new Unit().update(
-      state.current.uid,
+      state.current.id,
       state.current.name,
       state.current.description
     ).then(() => {
@@ -43,13 +43,14 @@ const actions = {
     commit,
     state
   }, data) {
-    new Unit().getC(
+    new Unit().get(
       0,
       1,
       [],
       [],
-      [`uid=eq.${data.id}`]
+      [`id=eq.${data.id}`]
     ).then(result => {
+      console.log(result.data[0])
       state.current = result.data[0]
     })
   },
@@ -60,7 +61,7 @@ const actions = {
     let start = state.list.currentPage === 1 ? 0 : (state.list.currentPage - 1) * state.list.perPage;
     let stop = state.list.currentPage === 1 ? (state.list.currentPage * state.list.perPage) - 1 : (state.list.currentPage * state.list.perPage)
     let ilike = state.list.query !== '' ? `search=ilike.*${encodeURI(state.list.query)}*` : ''
-    new Unit().search(
+    new Unit().get(
         start,
         stop,
         ['id,name'],
