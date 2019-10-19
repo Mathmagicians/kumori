@@ -41,6 +41,11 @@ const router = new Router({
       meta: { requiresAuth: true }
     },
     {
+      path: "/taxonomy",
+      component: () => import("./views/Taxonomy.vue"),
+      meta: { requiresAuth: true }
+    },
+    {
       path: "/search",
       component: () => import("./views/Search.vue"),
       meta: { requiresAuth: true }

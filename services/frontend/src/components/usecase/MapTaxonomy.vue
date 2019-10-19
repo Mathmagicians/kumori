@@ -1,6 +1,6 @@
 <template>
 <b-modal ref="map_taxononmy" :title="title" @ok="save" @cancel="cancel">
-  {{usecase.id}} {{usecase.name}}
+<tax-select/>
 </b-modal>
 </template>
 
@@ -8,8 +8,12 @@
 import {
   EventBus
 } from "@/api/event-bus.js";
+import TaxSelect from  "@/components/taxonomy/Select";
 export default {
   name: "map-taxonomy",
+  components: {
+    "tax-select": TaxSelect,
+  },
   data() {
     return {
       usecase: {
@@ -27,7 +31,7 @@ export default {
   },
   computed: {
     title() {
-      return `Map usecase "${this.usecase.name}" to taxonomies(s)`
+      return `Map taxonomies(s) to usecase "${this.usecase.name}"`
     }
   },
   methods: {

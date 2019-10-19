@@ -1,6 +1,6 @@
 import Postgrest from "./Postgrest.js";
 export default class Usecase {
-  
+
   async update(id, name, description) {
     return new Postgrest("/api/usecases").update([`id=eq.${id}`],{
       name: name,
@@ -32,7 +32,7 @@ export default class Usecase {
     order = [],
     clause = ["id=gt.0"]
   ) {
-    return new Postgrest("/api/w_usecases").get(
+    return new Postgrest("/api/usecases").get(
       offset,
       limit,
       select,

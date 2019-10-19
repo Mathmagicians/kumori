@@ -120,13 +120,12 @@ export default {
       EventBus.$emit("show-add-usecase-dialog");
     },
     show(item) {
-      let uid = item.id
       new Usecase().get(
         0,
         1,
         [],
         [],
-        [`id=eq.${uid}`]
+        [`id=eq.${item.id}`]
       ).then(result => {
         EventBus.$emit("show-usecase", result.data[0]);
       })

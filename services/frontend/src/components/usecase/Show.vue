@@ -17,21 +17,8 @@
     <h5>{{entry.name}}</h5>
   </div>
   <b-card-body>
-
     <b-card-text>
       {{entry.description}}
-    </b-card-text>
-    <b-card-text>
-      <hr />
-      <h5>Status</h5>
-      {{entry.status}}
-    </b-card-text>
-    <b-card-text v-if="entry.components.length">
-      <hr />
-      <h5>Components</h5>
-      <ul>
-        <li v-for="item in entry.components">{{item.name}}</li>
-      </ul>
     </b-card-text>
   </b-card-body>
 </b-card>
@@ -61,9 +48,7 @@ export default {
       entry: {
         id: null,
         name: "",
-        description: "",
-        status: "",
-        components: []
+        description: ""
       }
     }
   },
