@@ -39,9 +39,6 @@
 
 <script>
 import {
-  EventBus
-} from "@/api/event-bus.js";
-import {
   mapGetters,
   mapMutations,
   mapActions

@@ -3,6 +3,7 @@
   <template v-slot:left>
     <list-usecase /></template>
   <template v-slot:right>
+    <edit-usecase />
     <show-usecase />
     <add-usecase />
     <remove-usecase />
@@ -13,9 +14,6 @@
 </template>
 
 <script>
-import {
-  EventBus
-} from "@/api/event-bus.js";
 import {
   mapGetters
 } from 'vuex'
@@ -30,13 +28,6 @@ import MapTaxonomy from "@/components/usecase/MapTaxonomy";
 
 export default {
   name: "usecases",
-  props: {
-    perPage: {
-      default: () => {
-        return 10;
-      }
-    }
-  },
   components: {
     "split": Split,
     "list-usecase": ListUsecase,
@@ -47,34 +38,7 @@ export default {
     "map-component": MapComponent,
     "map-taxonomy": MapTaxonomy
   },
-  data() {
-    return {
-      fields: [{
-          key: "name",
-          label: "Name"
-        },
-        {
-          key: "status",
-          label: "Status"
-        },
-        {
-          key: "actions",
-          label: "Actions"
-        }
-      ],
-      currentPage: 1,
-      totalRows: 0,
-      data: []
-    };
-  },
-  computed: {
-    ...mapGetters([
-      'readonly'
-    ])
-  },
-  watch: {},
-  mounted() {},
-  methods: {}
+
 };
 </script>
 

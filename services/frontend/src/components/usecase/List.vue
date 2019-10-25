@@ -4,7 +4,7 @@
     <b-col>
       <b-row>
         <b-col>
-          <b-button size="sm" title="Edit usecase" @click="add()" v-if="authenticated && !readonly">
+          <b-button size="sm" title="Edit usecase" @click="toggleAddUsecase" v-if="authenticated && !readonly">
             <v-icon name="pen" />
           </b-button>
         </b-col>
@@ -23,17 +23,20 @@
               </b-container>
             </b-card>
           </b-collapse>
-          <b-table outlined striped small hover :busy="isBusy" :items="data" :fields="fields" @row-clicked="show">
+          <b-table outlined striped hover small :busy="list.busy" :items="list.data" :fields="list.fields" @row-clicked="current">
             <div slot="table-busy" class="text-center text-danger my-2">
               <b-spinner class="align-middle"></b-spinner>
               <strong>Loading...</strong>
             </div>
+            <template slot="HEAD_name" slot-scope="data">
+              <b-form-input size="sm" v-model="query" placeholder="Filter"></b-form-input>
+            </template>
           </b-table>
         </b-col>
       </b-row>
       <b-row>
         <b-col>
-          <b-pagination class="justify-content-center" v-model="currentPage" :total-rows="totalRows" :per-page="perPage"></b-pagination>
+          <b-pagination class="justify-content-center" v-model="currentPage" :total-rows="list.totalRows" :per-page="list.perPage"></b-pagination>
         </b-col>
       </b-row>
     </b-col>
@@ -43,10 +46,9 @@
 
 <script>
 import {
-  EventBus
-} from "@/api/event-bus.js";
-import {
-  mapGetters
+  mapGetters,
+  mapMutations,
+  mapActions
 } from 'vuex'
 import Icon from "vue-awesome/components/Icon";
 import "vue-awesome/icons/pen";
@@ -61,41 +63,33 @@ export default {
   components: {
     "v-icon": Icon,
   },
-  props: {
-    perPage: {
-      default: () => {
-        return 10;
-      }
-    }
-  },
-  data() {
-    return {
-      isBusy: true,
-      fields: [{
-          key: "name",
-          label: "Name"
-        },
-        {
-          key: "status",
-          label: "Status"
-        }
-      ],
-      currentPage: 1,
-      totalRows: 0,
-      data: []
-    };
-  },
   computed: {
     ...mapGetters([
       'authenticated',
       'readonly'
-    ])
+    ]),
+    ...mapGetters('usecase', {
+      list: 'list'
+    }),
+    query: {
+      set(query) {
+        this.$store.state.unit.list.query = query
+      },
+      get() {
+        return this.$store.state.unit.list.query
+      }
+    },
+    currentPage: {
+      set(selected) {
+        this.$store.state.unit.list.currentPage = selected
+      },
+      get() {
+        return this.$store.state.unit.list.currentPage
+      }
+    }
   },
   mounted() {
-    EventBus.$on("update-usecase-list", () => {
-      this.get();
-    });
-    this.get();
+    this.search()
   },
   watch: {
     currentPage() {
@@ -103,33 +97,13 @@ export default {
     }
   },
   methods: {
-    get() {
-      let start = this.currentPage === 1 ? 0 : (this.currentPage - 1) * this.perPage;
-      let stop = this.currentPage === 1 ? (this.currentPage * this.perPage) - 1 : (this.currentPage * this.perPage)
-      new Usecase().get(start, stop, [], ["id.desc"], [])
-        .then(response => {
-          this.data = response.data;
-          this.totalRows = parseInt(response.total);
-          this.isBusy = false;
-        })
-        .catch(error => {
-          console.log(error);
-        });
-    },
-    add() {
-      EventBus.$emit("show-add-usecase-dialog");
-    },
-    show(item) {
-      new Usecase().get(
-        0,
-        1,
-        [],
-        [],
-        [`id=eq.${item.id}`]
-      ).then(result => {
-        EventBus.$emit("show-usecase", result.data[0]);
-      })
-    }
+    ...mapActions('usecase', {
+      current: 'current',
+      search: 'search'
+    }),
+    ...mapMutations('usecase', {
+      toggleAddUsecase: 'toggleAddUsecase',
+    })
   }
 };
 </script>

@@ -1,10 +1,10 @@
 <template>
-<b-modal ref="remove_usecase" :title="title" @ok="remove" @cancel="cancel">
+<b-modal v-model="showRemoveUsecase" ref="remove_usecase" :title="title" @ok="remove">
   <b-form-group description="Keep the name concise." label="Usecase name">
-    <b-form-input readonly v-model.trim="usecase.name"></b-form-input>
+    <b-form-input readonly v-model.trim="entry.name"></b-form-input>
   </b-form-group>
   <b-form-group description="Keep the description comprehensive." label="Usecase description">
-    <b-form-textarea readonly v-model="usecase.description" placeholder="Enter something" :rows="3" :max-rows="6">
+    <b-form-textarea readonly v-model="entry.description" placeholder="Enter something" :rows="3" :max-rows="6">
     </b-form-textarea>
   </b-form-group>
 </b-modal>
@@ -12,42 +12,34 @@
 
 <script>
 import {
-  EventBus
-} from "@/api/event-bus.js";
+  mapGetters,
+  mapMutations,
+  mapActions
+} from 'vuex'
 import Usecase from "@/api/Usecase";
 export default {
   name: "remove-usecase",
-  data() {
-    return {
-      usecase: {
-        id: undefined,
-        name: undefined,
-        description: undefined
-      }
-    }
-  },
-  mounted() {
-    EventBus.$on("show-remove-usecase-dialog", usecase => {
-      this.usecase = usecase
-      this.$refs.remove_usecase.show();
-    });
-  },
   computed: {
+    showRemoveUsecase: {
+      set(showRemoveUsecase) {
+        this.$store.state.usecase.showRemoveUsecase = showRemoveUsecase
+      },
+      get() {
+        return this.$store.state.usecase.showRemoveUsecase
+      }
+    },
     title() {
-      return `Remove usecase "${this.usecase.name}"`
-    }
+      return `Add usecase "${this.entry.name}"`
+    },
+    ...mapGetters('usecase', {
+      entry: 'current',
+      editable: 'editable'
+    }),
   },
   methods: {
-    remove() {
-      new Usecase().deleteById(this.usecase.id).then(res => {
-        EventBus.$emit("update-usecase-list");
-      }).catch(e => {
-        console.log(e)
-      })
-    },
-    cancel() {
-      EventBus.$emit("update-usecase-list");
-    }
+    ...mapActions('usecase', {
+      remove: 'remove'
+    }),
   }
 };
 </script>

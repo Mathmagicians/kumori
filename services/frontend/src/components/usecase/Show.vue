@@ -4,14 +4,14 @@
     <b-dropdown class="float-right" right size="sm" v-if="authenticated && !readonly">
       <template slot="button-content">
         <v-icon name="bars" /></template>
-      <b-dropdown-item title="Edit usecase" @click="edit(entry)">
+      <b-dropdown-item title="Edit usecase" @click="toggleEditUsecase">
         <v-icon name="pen" /> Edit</b-dropdown-item>
-      <b-dropdown-item title="Map component" @click="mapComponent(entry)">
+      <b-dropdown-item title="Map component" @click="toggleCreateUsecaseComponentMap">
         <v-icon name="boxes" /> Map components</b-dropdown-item>
-      <b-dropdown-item title="Map taxononomy" @click="mapTaxonomy(entry)">
+      <b-dropdown-item title="Map taxononomy" @click="toggleCreateUsecaseTaxonomyMap">
         <v-icon name="layer-group" /> Map taxononomy</b-dropdown-item>
       <b-dropdown-divider></b-dropdown-divider>
-      <b-dropdown-item title="Remove usecase" @click="remove(entry)">
+      <b-dropdown-item title="Remove usecase" @click="toggleRemoveUsecase">
         <v-icon name="trash" /> Remove</b-dropdown-item>
     </b-dropdown>
     <h5>{{entry.name}}</h5>
@@ -26,10 +26,9 @@
 
 <script>
 import {
-  EventBus
-} from "@/api/event-bus.js";
-import {
-  mapGetters
+  mapGetters,
+  mapMutations,
+  mapActions
 } from 'vuex'
 import Icon from "vue-awesome/components/Icon";
 import "vue-awesome/icons/pen";
@@ -43,39 +42,23 @@ export default {
   components: {
     "v-icon": Icon,
   },
-  data() {
-    return {
-      entry: {
-        id: null,
-        name: "",
-        description: ""
-      }
-    }
-  },
   computed: {
     ...mapGetters([
       'authenticated',
       'readonly'
-    ])
-  },
-  mounted() {
-    EventBus.$on("show-usecase", data => {
-      this.entry = data;
-    });
+    ]),
+    ...mapGetters('usecase', {
+      entry: 'current',
+      editable: 'editable'
+    }),
   },
   methods: {
-    remove(item) {
-      EventBus.$emit("show-remove-usecase-dialog", item);
-    },
-    edit(item) {
-      EventBus.$emit("show-edit-usecase-dialog", item);
-    },
-    mapComponent(item) {
-      EventBus.$emit("show-create-usecase-component-map-dialog", item);
-    },
-    mapTaxonomy(item) {
-      EventBus.$emit("show-create-usecase-taxonomy-map-dialog", item);
-    }
+    ...mapMutations('usecase', {
+      toggleEditUsecase: 'toggleEditUsecase',
+      toggleRemoveUsecase: 'toggleRemoveUsecase',
+      toggleCreateUsecaseComponentMap: 'toggleCreateUsecaseComponentMap',
+      toggleCreateUsecaseTaxonomyMap: 'toggleCreateUsecaseTaxonomyMap'
+    })
   }
 };
 </script>
