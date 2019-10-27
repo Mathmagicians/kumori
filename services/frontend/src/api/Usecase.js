@@ -10,9 +10,15 @@ export default class Usecase {
 
   async insert(name, description) {
     return new Postgrest("/api/usecases").insert({
-      name: name,
-      description: description,
-      deleted: false
+      usecase: name,
+      description: description
+    });
+  }
+
+  async setTaxonomy(usecase_id, taxonomy_id) {
+    return new Postgrest("/api/usecase_taxonomy").insert({
+      usecase: usecase_id,
+      taxonomy: taxonomy_id
     });
   }
 

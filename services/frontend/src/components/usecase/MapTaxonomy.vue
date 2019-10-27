@@ -11,6 +11,7 @@ import {
   mapActions
 } from 'vuex'
 import TaxSelect from "@/components/taxonomy/Select";
+import Usecase from "@/api/Usecase"
 export default {
   name: "map-taxonomy",
   components: {
@@ -32,10 +33,15 @@ export default {
       entry: 'current',
       editable: 'editable'
     }),
+    ...mapGetters('taxonomy', {
+      selected: 'selected'
+    }),
   },
   methods: {
     save() {
-      console.log('Not implemented')
+      this.selected.forEach(entry => {
+        new Usecase().setTaxonomy(this.entry.id, entry)
+      })
     }
   }
 };

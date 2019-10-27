@@ -20,6 +20,9 @@
     <b-card-text>
       {{entry.description}}
     </b-card-text>
+    <li v-if="entry.taxonomy.length>0" v-for="tax in entry.taxonomy">
+    {{ tax.name }}
+  </li>
   </b-card-body>
 </b-card>
 </template>
