@@ -8,7 +8,8 @@
 import {
   mapGetters,
   mapMutations,
-  mapActions
+  mapActions,
+  mapState
 } from 'vuex'
 import TaxSelect from "@/components/taxonomy/Select";
 import Usecase from "@/api/Usecase"
@@ -38,13 +39,27 @@ export default {
     }),
   },
   methods: {
+    ...mapMutations('taxonomy', {
+      reset: 'reset'
+    }),
+    ...mapActions('usecase', {
+      current: 'current'
+    }),
     save() {
-      this.selected.forEach(entry => {
-        new Usecase().setTaxonomy(this.entry.id, entry)
+      new Usecase().clearTaxonomy(this.entry.id).then(() => {
+        let entries = []
+        this.selected.forEach(entry => {
+          entries.push(new Usecase().setTaxonomy(this.entry.id, entry))
+        })
+        Promise.all(entries).then(() => {
+          this.current(this.entry)
+          this.reset()
+        })
       })
     }
   }
-};
+}
+
 </script>
 
 <style scoped></style>

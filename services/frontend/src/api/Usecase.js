@@ -2,7 +2,7 @@ import Postgrest from "./Postgrest.js";
 export default class Usecase {
 
   async update(id, name, description) {
-    return new Postgrest("/api/usecases").update([`id=eq.${id}`],{
+    return new Postgrest("/api/usecases").update([`id=eq.${id}`], {
       name: name,
       description: description
     });
@@ -10,7 +10,7 @@ export default class Usecase {
 
   async insert(name, description) {
     return new Postgrest("/api/usecases").insert({
-      usecase: name,
+      name: name,
       description: description
     });
   }
@@ -22,9 +22,21 @@ export default class Usecase {
     });
   }
 
+  async clearTaxonomy(id) {
+    return new Postgrest("/api/usecase_taxonomy").delete([`usecase=eq.${id}`]);
+  }
+
+  async getTaxonomy(id) {
+    return new Postgrest("/api/usecase_taxonomy").get([`usecase=eq.${id}`]);
+  }
+
+  async clearComponents(id) {
+    return new Postgrest("/api/component_usecase").delete([`usecase=eq.${id}`]);
+  }
+
   async deleteById(id) {
-    return new Postgrest("/api/usecase_taxonomy").delete([`usecase=eq.${id}`]).then(() => {
-      return new Postgrest("/api/component_usecase").delete([`usecase=eq.${id}`])
+    return this.clearTaxonomy(id).then(() => {
+      return this.clearComponents(id)
         .then(() => {
           return new Postgrest("/api/usecases").delete([`id=eq.${id}`]);
         });

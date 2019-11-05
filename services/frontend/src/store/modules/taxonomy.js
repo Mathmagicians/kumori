@@ -114,6 +114,13 @@ const actions = {
 }
 
 const mutations = {
+  reset(state, list) {
+    state.selected = []
+    state.selected1 = []
+    state.selected2 = []
+    state.selected3 = []
+    state.selected4 = []
+  },
   setList(state, list) {
     state.list = list;
   },

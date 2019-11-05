@@ -71,7 +71,6 @@ const actions = {
       [],
       [`id=eq.${data.id}`]
     ).then(result => {
-      console.log(result.data[0])
       state.current = result.data[0]
     })
   },

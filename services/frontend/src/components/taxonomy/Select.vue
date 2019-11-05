@@ -31,6 +31,9 @@ export default {
       level4: 'level4',
       selected: 'selected',
     }),
+    ...mapGetters('usecase', {
+      entry: 'current'
+    }),
     selected1: {
       set(selected1) {
         this.setSelected1(selected1)
@@ -65,7 +68,10 @@ export default {
     }
   },
   mounted() {
-    this.list();
+    this.list().then(() => {
+      //TODO split by level
+      this.selected = this.entry.taxonomy.map(i => { return i.id})
+    });
   },
   methods: {
     ...mapActions('taxonomy', {
