@@ -1,23 +1,18 @@
 POSTGRES_PASSWORD = $(shell cat .env | grep 'POSTGRES_PASSWORD' | awk -F "=" '{print $$2}')
 POSTGREST_CONNECTION_DB = $(shell cat .env | grep 'POSTGREST_CONNECTION_DB' | awk -F "=" '{print $$2}')
 PGRST_JWT_KEY = $(shell cat .env | grep 'PGRST_JWT_KEY' | awk -F "=" '{print $$2}')
+ENV=dev
 BUILD_IMAGE=mathmagicians/kumori_build:latest
 .PHONY: build push sonar-scan
 
 build:
 	@cd services/frontend && make -f Makefile install build && cd ../../
 
-start:
-	@docker-compose -f kumori.yml up -d
+up:
+	@docker-compose -f kumori.${ENV}.yml up -d
 
-stop:
-	@docker-compose -f kumori.yml down
-
-start_dev:
-	@docker-compose -f kumori.dev.yml up -d
-
-stop_dev:
-	@docker-compose -f kumori.dev.yml down
+down:
+	@docker-compose -f kumori.${ENV}.yml down
 
 flyway:
 	@docker run --rm --net=kumori_kumori -v $(PWD)/services/flyway/sql:/flyway/sql boxfuse/flyway:latest -url=jdbc:postgresql://postgres/ -user=postgres -password=postgres -connectRetries=60 info
