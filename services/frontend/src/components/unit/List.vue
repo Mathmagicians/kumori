@@ -32,7 +32,6 @@ import {
   mapMutations
 } from 'vuex'
 export default {
-  name: "ComponentList",
   computed: {
     ...mapGetters('unit', {
       list: 'list'

@@ -35,6 +35,19 @@ const getters = {
 }
 
 const actions = {
+  async insert({
+    commit,
+    state,
+    dispatch
+  }, data) {
+    console.log(data)
+    return new Usecase().insert(
+      data.name,
+      data.description
+    ).then(() => {
+      dispatch('search')
+    })
+  },
   remove({
     commit,
     state,

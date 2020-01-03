@@ -14,7 +14,6 @@
 import Weather from "@/components/projects/Weather";
 
 export default {
-  name: "Project",
   components: {
     weather: Weather
   },

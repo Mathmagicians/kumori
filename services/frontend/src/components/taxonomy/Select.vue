@@ -17,7 +17,6 @@ import {
   mapMutations
 } from 'vuex'
 export default {
-  name: "TaxSelect",
   computed: {
     ...mapGetters('taxonomy', {
       options: 'selectOptions',
@@ -25,7 +24,6 @@ export default {
       level2: 'level2',
       level3: 'level3',
       level4: 'level4',
-      selected: 'selected',
     }),
     ...mapGetters('usecase', {
       entry: 'current'
@@ -64,12 +62,7 @@ export default {
     }
   },
   mounted() {
-    this.list().then(() => {
-      //TODO split by level
-      this.selected = this.entry.taxonomy.map(i => {
-        return i.id
-      })
-    });
+    this.list();
   },
   methods: {
     ...mapActions('taxonomy', {

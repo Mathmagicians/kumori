@@ -34,7 +34,7 @@
         <li v-for="item in entry.usecases" :key="item.name">
           <h6>{{ item.name }}</h6>
           <p>{{ item.description }}</p>
-          <p>{{ item }}</p>
+          <status-badge :status="item.status" :phase="item.phase"/>
         </li>
       </ul>
     </b-card-text>
@@ -53,10 +53,11 @@ import "vue-awesome/icons/pen";
 import "vue-awesome/icons/info";
 import "vue-awesome/icons/trash";
 import "vue-awesome/icons/bars";
+import Badge from "@/components/status/Badge";
 export default {
-  name: "Show",
   components: {
     "v-icon": Icon,
+    "status-badge": Badge,
   },
   computed: {
     ...mapGetters([

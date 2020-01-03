@@ -1,11 +1,20 @@
 <template>
-<b-modal ref="add_usecase" v-model="showAddUsecase" :title="title" @ok="save" @cancel="cancel">
+<b-modal ref="add_usecase" v-model="showAddUsecase" :title="title" @ok="save">
   <b-form-group description="Keep the name concise." label="Usecase name">
     <b-form-input v-model.trim="usecase.name" />
   </b-form-group>
   <b-form-group description="Keep the description comprehensive." label="Usecase description">
     <b-form-textarea v-model="usecase.description" placeholder="Enter something" :rows="3" :max-rows="6" />
   </b-form-group>
+  <template v-slot:modal-footer="{ ok, cancel }">
+    <b-button variant="primary" @click="ok()">
+      Save
+    </b-button>
+    <b-button variant="secondary" @click="cancel()">
+      Cancel
+    </b-button>
+  </template>
+
 </b-modal>
 </template>
 
@@ -17,16 +26,12 @@ import {
 } from 'vuex'
 import Usecase from "@/api/Usecase";
 export default {
-  name: "Add",
   data() {
     return {
       usecase: {
-        id: null,
-        name: "",
-        description: ""
-      },
-      options: [],
-      selected: null
+        name: undefined,
+        description: undefined
+      }
     };
   },
   computed: {
@@ -38,36 +43,19 @@ export default {
         return this.$store.state.usecase.showAddUsecase
       }
     },
-    title() {
+    title () {
       return `Add usecase "${this.usecase.name}"`
     }
   },
   methods: {
-    ...mapMutations('usecase', {
-      toggleAddUsecase: 'toggleAddUsecase'
-    }),
     ...mapActions('usecase', {
-      current: 'current',
-      search: 'search'
+      insert: 'insert'
     }),
-    reset() {
-      this.usecase = {
-        id: null,
-        name: "",
-        description: ""
-      }
-    },
     save() {
-      new Usecase().insert(
-        this.usecase.name,
-        this.usecase.description
-      ).then(() => {
-        this.reset()
-        this.search()
+      this.insert(this.usecase).then(() => {
+        this.usecase.name = "";
+        this.usecase.description = "";
       })
-    },
-    cancel() {
-      this.search()
     }
   }
 };

@@ -5,6 +5,14 @@
   <b-form-group id="fieldset-1" description="You may add a comment to this mapping" label="Description">
     <b-form-textarea v-model="description" placeholder="Enter something..." rows="3" max-rows="6" />
   </b-form-group>
+  <template v-slot:modal-footer="{ ok, cancel }">
+    <b-button variant="primary" @click="ok()">
+      Map
+    </b-button>
+    <b-button variant="secondary" @click="cancel()">
+      Cancel
+    </b-button>
+  </template>
 </b-modal>
 </template>
 
@@ -26,7 +34,7 @@ export default {
     return {
       unit: undefined,
       status: undefined,
-      description: undefined
+      description: ""
     };
   },
   computed: {

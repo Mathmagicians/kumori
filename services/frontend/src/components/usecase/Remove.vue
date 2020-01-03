@@ -6,6 +6,14 @@
   <b-form-group description="Keep the description comprehensive." label="Usecase description">
     <b-form-textarea v-model="entry.description" readonly placeholder="Enter something" :rows="3" :max-rows="6" />
   </b-form-group>
+  <template v-slot:modal-footer="{ ok, cancel }">
+    <b-button variant="danger" @click="ok()">
+      Remove
+    </b-button>
+    <b-button variant="secondary" @click="cancel()">
+      Cancel
+    </b-button>
+  </template>
 </b-modal>
 </template>
 
@@ -15,9 +23,7 @@ import {
   mapMutations,
   mapActions
 } from 'vuex'
-import Usecase from "@/api/Usecase";
 export default {
-  name: "RemoveUsecase",
   computed: {
     showRemoveUsecase: {
       set(showRemoveUsecase) {
@@ -31,14 +37,13 @@ export default {
       return `Remove usecase: "${this.entry.name}"`
     },
     ...mapGetters('usecase', {
-      entry: 'current',
-      editable: 'editable'
-    }),
+      entry: 'current'
+    })
   },
   methods: {
     ...mapActions('usecase', {
       remove: 'remove'
-    }),
+    })
   }
 };
 </script>

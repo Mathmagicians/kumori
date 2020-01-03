@@ -48,7 +48,6 @@ import "vue-awesome/icons/boxes";
 import "vue-awesome/icons/bars";
 import "vue-awesome/icons/layer-group";
 export default {
-  name: "Show",
   components: {
     "v-icon": Icon,
   },

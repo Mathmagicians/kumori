@@ -28,7 +28,6 @@ import MapComponent from "@/components/usecase/MapComponent";
 import MapTaxonomy from "@/components/usecase/MapTaxonomy";
 
 export default {
-  name: "Usecases",
   components: {
     "split": Split,
     "list-usecase": ListUsecase,
@@ -38,8 +37,7 @@ export default {
     "remove-usecase": RemoveUsecase,
     "map-component": MapComponent,
     "map-taxonomy": MapTaxonomy
-  },
-
+  }
 };
 </script>
 

@@ -12,7 +12,6 @@ import {
 } from 'vuex'
 import Status from "@/api/Status";
 export default {
-  name: "ComponentSelect",
   props: {
     value: {
       type: Number,

@@ -1,6 +1,14 @@
 <template>
 <b-modal v-model="showCreateUsecaseTaxonomyMap" :title="title" @ok="save">
   <tax-select />
+  <template v-slot:modal-footer="{ ok, cancel }">
+    <b-button variant="primary" @click="ok()">
+      Set
+    </b-button>
+    <b-button variant="secondary" @click="cancel()">
+      Cancel
+    </b-button>
+  </template>
 </b-modal>
 </template>
 
@@ -14,7 +22,6 @@ import {
 import TaxSelect from "@/components/taxonomy/Select";
 import Usecase from "@/api/Usecase"
 export default {
-  name: "MapTaxonomy",
   components: {
     "tax-select": TaxSelect,
   },
@@ -28,7 +35,7 @@ export default {
       }
     },
     title() {
-      return `Map taxonomy for usecase: "${this.entry.name}"`
+      return `Set taxonomy for usecase: "${this.entry.name}"`
     },
     ...mapGetters('usecase', {
       entry: 'current',

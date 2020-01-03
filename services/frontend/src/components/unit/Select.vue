@@ -12,7 +12,6 @@ import {
 } from 'vuex'
 import Unit from "@/api/Unit";
 export default {
-  name: "ComponentSelect",
   props: {
     value: {
       type: Number,

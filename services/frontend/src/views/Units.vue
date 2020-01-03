@@ -14,16 +14,11 @@ import Split from "@/components/Split";
 import UnitList from "@/components/unit/List";
 import UnitShow from "@/components/unit/Show";
 export default {
-  name: "List",
   components: {
     "split": Split,
     "unit-list": UnitList,
     "unit-show": UnitShow
-  },
-  data() {
-    return {};
-  },
-  mounted() {}
+  }
 };
 </script>
 

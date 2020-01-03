@@ -6,9 +6,16 @@
   <b-form-group description="Keep the description comprehensive." label="Usecase description">
     <b-form-textarea v-model="entry.description" placeholder="Enter something" :rows="3" :max-rows="6" />
   </b-form-group>
+  <template v-slot:modal-footer="{ ok, cancel }">
+    <b-button variant="primary" @click="ok()">
+      Save
+    </b-button>
+    <b-button variant="secondary" @click="cancel()">
+      Cancel
+    </b-button>
+  </template>
 </b-modal>
 </template>
-
 
 <script>
 import {
@@ -17,7 +24,6 @@ import {
   mapActions
 } from 'vuex'
 export default {
-  name: "Edit",
   computed: {
     showEditUsecase: {
       set(showEditUsecase) {
@@ -32,7 +38,6 @@ export default {
     },
     ...mapGetters('usecase', {
       entry: 'current',
-      editable: 'editable'
     }),
   },
   methods: {

@@ -4,7 +4,6 @@
 
 <script>
 export default {
-  name: "Weather",
   props: {
     state: {
       type: Number,

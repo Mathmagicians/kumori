@@ -57,7 +57,6 @@ import "vue-awesome/icons/layer-group";
 
 import Usecase from "@/api/Usecase";
 export default {
-  name: "UsecaseList",
   components: {
     "v-icon": Icon,
   },

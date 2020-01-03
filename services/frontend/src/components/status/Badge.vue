@@ -1,8 +1,14 @@
 <template>
 <div>
-  <b-badge :variant="color">
-    {{ label }}
-  </b-badge>
+  <b-button-group size="sm">
+    <b-button disabled variant="secondary">Phase</b-button>
+    <b-button :variant="phaseColor">{{ phase }}</b-button>
+    <b-button disabled variant="secondary">Status</b-button>
+    <b-button :variant="statusColor">{{ status }}</b-button>
+  </b-button-group>
+
+</div>
+
 </div>
 </template>
 
@@ -13,12 +19,17 @@ import {
   mapMutations
 } from 'vuex'
 export default {
-  name: "Badge",
   props: {
-    label: {
+    status: {
       type: String,
       default: () => {
         return "To be decided";
+      }
+    },
+    phase: {
+      type: String,
+      default: () => {
+        return "Maybe"
       }
     }
   },
@@ -26,16 +37,66 @@ export default {
     ...mapGetters('status', {
       statusList: 'list',
     }),
-    color() {
-      let s = this.colorMap.filter(entry => {
-        return entry.name === this.label;
+    ...mapGetters('phase', {
+      phaseList: 'list',
+    }),
+    statusColor() {
+      let s = this.statusColorMap.filter(entry => {
+        return entry.name === this.status;
       })[0];
       if (s !== undefined) {
         return s.variant;
       }
       return "Missing";
     },
-    colorMap() {
+    phaseColor() {
+      let s = this.phaseColorMap.filter(entry => {
+        return entry.name === this.phase;
+      })[0];
+      if (s !== undefined) {
+        return s.variant;
+      }
+      return "Missing";
+    },
+    phaseColorMap() {
+      return this.phaseList.map(entry => {
+        let t = {};
+        switch (entry.name) {
+          case "Maybe":
+            t = {
+              name: entry.name,
+              variant: "info"
+            };
+            break;
+          case "Buy":
+            t = {
+              name: entry.name,
+              variant: "success"
+            };
+            break;
+          case "Hold":
+            t = {
+              name: entry.name,
+              variant: "success"
+            };
+            break;
+          case "Sell":
+            t = {
+              name: entry.name,
+              variant: "danger"
+            };
+            break;
+          case "Default":
+            t = {
+              name: entry.name,
+              variant: "success"
+            };
+            break;
+        }
+        return t;
+      });
+    },
+    statusColorMap() {
       return this.statusList.map(entry => {
         let t = {};
         switch (entry.name) {
@@ -72,13 +133,13 @@ export default {
           case "To be decided":
             t = {
               name: entry.name,
-              variant: "secondary"
+              variant: "info"
             };
             break;
           case "Undecided":
             t = {
               name: entry.name,
-              variant: "secondary"
+              variant: "info"
             };
             break;
           case "Limited":
@@ -100,11 +161,15 @@ export default {
   },
   mounted() {
     this.getStatuses()
+    this.getPhases()
   },
   methods: {
     ...mapActions('status', {
       getStatuses: 'list'
-    })
+    }),
+    ...mapActions('phase', {
+      getPhases: 'list'
+    }),
   }
 };
 </script>

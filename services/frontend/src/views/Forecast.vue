@@ -12,14 +12,9 @@
 <script>
 import Split from "@/components/Split";
 export default {
-  name: "Forecast",
   components: {
     "split": Split,
-  },
-  data() {
-    return {};
-  },
-  methods: {}
+  }
 };
 </script>
 

@@ -12,14 +12,9 @@
 <script>
 import Split from "@/components/Split";
 export default {
-  name: "Search",
   components: {
     "split": Split,
-  },
-  data() {
-    return {};
-  },
-  methods: {}
+  }
 };
 </script>
 
