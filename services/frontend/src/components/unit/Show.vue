@@ -30,6 +30,7 @@
         <li v-for="item in entry.usecases">
           <h6>{{item.name}}</h6>
           <p>{{item.description}}</p>
+          <p>{{item}}</p>
         </li>
       </ul>
     </b-card-text>

@@ -93,7 +93,7 @@ export default {
   },
   watch: {
     currentPage() {
-      this.get();
+      this.search();
     }
   },
   methods: {

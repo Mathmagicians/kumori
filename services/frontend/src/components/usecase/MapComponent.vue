@@ -1,6 +1,10 @@
 <template>
 <b-modal v-model="showCreateUsecaseComponentMap" :title="title" @ok="save">
-  {{entry.id}} {{entry.name}}
+  <unit-select v-model="unit" />
+  <status-select v-model="status" />
+  <b-form-group id="fieldset-1" description="You may add a comment to this mapping" label="Description">
+    <b-form-textarea v-model="description" placeholder="Enter something..." rows="3" max-rows="6"></b-form-textarea>
+  </b-form-group>
 </b-modal>
 </template>
 
@@ -10,8 +14,21 @@ import {
   mapMutations,
   mapActions
 } from 'vuex'
+import UnitSelect from "@/components/unit/Select";
+import StatusSelect from "@/components/status/Select";
 import Unit from "@/api/Unit";
 export default {
+  components: {
+    "unit-select": UnitSelect,
+    "status-select": StatusSelect,
+  },
+  data() {
+    return {
+      unit: undefined,
+      status: undefined,
+      description: undefined
+    };
+  },
   computed: {
     showCreateUsecaseComponentMap: {
       set(showCreateUsecaseComponentMap) {
@@ -22,7 +39,7 @@ export default {
       }
     },
     title() {
-      return `Add usecase "${this.entry.name}"`
+      return `Map component to usecase: "${this.entry.name}"`
     },
     ...mapGetters('usecase', {
       entry: 'current',
@@ -31,8 +48,7 @@ export default {
   },
   methods: {
     save() {
-      console.log('Not implemented')
-      new Unit().addUsecase(2,1,1,'test')
+      new Unit().addUsecase(this.unit, this.entry.id, this.status, this.description)
     }
   }
 };

@@ -28,7 +28,7 @@ export default {
       }
     },
     title() {
-      return `Add usecase "${this.entry.name}"`
+      return `Map taxonomy for usecase: "${this.entry.name}"`
     },
     ...mapGetters('usecase', {
       entry: 'current',

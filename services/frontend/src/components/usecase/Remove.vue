@@ -29,7 +29,7 @@ export default {
       }
     },
     title() {
-      return `Add usecase "${this.entry.name}"`
+      return `Remove usecase: "${this.entry.name}"`
     },
     ...mapGetters('usecase', {
       entry: 'current',
