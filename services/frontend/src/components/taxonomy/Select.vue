@@ -1,16 +1,12 @@
 <template>
 <b-container fluid>
-  <b-form-checkbox-group switches stacked v-model="selected1" :options="level1">
-  </b-form-checkbox-group>
-  <hr v-if="selected1.length != 0" />
-  <b-form-checkbox-group v-if="selected1.length != 0" switches stacked v-model="selected2" :options="level2">
-  </b-form-checkbox-group>
-  <hr v-if="selected2.length != 0" />
-  <b-form-checkbox-group v-if="selected2.length != 0" switches stacked v-model="selected3" :options="level3">
-  </b-form-checkbox-group>
-  <hr v-if="selected3.length != 0" />
-  <b-form-checkbox-group v-if="selected3.length != 0" switches stacked v-model="selected4" :options="level4">
-  </b-form-checkbox-group>
+  <b-form-checkbox-group v-model="selected1" switches stacked :options="level1" />
+  <hr v-if="selected1.length != 0">
+  <b-form-checkbox-group v-if="selected1.length != 0" v-model="selected2" switches stacked :options="level2" />
+  <hr v-if="selected2.length != 0">
+  <b-form-checkbox-group v-if="selected2.length != 0" v-model="selected3" switches stacked :options="level3" />
+  <hr v-if="selected3.length != 0">
+  <b-form-checkbox-group v-if="selected3.length != 0" v-model="selected4" switches stacked :options="level4" />
 </b-container>
 </template>
 
@@ -21,7 +17,7 @@ import {
   mapMutations
 } from 'vuex'
 export default {
-  name: "tax-select",
+  name: "TaxSelect",
   computed: {
     ...mapGetters('taxonomy', {
       options: 'selectOptions',
@@ -70,7 +66,9 @@ export default {
   mounted() {
     this.list().then(() => {
       //TODO split by level
-      this.selected = this.entry.taxonomy.map(i => { return i.id})
+      this.selected = this.entry.taxonomy.map(i => {
+        return i.id
+      })
     });
   },
   methods: {

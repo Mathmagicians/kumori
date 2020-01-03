@@ -1,7 +1,9 @@
 <template>
-  <div>
-    <b-badge :variant="color">{{ label }}</b-badge>
-  </div>
+<div>
+  <b-badge :variant="color">
+    {{ label }}
+  </b-badge>
+</div>
 </template>
 
 <script>
@@ -11,9 +13,10 @@ import {
   mapMutations
 } from 'vuex'
 export default {
-  name: "badge",
+  name: "Badge",
   props: {
     label: {
+      type: String,
       default: () => {
         return "To be decided";
       }

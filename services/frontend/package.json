@@ -38,8 +38,7 @@
       "node": true
     },
     "extends": [
-      "plugin:vue/essential",
-      "@vue/prettier"
+      "plugin:vue/recommended"
     ],
     "rules": {
       "no-console": "off"

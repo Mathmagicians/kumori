@@ -1,7 +1,8 @@
 <template>
 <split title="usecases">
   <template v-slot:left>
-    <list-usecase /></template>
+    <list-usecase />
+  </template>
   <template v-slot:right>
     <edit-usecase />
     <show-usecase />
@@ -27,7 +28,7 @@ import MapComponent from "@/components/usecase/MapComponent";
 import MapTaxonomy from "@/components/usecase/MapTaxonomy";
 
 export default {
-  name: "usecases",
+  name: "Usecases",
   components: {
     "split": Split,
     "list-usecase": ListUsecase,

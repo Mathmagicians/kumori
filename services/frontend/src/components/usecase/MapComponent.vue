@@ -3,7 +3,7 @@
   <unit-select v-model="unit" />
   <status-select v-model="status" />
   <b-form-group id="fieldset-1" description="You may add a comment to this mapping" label="Description">
-    <b-form-textarea v-model="description" placeholder="Enter something..." rows="3" max-rows="6"></b-form-textarea>
+    <b-form-textarea v-model="description" placeholder="Enter something..." rows="3" max-rows="6" />
   </b-form-group>
 </b-modal>
 </template>

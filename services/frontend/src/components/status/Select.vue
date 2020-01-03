@@ -1,6 +1,6 @@
 <template>
 <b-form-group description="Please select a status" label="Select status">
-  <b-form-select v-model="selected" :options="options"></b-form-select>
+  <b-form-select v-model="selected" :options="options" />
 </b-form-group>
 </template>
 
@@ -12,13 +12,18 @@ import {
 } from 'vuex'
 import Status from "@/api/Status";
 export default {
-  name: "component-select",
+  name: "ComponentSelect",
+  props: {
+    value: {
+      type: Number,
+      default: undefined
+    }
+  },
   data() {
     return {
       options: []
     };
   },
-  props: ['value'],
   computed: {
     selected: {
       get() {
@@ -29,10 +34,10 @@ export default {
       }
     }
   },
+  watch: {},
   mounted() {
     this.populate()
   },
-  watch: {},
   methods: {
     populate() {
       new Status().get(
@@ -44,8 +49,8 @@ export default {
       ).then(response => {
         this.options = response.data.map(entry => {
           return {
-              value: entry.id,
-              text: entry.name
+            value: entry.id,
+            text: entry.name
           }
         })
       })

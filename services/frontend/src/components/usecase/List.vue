@@ -4,7 +4,7 @@
     <b-col>
       <b-row>
         <b-col>
-          <b-button size="sm" title="Edit usecase" @click="toggleAddUsecase" v-if="authenticated && !readonly">
+          <b-button v-if="authenticated && !readonly" size="sm" title="Edit usecase" @click="toggleAddUsecase">
             <v-icon name="pen" />
           </b-button>
         </b-col>
@@ -15,28 +15,26 @@
             <b-card>
               <b-container fluid>
                 <b-row>
-                  <b-col>
-                  </b-col>
-                  <b-col>
-                  </b-col>
+                  <b-col />
+                  <b-col />
                 </b-row>
               </b-container>
             </b-card>
           </b-collapse>
           <b-table outlined striped hover small :busy="list.busy" :items="list.data" :fields="list.fields" @row-clicked="current">
             <div slot="table-busy" class="text-center text-danger my-2">
-              <b-spinner class="align-middle"></b-spinner>
+              <b-spinner class="align-middle" />
               <strong>Loading...</strong>
             </div>
-            <template slot="HEAD_name" slot-scope="data">
-              <b-form-input size="sm" v-model="query" placeholder="Filter"></b-form-input>
+            <template slot="HEAD_name">
+              <b-form-input v-model="query" size="sm" placeholder="Filter" />
             </template>
           </b-table>
         </b-col>
       </b-row>
       <b-row>
         <b-col>
-          <b-pagination class="justify-content-center" v-model="currentPage" :total-rows="list.totalRows" :per-page="list.perPage"></b-pagination>
+          <b-pagination v-model="currentPage" class="justify-content-center" :total-rows="list.totalRows" :per-page="list.perPage" />
         </b-col>
       </b-row>
     </b-col>
@@ -59,7 +57,7 @@ import "vue-awesome/icons/layer-group";
 
 import Usecase from "@/api/Usecase";
 export default {
-  name: "usecase-list",
+  name: "UsecaseList",
   components: {
     "v-icon": Icon,
   },
@@ -88,13 +86,13 @@ export default {
       }
     }
   },
-  mounted() {
-    this.search()
-  },
   watch: {
     currentPage() {
       this.search();
     }
+  },
+  mounted() {
+    this.search()
   },
   methods: {
     ...mapActions('usecase', {

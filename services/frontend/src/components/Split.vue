@@ -2,15 +2,15 @@
 <b-container fluid>
   <b-row>
     <b-col>
-      <h1>{{title}}</h1>
+      <h1>{{ title }}</h1>
     </b-col>
   </b-row>
   <b-row>
     <b-col>
-      <slot name="left"></slot>
+      <slot name="left" />
     </b-col>
     <b-col>
-      <slot name="right"></slot>
+      <slot name="right" />
     </b-col>
   </b-row>
 </b-container>
@@ -18,8 +18,13 @@
 
 <script>
 export default {
-  name: "split",
-  props: ['title'],
+  name: "Split",
+  props: {
+    title: {
+      type: String,
+      default: ''
+    }
+  },
 };
 </script>
 

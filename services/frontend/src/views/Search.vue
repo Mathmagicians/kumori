@@ -1,22 +1,23 @@
 <template>
 <split title="Search">
   <template v-slot:left>
-    Missing</template>
+    Missing
+  </template>
   <template v-slot:right>
-Missing</template>
+    Missing
+  </template>
 </split>
 </template>
 
 <script>
 import Split from "@/components/Split";
 export default {
-  name: "search",
-  data() {
-    return {
-    };
-  },
+  name: "Search",
   components: {
     "split": Split,
+  },
+  data() {
+    return {};
   },
   methods: {}
 };

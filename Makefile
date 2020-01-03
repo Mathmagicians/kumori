@@ -15,7 +15,7 @@ down:
 	@docker-compose -f kumori.${ENV}.yml down
 
 flyway:
-	@docker run --rm --net=kumori_kumori -v $(PWD)/services/flyway/sql:/flyway/sql boxfuse/flyway:latest -url=jdbc:postgresql://postgres/ -user=postgres -password=postgres -connectRetries=60 info
+	@docker run --rm --net=kumori_kumori -v $(shell pwd)/services/flyway/sql:/flyway/sql boxfuse/flyway:latest -url=jdbc:postgresql://postgres/ -user=postgres -password=postgres -connectRetries=60 info
 
 jmeter:
 	@docker run --rm -v $(shell pwd)/services/jmeter:/jmeter --entrypoint /bin/rm localgod/jmeter -rf /jmeter/report /jmeter/output.jtl

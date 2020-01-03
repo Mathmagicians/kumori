@@ -1,11 +1,12 @@
 <template>
 <split title="Taxonomy">
   <template v-slot:left>
-    <tax/></template>
+    <tax />
+  </template>
   <template v-slot:right>
     <h1>Selected</h1>
-    {{selected}}
-</template>
+    {{ selected }}
+  </template>
 </split>
 </template>
 
@@ -19,20 +20,18 @@ import Split from "@/components/Split";
 import TaxonomySelect from "@/components/taxonomy/Select";
 
 export default {
-  name: "about",
+  name: "About",
+  components: {
+    "split": Split,
+    "tax": TaxonomySelect
+  },
   data() {
-    return {
-    };
+    return {};
   },
   computed: {
     ...mapGetters('taxonomy', {
-      selected:  'selected'
+      selected: 'selected'
     }),
-  },
-  components: {
-    "split": Split,
-    "tax": TaxonomySelect,
-
   },
   methods: {}
 };

@@ -6,18 +6,18 @@
         <b-col>
           <b-table outlined striped hover small :busy="list.busy" :items="list.data" :fields="list.fields" @row-clicked="current">
             <div slot="table-busy" class="text-center text-danger my-2">
-              <b-spinner class="align-middle"></b-spinner>
+              <b-spinner class="align-middle" />
               <strong>Loading...</strong>
             </div>
-            <template slot="HEAD_name" slot-scope="data">
-              <b-form-input size="sm" v-model="query" placeholder="Filter"></b-form-input>
+            <template slot="HEAD_name">
+              <b-form-input v-model="query" size="sm" placeholder="Filter" />
             </template>
           </b-table>
         </b-col>
       </b-row>
       <b-row>
         <b-col>
-          <b-pagination class="justify-content-center" v-model="currentPage" :total-rows="list.totalRows" :per-page="list.perPage"></b-pagination>
+          <b-pagination v-model="currentPage" class="justify-content-center" :total-rows="list.totalRows" :per-page="list.perPage" />
         </b-col>
       </b-row>
     </b-col>
@@ -32,7 +32,7 @@ import {
   mapMutations
 } from 'vuex'
 export default {
-  name: "component-list",
+  name: "ComponentList",
   computed: {
     ...mapGetters('unit', {
       list: 'list'
@@ -54,9 +54,6 @@ export default {
       }
     }
   },
-  mounted() {
-    this.search();
-  },
   watch: {
     currentPage() {
       this.search();
@@ -71,6 +68,9 @@ export default {
         this.search();
       }
     }
+  },
+  mounted() {
+    this.search();
   },
   methods: {
     ...mapActions('unit', {

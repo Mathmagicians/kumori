@@ -1,28 +1,35 @@
 <template>
 <b-card v-if="entry.id" no-body tag="article" border-variant="light">
   <div slot="header">
-    <b-dropdown class="float-right" right size="sm" v-if="authenticated && !readonly">
+    <b-dropdown v-if="authenticated && !readonly" class="float-right" right size="sm">
       <template slot="button-content">
-        <v-icon name="bars" /></template>
+        <v-icon name="bars" />
+      </template>
       <b-dropdown-item title="Edit usecase" @click="toggleEditUsecase">
-        <v-icon name="pen" /> Edit</b-dropdown-item>
+        <v-icon name="pen" /> Edit
+      </b-dropdown-item>
       <b-dropdown-item title="Map component" @click="toggleCreateUsecaseComponentMap">
-        <v-icon name="boxes" /> Map components</b-dropdown-item>
+        <v-icon name="boxes" /> Map components
+      </b-dropdown-item>
       <b-dropdown-item title="Map taxononomy" @click="toggleCreateUsecaseTaxonomyMap">
-        <v-icon name="layer-group" /> Map taxononomy</b-dropdown-item>
-      <b-dropdown-divider></b-dropdown-divider>
+        <v-icon name="layer-group" /> Map taxononomy
+      </b-dropdown-item>
+      <b-dropdown-divider />
       <b-dropdown-item title="Remove usecase" @click="toggleRemoveUsecase">
-        <v-icon name="trash" /> Remove</b-dropdown-item>
+        <v-icon name="trash" /> Remove
+      </b-dropdown-item>
     </b-dropdown>
-    <h5>{{entry.name}}</h5>
+    <h5>{{ entry.name }}</h5>
   </div>
   <b-card-body>
     <b-card-text>
-      {{entry.description}}
+      {{ entry.description }}
     </b-card-text>
-    <li v-if="entry.taxonomy.length>0" v-for="tax in entry.taxonomy">
-    {{ tax.name }}
-  </li>
+    <ul v-if="entry.taxonomy.length>0">
+      <li v-for="tax in entry.taxonomy" :key="tax.name">
+        {{ tax.name }}
+      </li>
+    </ul>
   </b-card-body>
 </b-card>
 </template>
@@ -41,7 +48,7 @@ import "vue-awesome/icons/boxes";
 import "vue-awesome/icons/bars";
 import "vue-awesome/icons/layer-group";
 export default {
-  name: "show",
+  name: "Show",
   components: {
     "v-icon": Icon,
   },

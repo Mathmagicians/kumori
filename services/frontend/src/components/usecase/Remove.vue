@@ -1,11 +1,10 @@
 <template>
-<b-modal v-model="showRemoveUsecase" ref="remove_usecase" :title="title" @ok="remove">
+<b-modal ref="remove_usecase" v-model="showRemoveUsecase" :title="title" @ok="remove">
   <b-form-group description="Keep the name concise." label="Usecase name">
-    <b-form-input readonly v-model.trim="entry.name"></b-form-input>
+    <b-form-input v-model.trim="entry.name" readonly />
   </b-form-group>
   <b-form-group description="Keep the description comprehensive." label="Usecase description">
-    <b-form-textarea readonly v-model="entry.description" placeholder="Enter something" :rows="3" :max-rows="6">
-    </b-form-textarea>
+    <b-form-textarea v-model="entry.description" readonly placeholder="Enter something" :rows="3" :max-rows="6" />
   </b-form-group>
 </b-modal>
 </template>
@@ -18,7 +17,7 @@ import {
 } from 'vuex'
 import Usecase from "@/api/Usecase";
 export default {
-  name: "remove-usecase",
+  name: "RemoveUsecase",
   computed: {
     showRemoveUsecase: {
       set(showRemoveUsecase) {

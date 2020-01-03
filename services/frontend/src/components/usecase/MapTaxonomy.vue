@@ -14,7 +14,7 @@ import {
 import TaxSelect from "@/components/taxonomy/Select";
 import Usecase from "@/api/Usecase"
 export default {
-  name: "map-taxonomy",
+  name: "MapTaxonomy",
   components: {
     "tax-select": TaxSelect,
   },
@@ -59,7 +59,6 @@ export default {
     }
   }
 }
-
 </script>
 
 <style scoped></style>
