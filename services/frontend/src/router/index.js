@@ -36,6 +36,12 @@ export default new Router({
       path: '/survey',
       component: Survey
     }, {
+      path: '/survey',
+      component: Survey
+    }, {
+      path: '/survey',
+      component: Survey
+    },{
       path: '/meritocracy',
       component: Meritocracy
     }, {
