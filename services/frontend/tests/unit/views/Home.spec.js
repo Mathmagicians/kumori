@@ -9,7 +9,6 @@ describe("/views/Home.vue", () => {
     localVue.use(BootstrapVue);
     const wrapper = shallowMount(Home, { localVue });
     expect(wrapper.isVueInstance()).to.equal(true);
-    expect(wrapper.name()).to.equal("home");
     expect(wrapper.find(".home").exists()).to.be.true;
   });
 });

@@ -30,12 +30,10 @@ dump:
 test: unit-test integration-test
 
 unit-test:
-	@docker run --rm -v ${PWD}/services/frontend:/tmp -w /tmp ${BUILD_IMAGE} npm run test
+	@docker run --rm -v ${PWD}/services/frontend:/tmp -w /tmp ${BUILD_IMAGE} npm run test:unit
 
 integration-test:
 	@./ready.sh
-#	dk.mathmagicians.kumori.meritocracy.spec.CucumberTestSuite > initializationError FAILED
-#	@docker exec kumori-integration bash -c 'cd services/spec && ./gradlew'
 
 sonar-scan:
 	@docker run \

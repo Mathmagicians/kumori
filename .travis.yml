@@ -12,7 +12,7 @@ addons:
 cache: npm
 
 env:
-  COMPOSE_VERSION: 1.22.0
+  COMPOSE_VERSION: 1.25.5
 
 os:
   - linux
@@ -34,7 +34,7 @@ script:
    - make test
    - make jmeter
 # Stop Environment
-   - docker-compose -f kumori..prod.yml down
+   - docker-compose -f kumori.prod.yml down
 # Run Sonarqube scan
    - if [ "$TRAVIS_BRANCH" == "master" ]; then make sonar-scan; fi
 # Push to dockerhub
