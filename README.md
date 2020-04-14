@@ -1,3 +1,4 @@
+![CI](https://github.com/Mathmagicians/kumori/workflows/CI/badge.svg)
 [![Build Status](https://travis-ci.org/Mathmagicians/kumori.svg?branch=master)](https://travis-ci.org/Mathmagicians/kumori)
 [![Sonar Status](https://sonarcloud.io/api/project_badges/measure?project=Mathmagicians_kumori&metric=alert_status)](https://sonarcloud.io/dashboard?id=Mathmagicians_kumori)
 
