@@ -40,7 +40,8 @@ export default class Postgrest {
     return this.hasToken().then(() => {
       let config = {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          Prefer: `resolution=merge-duplicates`
         }
       };
       return axios.post(this.endpoint, data, config);
