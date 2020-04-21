@@ -1,17 +1,7 @@
-version: '2.0'
+version: '3.4'
 services:
-  integration:
-    container_name: kumori-integration
-    image: mathmagicians/kumori_build
-    command: ["tail", "-F", "README.md"]
-    working_dir: /tmp
-    volumes:
-      - "./:/tmp"
-    networks:
-      - kumori
-
   web:
-    container_name: kumori-web
+    container_name: kumori_web
     image: mathmagicians/kumori_web:${VERSION}
     ports:
       - "80:80"
@@ -23,35 +13,49 @@ services:
       - postgrest
       - swagger
 
+  postgres:
+    container_name: kumori_postgres
+    image: postgres:11-alpine
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_USER: ${POSTGRES_USERNAME}
+      POSTGRES_DB: ${POSTGRES_DATABASE}
+    volumes:
+    - data-postgres:/var/lib/postgresql/data
+    networks:
+      - kumori
+
   postgrest:
-    container_name: kumori-postgrest
+    container_name: kumori_postgrest
     image: postgrest/postgrest:latest
     ports:
       - "3000:3000"
     environment:
-      PGRST_DB_URI: postgres://${POSTGREST_CONNECTION_USER}:${POSTGREST_CONNECTION_PASSWORD}@postgres:5432/${POSTGREST_CONNECTION_DB}
-      PGRST_DB_SCHEMA: ${POSTGREST_CONNECTION_SCHEMA}
-      PGRST_DB_ANON_ROLE: ${POSTGREST_ANON_ROLE}
+      PGRST_DB_URI: postgres://${POSTGRES_USERNAME}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DATABASE}
+      PGRST_DB_SCHEMA: api
+      PGRST_DB_ANON_ROLE: web_anon
       PGRST_JWT_SECRET: ${PGRST_JWT_SECRET} # Must be minimum 32 characters
+      PGRST_SERVER_PROXY_URI: http://localhost:3000/
     depends_on:
       - postgres
     networks:
       - kumori
 
-  postgres:
-    container_name: kumori-postgres
-    image: mathmagicians/kumori_db:${VERSION}
-    environment:
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      DB_SCHEMA: ${POSTGREST_CONNECTION_SCHEMA}
-      DB_CRUD_USER: ${POSTGREST_CONNECTION_USER}
-      DB_CRUD_PASS: ${POSTGREST_CONNECTION_PASSWORD}
-      DB_R_USER: ${POSTGREST_ANON_ROLE}
+  flyway:
+    container_name: kumori_flyway
+    image: boxfuse/flyway:latest
+    command: -url=jdbc:postgresql://postgres/${POSTGRES_DATABASE} -user=${POSTGRES_USERNAME} -password=${POSTGRES_PASSWORD} -connectRetries=60 -placeholders.dbrole=${POSTGRES_USERNAME} migrate
+    volumes:
+    - type: bind
+      source: ./services/flyway/sql
+      target: /flyway/sql
+    depends_on:
+      - postgres
     networks:
       - kumori
 
   swagger:
-    container_name: kumori-swagger
+    container_name: kumori_swagger
     image: swaggerapi/swagger-ui
     ports:
       - "8070:8080"

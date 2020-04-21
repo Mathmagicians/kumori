@@ -6,14 +6,17 @@ BUILD_IMAGE=mathmagicians/kumori_build:latest
 
 .PHONY: install build nuke_node peaceNode
 
-install:
+build_image:
+	@docker build --target developement -t ${BUILD_IMAGE} .
+
+install: build_image
 	@docker run --rm -v ${PWD}:/tmp -w /tmp ${BUILD_IMAGE} npm install
 
 build:
-	@docker run --rm -v ${PWD}:/tmp -w /tmp ${BUILD_IMAGE} npm run build
-	@docker build -t ${IMAGE} .
+	@docker build --target prod -t ${IMAGE} .
 
-nuke_node:
-	@rm -rf node_modules
+test:
+	@docker run --rm -v ${PWD}:/tmp -w /tmp ${BUILD_IMAGE} npm run test:unit
 
-peaceNode: nuke_node install
+clean:
+	@if [ -d "node_modules" ]; then rm -rf node_modules; fi

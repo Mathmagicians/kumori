@@ -22,7 +22,6 @@ before_install:
 
 before_script:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - docker pull mathmagicians/kumori_build:latest
 
 script:
 # Build backend
@@ -32,7 +31,6 @@ script:
    - docker-compose -f kumori.prod.yml up -d
 # Run tests
    - make test
-   - make jmeter
 # Stop Environment
    - docker-compose -f kumori.prod.yml down
 # Run Sonarqube scan

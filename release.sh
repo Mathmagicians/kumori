@@ -100,11 +100,8 @@ function add_asset () {
 
 function publish () {
   docker tag "mathmagicians/kumori_web:latest" "mathmagicians/kumori_web:${1}"
-  docker tag "mathmagicians/kumori_db:latest" "mathmagicians/kumori_db:${1}"
   docker push "mathmagicians/kumori_web:latest"
-  docker push "mathmagicians/kumori_db:latest"
   docker push "mathmagicians/kumori_web:${1}"
-  docker push "mathmagicians/kumori_db:${1}"
 }
 
 #get_release "${BUILD_RELEASE}"

@@ -1,8 +1,10 @@
 version: '3.4'
 services:
   devserver:
-    container_name: kumori-devserver
-    image: mathmagicians/kumori_build
+    container_name: kumori_devserver
+    build:
+      context: ./services/frontend
+      target: development
     command: ["npm", "run", "serve"]
     working_dir: /tmp/services/frontend
     ports:
@@ -19,7 +21,7 @@ services:
       - kumori
 
   postgres:
-    container_name: kumori-postgres
+    container_name: kumori_postgres
     image: postgres:11-alpine
     environment:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
@@ -30,21 +32,8 @@ services:
     networks:
       - kumori
 
-  flyway:
-    container_name: kumori-flyway
-    image: boxfuse/flyway:latest
-    command: -url=jdbc:postgresql://postgres/${POSTGRES_DATABASE} -user=${POSTGRES_USERNAME} -password=${POSTGRES_PASSWORD} -connectRetries=60 -placeholders.dbrole=${POSTGRES_USERNAME} migrate
-    volumes:
-    - type: bind
-      source: ./services/flyway/sql
-      target: /flyway/sql
-    depends_on:
-      - postgres
-    networks:
-      - kumori
-
   postgrest:
-    container_name: kumori-postgrest
+    container_name: kumori_postgrest
     image: postgrest/postgrest:latest
     ports:
       - "3000:3000"
@@ -59,18 +48,8 @@ services:
     networks:
       - kumori
 
-  pgadmin:
-    container_name: kumori-pgadmin
-    image: chorss/docker-pgadmin4:latest
-    ports:
-    - "5050:5050"
-    networks:
-      - kumori
-    volumes:
-    - data-pgadmin:/data
-
   swagger:
-    container_name: kumori-swagger
+    container_name: kumori_swagger
     image: swaggerapi/swagger-ui
     ports:
       - "8070:8080"
@@ -80,6 +59,29 @@ services:
       - postgrest
     networks:
       - kumori
+
+  flyway:
+    container_name: kumori_flyway
+    image: boxfuse/flyway:latest
+    command: -url=jdbc:postgresql://postgres/${POSTGRES_DATABASE} -user=${POSTGRES_USERNAME} -password=${POSTGRES_PASSWORD} -connectRetries=60 -placeholders.dbrole=${POSTGRES_USERNAME} migrate
+    volumes:
+    - type: bind
+      source: ./services/flyway/sql
+      target: /flyway/sql
+    depends_on:
+      - postgres
+    networks:
+      - kumori
+
+  pgadmin:
+    container_name: kumori_pgadmin
+    image: chorss/docker-pgadmin4:latest
+    ports:
+    - "5050:5050"
+    networks:
+      - kumori
+    volumes:
+    - data-pgadmin:/data
 
 volumes:
   data-pgadmin:
